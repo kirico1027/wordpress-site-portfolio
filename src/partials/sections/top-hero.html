@@ -1,0 +1,45 @@
+<!-- WP: front-page.php — ヒーロー（Phase 4 ACF）+ hero-news（news CPT 最新1件） -->
+<section class="hero">
+  <div class="hero__inner container">
+    <div class="hero__layout">
+      <div class="hero__content">
+        <h1 class="hero__title">
+          <span class="hero__title-line">社員と企業を</span>
+          <span class="hero__title-line hero__title-line--accent">共に育む</span>
+          <span class="hero__title-line">新しい福利厚生</span>
+        </h1>
+        <span class="hero__divider" aria-hidden="true"></span>
+        <div class="hero__lead">
+          <p class="hero__lead-line">社員の幸せと健康を第一に考えた、</p>
+          <p class="hero__lead-line">これからの福利厚生プログラム</p>
+        </div>
+      </div>
+      <div class="hero__visual">
+        <div class="hero__collage">
+          <div class="hero__collage-row hero__collage-row--top">
+            <figure class="hero__figure hero__figure--main">
+              <img src="./public/assets/img/top/hero-01.png" alt="" width="376" height="231" />
+            </figure>
+            <span class="hero__shape hero__shape--orange" aria-hidden="true"></span>
+          </div>
+          <div class="hero__collage-row hero__collage-row--bottom">
+            <span class="hero__shape hero__shape--green" aria-hidden="true"></span>
+            <span class="hero__shape hero__shape--blue" aria-hidden="true"></span>
+            <figure class="hero__figure hero__figure--sub">
+              <img src="./public/assets/img/top/hero-02.png" alt="" width="283" height="160" />
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- WP: WP_Query news CPT posts_per_page=1 meta_key=important -->
+  <div class="hero-news">
+    <div class="hero-news__inner container">
+      <a class="hero-news__link" href="./news-single.html">
+        <time class="hero-news__date" datetime="2024-03-01">2024.3.1</time>
+        <p class="hero-news__text">革新的な福利厚生サービスが登場！次世代の完全従業員ファーストの新サービス</p>
+      </a>
+    </div>
+  </div>
+</section>

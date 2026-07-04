@@ -1,0 +1,17 @@
+{
+  "source": "get_design_context + get_metadata",
+  "nodeId": "1:453",
+  "fetchedAt": "2026-07-04T09:45:00+09:00",
+  "page": "top",
+  "section": "company",
+  "specs": {
+    "width": "1120px",
+    "contentColumn": "540px, margin-top 170.094px",
+    "visualColumn": "540px, margin-top 120px",
+    "columnGap": "40px",
+    "body": "15px SemiBold / 30px / 1.5px, 2 paragraphs",
+    "btnMore": "会社概要, letter-spacing 1.6px, margin-top 48px",
+    "collageTop": "334.797x223.188 image + 156.594x110 orange",
+    "collageBottom": "80x193 blue + 200x133.328 image + 86x90 #ffe0cb tag, width 390, margin-right 24px"
+  }
+}

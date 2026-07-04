@@ -1,0 +1,49 @@
+<!-- WP: front-page.php — Works セクション（Phase 3 WP_Query works CPT） -->
+<section class="section works">
+  <div class="container works__header">
+    <div class="works__intro">
+      @@include('partials/sections/section-heading.html', { "en": "Works", "title": "実績紹介" })
+      <p class="works__text">業種や形態問わず、さまざまなクライアント様にご活用いただいております。<br />新しい福利厚生の形として事業規模や用途に合わせご支援が可能です。</p>
+    </div>
+    @@include('partials/sections/btn-more.html', { "href": "./works-archive.html", "label": "一覧をみる", "modifier": "btn-more--header" })
+  </div>
+  <div class="works__slider-wrap">
+    <div class="works__slider" tabindex="0">
+      @@include('partials/cards/works-card.html', {
+        "href": "./works-single.html",
+        "thumbnail": "./public/assets/img/top/about-01.png",
+        "tags": "<li class=\"works-card__tag\"># あなたのメンタルコーチ</li>",
+        "title": "内部崩壊しかけていた弊社を救うきっかけになった「福利厚生」の話",
+        "company": "株式会社monkey"
+      })
+      @@include('partials/cards/works-card.html', {
+        "href": "./works-single.html",
+        "thumbnail": "./public/assets/img/top/about-01.png",
+        "tags": "<li class=\"works-card__tag\"># みんなの福利厚生クラウド</li><li class=\"works-card__tag\"># つながるワークフロー</li><li class=\"works-card__tag\"># あなたのメンタルコーチ</li>",
+        "title": "従業員の悩みや不安に本気で向き合うことで会社全体の『人』に対する考え方が変わった",
+        "company": "株式会社horse"
+      })
+      @@include('partials/cards/works-card.html', {
+        "href": "./works-single.html",
+        "thumbnail": "./public/assets/img/top/about-01.png",
+        "tags": "<li class=\"works-card__tag\"># つながるワークフロー</li><li class=\"works-card__tag\"># あなたのメンタルコーチ</li>",
+        "title": "意地でも従業員満足度を高めたかった。とことん向き合うことで見えたこれからの福利厚生",
+        "company": "株式会社giraffe"
+      })
+      @@include('partials/cards/works-card.html', {
+        "href": "./works-single.html",
+        "thumbnail": "./public/assets/img/top/about-01.png",
+        "tags": "<li class=\"works-card__tag\"># つながるワークフロー</li><li class=\"works-card__tag\"># みんなの福利厚生クラウド</li>",
+        "title": "従業員満足度が前年比200％Up！「従業員」の本質を語れるBiz Lifeのサービス",
+        "company": "株式会社Rabbit"
+      })
+      @@include('partials/cards/works-card.html', {
+        "href": "./works-single.html",
+        "thumbnail": "./public/assets/img/top/about-01.png",
+        "tags": "<li class=\"works-card__tag\"># つながるワークフロー</li>",
+        "title": "これはただの福利厚生ではないと確信。これからより求められる働き方だと感じた",
+        "company": "株式会社turtle"
+      })
+    </div>
+  </div>
+</section>

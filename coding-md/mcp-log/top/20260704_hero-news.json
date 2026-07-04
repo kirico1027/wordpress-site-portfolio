@@ -1,0 +1,20 @@
+{
+  "source": "get_design_context + get_metadata",
+  "nodeId": "1:86",
+  "fetchedAt": "2026-07-04T09:33:00+09:00",
+  "page": "top",
+  "section": "hero-news",
+  "specs": {
+    "outerHeight": "109px",
+    "outerPaddingBottom": "40px",
+    "marginTopFromVisual": "51px",
+    "pillWidth": "742.422px",
+    "pillHeight": "69px",
+    "pillRadius": "48px",
+    "pillShadow": "0 0 6px rgba(125,125,125,0.2)",
+    "pillPadding": "24px 48px 24px 56px (combined outer+inner)",
+    "linkGap": "24px",
+    "date": "14px SemiBold / 14px line-height / 0.7px letter-spacing / #777",
+    "text": "14px Medium / 21px line-height / 1.4px letter-spacing / #1e1e1e"
+  }
+}

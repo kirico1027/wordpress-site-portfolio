@@ -1,0 +1,25 @@
+{
+  "source": "get_design_context + get_metadata",
+  "nodeId": "1:489",
+  "fetchedAt": "2026-07-04T09:50:00+09:00",
+  "page": "top",
+  "section": "news",
+  "specs": {
+    "sectionPadding": "120px 32px",
+    "columnGap": "80px",
+    "sidebarWidth": "172px (deco area)",
+    "mainWidth": "868px",
+    "listItemHeight": "127px",
+    "listItemPadding": "33px 24px 32px",
+    "listItemBorderTop": "1px #777",
+    "metaGap": "16px",
+    "titleMarginTop": "16px",
+    "dateFont": "15px Medium / 15px / tracking 0.75px",
+    "tagFont": "13px SemiBold / tracking 0.65px / bg #ffe0cb / padding 6px 12px 4px",
+    "titleFont": "15px Medium / 22.5px / tracking 0.75px",
+    "listToButtonGap": "64px",
+    "decoTopRow": "103x117 orange + 40x40 peach",
+    "decoBottomRow": "74x74 green + 98x74 blue",
+    "btnMore": "252x68 / border 2px #0096df / radius 96px / pl 34 pr 2 py 2 / gap 64"
+  }
+}

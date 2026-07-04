@@ -1,0 +1,16 @@
+{
+  "source": "get_design_context + get_metadata",
+  "nodeId": "1:48",
+  "fetchedAt": "2026-07-04T09:19:00+09:00",
+  "page": "top",
+  "section": "header-contact",
+  "specs": {
+    "outerSize": "144 x 54.390625px",
+    "padding": "16px 20px (py px on outer Link)",
+    "borderRadius": "48px",
+    "background": "#0096df",
+    "innerSize": "104 x 22.390625px",
+    "font": "Poppins Bold 16px / 22.4px / white"
+  },
+  "implementation": "padding on .top-header__nav-link--contact (outer), inner span is 104px content box only"
+}

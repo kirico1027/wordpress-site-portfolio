@@ -1,0 +1,20 @@
+{
+  "source": "get_design_context",
+  "nodeId": "1:10",
+  "fetchedAt": "2026-07-04T09:09:00+09:00",
+  "page": "top",
+  "section": "header",
+  "specs": {
+    "headerHeight": "109.39px",
+    "headerPadding": "16px",
+    "innerWidth": "1248px",
+    "innerMinHeight": "77.39px",
+    "innerPadding": "4px 24px",
+    "innerShadow": "0 0 5px rgba(123,123,123,0.2)",
+    "innerRadius": "12px",
+    "logoSize": "104 x 23.891px",
+    "navWidth": "664px",
+    "navLinkSize": "104px, padding 24px 0, 16px SemiBold",
+    "contactSize": "144px, padding 16px 20px, 16px Bold, radius 48px, #0096df"
+  }
+}

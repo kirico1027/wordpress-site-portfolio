@@ -1,0 +1,14 @@
+{
+  "source": "get_design_context + get_metadata",
+  "nodeId": "1:57",
+  "fetchedAt": "2026-07-04T09:25:00+09:00",
+  "page": "top",
+  "section": "hero-content",
+  "specs": {
+    "size": "394 x 386px",
+    "offset": "26.562px left, 43.281px below visual top",
+    "heading": "394 x 220px, 48px SemiBold / 67.2px / 9.6px letter-spacing, gap 8px, line box 68px",
+    "divider": "40 x 2px, pt 48px above (margin-top 48px)",
+    "lead": "342 x 116px, pt 64px, 18px Bold / 25.2px / 3.6px letter-spacing, 2 lines"
+  }
+}

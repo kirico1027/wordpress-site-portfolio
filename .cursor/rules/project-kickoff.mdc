@@ -1,0 +1,27 @@
+---
+description: 新規サイト制作のコーディング前キックオフ（工程 0）
+alwaysApply: true
+---
+
+# プロジェクトキックオフ（工程 0）
+
+新規サイト制作では、**いきなりコーディングを開始しない**。  
+詳細は `coding-md/00-project-kickoff/WORKFLOW_00_PROJECT_KICKOFF.md` を正とする。
+
+## コーディング開始前にやること
+
+1. **トップページ全体を確認**し、以下を整理する
+   - 共通レイアウト幅 / 左右余白 / セクション間余白
+   - Header / Footer / Section Heading / Button / CTA / Card 系パーツ
+   - WordPress 化時に template-parts 化すべき要素
+2. **`commonization-plan.md` を作成**し、共通化方針を提案する
+3. **WordPress 化案件**の場合、`WORDPRESS_DESIGN.md` を工程 0 で作成する（テンプレート: `coding-md/07-wordpress-design/WORDPRESS_DESIGN_TEMPLATE.md`）
+
+## 後続工程
+
+```
+工程 0（キックオフ）→ 工程 1（フォント・カラー）→ 工程 3（コンポーネント検出）→ 工程 4（コーディング）
+```
+
+- 工程 3 は工程 0 の `commonization-plan.md` を詳細化する
+- 工程 3 の手順は `coding-md/03-component-detection/WORKFLOW_03_COMPONENT_DETECTION.md`

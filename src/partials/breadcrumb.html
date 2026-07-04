@@ -1,0 +1,9 @@
+<!-- WP: get_template_part('template-parts/breadcrumb') -->
+<nav class="breadcrumb" aria-label="パンくずリスト">
+  <ol class="breadcrumb__list">
+    <li class="breadcrumb__item"><a class="breadcrumb__link" href="@@homeHref">ホーム</a></li>
+    @@if (breadcrumbCurrent) {
+    <li class="breadcrumb__item" aria-current="page">@@breadcrumbCurrent</li>
+    }
+  </ol>
+</nav>

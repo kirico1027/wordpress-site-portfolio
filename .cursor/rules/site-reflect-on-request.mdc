@@ -1,0 +1,40 @@
+---
+description: コード変更後は必ずビルドでサイトへ反映。ユーザーから「反映して」と言われなくても実行する
+alwaysApply: true
+---
+
+# 変更の自動反映（必須）
+
+**`src/templates/` / `src/partials/` / `src/sass/` / `src/public/assets/js/` を変更したら、作業完了前に必ず反映まで行う。** ユーザーが「反映して」と言うのを待たない。
+
+## 毎回実行する手順
+
+1. **`npm run build`** — `gulp styles` + `htmlIncludes` で `src/*.html` と `main.css` を再生成
+2. **キャッシュバスター** — `main.css` / `script.js` を変更したら `src/partials/head.html` と各 `src/templates/*.html` の `?v=` をインクリメントしてから再ビルド
+3. **編集元の確認** — 生成 HTML（`src/index.html` 等）を直接編集しない。正は `templates/` + `partials/`
+
+## 対象ファイル
+
+| 変更した場所 | ビルドで更新される成果物 |
+|-------------|------------------------|
+| `src/templates/*.html` | `src/*.html` |
+| `src/partials/**` | `src/*.html`（include 展開） |
+| `src/sass/**` | `src/public/assets/css/main.css` |
+| `src/public/assets/js/**` | そのまま（`?v=` 更新のみ） |
+
+## ユーザーが「反映して」と言ったとき
+
+変更内容の再実装より先に、**反映漏れの原因を潰してサイトに届ける**ことを優先する。
+
+### よくある原因
+
+1. **ビルド未実行** → `npm run build`
+2. **生成 HTML とソースの不整合** → partial / template を正とし、ビルドで全ページ再生成
+3. **ブラウザキャッシュ** → `?v=` 更新後、ハードリロードを案内
+4. **セレクタ・スコープの限定** → 全ページ共通の partial・セレクタに揃える（CTA → `cta-scroll-reveal.mdc`）
+5. **参照パスの取り違え** → HTML が `./public/assets/...` を参照していることを確認
+
+## 補足
+
+- CTA 固有の手順は `cta-scroll-reveal.mdc` も参照する
+- 反映確認用に `npm run serve` を起動してよいが、**ビルド完了が必須**、サーバー起動は任意

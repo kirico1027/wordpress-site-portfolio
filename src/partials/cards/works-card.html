@@ -1,0 +1,17 @@
+<!-- WP: get_template_part('template-parts/cards/works-card') — CPT works ループ -->
+<article class="works-card">
+  <a class="works-card__link" href="@@href">
+    <figure class="works-card__figure">
+      @@if (thumbnail) {
+      <img src="@@thumbnail" alt="" width="432" height="259" />
+      } @@if (!thumbnail) {
+      <span class="works-card__placeholder" aria-hidden="true"></span>
+      }
+    </figure>
+    <div class="works-card__body">
+      <ul class="works-card__tags">@@tags</ul>
+      <h3 class="works-card__title">@@title</h3>
+      <p class="works-card__company">@@company</p>
+    </div>
+  </a>
+</article>

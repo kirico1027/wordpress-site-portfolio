@@ -1,0 +1,58 @@
+<!-- WP: front-page.php — News セクション（Phase 3 WP_Query news CPT posts_per_page=5） -->
+<section class="section news">
+  <div class="container news__inner">
+    <div class="news__sidebar">
+      @@include('partials/sections/section-heading.html', { "en": "News", "title": "お知らせ" })
+      <div class="news__deco" aria-hidden="true">
+        <div class="news__deco-row news__deco-row--top">
+          <span class="news__deco-block news__deco-block--orange"></span>
+          <span class="news__deco-block news__deco-block--peach"></span>
+        </div>
+        <div class="news__deco-row news__deco-row--bottom">
+          <span class="news__deco-block news__deco-block--green"></span>
+          <span class="news__deco-block news__deco-block--blue"></span>
+        </div>
+      </div>
+    </div>
+    <div class="news__main">
+      <ul class="news__list">
+        @@include('partials/cards/news-item.html', {
+          "href": "./news-single.html",
+          "datetime": "2024-03-08",
+          "date": "2024/3/8",
+          "tag": "採用",
+          "title": "2025年卒 インターンシップ募集開始のお知らせ"
+        })
+        @@include('partials/cards/news-item.html', {
+          "href": "./news-single.html",
+          "datetime": "2024-03-08",
+          "date": "2024/3/8",
+          "tag": "お知らせ",
+          "title": "夏季休業のお知らせ"
+        })
+        @@include('partials/cards/news-item.html', {
+          "href": "./news-single.html",
+          "datetime": "2024-03-01",
+          "date": "2024/3/1",
+          "tag": "メディア掲載",
+          "title": "イベント出展のお知らせ【2024夏】"
+        })
+        @@include('partials/cards/news-item.html', {
+          "href": "./news-single.html",
+          "datetime": "2024-03-01",
+          "date": "2024/3/1",
+          "tag": "お知らせ",
+          "title": "【ご報告】導入社数1000社を突破しました！"
+        })
+        @@include('partials/cards/news-item.html', {
+          "href": "./news-single.html",
+          "datetime": "2024-03-01",
+          "date": "2024/3/1",
+          "tag": "お知らせ",
+          "title": "革新的な福利厚生サービスが登場！次世代の完全従業員ファーストの新サービス"
+        })
+      </ul>
+      @@include('partials/sections/btn-more.html', { "href": "./news-archive.html", "label": "一覧をみる", "modifier": "btn-more--center" })
+    </div>
+  </div>
+</section>

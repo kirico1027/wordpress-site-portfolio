@@ -1,0 +1,31 @@
+{
+  "source": "get_design_context + get_metadata",
+  "nodeId": "1:96",
+  "fetchedAt": "2026-07-04T09:21:00+09:00",
+  "page": "top",
+  "section": "hero",
+  "specs": {
+    "outerWidth": "1184px",
+    "outerPaddingInline": "32px",
+    "innerWidth": "1120px",
+    "innerHeight": "788.5px",
+    "paddingTop": "160px (Header 109.391px + gap 50.609px to hero visual)",
+    "contentOffset": "26.562px left, 43.281px below visual top",
+    "contentWidth": "394px",
+    "visualSize": "578.547 x 468.5px",
+    "layoutGap": "94.33px",
+    "title": "48px SemiBold / 67.2px / 9.6px letter-spacing / gap 8px",
+    "divider": "40x2px, margin-top 48px",
+    "lead": "18px Bold / 25.2px / 3.6px letter-spacing, margin-top 64px, max-width 342px",
+    "collage": {
+      "mainImage": "376.047 x 230.5",
+      "orange": "157 x 137",
+      "green": "125 x 76",
+      "blue": "182 x 238",
+      "subImage": "283.484 x 159.578",
+      "topRowPaddingLeft": "22.75px",
+      "bottomRowMarginLeft": "-5.969px",
+      "rowGap": "0"
+    }
+  }
+}

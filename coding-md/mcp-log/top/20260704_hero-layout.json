@@ -1,0 +1,16 @@
+{
+  "source": "get_metadata node 1:56",
+  "nodeId": "1:56",
+  "fetchedAt": "2026-07-04T09:28:00+09:00",
+  "page": "top",
+  "section": "hero-layout",
+  "baseWidth": "1120px",
+  "layout": {
+    "paddingInline": "2.371% (26.562px)",
+    "contentColumn": "35.179% (394px)",
+    "columnGap": "8.422% (94.33px)",
+    "visualColumn": "51.656% (578.547px)",
+    "contentOffsetTop": "43.281px below visual"
+  },
+  "note": "Use CSS grid percentages on 1120px base. Do not combine gap + margin-left on content."
+}

@@ -1,0 +1,8 @@
+{
+  "source": "get_design_context",
+  "nodeId": "1:9",
+  "fetchedAt": "2026-07-04T08:55:00+09:00",
+  "page": "top",
+  "section": "body",
+  "note": "Full page Body node. Images exported from Figma localhost to src/public/assets/img/"
+}

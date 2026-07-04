@@ -1,0 +1,33 @@
+<!-- WP: front-page.php — Service セクション（Phase 1 HTML 直書き → Phase 4 Repeater） -->
+<section class="section services">
+  <div class="container services__inner">
+    <div class="services__intro">
+      @@include('partials/sections/section-heading.html', { "en": "Service", "title": "事業内容" })
+      <p class="services__text">Biz Lifeでは現代のテクノロジーとライフスタイルに即した福利厚生プログラムとして、社員の悩みや不安に寄り添い、健康で幸せな職場環境を構築します。</p>
+      @@include('partials/sections/btn-more.html', { "href": "./service.html", "label": "サービスについて", "modifier": "" })
+    </div>
+    <ul class="services__list">
+      @@include('partials/cards/service-card.html', {
+        "num": "01",
+        "title": "みんなの福利厚生クラウド",
+        "en": "Employee Welfare Cloud",
+        "desc": "デジタルストレスやデジタル関連の不安を軽減し、デジタルデバイスを適切に活用するための支援を提供します。",
+        "href": "#"
+      })
+      @@include('partials/cards/service-card.html', {
+        "num": "02",
+        "title": "つながるワークフロー",
+        "en": "AI Workflow Assistant",
+        "desc": "社員が効果的にタスクを管理し、仕事を遂行するためトレーニングを通じて支援を提供します。",
+        "href": "#"
+      })
+      @@include('partials/cards/service-card.html', {
+        "num": "03",
+        "title": "あなたのメンタルコーチ",
+        "en": "Personal Mentor Support",
+        "desc": "リラクゼーションアプリの提供を通じて、社員個人個人のメンタルヘルスをサポートし、ストレスや不安を軽減します。",
+        "href": "#"
+      })
+    </ul>
+  </div>
+</section>

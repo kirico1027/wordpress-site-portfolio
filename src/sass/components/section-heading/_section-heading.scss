@@ -1,0 +1,31 @@
+@use "../../foundation/functions" as *;
+@use "../../foundation/mixins" as *;
+
+.section-heading__en {
+  display: flex;
+  align-items: center;
+  gap: rem(4);
+  margin: 0;
+  font-size: rem(18);
+  font-weight: 700;
+  line-height: calc(25.2 / 18);
+  color: var(--color-primary);
+}
+
+.section-heading__dot {
+  display: block;
+  width: rem(16);
+  height: rem(16);
+  border-radius: rem(48);
+  background: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.section-heading__title {
+  margin: rem(8) 0 0;
+  font-size: clamp(#{rem(24)}, 4vw, #{rem(32)});
+  font-weight: 700;
+  line-height: calc(44.8 / 32);
+  letter-spacing: 0.15em;
+  color: var(--color-text);
+}

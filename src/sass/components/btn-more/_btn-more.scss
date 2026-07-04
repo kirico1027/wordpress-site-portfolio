@@ -1,0 +1,59 @@
+@use "../../foundation/functions" as *;
+@use "../../foundation/mixins" as *;
+
+.btn-more {
+  display: inline-flex;
+  align-items: center;
+  gap: rem(64);
+  padding: rem(2) rem(2) rem(2) rem(34);
+  border: rem(2) solid var(--color-primary);
+  border-radius: rem(96);
+  background: var(--color-white);
+  text-decoration: none;
+  color: var(--color-primary);
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.btn-more__label {
+  font-size: rem(16);
+  font-weight: 700;
+  line-height: calc(25.6 / 16);
+  letter-spacing: 0.1em;
+}
+
+.btn-more__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: rem(64);
+  height: rem(64);
+  flex-shrink: 0;
+
+  .material-icons {
+    font-size: rem(24);
+  }
+}
+
+.btn-more--header {
+  flex-shrink: 0;
+}
+
+.btn-more--center {
+  margin-top: rem(48);
+}
+
+@include mq {
+  .btn-more {
+    gap: rem(32);
+    padding-left: rem(24);
+  }
+
+  .btn-more__icon {
+    width: rem(48);
+    height: rem(48);
+  }
+}

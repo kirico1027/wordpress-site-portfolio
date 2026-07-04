@@ -1,0 +1,38 @@
+---
+description: BizLife 案件の WordPress 設計・実装優先順位（案件固有）
+alwaysApply: true
+---
+
+# BizLife WordPress 設計（案件固有）
+
+**全案件共通の WP 化フロー**は `coding-md/00-project-kickoff/WORKFLOW_00_PROJECT_KICKOFF.md` と  
+`coding-md/07-wordpress-design/WORDPRESS_DESIGN_TEMPLATE.md` を参照。
+
+**BizLife 案件の設計の正**は `coding-md/07-wordpress-design/WORDPRESS_DESIGN.md` とする。
+
+## 実装優先順位
+
+1. **静的コーディング** — HTML / Sass / JS、partials 共通化
+2. **WordPress テーマ化** — PHP テンプレート移植、共通パーツの `get_template_part` 化
+3. **CPT 実装** — `works` / `news` / `job`（job CPT は採用）
+4. **ACF 段階導入** — 動的更新が必要な箇所から順次
+
+## 禁止・注意
+
+- 固定ページ（About / Service / Recruit / Company 等）を **最初からすべて ACF 化しない**
+- Phase 1〜2 では固定ページ内容は **HTML 直書き** で完成させる
+- サービス個別ページの CPT 化は **現段階では不要**（Service 1 ページ + 外部リンク）
+
+## CPT 一覧
+
+| CPT | 用途 |
+|-----|------|
+| `works` | 実績紹介（インタビュー形式） |
+| `news` | お知らせ |
+| `job` | 募集職種（Recruit アコーディオン + Entry フォーム連動） |
+
+## 静的コーディング時
+
+- テンプレートは `src/templates/`、共通パーツは `src/partials/` に配置
+- 設計書 §7 のコンポーネント構成に沿って共通化する
+- `npm run build` で全 HTML を再生成する

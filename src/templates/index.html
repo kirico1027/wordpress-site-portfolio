@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    @@include('partials/head.html', { "title": "BizLife | 社員と企業を共に育む新しい福利厚生" })
+  </head>
+  <body>
+    @@include('partials/header.html')
+
+    <!-- WP: front-page.php -->
+    <main class="top-page">
+      @@include('partials/sections/top-hero.html')
+      @@include('partials/sections/top-about.html')
+      @@include('partials/sections/top-services.html')
+      @@include('partials/sections/top-works.html')
+      @@include('partials/sections/top-company.html')
+      @@include('partials/sections/top-news.html')
+      @@include('partials/sections/cta-contact.html')
+    </main>
+
+    @@include('partials/footer.html')
+    <script src="./public/assets/js/script.js?v=17"></script>
+  </body>
+</html>

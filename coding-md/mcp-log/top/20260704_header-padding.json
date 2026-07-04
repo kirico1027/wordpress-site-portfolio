@@ -1,0 +1,23 @@
+{
+  "source": "get_metadata + get_design_context",
+  "nodeId": "1:10",
+  "fetchedAt": "2026-07-04T09:15:00+09:00",
+  "page": "top",
+  "section": "header",
+  "specs": {
+    "headerHeight": "109.390625px",
+    "headerPadding": "16px (all sides)",
+    "innerWidth": "1248px",
+    "innerHeight": "77.390625px",
+    "innerPaddingBlock": "4px",
+    "innerPaddingInline": "24px",
+    "navAreaHeight": "69.390625px",
+    "navLinkOuter": "104 x 70.390625px",
+    "navLinkInnerPaddingBlock": "24px",
+    "navLinkInnerHeight": "22.390625px",
+    "contactOuter": "144 x 54.390625px",
+    "contactInnerPadding": "16px 20px",
+    "contactInnerWidth": "104px"
+  },
+  "fixNote": "Padding is on inner layer (nav-link-inner), not combined with outer width. Matches Figma node tree 1:23/1:48."
+}

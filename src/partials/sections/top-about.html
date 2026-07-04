@@ -1,0 +1,21 @@
+<!-- WP: front-page.php — About セクション（Phase 1 HTML 直書き → Phase 4 ACF） -->
+<section class="section about">
+  <div class="container about__inner">
+    <div class="about__visual">
+      <figure class="about__figure about__figure--main">
+        <img src="./public/assets/img/top/about-01.png" alt="" width="350" height="233" />
+      </figure>
+      <div class="about__figure-row">
+        <span class="about__shape" aria-hidden="true"></span>
+        <figure class="about__figure about__figure--sub">
+          <img src="./public/assets/img/top/about-02.png" alt="" width="240" height="160" />
+        </figure>
+      </div>
+    </div>
+    <div class="about__content">
+      @@include('partials/sections/section-heading.html', { "en": "About us", "title": "私たちについて" })
+      <p class="about__text">Biz Lifeは社員の幸せと企業の成功を追求し、革新的なメンタルヘルスサポートを提供しています。私たちは社員ファーストの理念に基づき、社員が健康で充実した人生を送り、企業が持続可能な成功を収めるためのパートナーとして、常に前進しています。</p>
+      @@include('partials/sections/btn-more.html', { "href": "./about.html", "label": "私たちについて", "modifier": "" })
+    </div>
+  </div>
+</section>

@@ -1,0 +1,20 @@
+{
+  "source": "get_design_context + get_metadata",
+  "nodeId": "1:98",
+  "fetchedAt": "2026-07-04T09:35:00+09:00",
+  "page": "top",
+  "section": "about",
+  "specs": {
+    "padding": "120px 32px 80px",
+    "columnGap": "80px",
+    "visualColumn": "520px",
+    "contentColumn": "520px",
+    "mainImage": "350 x 233.328px, radius 8px",
+    "orangeShape": "120 x 120px at offset 160px, radius 12px",
+    "subImage": "240 x 160px, radius 8px",
+    "headingEn": "18px Bold #0096df, dot 16px, gap 4px",
+    "headingTitle": "32px Bold / 44.8px / 4.8px letter-spacing",
+    "body": "15px SemiBold / 30px / 1.5px letter-spacing, margin-top 32px",
+    "btnMore": "margin-top 80px, border 2px, radius 96px, pl 34 pr 2 py 2, gap 64px"
+  }
+}

@@ -1,0 +1,30 @@
+<!-- WP: front-page.php — Company セクション（Phase 1 HTML 直書き → Options Page 連動） -->
+<section class="section company">
+  <div class="container company__inner">
+    <div class="company__content">
+      @@include('partials/sections/section-heading.html', { "en": "Company", "title": "会社について" })
+      <div class="company__text">
+        <p class="company__text-paragraph">企業だけでなくその先にいる従業員にしっかりと目を向け、「人ベース」で企業成長を促進させる事がBiz Lifeの目指す姿です。</p>
+        <p class="company__text-paragraph">また、ご支援する企業様の成長は私たちの成長にもつながります。</p>
+      </div>
+      @@include('partials/sections/btn-more.html', { "href": "./company.html", "label": "会社概要", "modifier": "" })
+    </div>
+    <div class="company__visual">
+      <div class="company__collage">
+        <div class="company__collage-row company__collage-row--top">
+          <figure class="company__figure company__figure--main">
+            <img src="./public/assets/img/top/company-01.png" alt="" width="335" height="223" />
+          </figure>
+          <span class="company__shape company__shape--orange" aria-hidden="true"></span>
+        </div>
+        <div class="company__collage-row company__collage-row--bottom">
+          <span class="company__shape company__shape--blue" aria-hidden="true"></span>
+          <figure class="company__figure company__figure--sub">
+            <img src="./public/assets/img/top/company-02.png" alt="" width="200" height="133" />
+          </figure>
+          <span class="company__shape company__shape--tag" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

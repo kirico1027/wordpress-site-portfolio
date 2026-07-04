@@ -1,0 +1,21 @@
+{
+  "source": "get_design_context + get_metadata",
+  "nodeId": "1:157",
+  "fetchedAt": "2026-07-04T09:37:00+09:00",
+  "page": "top",
+  "section": "services-list",
+  "specs": {
+    "listWidth": "640px",
+    "listGap": "24px",
+    "itemMinHeight": "307.188px",
+    "itemPadding": "32px",
+    "itemRadius": "16px",
+    "itemBg": "#f9f9f9",
+    "contentWidth": "576px",
+    "num": "24px SemiBold #ffa76c / 28.8px / 1.2px letter-spacing",
+    "title": "24px Bold / 33.6px / 1.2px, margin-top 24px",
+    "en": "14px SemiBold #0096df / 16.8px / 0.7px, margin-top 8px",
+    "desc": "15px SemiBold / 30px / 1.5px, margin-top 24px, width 100%",
+    "link": "14px Bold / 22.4px / 0.7px, gap 16px, align right, margin-top 24px"
+  }
+}
