@@ -11,6 +11,12 @@ body {
   padding: 0;
 }
 
+body {
+  font-family: var(--font-base);
+  color: var(--color-text);
+  overflow-x: hidden;
+}
+
 @media (max-width: 768px) {
   // scrollTo(0, 1) が効くよう、常に 1px だけ縦スクロール可能にする
   html {

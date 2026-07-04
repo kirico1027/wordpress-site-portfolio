@@ -5,12 +5,6 @@
 // Base
 // ---------------------------------------------------------------------------
 
-body {
-  font-family: var(--font-base);
-  color: var(--color-text);
-  overflow-x: hidden;
-}
-
 .top-page {
   padding-top: 0;
 }
@@ -1232,7 +1226,7 @@ body {
 .section-cta__title {
   margin: 0;
   font-size: clamp(#{rem(32)}, 6vw, #{rem(56)});
-  font-weight: 700;
+  font-weight: 600;
   line-height: calc(61.6 / 56);
   letter-spacing: 0.1em;
   color: var(--color-white);
@@ -1250,19 +1244,28 @@ body {
 .section-cta__cards {
   display: flex;
   flex-direction: row;
-  gap: rem(24);
+  justify-content: center;
+  gap: rem(32);
+  max-width: rem(832);
   margin-top: rem(48);
+  margin-inline: auto;
 }
 
 .section-cta__card {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  flex: 1 1 50%;
-  min-width: 0;
-  padding: rem(32);
+  align-items: center;
+  justify-content: center;
+  gap: rem(16);
+  flex: 0 0 rem(400);
+  width: rem(400);
+  max-width: 100%;
+  padding-top: rem(32);
+  padding-bottom: rem(40);
+  padding-inline: rem(32);
   border-radius: rem(12);
   background: var(--color-white);
+  text-align: center;
   text-decoration: none;
   color: var(--color-text);
   transition: opacity 0.2s ease;
@@ -1272,36 +1275,48 @@ body {
   opacity: 0.9;
 }
 
+.section-cta__card-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: rem(4);
+}
+
 .section-cta__card-icon {
   font-size: rem(32);
-  color: var(--color-primary);
+  line-height: rem(32);
+  color: var(--color-text);
 }
 
 .section-cta__card-title {
-  margin-top: rem(16);
-  font-size: rem(20);
-  font-weight: 700;
-  line-height: calc(28 / 20);
+  margin: 0;
+  font-size: rem(22);
+  font-weight: 600;
+  line-height: calc(35.2 / 22);
   letter-spacing: 0.1em;
   color: var(--color-text);
 }
 
 .section-cta__card-desc {
-  margin-top: rem(16);
-  @include section-copy-font-size;
+  margin: 0;
+  width: 100%;
+  max-width: rem(336);
+  font-size: rem(14);
   font-weight: 500;
-  line-height: 1.8;
-  letter-spacing: 0.05em;
+  line-height: calc(25.2 / 14);
+  letter-spacing: 0.1em;
   color: var(--color-text-muted);
 }
 
 @include mq {
   .section-cta__cards {
     flex-direction: column;
+    max-width: none;
   }
 
   .section-cta__card {
-    flex-basis: auto;
+    flex: none;
+    width: 100%;
   }
 }
 
@@ -1312,30 +1327,39 @@ body {
 .site-footer {
   background: var(--color-dark);
   color: var(--color-white);
-  @include fluid-padding-y(rem(64), 8vw, rem(96));
+  padding-top: rem(80);
+  padding-bottom: rem(24);
+  padding-inline: rem(64);
 }
 
 .site-footer__inner {
   width: 100%;
+  max-width: rem(1280);
+  margin-inline: auto;
 }
 
 .site-footer__main {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
-  @include fluid-gap(rem(32), 5vw, rem(64));
+  gap: rem(24);
 }
 
 .site-footer__brand {
-  flex: 1 1 55%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: rem(24);
+  flex: 0 1 auto;
   min-width: 0;
 }
 
 .site-footer__logo-row {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   gap: rem(32);
 }
 
@@ -1349,87 +1373,98 @@ body {
 .site-footer__logo img {
   display: block;
   width: rem(120);
-  height: auto;
+  height: rem(26.75);
 }
 
 .site-footer__tagline {
   margin: 0;
-  font-size: rem(12);
-  font-weight: 500;
-  line-height: calc(20.4 / 12);
-  letter-spacing: 0.05em;
+  font-size: rem(14);
+  font-weight: 600;
+  line-height: calc(16.8 / 14);
   color: var(--color-white);
 }
 
 .site-footer__company {
-  margin-top: rem(32);
+  display: flex;
+  flex-direction: column;
+  gap: rem(4);
 }
 
 .site-footer__company-name {
   margin: 0;
-  font-size: rem(14);
-  font-weight: 600;
-  line-height: calc(21 / 14);
+  font-size: rem(12);
+  font-weight: 700;
+  line-height: calc(16.8 / 12);
   letter-spacing: 0.05em;
 }
 
 .site-footer__address {
   display: flex;
-  flex-direction: column;
-  gap: rem(4);
-  margin: rem(8) 0 0;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: rem(12);
+  margin: 0;
   font-size: rem(12);
-  font-weight: 500;
-  line-height: calc(20.4 / 12);
+  font-weight: 700;
+  line-height: calc(16.8 / 12);
   letter-spacing: 0.05em;
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--color-white);
 }
 
 .site-footer__social {
   display: flex;
   flex-direction: row;
-  gap: rem(16);
-  margin: rem(24) 0 0;
+  align-items: center;
+  justify-content: center;
+  width: rem(192);
+  height: rem(64);
+  margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.site-footer__social li {
+  margin: 0;
+  padding: 0;
 }
 
 .site-footer__social-link {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: rem(40);
-  height: rem(40);
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  flex-shrink: 0;
+  width: rem(64);
+  height: rem(64);
+  border-radius: rem(128);
   text-decoration: none;
   color: var(--color-white);
   transition: opacity 0.2s ease;
+}
+
+.site-footer__social-link i {
+  display: block;
+  font-size: rem(20);
+  line-height: rem(20);
 }
 
 .site-footer__social-link:hover {
   opacity: 0.75;
 }
 
-.site-footer__social-link .material-icons {
-  font-size: rem(20);
-}
-
 .site-footer__legal {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: rem(16) rem(24);
-  margin-top: rem(24);
+  gap: rem(16);
 }
 
 .site-footer__legal-link {
   font-size: rem(12);
-  font-weight: 500;
-  line-height: calc(20.4 / 12);
+  font-weight: 400;
+  line-height: calc(16.8 / 12);
   letter-spacing: 0.05em;
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--color-border);
   transition: opacity 0.2s ease;
 }
 
@@ -1438,25 +1473,24 @@ body {
 }
 
 .site-footer__nav-col {
-  flex: 0 1 40%;
-  min-width: 0;
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: rem(32);
+  flex-direction: row;
+  align-items: flex-start;
+  gap: rem(80);
+  flex: 0 0 auto;
 }
 
 .site-footer__nav {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  gap: rem(16);
+  align-items: flex-start;
 }
 
 .site-footer__nav-link {
-  font-size: rem(14);
-  font-weight: 500;
-  line-height: calc(21 / 14);
+  padding-block: rem(8);
+  font-size: rem(16);
+  font-weight: 600;
+  line-height: calc(22.4 / 16);
   letter-spacing: 0.05em;
   text-decoration: none;
   color: var(--color-white);
@@ -1469,23 +1503,22 @@ body {
 
 .site-footer__actions {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: rem(16);
-  justify-content: flex-end;
+  flex-direction: column;
+  gap: rem(8);
 }
 
 .site-footer__action-btn {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: rem(8);
-  padding: rem(10) rem(24);
-  border-radius: rem(48);
+  justify-content: space-between;
+  width: rem(160);
+  padding: rem(12) rem(32);
+  border-radius: rem(64);
   background: var(--color-white);
-  font-size: rem(14);
+  font-size: rem(15);
   font-weight: 600;
-  line-height: calc(21 / 14);
-  letter-spacing: 0.05em;
+  line-height: calc(24 / 15);
+  letter-spacing: 0.1em;
   text-decoration: none;
   color: var(--color-dark);
   transition: opacity 0.2s ease;
@@ -1496,46 +1529,46 @@ body {
 }
 
 .site-footer__action-btn .material-icons {
-  font-size: rem(20);
+  font-size: rem(14);
+  line-height: rem(14);
 }
 
 .site-footer__copy {
   margin: rem(80) 0 0;
   text-align: center;
-  font-size: rem(12);
+  font-size: rem(13);
   font-weight: 500;
-  line-height: calc(20.4 / 12);
+  line-height: calc(18.2 / 13);
   letter-spacing: 0.05em;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--color-white);
 }
 
 @include mq {
+  .site-footer {
+    padding-top: rem(64);
+    padding-inline: rem(16);
+  }
+
   .site-footer__main {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .site-footer__brand {
-    flex-basis: auto;
-  }
-
   .site-footer__logo-row {
     flex-direction: column;
+    align-items: flex-start;
     gap: rem(16);
   }
 
   .site-footer__nav-col {
-    flex-basis: auto;
-    align-items: flex-start;
+    flex-direction: column;
+    gap: rem(32);
     margin-top: rem(48);
   }
 
-  .site-footer__nav {
-    align-items: flex-start;
-  }
-
   .site-footer__actions {
-    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 
   .site-footer__copy {

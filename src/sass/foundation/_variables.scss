@@ -13,5 +13,6 @@
   --color-dark: #373737;
   --color-white: #ffffff;
   --container-max: 74rem;
+  // Figma: 日英とも Poppins（日本語は Web フォントに字形がないためシステムゴシックへフォールバック）
   --font-base: "Poppins", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
 }

@@ -35,7 +35,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-<link rel="stylesheet" href="./public/assets/css/main.css?v=17" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/brands.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="./public/assets/css/main.css?v=23" />
 
   </head>
   <body>
@@ -430,14 +432,18 @@
       </div>
       <div class="section-cta__cards">
         <a class="section-cta__card" href="./contact.html">
-          <span class="material-icons section-cta__card-icon" aria-hidden="true">mail_outline</span>
-          <span class="section-cta__card-title">お問い合わせ</span>
-          <span class="section-cta__card-desc">数ある会社から弊社にご興味·関心をいただきありがとうございます。</span>
+          <div class="section-cta__card-head">
+            <span class="material-icons section-cta__card-icon" aria-hidden="true">mail_outline</span>
+            <span class="section-cta__card-title">お問い合わせ</span>
+          </div>
+          <p class="section-cta__card-desc">数ある会社から弊社にご興味·関心をいただきありがとうございます。</p>
         </a>
         <a class="section-cta__card" href="./download.html">
-          <span class="material-icons section-cta__card-icon" aria-hidden="true">insert_drive_file</span>
-          <span class="section-cta__card-title">資料ダウンロード</span>
-          <span class="section-cta__card-desc">数ある会社から弊社にご興味·関心をいただきありがとうございます。</span>
+          <div class="section-cta__card-head">
+            <span class="material-icons section-cta__card-icon" aria-hidden="true">insert_drive_file</span>
+            <span class="section-cta__card-title">資料ダウンロード</span>
+          </div>
+          <p class="section-cta__card-desc">数ある会社から弊社にご興味·関心をいただきありがとうございます。</p>
         </a>
       </div>
     </div>
@@ -448,7 +454,7 @@
 
     <!-- WP: get_footer() / template-parts/footer.php — Options Page（会社情報・SNS） -->
 <footer class="site-footer">
-  <div class="site-footer__inner container">
+  <div class="site-footer__inner">
     <div class="site-footer__main">
       <div class="site-footer__brand">
         <div class="site-footer__logo-row">
@@ -460,9 +466,9 @@
           <p class="site-footer__address"><span>〒361-9841</span><span>東京都中央区0-00-0 シルバービルディング9F</span></p>
         </div>
         <ul class="site-footer__social">
-          <li><a class="site-footer__social-link" href="#" aria-label="Instagram"><span class="material-icons" aria-hidden="true">photo_camera</span></a></li>
-          <li><a class="site-footer__social-link" href="#" aria-label="X"><span class="material-icons" aria-hidden="true">close</span></a></li>
-          <li><a class="site-footer__social-link" href="#" aria-label="Facebook"><span class="material-icons" aria-hidden="true">facebook</span></a></li>
+          <li><a class="site-footer__social-link" href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
+          <li><a class="site-footer__social-link" href="#" aria-label="X"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a></li>
+          <li><a class="site-footer__social-link" href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a></li>
         </ul>
         <div class="site-footer__legal">
           <a class="site-footer__legal-link" href="./privacy-policy.html">プライバシーポリシー</a>
