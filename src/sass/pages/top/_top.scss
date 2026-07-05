@@ -1085,9 +1085,11 @@
 }
 
 @include mq {
-  $company-visual-base-w: rem(540);
-  $company-visual-base-h: rem(416.188);
-  $company-sp-gutter: rem(48);
+  $company-collage-cols-top: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
+  // SP サンプル計測比（青:中画像:ベージュ ≒ 64:120:90 → 32:60:45）
+  $company-collage-cols-bottom: minmax(0, 32fr) minmax(0, 60fr) minmax(0, 45fr);
+  $company-collage-inset-top: rem(24);
+  $company-collage-inset-bottom-right: rem(36);
 
   .company__inner {
     flex-direction: column;
@@ -1121,10 +1123,94 @@
   }
 
   .company__visual-scaler {
-    width: $company-visual-base-w;
-    height: calc(#{$company-visual-base-h} * ((100vw - #{$company-sp-gutter}) / #{$company-visual-base-w}));
-    transform: scale(calc((100vw - #{$company-sp-gutter}) / #{$company-visual-base-w}));
-    transform-origin: top left;
+    width: 100%;
+    height: auto;
+    transform: none;
+  }
+
+  .company__collage {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .company__collage-row--top,
+  .company__collage-row--bottom {
+    position: relative;
+    left: auto;
+    top: auto;
+    display: grid;
+    gap: 0;
+    height: auto;
+  }
+
+  .company__collage-row--top {
+    align-items: start;
+    grid-template-columns: $company-collage-cols-top;
+    width: calc(100% - #{$company-collage-inset-top} * 2);
+    margin-inline: auto;
+  }
+
+  .company__collage-row--bottom {
+    align-items: start;
+    grid-template-columns: $company-collage-cols-bottom;
+    width: calc(100% - #{$company-collage-inset-bottom-right});
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .company__figure {
+    position: static;
+    left: auto;
+    top: auto;
+    min-width: 0;
+    width: 100%;
+    height: auto;
+  }
+
+  .company__figure img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .company__figure--main {
+    grid-column: 1 / 3;
+    aspect-ratio: 335 / 223;
+  }
+
+  .company__figure--sub {
+    grid-column: 2;
+    aspect-ratio: 200 / 133;
+  }
+
+  .company__shape {
+    position: static;
+    left: auto;
+    top: auto;
+    width: 100%;
+    height: auto;
+  }
+
+  .company__shape--orange {
+    grid-column: 3;
+    align-self: end;
+    aspect-ratio: 1 / 1;
+  }
+
+  .company__shape--blue {
+    grid-column: 1;
+    aspect-ratio: 1 / 1;
+  }
+
+  .company__shape--tag {
+    grid-column: 3;
+    aspect-ratio: 1 / 1;
   }
 }
 
