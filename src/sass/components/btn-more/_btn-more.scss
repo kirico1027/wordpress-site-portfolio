@@ -4,8 +4,8 @@
 .btn-more {
   display: inline-flex;
   align-items: center;
-  gap: rem(64);
-  padding: rem(2) rem(2) rem(2) rem(34);
+  gap: rem(40);
+  padding: rem(2) rem(2) rem(2) rem(38);
   border: rem(2) solid var(--color-primary);
   border-radius: rem(96);
   background: var(--color-white);
@@ -19,6 +19,7 @@
 }
 
 .btn-more__label {
+  padding-left: rem(4);
   font-size: rem(16);
   font-weight: 700;
   line-height: calc(25.6 / 16);
@@ -48,8 +49,12 @@
 
 @include mq {
   .btn-more {
-    gap: rem(32);
-    padding-left: rem(24);
+    gap: rem(24);
+    padding-left: rem(30);
+  }
+
+  .btn-more__label {
+    padding-left: rem(6);
   }
 
   .btn-more__icon {

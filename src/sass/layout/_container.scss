@@ -39,7 +39,7 @@
   box-sizing: border-box;
 
   @include mq {
-    padding-left: rem(16);
-    padding-right: rem(16);
+    padding-left: rem(24);
+    padding-right: rem(24);
   }
 }
