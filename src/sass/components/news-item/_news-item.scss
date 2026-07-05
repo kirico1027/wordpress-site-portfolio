@@ -52,3 +52,21 @@
   letter-spacing: rem(0.75);
   color: var(--color-text);
 }
+
+@include mq {
+  .news-item__link {
+    padding: rem(24) rem(16) rem(24);
+  }
+
+  .news-item__meta {
+    gap: rem(16);
+  }
+
+  .news-item__tag {
+    flex-shrink: 0;
+  }
+
+  .news-item__title {
+    margin-top: rem(16);
+  }
+}

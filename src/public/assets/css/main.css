@@ -371,6 +371,20 @@ body {
   color: var(--color-text);
 }
 
+@media (max-width: 768px) {
+  .news-item__link {
+    padding: 1.5rem 1rem 1.5rem;
+  }
+  .news-item__meta {
+    gap: 1rem;
+  }
+  .news-item__tag {
+    flex-shrink: 0;
+  }
+  .news-item__title {
+    margin-top: 1rem;
+  }
+}
 .page-hero {
   position: relative;
   display: flex;
@@ -1721,6 +1735,9 @@ body {
     flex-basis: auto;
     width: 100%;
     gap: 3rem;
+  }
+  .news__list {
+    width: 100%;
   }
 }
 .section-cta {
