@@ -1505,14 +1505,45 @@
 }
 
 @include mq {
+  .section-cta {
+    padding-inline: rem(16);
+  }
+
+  .section-cta__inner {
+    padding-top: rem(32);
+    padding-bottom: rem(32);
+  }
+
+  .section-cta__head {
+    text-align: left;
+  }
+
+  .section-cta__title {
+    font-size: rem(32);
+    line-height: calc(44.8 / 32);
+  }
+
+  .section-cta__lead {
+    margin-top: rem(16);
+  }
+
   .section-cta__cards {
     flex-direction: column;
     max-width: none;
+    margin-top: rem(32);
+    gap: rem(24);
   }
 
   .section-cta__card {
     flex: none;
     width: 100%;
+    padding-top: rem(28);
+    padding-bottom: rem(32);
+    padding-inline: rem(24);
+  }
+
+  .section-cta__card-desc {
+    max-width: none;
   }
 }
 

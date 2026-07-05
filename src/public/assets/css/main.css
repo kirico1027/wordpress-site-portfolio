@@ -1852,13 +1852,38 @@ body {
 }
 
 @media (max-width: 768px) {
+  .section-cta {
+    padding-inline: 1rem;
+  }
+  .section-cta__inner {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  .section-cta__head {
+    text-align: left;
+  }
+  .section-cta__title {
+    font-size: 2rem;
+    line-height: 1.4;
+  }
+  .section-cta__lead {
+    margin-top: 1rem;
+  }
   .section-cta__cards {
     flex-direction: column;
     max-width: none;
+    margin-top: 2rem;
+    gap: 1.5rem;
   }
   .section-cta__card {
     flex: none;
     width: 100%;
+    padding-top: 1.75rem;
+    padding-bottom: 2rem;
+    padding-inline: 1.5rem;
+  }
+  .section-cta__card-desc {
+    max-width: none;
   }
 }
 .site-footer {
