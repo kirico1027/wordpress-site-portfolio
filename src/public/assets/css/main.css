@@ -2108,7 +2108,7 @@ body {
 @media (max-width: 768px) {
   .site-footer {
     padding-top: 4rem;
-    padding-inline: 1rem;
+    padding-inline: 1.5rem;
   }
   .site-footer__main {
     flex-direction: column;
