@@ -194,14 +194,15 @@
 
 @include mq-header {
   .top-header {
-    padding: rem(12) rem(24);
-    padding-top: calc(rem(12) + env(safe-area-inset-top, 0px));
+    @include fluid-padding-inline(rem(24), 5.21vw, rem(40));
+    padding-bottom: rem(16);
+    padding-top: calc(rem(16) + env(safe-area-inset-top, 0px));
   }
 
   .top-header__inner {
     min-height: rem(56);
-    padding-block: rem(8);
-    padding-inline: rem(16);
+    padding-block: rem(12);
+    padding-inline: rem(24);
   }
 
   .top-header__logo img {
@@ -550,18 +551,29 @@
 @include mq {
   $hero-collage-base-w: rem(590.484);
   $hero-collage-base-h: rem(468.5);
-  $hero-sp-gutter: rem(48);
+  // 375px: gutter 48 / 768px: gutter 178 → 768px で scale 1.0（サンプル通り全体表示）
+  $hero-sp-gutter: clamp(
+    #{rem(48)},
+    calc(#{rem(48)} + #{rem(130)} * ((100vw - 375px) / 393px)),
+    #{rem(178)}
+  );
+  $hero-sp-collage-scale: calc((100vw - #{$hero-sp-gutter}) / #{$hero-collage-base-w});
 
   .hero {
-    padding-top: calc(#{rem(104)} + env(safe-area-inset-top, 0px));
-    padding-bottom: rem(48);
+    padding-top: clamp(#{rem(104)}, 15.625vw, #{rem(120)});
+    padding-top: calc(clamp(#{rem(104)}, 15.625vw, #{rem(120)}) + env(safe-area-inset-top, 0px));
+    @include fluid-spacing(padding-bottom, rem(48), 8.33vw, rem(64));
+  }
+
+  .hero__inner.container {
+    @include fluid-padding-inline(rem(24), 8.33vw, rem(64));
   }
 
   .hero__layout {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: rem(32);
+    gap: clamp(#{rem(32)}, 6.25vw, #{rem(48)});
     max-width: none;
     padding-inline: 0;
   }
@@ -579,8 +591,8 @@
   }
 
   .hero__title {
-    font-size: rem(28);
-    line-height: calc(39.2 / 28);
+    font-size: clamp(#{rem(28)}, 4.6vw, #{rem(36)});
+    line-height: 1.4;
   }
 
   .hero__title-line {
@@ -589,45 +601,52 @@
   }
 
   .hero__divider {
-    margin-top: rem(32);
+    margin-top: clamp(#{rem(32)}, 6.25vw, #{rem(48)});
   }
 
   .hero__lead {
-    margin-top: rem(32);
+    margin-top: clamp(#{rem(32)}, 6.25vw, #{rem(48)});
   }
 
   .hero__lead-line {
-    font-size: rem(16);
-    line-height: calc(22.4 / 16);
+    font-size: clamp(#{rem(16)}, 2.34vw, #{rem(18)});
+    line-height: calc(25.2 / 18);
     white-space: normal;
   }
 
   .hero__collage-scaler {
-    height: calc(#{$hero-collage-base-h} * ((100vw - #{$hero-sp-gutter}) / #{$hero-collage-base-w}));
+    width: calc(100vw - #{$hero-sp-gutter});
+    margin-left: auto;
+    height: calc(#{$hero-collage-base-h} * #{$hero-sp-collage-scale});
     overflow: visible;
   }
 
   .hero__collage {
     width: $hero-collage-base-w;
-    transform: scale(calc((100vw - #{$hero-sp-gutter}) / #{$hero-collage-base-w}));
+    transform: scale(#{$hero-sp-collage-scale});
     transform-origin: top left;
   }
 
   .hero-news {
     position: relative;
     z-index: 1;
-    margin-top: rem(-16);
-    padding-bottom: rem(32);
-    padding-inline: rem(24);
+    margin-top: clamp(#{rem(-40)}, -5.2vw, #{rem(-16)});
+    padding-bottom: clamp(#{rem(32)}, 6.25vw, #{rem(40)});
+    padding-inline: clamp(#{rem(24)}, 6.25vw, #{rem(48)});
+  }
+
+  .hero-news__inner {
+    padding-inline: 0;
   }
 
   .hero-news__link {
     flex-direction: column;
     align-items: flex-start;
-    gap: rem(8);
+    gap: clamp(#{rem(8)}, 1.56vw, #{rem(12)});
     width: 100%;
-    padding: rem(16) rem(20);
-    border-radius: rem(24);
+    padding-block: clamp(#{rem(16)}, 3.13vw, #{rem(24)});
+    padding-inline: clamp(#{rem(20)}, 6.25vw, #{rem(48)});
+    border-radius: clamp(#{rem(24)}, 8vw, #{rem(48)});
   }
 
   .hero-news__date,
@@ -745,6 +764,10 @@
   .about.section {
     padding-top: rem(64);
     padding-bottom: rem(64);
+  }
+
+  .about__inner.container {
+    @include fluid-padding-inline(rem(24), 8.33vw, rem(64));
   }
 
   .about__inner {
