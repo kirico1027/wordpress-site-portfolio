@@ -785,12 +785,15 @@
   }
 
   .about .section-heading__title {
-    font-size: rem(22);
     letter-spacing: 0.15em;
   }
 
   .about__text {
-    @include section-copy-font-size;
+    font-size: clamp(
+      #{rem(14)},
+      calc(#{rem(14)} + (100vw - 375px) * 2 / 393),
+      #{rem(16)}
+    );
     margin-top: rem(24);
     font-weight: 600;
     line-height: calc(30 / 15);
@@ -1120,7 +1123,6 @@
   }
 
   .company .section-heading__title {
-    font-size: clamp(#{rem(22)}, 4vw, #{rem(28)});
     letter-spacing: 0.15em;
   }
 
@@ -1362,7 +1364,6 @@
   }
 
   .news .section-heading__title {
-    font-size: clamp(#{rem(22)}, 4vw, #{rem(28)});
     letter-spacing: 0.15em;
   }
 
