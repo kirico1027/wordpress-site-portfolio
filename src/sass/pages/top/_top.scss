@@ -327,7 +327,6 @@
   // Figma: ヒーロー開始 y=160px（Header 109.391px + 下余白 50.609px）
   padding-top: rem(160);
   padding-top: calc(rem(160) + env(safe-area-inset-top, 0px));
-  @include fluid-spacing(padding-bottom, rem(48), 8vw, rem(96));
 }
 
 .hero__inner {
@@ -494,7 +493,7 @@
   display: flex;
   justify-content: center;
   margin-top: rem(51);
-  padding-bottom: rem(40);
+  @include fluid-spacing(padding-bottom, rem(64), 10vw, rem(120));
   padding-inline: rem(16);
 }
 
@@ -551,18 +550,13 @@
 @include mq {
   $hero-collage-base-w: rem(590.484);
   $hero-collage-base-h: rem(468.5);
-  // 375px: gutter 48 / 768px: gutter 178 → 768px で scale 1.0（サンプル通り全体表示）
-  $hero-sp-gutter: clamp(
-    #{rem(48)},
-    calc(#{rem(48)} + #{rem(130)} * ((100vw - 375px) / 393px)),
-    #{rem(178)}
-  );
-  $hero-sp-collage-scale: calc((100vw - #{$hero-sp-gutter}) / #{$hero-collage-base-w});
+  // 下段 row の margin-left 分だけ左にはみ出す（PC でも同値）
+  $hero-collage-overflow-left: rem(5.969);
+  $hero-collage-fit-w: calc(#{$hero-collage-base-w} + #{$hero-collage-overflow-left});
 
   .hero {
     padding-top: clamp(#{rem(104)}, 15.625vw, #{rem(120)});
     padding-top: calc(clamp(#{rem(104)}, 15.625vw, #{rem(120)}) + env(safe-area-inset-top, 0px));
-    @include fluid-spacing(padding-bottom, rem(48), 8.33vw, rem(64));
   }
 
   .hero__inner.container {
@@ -588,6 +582,7 @@
     width: 100%;
     min-width: 0;
     justify-self: auto;
+    container-type: inline-size;
   }
 
   .hero__title {
@@ -615,15 +610,16 @@
   }
 
   .hero__collage-scaler {
-    width: calc(100vw - #{$hero-sp-gutter});
-    margin-left: auto;
-    height: calc(#{$hero-collage-base-h} * #{$hero-sp-collage-scale});
-    overflow: visible;
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: calc(#{$hero-collage-overflow-left} * 100cqw / #{$hero-collage-fit-w});
+    height: calc(#{$hero-collage-base-h} * (100cqw / #{$hero-collage-fit-w}));
+    overflow: hidden;
   }
 
   .hero__collage {
     width: $hero-collage-base-w;
-    transform: scale(#{$hero-sp-collage-scale});
+    transform: scale(calc(100cqw / #{$hero-collage-fit-w}));
     transform-origin: top left;
   }
 
@@ -631,7 +627,6 @@
     position: relative;
     z-index: 1;
     margin-top: clamp(#{rem(-40)}, -5.2vw, #{rem(-16)});
-    padding-bottom: clamp(#{rem(32)}, 6.25vw, #{rem(40)});
     padding-inline: clamp(#{rem(24)}, 6.25vw, #{rem(48)});
   }
 
@@ -660,8 +655,7 @@
 // ---------------------------------------------------------------------------
 
 .about.section {
-  padding-top: rem(120);
-  padding-bottom: rem(80);
+  padding-bottom: 0;
 }
 
 .about__inner {
@@ -759,12 +753,6 @@
 @include mq {
   $about-visual-base-w: rem(520);
   $about-visual-base-h: rem(393.328);
-  $about-sp-gutter: rem(48);
-
-  .about.section {
-    padding-top: rem(64);
-    padding-bottom: rem(64);
-  }
 
   .about__inner.container {
     @include fluid-padding-inline(rem(24), 8.33vw, rem(64));
@@ -778,12 +766,16 @@
   .about__visual {
     flex: none;
     width: 100%;
+    min-width: 0;
+    container-type: inline-size;
+    height: calc(#{$about-visual-base-h} * (100cqw / #{$about-visual-base-w}));
+    overflow: hidden;
   }
 
   .about__visual-scaler {
     width: $about-visual-base-w;
-    height: calc(#{$about-visual-base-h} * ((100vw - #{$about-sp-gutter}) / #{$about-visual-base-w}));
-    transform: scale(calc((100vw - #{$about-sp-gutter}) / #{$about-visual-base-w}));
+    height: $about-visual-base-h;
+    transform: scale(calc(100cqw / #{$about-visual-base-w}));
     transform-origin: top left;
   }
 

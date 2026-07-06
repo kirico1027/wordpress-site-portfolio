@@ -745,7 +745,6 @@ body {
   min-height: auto;
   padding-top: 10rem;
   padding-top: calc(10rem + env(safe-area-inset-top, 0px));
-  padding-bottom: clamp(3rem, 8vw, 6rem);
 }
 
 .hero__inner {
@@ -912,7 +911,7 @@ body {
   display: flex;
   justify-content: center;
   margin-top: 3.1875rem;
-  padding-bottom: 2.5rem;
+  padding-bottom: clamp(4rem, 10vw, 7.5rem);
   padding-inline: 1rem;
 }
 
@@ -970,7 +969,6 @@ body {
   .hero {
     padding-top: clamp(6.5rem, 15.625vw, 7.5rem);
     padding-top: calc(clamp(6.5rem, 15.625vw, 7.5rem) + env(safe-area-inset-top, 0px));
-    padding-bottom: clamp(3rem, 8.33vw, 4rem);
   }
   .hero__inner.container {
     padding-left: clamp(1.5rem, 8.33vw, 4rem);
@@ -993,6 +991,7 @@ body {
     width: 100%;
     min-width: 0;
     justify-self: auto;
+    container-type: inline-size;
   }
   .hero__title {
     font-size: clamp(1.75rem, 4.6vw, 2.25rem);
@@ -1014,21 +1013,21 @@ body {
     white-space: normal;
   }
   .hero__collage-scaler {
-    width: calc(100vw - clamp(3rem, 3rem + 8.125rem * (100vw - 375px) / 393px, 11.125rem));
-    margin-left: auto;
-    height: calc(29.28125rem * calc((100vw - clamp(3rem, 3rem + 8.125rem * (100vw - 375px) / 393px, 11.125rem)) / 36.90525rem));
-    overflow: visible;
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: calc(0.3730625rem * 100cqw / calc(36.90525rem + 0.3730625rem));
+    height: calc(29.28125rem * 100cqw / calc(36.90525rem + 0.3730625rem));
+    overflow: hidden;
   }
   .hero__collage {
     width: 36.90525rem;
-    transform: scale(calc((100vw - clamp(3rem, 3rem + 8.125rem * (100vw - 375px) / 393px, 11.125rem)) / 36.90525rem));
+    transform: scale(calc(100cqw / calc(36.90525rem + 0.3730625rem)));
     transform-origin: top left;
   }
   .hero-news {
     position: relative;
     z-index: 1;
     margin-top: clamp(-2.5rem, -5.2vw, -1rem);
-    padding-bottom: clamp(2rem, 6.25vw, 2.5rem);
     padding-inline: clamp(1.5rem, 6.25vw, 3rem);
   }
   .hero-news__inner {
@@ -1049,8 +1048,7 @@ body {
   }
 }
 .about.section {
-  padding-top: 7.5rem;
-  padding-bottom: 5rem;
+  padding-bottom: 0;
 }
 
 .about__inner {
@@ -1146,10 +1144,6 @@ body {
 }
 
 @media (max-width: 768px) {
-  .about.section {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
-  }
   .about__inner.container {
     padding-left: clamp(1.5rem, 8.33vw, 4rem);
     padding-right: clamp(1.5rem, 8.33vw, 4rem);
@@ -1161,11 +1155,15 @@ body {
   .about__visual {
     flex: none;
     width: 100%;
+    min-width: 0;
+    container-type: inline-size;
+    height: calc(24.583rem * 100cqw / 32.5rem);
+    overflow: hidden;
   }
   .about__visual-scaler {
     width: 32.5rem;
-    height: calc(24.583rem * (100vw - 3rem) / 32.5rem);
-    transform: scale(calc((100vw - 3rem) / 32.5rem));
+    height: 24.583rem;
+    transform: scale(calc(100cqw / 32.5rem));
     transform-origin: top left;
   }
   .about__content {
