@@ -4,8 +4,16 @@
     <div class="company__content">
       @@include('partials/sections/section-heading.html', { "en": "Company", "title": "会社について" })
       <div class="company__text">
-        <p class="company__text-paragraph">企業だけでなくその先にいる従業員にしっかりと目を向け、「人ベース」で企業成長を促進させる事がBiz Lifeの目指す姿です。</p>
-        <p class="company__text-paragraph">また、ご支援する企業様の成長は私たちの成長にもつながります。</p>
+        @@include('partials/sections/section-body.html', {
+          "blockClass": "company__text-paragraph",
+          "modifier": "section-body--company",
+          "text": "企業だけでなくその先にいる従業員にしっかりと目を向け、「人ベース」で企業成長を促進させる事がBiz Lifeの目指す姿です。"
+        })
+        @@include('partials/sections/section-body.html', {
+          "blockClass": "company__text-paragraph",
+          "modifier": "section-body--company",
+          "text": "また、ご支援する企業様の成長は私たちの成長にもつながります。"
+        })
       </div>
       @@include('partials/sections/btn-more.html', { "href": "./company.html", "label": "会社概要", "modifier": "" })
     </div>

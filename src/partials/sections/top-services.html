@@ -3,7 +3,11 @@
   <div class="container services__inner">
     <div class="services__intro">
       @@include('partials/sections/section-heading.html', { "en": "Service", "title": "事業内容" })
-      <p class="services__text">Biz Lifeでは現代のテクノロジーとライフスタイルに即した福利厚生プログラムとして、社員の悩みや不安に寄り添い、健康で幸せな職場環境を構築します。</p>
+      @@include('partials/sections/section-body.html', {
+        "blockClass": "services__text",
+        "modifier": "",
+        "text": "Biz Lifeでは現代のテクノロジーとライフスタイルに即した福利厚生プログラムとして、社員の悩みや不安に寄り添い、健康で幸せな職場環境を構築します。"
+      })
       @@include('partials/sections/btn-more.html', { "href": "./service.html", "label": "サービスについて", "modifier": "" })
     </div>
     <ul class="services__list">

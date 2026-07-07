@@ -1,0 +1,47 @@
+@use "../../foundation/functions" as *;
+@use "../../foundation/mixins" as *;
+
+// セクション説明文（トップ About / Service / Works / Company など）
+// 一括変更: section-body-font-size の $sp-min-px / $tablet-max-px
+@mixin section-body-font-size($sp-min-px: 14, $tablet-max-px: 16) {
+  $diff: $tablet-max-px - $sp-min-px;
+  font-size: clamp(
+    #{rem($sp-min-px)},
+    calc(#{rem($sp-min-px)} + (100vw - 375px) * #{$diff} / 393),
+    #{rem($tablet-max-px)}
+  );
+}
+
+@mixin section-body($pc-size-px: 16, $sp-min-px: 14, $tablet-max-px: 16) {
+  font-size: rem($pc-size-px);
+  font-weight: 600;
+  line-height: 2;
+  letter-spacing: 0.1em;
+  color: var(--color-text);
+
+  @include mq {
+    @include section-body-font-size($sp-min-px, $tablet-max-px);
+  }
+}
+
+.section-body {
+  @include section-body();
+}
+
+// About: PC 15px / 375px 14px → 768px 16px
+.section-body--about {
+  font-size: rem(15);
+
+  @include mq {
+    @include section-body-font-size(14, 16);
+  }
+}
+
+// Company: PC・375px 15px → 768px 16px
+.section-body--company {
+  font-size: rem(15);
+
+  @include mq {
+    @include section-body-font-size(15, 16);
+  }
+}

@@ -3,7 +3,11 @@
   <div class="container works__header">
     <div class="works__intro">
       @@include('partials/sections/section-heading.html', { "en": "Works", "title": "実績紹介" })
-      <p class="works__text">業種や形態問わず、さまざまなクライアント様にご活用いただいております。<br />新しい福利厚生の形として事業規模や用途に合わせご支援が可能です。</p>
+      @@include('partials/sections/section-body.html', {
+        "blockClass": "works__text",
+        "modifier": "",
+        "text": "業種や形態問わず、さまざまなクライアント様にご活用いただいております。<br />新しい福利厚生の形として事業規模や用途に合わせご支援が可能です。"
+      })
     </div>
     @@include('partials/sections/btn-more.html', { "href": "./works-archive.html", "label": "一覧をみる", "modifier": "btn-more--header" })
   </div>

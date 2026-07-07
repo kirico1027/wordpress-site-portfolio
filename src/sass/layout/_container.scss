@@ -39,7 +39,6 @@
   box-sizing: border-box;
 
   @include mq {
-    padding-left: rem(24);
-    padding-right: rem(24);
+    @include fluid-padding-inline(rem(24), 8.33vw, rem(64));
   }
 }

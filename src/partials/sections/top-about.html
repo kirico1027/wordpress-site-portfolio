@@ -16,7 +16,11 @@
     </div>
     <div class="about__content">
       @@include('partials/sections/section-heading.html', { "en": "About us", "title": "私たちについて" })
-      <p class="about__text">Biz Lifeは社員の幸せと企業の成功を追求し、革新的なメンタルヘルスサポートを提供しています。私たちは社員ファーストの理念に基づき、社員が健康で充実した人生を送り、企業が持続可能な成功を収めるためのパートナーとして、常に前進しています。</p>
+      @@include('partials/sections/section-body.html', {
+        "blockClass": "about__text",
+        "modifier": "section-body--about",
+        "text": "Biz Lifeは社員の幸せと企業の成功を追求し、革新的なメンタルヘルスサポートを提供しています。私たちは社員ファーストの理念に基づき、社員が健康で充実した人生を送り、企業が持続可能な成功を収めるためのパートナーとして、常に前進しています。"
+      })
       @@include('partials/sections/btn-more.html', { "href": "./about.html", "label": "私たちについて", "modifier": "" })
     </div>
   </div>
