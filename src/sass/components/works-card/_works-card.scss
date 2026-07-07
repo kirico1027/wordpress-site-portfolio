@@ -87,4 +87,9 @@
   .works-card__link {
     padding-inline: 0;
   }
+
+  .works-card__title {
+    font-size: rem(15);
+    line-height: calc(24 / 15);
+  }
 }

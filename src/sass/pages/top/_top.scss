@@ -584,6 +584,7 @@
   .hero__title {
     font-size: clamp(#{rem(28)}, 4.6vw, #{rem(36)});
     line-height: 1.4;
+    letter-spacing: clamp(0.08em, 0.25vw, 0.14em);
   }
 
   .hero__title-line {
@@ -602,6 +603,7 @@
   .hero__lead-line {
     font-size: clamp(#{rem(16)}, 2.34vw, #{rem(18)});
     line-height: calc(25.2 / 18);
+    letter-spacing: clamp(0.06em, 0.2vw, 0.1em);
     white-space: normal;
   }
 
@@ -622,7 +624,11 @@
   .hero-news {
     position: relative;
     z-index: 1;
-    margin-top: clamp(#{rem(-40)}, -5.2vw, #{rem(-16)});
+    margin-top: clamp(
+      #{rem(-32)},
+      calc(#{rem(-16)} - (100vw - 375px) * 16 / 393),
+      #{rem(-16)}
+    );
     padding-inline: clamp(#{rem(24)}, 6.25vw, #{rem(48)});
   }
 
@@ -793,10 +799,14 @@
 // Services
 // ---------------------------------------------------------------------------
 
-// About → Services: タブレット幅（376〜768px）のみ上余白を詰める（375px は .section のまま）
-@media (min-width: 376px) and (max-width: 768px) {
+// About → Services: 375〜768pxで上余白を段階的に詰める（375px: 既定値 / 768px: 0）
+@media (max-width: 768px) {
   .services.section {
-    padding-top: 0;
+    padding-top: clamp(
+      #{rem(0)},
+      calc(#{rem(64)} - (100vw - 375px) * 64 / 393),
+      #{rem(64)}
+    );
   }
 }
 
@@ -917,11 +927,13 @@
   }
 
   .works__slider {
+    $works-slider-edge: clamp(#{rem(24)}, 8vw, #{rem(64)});
+
     gap: rem(24);
-    padding-left: calc((100vw - #{rem(280)}) / 2);
-    padding-right: calc((100vw - #{rem(280)}) / 2);
-    scroll-padding-left: calc((100vw - #{rem(280)}) / 2);
-    scroll-padding-right: calc((100vw - #{rem(280)}) / 2);
+    padding-left: $works-slider-edge;
+    padding-right: $works-slider-edge;
+    scroll-padding-left: $works-slider-edge;
+    scroll-padding-right: $works-slider-edge;
   }
 }
 

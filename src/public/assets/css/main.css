@@ -358,6 +358,10 @@ body {
   .works-card__link {
     padding-inline: 0;
   }
+  .works-card__title {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
 }
 .news-item {
   list-style: none;
@@ -1031,6 +1035,7 @@ body {
   .hero__title {
     font-size: clamp(1.75rem, 4.6vw, 2.25rem);
     line-height: 1.4;
+    letter-spacing: clamp(0.08em, 0.25vw, 0.14em);
   }
   .hero__title-line {
     min-height: 0;
@@ -1045,6 +1050,7 @@ body {
   .hero__lead-line {
     font-size: clamp(1rem, 2.34vw, 1.125rem);
     line-height: 1.4;
+    letter-spacing: clamp(0.06em, 0.2vw, 0.1em);
     white-space: normal;
   }
   .hero__collage-scaler {
@@ -1062,7 +1068,7 @@ body {
   .hero-news {
     position: relative;
     z-index: 1;
-    margin-top: clamp(-2.5rem, -5.2vw, -1rem);
+    margin-top: clamp(-2rem, -1rem - (100vw - 375px) * 16 / 393, -1rem);
     padding-inline: clamp(1.5rem, 6.25vw, 3rem);
   }
   .hero-news__inner {
@@ -1211,9 +1217,9 @@ body {
     margin-inline: auto;
   }
 }
-@media (min-width: 376px) and (max-width: 768px) {
+@media (max-width: 768px) {
   .services.section {
-    padding-top: 0;
+    padding-top: clamp(0rem, 4rem - (100vw - 375px) * 64 / 393, 4rem);
   }
 }
 .services__inner {
@@ -1323,10 +1329,10 @@ body {
   }
   .works__slider {
     gap: 1.5rem;
-    padding-left: calc((100vw - 17.5rem) / 2);
-    padding-right: calc((100vw - 17.5rem) / 2);
-    scroll-padding-left: calc((100vw - 17.5rem) / 2);
-    scroll-padding-right: calc((100vw - 17.5rem) / 2);
+    padding-left: clamp(1.5rem, 8vw, 4rem);
+    padding-right: clamp(1.5rem, 8vw, 4rem);
+    scroll-padding-left: clamp(1.5rem, 8vw, 4rem);
+    scroll-padding-right: clamp(1.5rem, 8vw, 4rem);
   }
 }
 .company__inner {
