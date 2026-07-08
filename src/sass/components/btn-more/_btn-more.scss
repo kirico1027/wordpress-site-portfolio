@@ -4,7 +4,9 @@
 .btn-more {
   display: inline-flex;
   align-items: center;
-  gap: rem(40);
+  gap: rem(24);
+  max-width: 100%;
+  box-sizing: border-box;
   padding: rem(2) rem(2) rem(2) rem(38);
   border: rem(2) solid var(--color-primary);
   border-radius: rem(96);
@@ -19,11 +21,13 @@
 }
 
 .btn-more__label {
+  min-width: 0;
   padding-left: rem(4);
   font-size: rem(16);
   font-weight: 700;
   line-height: calc(25.6 / 16);
   letter-spacing: 0.1em;
+  white-space: nowrap;
 }
 
 .btn-more__icon {
@@ -49,7 +53,7 @@
 
 @include mq {
   .btn-more {
-    gap: rem(24);
+    gap: rem(16);
     padding-left: rem(30);
   }
 

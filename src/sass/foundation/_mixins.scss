@@ -149,7 +149,8 @@
 
 // PC帯: $min-vw（狭い2カラム）〜 $max-vw で線形補間。$max-vw 以上は max 固定
 // ※ $min-vw 未満には適用しない（SP・1カラム帯の指定を上書きしない）
-@mixin fluid-pc-range($property, $min-px, $max-px, $min-vw: 961, $max-vw: 1184) {
+// 基準: 769px（レイアウト切替直後）→ 1184px（コンテナ最大＝カンプ）
+@mixin fluid-pc-range($property, $min-px, $max-px, $min-vw: 769, $max-vw: 1184) {
   $diff: $max-px - $min-px;
   $range: $max-vw - $min-vw;
 
