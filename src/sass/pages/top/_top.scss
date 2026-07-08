@@ -396,7 +396,7 @@ $hero-collage-fit-w: calc(#{$hero-collage-base-w} + #{$hero-collage-overflow-lef
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: rem(8);
+  gap: 0;
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
@@ -425,7 +425,7 @@ $hero-collage-fit-w: calc(#{$hero-collage-base-w} + #{$hero-collage-overflow-lef
   display: block;
   width: rem(40);
   height: rem(2);
-  @include fluid-pc-range(margin-top, 40, 48);
+  @include fluid-pc-range(margin-top, 20, 24);
   background: var(--color-text);
 }
 
@@ -437,7 +437,7 @@ $hero-collage-fit-w: calc(#{$hero-collage-base-w} + #{$hero-collage-overflow-lef
   max-width: 100%;
   box-sizing: border-box;
   margin: 0;
-  @include fluid-pc-range(margin-top, 48, 64);
+  @include fluid-pc-range(margin-top, 30, 30);
   padding: 0;
 }
 
@@ -533,7 +533,7 @@ $hero-collage-fit-w: calc(#{$hero-collage-base-w} + #{$hero-collage-overflow-lef
 .hero-news {
   display: flex;
   justify-content: center;
-  @include fluid-pc-range(margin-top, 40, 51);
+  @include fluid-pc-range(margin-top, 20, 51);
   @include fluid-spacing(padding-bottom, rem(64), 10vw, rem(120));
   padding-inline: rem(16);
 }
@@ -547,13 +547,13 @@ $hero-collage-fit-w: calc(#{$hero-collage-base-w} + #{$hero-collage-overflow-lef
 
 .hero-news__link {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   gap: rem(24);
   width: rem(742.422);
   max-width: 100%;
   box-sizing: border-box;
-  padding: rem(24) rem(48) rem(24) rem(56);
+  padding: rem(24) rem(30);
   border-radius: rem(48);
   background: var(--color-white);
   box-shadow: 0 0 rem(6) rgba(125, 125, 125, 0.2);
@@ -570,7 +570,7 @@ $hero-collage-fit-w: calc(#{$hero-collage-base-w} + #{$hero-collage-overflow-lef
   flex-shrink: 0;
   font-size: rem(14);
   font-weight: 600;
-  line-height: calc(14 / 14);
+  line-height: calc(20 / 14);
   letter-spacing: rem(0.7);
   color: var(--color-text-muted);
   white-space: nowrap;
@@ -585,7 +585,8 @@ $hero-collage-fit-w: calc(#{$hero-collage-base-w} + #{$hero-collage-overflow-lef
   line-height: calc(21 / 14);
   letter-spacing: rem(1.4);
   color: var(--color-text);
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 // Hero レスポンシブ
@@ -596,9 +597,9 @@ $hero-collage-fit-w: calc(#{$hero-collage-base-w} + #{$hero-collage-overflow-lef
   @include hero-collage-scale;
 
   .container {
-    // 961px: 50px → 1184px+: 32px（カンプ）
-    padding-left: clamp(#{rem(32)}, calc(#{rem(50)} + (100vw - 961px) * -18 / 223), #{rem(50)});
-    padding-right: clamp(#{rem(32)}, calc(#{rem(50)} + (100vw - 961px) * -18 / 223), #{rem(50)});
+    // 769px: 35px → 1184px+: 32px（カンプ）
+    padding-left: clamp(#{rem(32)}, calc(#{rem(35)} + (100vw - 769px) * -3 / 415), #{rem(35)});
+    padding-right: clamp(#{rem(32)}, calc(#{rem(35)} + (100vw - 769px) * -3 / 415), #{rem(35)});
   }
 
   .hero__layout {
@@ -624,7 +625,7 @@ $hero-collage-fit-w: calc(#{$hero-collage-base-w} + #{$hero-collage-overflow-lef
   }
 
   .hero__title {
-    font-size: min(#{rem(48)}, calc(100cqw / 8.3));
+    font-size: min(#{rem(30)}, calc(100cqw / 8.3));
     line-height: 1.4;
   }
 
@@ -634,8 +635,24 @@ $hero-collage-fit-w: calc(#{$hero-collage-base-w} + #{$hero-collage-overflow-lef
   }
 
   .hero__lead-line {
-    font-size: min(#{rem(18)}, calc(100cqw / 19));
+    font-size: min(#{rem(15)}, calc(100cqw / 19));
     white-space: nowrap;
+  }
+
+  .hero__divider {
+    margin-top: clamp(
+      #{rem(20)},
+      calc(#{rem(20)} + (100vw - 769px) * 4 / 415),
+      #{rem(24)}
+    );
+  }
+
+  .hero__lead {
+    margin-top: rem(30);
+  }
+
+  .hero-news {
+    margin-top: rem(20);
   }
 
   .works__slider {
@@ -651,15 +668,12 @@ $hero-collage-fit-w: calc(#{$hero-collage-base-w} + #{$hero-collage-overflow-lef
   }
 
   .hero__title {
-    font-size: min(
-      clamp(#{rem(44)}, calc(#{rem(44)} + (100vw - 961px) * 4 / 223), #{rem(48)}),
-      calc(100cqw / 8.3)
-    );
+    font-size: rem(30);
   }
 
   .hero__lead-line {
-    // 961px 付近は cqw 上限が 18px 未満になりやすいため固定（列幅は narrow 帯で確保済み）
-    font-size: rem(18);
+    // 961px 付近は cqw 上限が 15px 未満になりやすいため固定（列幅は narrow 帯で確保済み）
+    font-size: rem(15);
   }
 }
 
