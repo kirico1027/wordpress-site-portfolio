@@ -1051,7 +1051,7 @@ body {
   white-space: nowrap;
 }
 
-@media (min-width: 961px) {
+@media (min-width: 769px) {
   .hero__visual {
     container-type: inline-size;
     max-width: 100%;
@@ -1097,8 +1097,11 @@ body {
     font-size: min(1.125rem, 5.2631578947cqw);
     white-space: nowrap;
   }
+  .works__slider {
+    gap: 0;
+  }
 }
-@media (min-width: 961px) and (max-width: 1183px) {
+@media (min-width: 769px) and (max-width: 1183px) {
   .hero__layout {
     grid-template-columns: minmax(0, calc(55% - (100vw - 961px) * 14.46% / 223)) minmax(0, 1fr);
   }
@@ -1109,7 +1112,7 @@ body {
     font-size: 1.125rem;
   }
 }
-@media (max-width: 960px) {
+@media (max-width: 768px) {
   .hero__layout {
     display: flex;
     flex-direction: column;
@@ -1169,8 +1172,11 @@ body {
     max-width: 46.401375rem;
     margin-inline: auto;
   }
+  .works__slider {
+    gap: 1.5rem;
+  }
 }
-@media (max-width: 960px) and (max-width: 768px) {
+@media (max-width: 768px) and (max-width: 768px) {
   .hero {
     padding-top: clamp(6.5rem, 15.625vw, 7.5rem);
     padding-top: calc(clamp(6.5rem, 15.625vw, 7.5rem) + env(safe-area-inset-top, 0px));
@@ -1386,7 +1392,7 @@ body {
     padding-top: clamp(0rem, 4rem - (100vw - 375px) * 64 / 393, 4rem);
   }
 }
-@media (min-width: 769px) and (max-width: 960px) {
+@media (max-width: 768px) {
   .services.section {
     padding-top: clamp(0rem, (100vw - 769px) * 64 / 191, 4rem);
   }
@@ -1479,7 +1485,6 @@ body {
 
 .works__slider {
   display: flex;
-  gap: 1.5rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
@@ -1518,7 +1523,7 @@ body {
     scroll-padding-right: clamp(1.5rem, 8vw, 4rem);
   }
 }
-@media (min-width: 769px) and (max-width: 960px) {
+@media (max-width: 768px) {
   .about__inner,
   .services__inner,
   .works__header,
@@ -1551,7 +1556,7 @@ body {
     margin-inline: 0;
   }
 }
-@media (min-width: 961px) and (max-width: 1183px) {
+@media (min-width: 769px) and (max-width: 1183px) {
   .about__visual {
     flex: 0 1 48%;
     width: 48%;
@@ -1594,17 +1599,24 @@ body {
   .company__content {
     flex: 0 1 48%;
     width: 48%;
+    margin-top: 0;
   }
   .company__visual {
     flex: 0 1 48%;
     width: 48%;
+    margin-top: 0;
     container-type: inline-size;
-    overflow: hidden;
-    height: calc(26.01175rem * 100cqw / 33.75rem);
+    min-height: 0;
+    max-width: 100%;
+    align-self: flex-start;
   }
   .company__visual-scaler {
-    width: 33.75rem;
-    height: 26.01175rem;
+    width: 100%;
+    box-sizing: border-box;
+    height: calc(26.01175rem * 100cqw / 33.75rem);
+    overflow: hidden;
+  }
+  .company__collage {
     transform: scale(calc(100cqw / 33.75rem));
     transform-origin: top left;
   }
@@ -1699,6 +1711,12 @@ body {
   overflow: visible;
 }
 
+@media (min-width: 769px) and (max-width: 1183px) {
+  .company__content,
+  .company__visual {
+    margin-top: 0;
+  }
+}
 .company__visual-scaler {
   width: 33.75rem;
 }

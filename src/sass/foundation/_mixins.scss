@@ -29,34 +29,34 @@
   }
 }
 
-// Hero: 1カラム（SP） / 2カラム（PC）— カラム数が変わる 960px / 961px がレイアウト境界
+// Hero: 1カラム（SP） / 2カラム（PC）— 検証用に 768px / 769px を境界にする
 @mixin mq-hero-sp {
-  @media (max-width: 960px) {
+  @media (max-width: 768px) {
     @content;
   }
 }
 
 @mixin mq-hero-pc {
-  @media (min-width: 961px) {
+  @media (min-width: 769px) {
     @content;
   }
 }
 
 @mixin mq-hero-pc-narrow {
-  @media (min-width: 961px) and (max-width: 1183px) {
+  @media (min-width: 769px) and (max-width: 1183px) {
     @content;
   }
 }
 
-// トップページ共通（Hero と同じ 960 / 961 境界）
+// トップページ共通（検証用: Hero と同じ 768 / 769 境界）
 @mixin mq-top-pc-narrow {
-  @media (min-width: 961px) and (max-width: 1183px) {
+  @media (min-width: 769px) and (max-width: 1183px) {
     @content;
   }
 }
 
 @mixin mq-top-sp-tablet {
-  @media (min-width: 769px) and (max-width: 960px) {
+  @media (max-width: 768px) {
     @content;
   }
 }
