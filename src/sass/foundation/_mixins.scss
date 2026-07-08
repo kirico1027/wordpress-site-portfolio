@@ -147,12 +147,46 @@
   gap: clamp(#{$min-rem}, #{$vw-middle}, #{$max-rem});
 }
 
-// PC帯: $min-vw（狭い2カラム）〜 $max-vw で線形補間。$max-vw 以上は max 固定
-// ※ $min-vw 未満には適用しない（SP・1カラム帯の指定を上書きしない）
-// 基準: 769px（レイアウト切替直後）→ 1184px（コンテナ最大＝カンプ）
-@mixin fluid-pc-range($property, $min-px, $max-px, $min-vw: 769, $max-vw: 1184) {
+// SP帯: $min-vw（375）〜 $max-vw（768）で線形補間。ベースに必ず出力する。
+// 基準: 375px（SP最小）→ 768px（SP最大・レイアウト切替直前）
+@mixin fluid-sp-range(
+  $property,
+  $min-px,
+  $max-px,
+  $min-vw: 375,
+  $max-vw: 768
+) {
   $diff: $max-px - $min-px;
   $range: $max-vw - $min-vw;
+
+  #{$property}: clamp(
+    #{rem($min-px)},
+    calc(#{rem($min-px)} + (100vw - #{$min-vw}px) * #{$diff} / #{$range}),
+    #{rem($max-px)}
+  );
+}
+
+// PC帯: $min-vw（狭い2カラム）〜 $max-vw で線形補間。$max-vw 以上は max 固定
+// 重要: ベースに必ず値を出す（$sp-px 未指定時は $min-px）。
+// $min-vw 未満で値が消える事故を防ぐ。SPだけ別値にするときは $sp-px を渡す。
+// 基準: 769px（レイアウト切替直後）→ 1184px（コンテナ最大＝カンプ）
+@mixin fluid-pc-range(
+  $property,
+  $min-px,
+  $max-px,
+  $min-vw: 769,
+  $max-vw: 1184,
+  $sp-px: null
+) {
+  $diff: $max-px - $min-px;
+  $range: $max-vw - $min-vw;
+  $base-px: $min-px;
+  @if $sp-px != null {
+    $base-px: $sp-px;
+  }
+
+  // SP・タブレット（<$min-vw）でもプロパティが未定義にならないようにする
+  #{$property}: rem($base-px);
 
   @media (min-width: #{$min-vw}px) {
     #{$property}: clamp(

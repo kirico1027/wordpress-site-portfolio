@@ -28,12 +28,12 @@
   @include section-body();
 }
 
-// About: PC 15px / 375px 14px → 768px 16px
+// About: 15px 固定（.section-body の SP clamp より後で上書き）
 .section-body--about {
   font-size: rem(15);
 
   @include mq {
-    @include section-body-font-size(14, 16);
+    font-size: rem(15);
   }
 }
 
