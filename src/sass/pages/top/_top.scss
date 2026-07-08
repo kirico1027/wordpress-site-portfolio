@@ -591,8 +591,8 @@ $hero-collage-fit-w: calc(#{$hero-collage-base-w} + #{$hero-collage-overflow-lef
 }
 
 // Hero レスポンシブ
-// - レイアウト境界: 960px（SP・1カラム） / 961px（PC・2カラム）
-// - 768px 以下: SP 内のスマホ向け微調整（@include mq）
+// - レイアウト境界: 768px（SP） / 769px（PC）— site-layout-tokens.mdc
+// - 768px 以下: SP 微調整（@include mq）
 
 @include mq-hero-pc {
   @include hero-collage-scale;
@@ -855,7 +855,7 @@ $about-visual-base-h: rem(393.328);
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  // gap: 961px+ は mq-hero-pc、それ未満は mq / mq-top-sp-tablet
+  // gap: 769px+ は mq-hero-pc、それ未満は mq / mq-top-sp-tablet
 }
 
 .about__visual {
@@ -1191,7 +1191,7 @@ $about-visual-base-h: rem(393.328);
 }
 
 // ---------------------------------------------------------------------------
-// 961〜1183px: トップ全体の狭い2カラム帯（ブレイクポイント評価用に統一調整）
+// 769〜1183px: トップ全体の狭い2カラム帯
 // ---------------------------------------------------------------------------
 
 @include mq-top-pc-narrow {
@@ -1339,7 +1339,7 @@ $about-visual-base-h: rem(393.328);
   overflow: visible;
 }
 
-// 961〜1183px では上マージンをなくして2カラム上端を揃える
+// 769〜1183px では上マージンをなくして2カラム上端を揃える
 @include mq-top-pc-narrow {
   .company__content,
   .company__visual {
@@ -1935,8 +1935,7 @@ $about-visual-base-h: rem(393.328);
 
 @include mq-hero-pc {
   .site-footer {
-    // PC: 769px 35px → 1184px 32px（.container と揃える）
-    @include fluid-pc-range(padding-inline, 32, 35);
+    padding-inline: rem(35);
   }
 }
 

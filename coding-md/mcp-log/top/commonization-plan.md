@@ -6,16 +6,18 @@
 
 | フェーズ | 内容 | 本プロジェクトでの状態 |
 |---------|------|---------------------|
-| Phase 1 | 静的コーディング（partials 共通化） | **進行中** — トップページ |
+| Phase 1 | 静的コーディング（partials 共通化） | **トップページ完了** — 下層ページへ |
 | Phase 2 | WP テーマ化（get_template_part） | 未着手 |
 | Phase 3 | CPT（works / news / job） | 未着手 |
 | Phase 4 | ACF 段階導入 | 未着手 |
 
 ## レイアウト基準
 
-- コンテナ最大幅: 1184px（内側パディング 32px）
-- 左右余白: `.l-inset-comp-1920` / `.container`
-- セクション間余白: `padding-top` rem(120) 相当（fluid-spacing）
+- **幅の作り方**: `responsive-build-workflow.mdc`（①カンプ固定 → ②375固定 → ③境界 → ④SP clamp → ⑤PC clamp → ⑥全体調整）
+- **境界**: SP `768px` 以下 / PC `769px` 以上（`site-layout-tokens.mdc`）
+- **fluid 実装**: `responsive-fluid-pattern.mdc`
+- **コンテナ（トップ PC）**: `site-layout-tokens.mdc` 参照（中身 1120px / padding 35px）
+- **セクション外周**: 原則 `fluid-sp-range` / `fluid-pc-range`。`.section` の `fluid-padding-y` は未移行（tokens 参照）
 
 ## 静的 → WordPress 移行マップ（partials）
 

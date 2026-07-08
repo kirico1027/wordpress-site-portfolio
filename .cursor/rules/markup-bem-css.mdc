@@ -8,7 +8,10 @@ alwaysApply: true
 
 ## タイポグラフィ・縦余白
 
-- **タイポ（rem + 見出しの clamp）**、**セクション説明文の PC16 / SP14（`section-copy-font-size`）**、**margin/padding は `clamp(rem, vw, rem)` と `fluid-spacing`**（**テキストを包む UI の内側余白は `em`** と役割分担）、**ブロック間の `margin-top`** は **`typography-rem-clamp.mdc`** にまとめる。
+- **タイポ・ブロック間 `margin-top`・UI 内側 `em`** → **`typography-rem-clamp.mdc`**
+- **サイト幅の工程** → **`responsive-build-workflow.mdc`**
+- **fluid 実装 API** → **`responsive-fluid-pattern.mdc`**
+- **本サイトの数値・例外** → **`site-layout-tokens.mdc`**
 
 ## セクション単位の BEM（親子が名前で分かること）
 

@@ -17,6 +17,15 @@ alwaysApply: true
 2. **`commonization-plan.md` を作成**し、共通化方針を提案する
 3. **WordPress 化案件**の場合、`WORDPRESS_DESIGN.md` を工程 0 で作成する（テンプレート: `coding-md/07-wordpress-design/WORDPRESS_DESIGN_TEMPLATE.md`）
 
+## 静的コーディングのレスポンシブ
+
+| 種別 | ルール |
+|------|--------|
+| 工程（汎用） | `responsive-build-workflow.mdc` |
+| 実装 API（汎用） | `responsive-fluid-pattern.mdc` |
+| タイポ（汎用） | `typography-rem-clamp.mdc` |
+| 数値・例外（BizLife） | `site-layout-tokens.mdc` |
+
 ## 後続工程
 
 ```

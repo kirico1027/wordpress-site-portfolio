@@ -1,0 +1,58 @@
+---
+description: fluid 実装 API（汎用）— fluid-sp/pc-range 第一選択・fluid-spacing は補助
+globs: src/sass/**/*.scss,src/**/*.html
+alwaysApply: true
+---
+
+# レスポンシブ・fluid 実装 API（汎用）
+
+**工程**: `responsive-build-workflow.mdc`。**数値**: 各サイトの `site-layout-tokens.mdc`。
+
+## 第一選択: 幅基準点間の線形補間
+
+| 帯 | ミキシン | 典型レンジ |
+|----|---------|-----------|
+| SP | `fluid-sp-range` | `$sp-min-vw`（375）→ `$sp-max-vw`（768） |
+| PC | `fluid-pc-range` | `$pc-min-vw`（769）→ `$max-vw`（コンテナ最大 or カンプ幅） |
+
+```scss
+@include fluid-sp-range(padding-top, $px-at-sp-min, $px-at-sp-max);
+@include fluid-pc-range(font-size, $px-at-pc-min, $px-at-comp);
+@include fluid-pc-range(padding-bottom, $a, $b, $max-vw: $comp-width);
+@include fluid-pc-range(margin-top, $pc-min, $pc-max, $sp-px: $sp-only);
+```
+
+- **ベースに必ず出力**。`@include mq` / `@include mq-hero-pc` **内だけ**に書かない
+- PC 帯で **`rem()` 固定上書き**して clamp を潰さない
+- SP と PC で別値 → **`$sp-px`**
+
+### 1184 とカンプ幅の関係
+
+- **`fluid-pc-range` の `$max-vw` デフォルト** = サイトのコンテナ最大（本サイト `1184`）
+- **1184 以降〜カンプ幅**は clamp の max で**固定**（追加の vw 伸びなし）
+- カンプ端で別値にしたいときだけ **`$max-vw: カンプ幅`**（例: 1905）
+
+## 補助: `fluid-spacing`（vw 中央項）
+
+- **`clamp(rem, vw, rem)`** — 下層ページ未移行・単独ブロック向け
+- **トップページ新規・修正**では **`fluid-sp-range` / `fluid-pc-range` を優先**し、触るタイミングで vw 中央から線形補間へ寄せる
+- 裸の `vw` のみは禁止
+
+```scss
+// 補助（移行中のみ推奨）
+@include fluid-padding-y(rem(64), 10vw, rem(120));
+```
+
+## コンテナ系の二系統（混同しない）
+
+| クラス | 用途 | 定義 |
+|--------|------|------|
+| `.container` | トップ等の標準コンテナ | `src/sass/layout/_container.scss` + ページ別上書き |
+| `.l-inset-comp-1920` | Safari 向け採用ページ等 | `_container.scss`（別カンプ系） |
+
+**サイトごとにどちらを正とするか**は `site-layout-tokens.mdc` に書く。
+
+## やらないこと
+
+- 工程③前に clamp 全面適用
+- コンパイル後 CSS 手編集

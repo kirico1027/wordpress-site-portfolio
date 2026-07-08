@@ -1,0 +1,78 @@
+---
+description: BizLife 固有トークン — 境界・container・セクション値・例外・未移行
+globs: src/sass/**/*.scss,src/**/*.html
+alwaysApply: true
+---
+
+# サイトレイアウトトークン（BizLife）
+
+**汎用**: `responsive-build-workflow.mdc` / `responsive-fluid-pattern.mdc` / `typography-rem-clamp.mdc`
+
+## 基準点（工程 ①③ で確定・変更しない）
+
+| 項目 | 値 |
+|------|-----|
+| カンプ幅 | `1905px` |
+| SP 最小 | `375px` |
+| 列切替 | `768px`（SP） / `769px`（PC） |
+| コンテナ最大（ボックス） | `1184px` |
+
+**検証幅**: `375` → `768` → `767` / `769` → `1184` → `1905`
+
+## コンテナ
+
+### トップページ（769px 以上）— 正
+
+- 中身幅 **`1120px`** / 左右 padding **`35px` 固定** / **`max-width: 1190px`**
+- 上書き: `src/sass/pages/top/_top.scss` → `@include mq-hero-pc { .container { ... } }`
+
+### グローバル `.container`（`_container.scss`）— 下層・未移行
+
+- ベース: `max-width: 1184px`、padding **`32px`**（769 未満は `fluid-padding-inline`）
+- **トップ PC では `_top.scss` が優先**。下層ページ移行時に 1190 / 35px へ揃える
+
+### `.l-inset-comp-1920`
+
+- 採用系など **別カンプ（1920 / 1200 コンテンツ）**。トップ `.container` とは別系統（`safari-layout-inset.mdc`）
+
+## fluid レンジ（本サイト）
+
+| 用途 | `$min-vw` | `$max-vw` |
+|------|-----------|-----------|
+| SP | `375` | `768` |
+| PC 標準 | `769` | `1184` |
+| PC カンプ外周 | `769` | `1905` |
+
+## タイポグラフィ例外
+
+| 要素 | ルール |
+|------|--------|
+| `.section-body--about` | **15px 固定**（SP/PC。`section-copy-font-size` の 14px 適用外） |
+| その他 `.section-body` | 汎用: PC 16 / SP 14 |
+
+## トップ・確定 clamp / 固定値
+
+| 要素 | 帯 | 値 |
+|------|-----|-----|
+| `hero__title` | 769→1184 | 30 → 48px |
+| `hero__lead-line` | 769→1184 | 15 → 18px |
+| `hero-news` padding-bottom | 769→1905 | 64 → 40px |
+| `about.section` padding-top | 375→768 | 50 → 0 |
+| `about.section` padding-bottom | 769→1905 | 0 → 80px |
+| `company.section` padding-top | 1184→1905 | 120 → 0 |
+| `site-footer` padding-inline | 375→768 | 35 → 50px |
+| `site-footer` padding-inline | 769+ | **35px 固定**（`.container` と揃える） |
+
+## 未移行（769 基準へ寄せる）
+
+- **`.section`** の `fluid-padding-y(64, 10vw, 120)` → 触る際 `fluid-pc-range` へ
+- **`about.section` PC padding-top** の `fluid-spacing(10vw)` → 同上
+- **`hero__layout` column-gap / `about__inner` gap** の **`961px` 起点 calc** — 境界は 768/769 に統一済み。補間起点を **769** へ移行予定
+
+## 後回し
+
+- Works スライダー表示枚数・カード幅
+
+## 関連
+
+- `coding-md/mcp-log/top/commonization-plan.md`
