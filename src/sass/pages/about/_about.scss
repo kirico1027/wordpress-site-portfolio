@@ -16,7 +16,7 @@
 // Purpose（Figma node 1:843 — 外枠 1184 / padding 32 / コンテンツ 1120）
 .about-purpose {
   @include fluid-pc-range(padding-top, 0, 0, $max-vw: 1905);
-  @include fluid-sp-range(padding-top, 48, 0);
+  @include fluid-sp-range(padding-top, 0, 0);
   @include fluid-pc-range(padding-bottom, 0, 0, $max-vw: 1905);
 }
 
@@ -28,7 +28,7 @@
   width: 100%;
   @include fluid-pc-range(padding-top, 80, 80, $max-vw: 1905);
   @include fluid-pc-range(padding-bottom, 80, 80, $max-vw: 1905);
-  @include fluid-sp-range(padding-top, 0, 80);
+  @include fluid-sp-range(padding-top, 48, 80);
   @include fluid-sp-range(padding-bottom, 48, 80);
 }
 
@@ -41,7 +41,7 @@
 
 .about-purpose__title {
   margin: rem(24) 0 0;
-  @include fluid-sp-range(font-size, 25, 40);
+  font-size: rem(40);
   font-weight: 600;
   line-height: calc(64 / 40);
   letter-spacing: rem(4);
@@ -490,6 +490,7 @@ $about-purpose-collage-h: rem(506.594);
   }
 
   .about-purpose__title {
+    @include fluid-sp-range(font-size, 25, 35);
     line-height: calc(44.8 / 28);
   }
 
@@ -499,7 +500,7 @@ $about-purpose-collage-h: rem(506.594);
   }
 
   .about-purpose__text {
-    font-size: rem(14);
+    @include fluid-sp-range(font-size, 14, 15);
     line-height: calc(25.2 / 14);
   }
 
@@ -553,7 +554,7 @@ $about-purpose-collage-h: rem(506.594);
   }
 
   .about-value__title {
-    font-size: rem(25);
+    @include fluid-sp-range(font-size, 25, 28);
   }
 
   .about-value__item {

@@ -25,10 +25,20 @@ alwaysApply: true
 ## タイポの二本柱
 
 1. **UI・ラベル・注釈** … **`rem()` 段階指定**
-2. **大きな見出し** … **カンプ幅 = 固定 `rem()`**、**PC 切替後〜コンテナ最大 = `fluid-pc-range`**（`5vw` 単独の clamp は新規に使わない）
+2. **大きな見出し** … **カンプ幅 = ベース固定 `rem()`**。**SP 帯**（768 端 ≠ カンプ値）は **`@include mq` + `fluid-sp-range`**。**PC 帯**（769 〜 コンテナ最大で値が変わる）は **`fluid-pc-range`**（`responsive-fluid-pattern.mdc`）
 
 ```scss
-// ✅ PC 帯の大見出し（工程⑤）
+// ✅ SP 端 ≠ カンプ値の大見出し（工程④ — about-purpose__title 等）
+.about-purpose__title {
+  font-size: rem(40); // カンプ固定
+}
+@include mq {
+  .about-purpose__title {
+    @include fluid-sp-range(font-size, 25, 38);
+  }
+}
+
+// ✅ PC 帯でも 769→1184 でサイズが変わる大見出し（工程⑤）
 .hero__title {
   font-size: rem(48); // カンプ固定
 }

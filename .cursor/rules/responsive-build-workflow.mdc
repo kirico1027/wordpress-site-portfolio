@@ -41,7 +41,9 @@ alwaysApply: true
 ### ④ SP 帯：`375px` 固定 → `768px` まで `clamp`
 
 - **375px = 固定（min）**、**768px = clamp の max**。
-- 実装: **`fluid-sp-range`** を**ベースセレクタ**に書く（`@include mq` 内だけに書かない）。
+- 実装: **`@include mq`（max-width: 768px）内**に **`fluid-sp-range`** を書く（**ベースに PC/カンプの固定 `rem()` を先に出す**）。
+- **768px 端の値 ≠ 769px 以降（カンプ）の値**のときはこの方式を使う（タイポなど）。SP clamp が PC 帯に漏れない。
+- **768px 端 = 769px 以降の値**（境界で連続）の余白などは、ベースに `fluid-pc-range` + `fluid-sp-range` を並べる方式も可（`responsive-fluid-pattern.mdc`）。
 - 768px 付近まで滑らかにつなぐ。375→768 の中間幅（390 / 414 / 600 等）は必要に応じて spot 確認。
 
 ### ⑤ PC 帯：`769px` から `clamp` → カンプ幅は固定
@@ -63,16 +65,25 @@ alwaysApply: true
 
 **SP を直すとき PC を壊さない。PC を直すとき SP を壊さない。**
 
+- **「375px 幅の修正」** = SP 帯 clamp の **min**（`fluid-sp-range` 第2引数）。
+- **「768px 幅の修正」** = SP 帯 clamp の **max**（第3引数）。375〜768 の線形補間が変わる（768px だけの変更ではない）。
+
+| 条件 | SP 帯（≤768） | PC 帯（≥769） |
+|------|---------------|---------------|
+| **768px 端 ≠ カンプ値**（タイポ等） | ベース `rem()` + **`@include mq` 内 `fluid-sp-range`** | ベースの `rem()`（カンプ固定） |
+| **768px 端 = 769px 値**（余白等） | ベース `fluid-sp-range` | ベース `fluid-pc-range` |
+| 修正後の確認 | **769px 以上が変わっていないか** | **768px 以下が変わっていないか** |
+| 禁止 | `@include mq` **内だけ**にプロパティ（ベースに PC 値なし） | `@include mq-hero-pc` 内 **`rem()` 固定**で PC clamp 潰し |
+
 | やること | SP 帯（≤768） | PC 帯（≥769） |
 |---------|---------------|---------------|
-| 余白・タイポの fluid | `fluid-sp-range` / `@include mq` | `fluid-pc-range` / `@include mq-hero-pc` |
-| ベース値 | 必ずベースに出力 | `fluid-pc-range` のベース + `$sp-px` で SP 別値 |
-| 禁止 | PC ミキシン内で SP 向け固定上書き | `@include mq` だけにプロパティを書く |
-| 修正後の確認 | **769px 以上が変わっていないか** | **768px 以下が変わっていないか** |
+| 余白・タイポの fluid | 上表の条件で `fluid-sp-range` | `fluid-pc-range` / `@include mq-hero-pc` |
+| ベース値 | **カンプ / PC の `rem()` を必ず出力** | `fluid-pc-range` + `$sp-px` で SP 別値 |
 
 ### よくある事故
 
-- `@include mq` **内だけ** `padding` を書き → 375〜768 で値が消える
+- **ベースに PC 値なしで `@include mq` 内だけ `fluid-sp-range`** → 769px 以上に SP 用 clamp が効く、または値が未定義
+- **ベースに `fluid-sp-range` のみ（768 端 ≠ カンプ値）** → clamp max が 769px 以上にも効きカンプが潰れる
 - `@include mq-hero-pc` 内で **`rem()` 固定** → 769 起点の clamp が潰れる
 - `fluid-pc-range` のベースが PC min のまま → SP 帯の意図した値が上書きされる（**`$sp-px` を渡す**）
 

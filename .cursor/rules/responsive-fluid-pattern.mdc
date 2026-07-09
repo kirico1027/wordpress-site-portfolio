@@ -22,9 +22,32 @@ alwaysApply: true
 @include fluid-pc-range(margin-top, $pc-min, $pc-max, $sp-px: $sp-only);
 ```
 
-- **ベースに必ず出力**。`@include mq` / `@include mq-hero-pc` **内だけ**に書かない
-- PC 帯で **`rem()` 固定上書き**して clamp を潰さない
-- SP と PC で別値 → **`$sp-px`**
+## SP 帯の書き方（2 パターン）
+
+**768px 端 ≠ 769px 以降（カンプ）の値** — タイポなど。**`@include mq` 内**に `fluid-sp-range`（ベースにカンプ `rem()` を先に出す）:
+
+```scss
+.hero__title {
+  font-size: rem(48); // ① カンプ固定
+}
+@include mq {
+  .hero__title {
+    @include fluid-sp-range(font-size, 25, 38); // ④ SP 375→768
+  }
+}
+```
+
+**768px 端 = 769px 以降の値** — 余白など。ベースに **`fluid-pc-range` + `fluid-sp-range`** を並べる（境界で連続）:
+
+```scss
+.about-purpose__inner {
+  @include fluid-pc-range(padding-top, 80, 80, $max-vw: 1905);
+  @include fluid-sp-range(padding-top, 48, 80);
+}
+```
+
+- **ベースに PC/カンプの `rem()` または `fluid-pc-range` を必ず出す**。`@include mq` **内だけ**にプロパティを書かない
+- SP と PC で別値 → **`$sp-px`**（`fluid-pc-range`）
 
 ### 1184 とカンプ幅の関係
 
