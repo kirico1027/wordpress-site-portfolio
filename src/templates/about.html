@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    @@include('partials/head.html', { "title": "私たちについて | BizLife" })
+  </head>
+  <body>
+    @@include('partials/header.html')
+
+    <!-- WP: page-about.php / 固定ページ About -->
+    <main class="about-page">
+      @@include('partials/page-hero.html', {
+        "heroModifier": "page-hero--light",
+        "heroHeadingId": "about-hero-heading",
+        "heroTitleEn": "About us",
+        "heroTitleJa": "私たちについて",
+        "heroImgSrc": ""
+      })
+
+      <!-- Purpose -->
+      <section class="about-purpose" aria-labelledby="about-purpose-heading">
+        <div class="container about-purpose__inner">
+          <div class="about-purpose__content">
+            @@include('partials/sections/section-label.html', { "text": "Purpose", "modifier": "" })
+            <h2 id="about-purpose-heading" class="about-purpose__title">
+              仕事もプライベートも<br />充実させる最強の味方
+            </h2>
+            <div class="about-purpose__body">
+              <p class="about-purpose__text">BizLifeの理念は、社員の健康と幸福を最優先に考え、企業と社員の双方が共に成長できる持続可能な職場環境を築くことにあります。</p>
+              <p class="about-purpose__text">私たちは、社員が心身ともに健康で充実した生活を送ることができるよう、革新的な福利厚生サービスを提供し、彼らのポテンシャルを最大限に引き出します。</p>
+              <p class="about-purpose__text">同時に、企業にとっても社員の幸福は最も重要な資産であり、彼らのウェルビーイングをサポートすることで、企業の持続的な成功に貢献します。私たちの理念は、人々が働きやすく、生きやすい環境を創造することにあります。</p>
+            </div>
+          </div>
+          <div class="about-purpose__visual" aria-hidden="true">
+            <div class="about-purpose__visual-scaler">
+              <div class="about-purpose__collage">
+                <span class="about-purpose__accent"></span>
+                <div class="about-purpose__carousel">
+                  <div class="about-purpose__carousel-track">
+                    <figure class="about-purpose__slide">
+                      <img src="./public/assets/img/about/purpose_01.png" alt="" width="432" height="288" />
+                    </figure>
+                    <figure class="about-purpose__slide">
+                      <img src="./public/assets/img/about/purpose_02.png" alt="" width="432" height="288" />
+                    </figure>
+                    <figure class="about-purpose__slide">
+                      <img src="./public/assets/img/about/purpose_03.png" alt="" width="432" height="288" />
+                    </figure>
+                    <figure class="about-purpose__slide">
+                      <img src="./public/assets/img/about/purpose_04.png" alt="" width="432" height="288" />
+                    </figure>
+                  </div>
+                </div>
+                <div class="about-purpose__shapes">
+                  <span class="about-purpose__shape about-purpose__shape--peach"></span>
+                  <span class="about-purpose__shape about-purpose__shape--green"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Vision / Mission / Gallery -->
+      <section class="about-statements" aria-label="ビジョンとミッション">
+        <div class="container about-statements__inner">
+          <div class="about-statements__panels">
+            <article class="about-panel about-panel--vision">
+              <div class="about-panel__content">
+                @@include('partials/sections/section-label.html', { "text": "Vision", "modifier": "" })
+                <div class="about-panel__layout">
+                  <h2 class="about-panel__title">変革を牽引し、<br />未来の労働環境を再定義する</h2>
+                  <div class="about-panel__body">
+                    <p class="about-panel__text">BizLifeは、社員の幸福と健康を最優先に考え、企業の成功と社会の発展に貢献します。</p>
+                    <p class="about-panel__text">我々の使命は、社員が仕事とプライベートの両方で充実した人生を送ることができるよう、</p>
+                    <p class="about-panel__text">革新的な福利厚生プログラムを提供することです。</p>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="about-panel about-panel--mission">
+              <div class="about-panel__content">
+                @@include('partials/sections/section-label.html', { "text": "Mission", "modifier": "section-label--orange" })
+                <div class="about-panel__layout">
+                  <h2 class="about-panel__title">人々のポテンシャルを最大限に引き出し、<br />持続可能なビジネスの発展に貢献する</h2>
+                  <div class="about-panel__body">
+                    <p class="about-panel__text">BizLifeは、社員の幸福と健康を最優先に考え、</p>
+                    <p class="about-panel__text">企業の成功と社会の発展に貢献します。</p>
+                    <p class="about-panel__text">我々の使命は、社員が仕事とプライベートの両方で充実した人生を送ることができるよう、</p>
+                    <p class="about-panel__text">革新的な福利厚生プログラムを提供することです。</p>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="about-gallery" aria-label="ギャラリー">
+          <div class="about-gallery__slider" tabindex="0">
+            <ul class="about-gallery__list">
+              <li class="about-gallery__item">
+                <figure class="about-gallery__figure">
+                  <img src="./public/assets/img/about/gallery_01.png" alt="" width="456" height="274" loading="lazy" />
+                </figure>
+              </li>
+              <li class="about-gallery__item">
+                <figure class="about-gallery__figure">
+                  <img src="./public/assets/img/about/gallery_02.png" alt="" width="456" height="274" loading="lazy" />
+                </figure>
+              </li>
+              <li class="about-gallery__item">
+                <figure class="about-gallery__figure">
+                  <img src="./public/assets/img/about/gallery_03.png" alt="" width="456" height="274" loading="lazy" />
+                </figure>
+              </li>
+              <li class="about-gallery__item">
+                <figure class="about-gallery__figure">
+                  <img src="./public/assets/img/about/gallery_04.png" alt="" width="456" height="274" loading="lazy" />
+                </figure>
+              </li>
+              <li class="about-gallery__item">
+                <figure class="about-gallery__figure">
+                  <img src="./public/assets/img/about/gallery_05.png" alt="" width="456" height="274" loading="lazy" />
+                </figure>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Value -->
+      <section class="about-value" aria-labelledby="about-value-heading">
+        <div class="container about-value__inner">
+          <div class="about-value__head">
+            @@include('partials/sections/section-label.html', { "text": "Value", "modifier": "" })
+            <h2 id="about-value-heading" class="about-value__title">BizLifeが大切にする5つの価値観</h2>
+          </div>
+          <ul class="about-value__list">
+            <li class="about-value__item value-card">
+              <div class="value-card__head">
+                <p class="value-card__num">01</p>
+                <h3 class="value-card__title">社員の幸福至上</h3>
+              </div>
+              <p class="value-card__text">私たちは、社員が仕事とプライベートの両方で充実した人生を送ること、社員が健康で幸せな状態であることを外1に考え、積極的に支援します。</p>
+            </li>
+            <li class="about-value__item value-card">
+              <div class="value-card__head">
+                <p class="value-card__num">02</p>
+                <h3 class="value-card__title">革新性</h3>
+              </div>
+              <p class="value-card__text">常に新しいアイデアを模索し、革新的な福利厚生ソリューションを提供し、働く人の負担を減らすサービスを提供することを目指しています。</p>
+            </li>
+            <li class="about-value__item value-card">
+              <div class="value-card__head">
+                <p class="value-card__num">03</p>
+                <h3 class="value-card__title">プロフェッショナル</h3>
+              </div>
+              <p class="value-card__text">お客様やパートナーとの関係を大切にし、共に成長し、共に成功することを目指します。お互いの強みを活かし、共に目標達成に向けて努力します。</p>
+            </li>
+            <li class="about-value__item value-card">
+              <div class="value-card__head">
+                <p class="value-card__num">04</p>
+                <h3 class="value-card__title">リスペクトと透明性</h3>
+              </div>
+              <p class="value-card__text">お互いを尊重し、コミュニケーションを通じて透明性を確保します。私たちは、社員や関係者との間で健全なコミュニケーションを実現します。</p>
+            </li>
+            <li class="about-value__item value-card">
+              <div class="value-card__head">
+                <p class="value-card__num">05</p>
+                <h3 class="value-card__title">社会的責任</h3>
+              </div>
+              <p class="value-card__text">社会と環境に対する責任を重視し、持続可能なビジネス活動を展開します。私たちは、地域社会や環境に対して積極的な貢献を行うことを約束します。</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      @@include('partials/sections/cta-contact.html')
+    </main>
+
+    @@include('partials/footer.html')
+    <script src="./public/assets/js/script.js?v=17"></script>
+  </body>
+</html>

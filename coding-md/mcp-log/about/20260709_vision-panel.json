@@ -1,0 +1,27 @@
+{
+  "source": "get_design_context",
+  "nodeId": "1:845",
+  "fetchedAt": "2026-07-09T16:08:00+09:00",
+  "page": "about",
+  "section": "vision-panel",
+  "outer": {
+    "width": 1264,
+    "paddingInline": 32,
+    "panelWidth": 1200
+  },
+  "panel": {
+    "width": 1200,
+    "paddingInline": 40,
+    "paddingBlock": 64,
+    "contentWidth": 1120,
+    "labelGap": 40,
+    "borderRadius": 24,
+    "background": "#f9f9f9"
+  },
+  "layout": {
+    "width": 1120,
+    "gap": 80,
+    "titleWidth": 520,
+    "bodyWidth": 520
+  }
+}

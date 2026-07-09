@@ -1,0 +1,19 @@
+{
+  "source": "get_design_context",
+  "nodeId": "1:843",
+  "fetchedAt": "2026-07-09T16:01:00+09:00",
+  "page": "about",
+  "section": "purpose-margin",
+  "layout": {
+    "outerWidth": 1184,
+    "paddingInline": 32,
+    "contentWidth": 1120,
+    "paddingTop": 80,
+    "paddingBottom": 80,
+    "columns": {
+      "left": 550,
+      "gap": 32,
+      "right": 538
+    }
+  }
+}

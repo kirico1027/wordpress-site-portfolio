@@ -1,0 +1,28 @@
+@use "../../foundation/functions" as *;
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: rem(8);
+  margin: 0;
+}
+
+.section-label__dot {
+  display: block;
+  flex-shrink: 0;
+  width: rem(8);
+  height: rem(8);
+  border-radius: rem(24);
+  background: var(--color-primary);
+}
+
+.section-label__text {
+  font-size: rem(18);
+  font-weight: 500;
+  line-height: calc(25.2 / 18);
+  color: var(--color-text);
+}
+
+.section-label--orange .section-label__dot {
+  background: var(--color-accent-orange);
+}

@@ -66,3 +66,59 @@
   line-height: 1.4;
   letter-spacing: 0.05em;
 }
+
+// 下層ページ: 背景画像なし・ライトグレー帯
+.page-hero--light {
+  align-items: flex-end;
+  justify-content: flex-start;
+  min-height: 0;
+  background: var(--color-bg-light);
+  border-radius: 0 0 rem(64) rem(64);
+  @include fluid-pc-range(padding-top, 140, 140, $max-vw: 1905);
+  @include fluid-sp-range(padding-top, 100, 120);
+  @include fluid-pc-range(padding-bottom, 64, 64, $max-vw: 1905);
+  @include fluid-sp-range(padding-bottom, 40, 64);
+}
+
+.page-hero--light .page-hero__inner {
+  align-items: flex-start;
+  text-align: left;
+  color: var(--color-text);
+}
+
+.page-hero--light .page-hero__title {
+  font-weight: 600;
+  font-size: clamp(#{rem(40)}, #{rem(28)} + 3.5vw, #{rem(56)});
+  line-height: calc(78.4 / 56);
+  letter-spacing: 0.05em;
+}
+
+.page-hero--light .page-hero__lead {
+  margin-top: rem(8);
+  font-size: rem(18);
+  font-weight: 700;
+  line-height: calc(18 / 18);
+  letter-spacing: 0.1em;
+}
+
+@include mq {
+  .page-hero--light {
+    border-radius: 0 0 rem(32) rem(32);
+  }
+
+  .page-hero--light .page-hero__title {
+    font-size: clamp(
+      #{rem(36)},
+      calc(#{rem(36)} + (100vw - 375px) * 20 / 393),
+      #{rem(56)}
+    );
+  }
+
+  .page-hero--light .page-hero__lead {
+    font-size: clamp(
+      #{rem(16)},
+      calc(#{rem(16)} + (100vw - 375px) * 2 / 393),
+      #{rem(18)}
+    );
+  }
+}

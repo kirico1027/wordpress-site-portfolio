@@ -1,0 +1,17 @@
+{
+  "source": "get_design_context",
+  "nodeId": "1:813",
+  "fetchedAt": "2026-07-09T15:52:00+09:00",
+  "page": "about",
+  "section": "purpose-visual",
+  "dimensions": {
+    "collageWidth": 538,
+    "collageHeight": 506.594,
+    "accent": { "width": 221, "height": 91, "borderRadius": 16, "color": "#0096df" },
+    "carousel": { "width": 432, "height": 255.594, "borderRadius": 12, "imageSize": "432x288" },
+    "shapes": {
+      "peach": { "width": 160, "height": 160, "color": "#ffe0cb" },
+      "green": { "width": 96, "height": 91, "color": "#32bf98" }
+    }
+  }
+}
