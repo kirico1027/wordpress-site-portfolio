@@ -2707,7 +2707,7 @@ body {
 
 .about-purpose__title {
   margin: 1.5rem 0 0;
-  font-size: 2.5rem;
+  font-size: clamp(1.5625rem, 1.5625rem + (100vw - 375px) * 15 / 393, 2.5rem);
   font-weight: 600;
   line-height: 1.6;
   letter-spacing: 0.25rem;
@@ -2960,7 +2960,7 @@ body {
 
 .about-gallery {
   overflow: hidden;
-  margin-top: 7.5rem;
+  margin-top: clamp(3.75rem, 3.75rem + (100vw - 375px) * 60 / 393, 7.5rem);
 }
 
 .about-gallery__slider {
@@ -3019,24 +3019,24 @@ body {
   gap: 3rem;
   width: 100%;
   max-width: 74rem;
-  padding-top: 7.5rem;
+  padding-top: 3.75rem;
 }
 @media (min-width: 769px) {
   .about-value__inner {
-    padding-top: clamp(7.5rem, 7.5rem + (100vw - 769px) * 0 / 1136, 7.5rem);
+    padding-top: clamp(3.75rem, 3.75rem + (100vw - 769px) * 0 / 1136, 3.75rem);
   }
 }
 .about-value__inner {
-  padding-top: clamp(4rem, 4rem + (100vw - 375px) * 56 / 393, 7.5rem);
-  padding-bottom: 12.5rem;
+  padding-top: clamp(2rem, 2rem + (100vw - 375px) * 28 / 393, 3.75rem);
+  padding-bottom: 6.25rem;
 }
 @media (min-width: 769px) {
   .about-value__inner {
-    padding-bottom: clamp(12.5rem, 12.5rem + (100vw - 769px) * 0 / 1136, 12.5rem);
+    padding-bottom: clamp(6.25rem, 6.25rem + (100vw - 769px) * 0 / 1136, 6.25rem);
   }
 }
 .about-value__inner {
-  padding-bottom: clamp(5rem, 5rem + (100vw - 375px) * 40 / 393, 7.5rem);
+  padding-bottom: clamp(2.5rem, 2.5rem + (100vw - 375px) * 20 / 393, 3.75rem);
 }
 
 .about-value__head {
@@ -3134,7 +3134,6 @@ body {
     max-width: none;
   }
   .about-purpose__title {
-    font-size: clamp(1.75rem, 1.75rem + (100vw - 375px) * 12 / 393, 2.5rem);
     line-height: 1.6;
   }
   .about-purpose__body {
@@ -3199,7 +3198,7 @@ body {
     align-items: flex-start;
   }
   .about-value__title {
-    font-size: clamp(1.25rem, 1.25rem + (100vw - 375px) * 4 / 393, 1.5rem);
+    font-size: 1.5625rem;
   }
   .about-value__item {
     flex: 1 1 100%;
