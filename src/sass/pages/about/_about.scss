@@ -24,7 +24,7 @@
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  gap: rem(32);
+  @include fluid-pc-range(gap, 15, 32);
   width: 100%;
   @include fluid-pc-range(padding-top, 80, 80, $max-vw: 1905);
   @include fluid-pc-range(padding-bottom, 80, 80, $max-vw: 1905);
@@ -41,7 +41,7 @@
 
 .about-purpose__title {
   margin: rem(24) 0 0;
-  font-size: rem(40);
+  @include fluid-pc-range(font-size, 30, 40);
   font-weight: 600;
   line-height: calc(64 / 40);
   letter-spacing: rem(4);
@@ -230,8 +230,7 @@ $about-purpose-collage-h: rem(506.594);
 
 .about-statements {
   padding-top: 0;
-  @include fluid-pc-range(padding-bottom, 80, 80, $max-vw: 1905);
-  @include fluid-sp-range(padding-bottom, 48, 80);
+  @include fluid-pc-range(padding-bottom, 60, 80);
 }
 
 .about-statements__inner {
@@ -268,22 +267,22 @@ $about-purpose-collage-h: rem(506.594);
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: rem(40);
+  @include fluid-pc-range(gap, 30, 40);
   width: 100%;
   max-width: rem(1120);
   margin-inline: auto;
 }
 
 .about-panel--mission .about-panel__content {
-  gap: rem(24);
+  @include fluid-pc-range(gap, 30, 24);
 }
 
 .about-panel__layout {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
-  gap: rem(80);
+  @include fluid-pc-range(gap, 24, 80);
   width: 100%;
 }
 
@@ -292,7 +291,7 @@ $about-purpose-collage-h: rem(506.594);
   flex: 0 0 rem(520);
   width: rem(520);
   min-width: 0;
-  font-size: rem(24);
+  @include fluid-pc-range(font-size, 22, 24);
   font-weight: 600;
   line-height: calc(43.2 / 24);
   letter-spacing: rem(2.4);
@@ -319,7 +318,7 @@ $about-purpose-collage-h: rem(506.594);
 
 .about-gallery {
   overflow: hidden;
-  @include fluid-sp-range(margin-top, 60, 120);
+  @include fluid-pc-range(margin-top, 60, 120);
 }
 
 .about-gallery__slider {
@@ -352,7 +351,7 @@ $about-purpose-collage-h: rem(506.594);
 
 .about-gallery__figure {
   margin: 0;
-  width: rem(456);
+  @include fluid-pc-range(width, 258, 456);
   max-width: 80vw;
   aspect-ratio: 456 / 274;
   border-radius: rem(8);
@@ -513,6 +512,14 @@ $about-purpose-collage-h: rem(506.594);
 
   @include about-purpose-visual-scale;
 
+  .about-statements {
+    @include fluid-sp-range(padding-bottom, 48, 80);
+  }
+
+  .about-gallery {
+    @include fluid-sp-range(margin-top, 30, 60);
+  }
+
   .about-panel {
     padding-block: rem(40);
     padding-inline: rem(24);
@@ -565,9 +572,13 @@ $about-purpose-collage-h: rem(506.594);
 
 @include mq-hero-pc {
   // About 下層（Purpose 等）: Figma 1184 ボックス / 32 padding / 1120 コンテンツ
-  .about-page .container:not(.about-statements__inner) {
+  .about-page .container:not(.about-statements__inner):not(.page-hero__inner) {
     max-width: rem(1184);
     padding-inline: rem(32);
+  }
+
+  .about-page .container.about-purpose__inner {
+    @include fluid-pc-range(padding-inline, 35, 32);
   }
 
   .about-statements__inner.container {
@@ -578,5 +589,35 @@ $about-purpose-collage-h: rem(506.594);
 }
 
 @include mq-top-pc-narrow {
+  // カンプ 550:538 — flex 比率で gap 変動に追従
+  .about-purpose__content {
+    flex: 550 1 0;
+    width: auto;
+    max-width: none;
+  }
+
+  .about-purpose__visual {
+    flex: 538 1 0;
+    width: auto;
+    max-width: none;
+  }
+
   @include about-purpose-visual-scale;
+
+  // カンプ 520:520 — flex 比率で gap 変動に追従
+  .about-panel__layout {
+    align-items: flex-start;
+  }
+
+  .about-panel__title {
+    flex: 520 1 0;
+    width: auto;
+    max-width: none;
+  }
+
+  .about-panel__body {
+    flex: 520 1 0;
+    width: auto;
+    max-width: none;
+  }
 }

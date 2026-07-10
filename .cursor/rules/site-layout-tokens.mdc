@@ -30,6 +30,7 @@ alwaysApply: true
 
 - ベース: `max-width: 1184px`、padding **`32px`**（769 未満は `fluid-padding-inline`）
 - **トップ PC では `_top.scss` が優先**。下層ページ移行時に 1190 / 35px へ揃える
+- **About 下層**（`mq-hero-pc`）: `.about-page .container:not(.about-statements__inner):not(.page-hero__inner)` — **`.page-hero__inner` は page-hero 側の padding ルールを正とする**（詳細度競合を避ける）
 
 ### `.l-inset-comp-1920`
 

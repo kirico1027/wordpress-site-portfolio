@@ -22,32 +22,52 @@ alwaysApply: true
 @include fluid-pc-range(margin-top, $pc-min, $pc-max, $sp-px: $sp-only);
 ```
 
-## SP 帯の書き方（2 パターン）
+## SP 帯の書き方（原則）
 
-**768px 端 ≠ 769px 以降（カンプ）の値** — タイポなど。**`@include mq` 内**に `fluid-sp-range`（ベースにカンプ `rem()` を先に出す）:
+**`fluid-sp-range` は `@include mq`（max-width: 768px）内に書く。** ベースに書くと 769px 以上にも `clamp` の max が効き、カンプが潰れる。
+
+**768px 端 ≠ カンプ値** — タイポ（ベースにカンプ `rem()`、SP のみ mq 内）:
 
 ```scss
-.hero__title {
-  font-size: rem(48); // ① カンプ固定
+.about-purpose__title {
+  font-size: rem(40); // カンプ固定（1184px+）
 }
 @include mq {
-  .hero__title {
-    @include fluid-sp-range(font-size, 25, 38); // ④ SP 375→768
+  .about-purpose__title {
+    @include fluid-sp-range(font-size, 25, 35); // 375→768
   }
 }
 ```
 
-**768px 端 = 769px 以降の値** — 余白など。ベースに **`fluid-pc-range` + `fluid-sp-range`** を並べる（境界で連続）:
+**768 端 ≠ カンプ値** — 余白・margin（ベース PC、SP は mq 内）:
 
 ```scss
-.about-purpose__inner {
-  @include fluid-pc-range(padding-top, 80, 80, $max-vw: 1905);
-  @include fluid-sp-range(padding-top, 48, 80);
+.about-gallery {
+  @include fluid-pc-range(margin-top, 60, 120); // 769→1184（カンプ 120）
+}
+@include mq {
+  .about-gallery {
+    @include fluid-sp-range(margin-top, 30, 60); // 375→768
+  }
 }
 ```
 
-- **ベースに PC/カンプの `rem()` または `fluid-pc-range` を必ず出す**。`@include mq` **内だけ**にプロパティを書かない
-- SP と PC で別値 → **`$sp-px`**（`fluid-pc-range`）
+**768 端 = 769px = カンプ値** — ベース `fluid-pc-range` のみで足りることもある。SP だけ別値なら mq 内に `fluid-sp-range` を足す。
+
+## PC 帯の書き方
+
+- **769px 幅の修正** = `fluid-pc-range` の **第2引数**（`min-width: 769px` の clamp min）
+- ベースセレクタに `@include fluid-pc-range(...)` を書く（`@include mq` 内だけに書かない）
+- **769〜1183px のみ**（カンプ 1184px+ 不変）→ `@include mq-top-pc-narrow { ... }`
+
+```scss
+@include fluid-pc-range(font-size, 30, 40); // 769px: 30 → 1184px: 40
+```
+
+## 禁止（同一プロパティ）
+
+- ベースに **`fluid-sp-range` のみ**
+- ベースに **`fluid-pc-range` + `fluid-sp-range` を併記**（SP は必ず `@include mq` 内へ）
 
 ### 1184 とカンプ幅の関係
 
@@ -74,6 +94,11 @@ alwaysApply: true
 | `.l-inset-comp-1920` | Safari 向け採用ページ等 | `_container.scss`（別カンプ系） |
 
 **サイトごとにどちらを正とするか**は `site-layout-tokens.mdc` に書く。
+
+### ページ共通 `.container` 上書き（本サイト）
+
+- About 下層: `@include mq-hero-pc` 内の **`.about-page .container:not(...)`** が、ヒーロー等の **`.page-hero__inner.container`** と競合しうる
+- 個別ブロックは **`:not(.page-hero__inner)` 等で除外**するか、コンポーネント側で **詳細度を上げる**（`responsive-build-workflow.mdc`「詳細度・ページ上書き」）
 
 ## やらないこと
 
