@@ -52,7 +52,7 @@ alwaysApply: true
 - **769px = clamp の min**、**カンプ幅（またはコンテナ最大）= 固定 max**。
 - **「769px 幅の修正」** = `fluid-pc-range` の **第2引数**（`min-width: 769px` 側の値）。
 - 実装: ベースセレクタに **`fluid-pc-range`**（内部で `@media (min-width: 769px)` を出力）。`@include mq-hero-pc` 内に閉じる書き方も可。
-- **769〜1183px だけ**変え、カンプ（1184px+）を触らないレイアウト → **`@include mq-top-pc-narrow`**
+- **769〜コンテナ最大の手前まで**変え、カンプ（コンテナ最大+）を触らないレイアウト → サイトの **狭い PC 帯用 mq**（`site-layout-tokens.mdc` にミキシン名を記載）
 - タイポ・大きな余白も同様：**カンプ = 固定 `rem()`、769 起点 = 線形 clamp**。
 - `min()` / `cqw` だけで PC タイポを完結させない。
 
@@ -60,7 +60,8 @@ alwaysApply: true
 
 - 全セクションを通しで見て、余白・並び・はみ出しを調整する。
 - **検証の最小セット**（サイトトークンに記載）を順に確認する。
-- 例: `375` → `768` → `767` / `769` → コンテナ最大 → カンプ幅
+- 例: `375` → `768` → `767` / `769` → `コンテナ最大` → `カンプ幅`
+- **ページ・セクションの帯調整が完了したら**、確定した clamp / 固定値を **そのサイトの `site-layout-tokens.mdc`** に追記する。数値の正はトークンファイルとする。
 
 ---
 
@@ -75,9 +76,9 @@ alwaysApply: true
 |------|---------------|---------------|
 | **768px 端 ≠ カンプ値**（タイポ・余白・margin 等） | **`@include mq` 内 `fluid-sp-range` のみ** | ベース **`fluid-pc-range`**（カンプ = max） |
 | **768px 端 = 769px = カンプ値**（境界で全帯同値） | `@include mq` 内で SP だけ別値なら `fluid-sp-range` | ベース `fluid-pc-range`（min = max 可） |
-| **769〜1183px だけ**レイアウト変更（カンプ不変） | 触らない | **`@include mq-top-pc-narrow` 内のみ** |
+| **769〜コンテナ最大の手前だけ**レイアウト変更（カンプ不変） | 触らない | **狭い PC 帯用 mq 内のみ** |
 | メディアクエリ | **`max-width: 768px`**（`@include mq`） | **`min-width: 769px`**（`fluid-pc-range` / `@include mq-hero-pc`） |
-| 修正後の確認 | **769px 以上が変わっていないか**（特に **1184px・カンプ幅**） | **768px 以下が変わっていないか** |
+| 修正後の確認 | **769px 以上が変わっていないか**（特に **コンテナ最大・カンプ幅**） | **768px 以下が変わっていないか** |
 | 禁止 | ベースに **`fluid-sp-range` のみ** / `@include mq` 内だけ（ベースに PC 値なし） | `@include mq-hero-pc` 内 **`rem()` 固定**で PC clamp 潰し |
 
 | やること | SP 帯（≤768） | PC 帯（≥769） |
@@ -93,19 +94,20 @@ alwaysApply: true
 - **768 端 ≠ カンプ値のタイポをベース `fluid-sp-range` のみ** → 769px 以上でカンプ `rem()` が潰れる。**ベース `rem()`（カンプ）+ `@include mq` 内 `fluid-sp-range`**
 - `@include mq-hero-pc` 内で **`rem()` 固定** → 769 起点の `fluid-pc-range` clamp が潰れる
 - `fluid-pc-range` のベースが PC min のまま → SP 帯の意図した値が上書きされる（**`$sp-px` を渡す**）
-- **ページ共通 `.container` 上書き**がコンポーネントより詳細度・ソース順で勝つ → 意図した padding が効かない（下記「詳細度」参照）
+- **ページ共通のコンテナ上書き**がコンポーネントより詳細度・ソース順で勝つ → 意図した padding が効かない（下記「詳細度」参照）
 
-### 詳細度・ページ上書き
+### 詳細度・ページ上書き（汎用）
 
-- 下層ページの **`.about-page .container:not(...)`** 等は、**`.page-hero__inner.container`** などと **詳細度が同率**になり、**後に読み込まれた SCSS が勝つ**ことがある
+- **ページ用 SCSS の blanket ルール**（例: `.sub-page .container`）と、**コンポーネント内の `.container`** が **詳細度同率**だと、**後に読み込まれた SCSS が勝つ**
 - **対処（いずれか）**:
-  1. ページ共通ルールから **個別ブロックを `:not()` で除外**（例: `:not(.page-hero__inner)`）
-  2. コンポーネント側で **詳細度を上げる**（例: `main .page-hero .page-hero__inner.container`）
-- 769px 調整後は **DevTools で当たっているルール**を確認し、上書きされていないか必ず見る
+  1. ページ共通ルールから **個別ブロックを `:not()` で除外**
+  2. コンポーネント側で **詳細度を上げる**（例: `main .component .component__inner.container`）
+- 帯調整後は **DevTools で当たっているルール**を確認する
+- **サイト固有の競合例**は `site-layout-tokens.mdc`「詳細度・ページ上書き」を参照
 
 ### 修正後チェックリスト（毎回）
 
-`375` → `768` → `769` → `1184` → **カンプ幅** の順に、**変更したプロパティだけ**確認する。SP 修正後は **769 以上**、PC 修正後は **768 以下**が変わっていないこと。
+`375` → `768` → `769` → **コンテナ最大** → **カンプ幅** の順に、**変更したプロパティだけ**確認する。SP 修正後は **769 以上**、PC 修正後は **768 以下**が変わっていないこと。
 
 ---
 
@@ -123,7 +125,7 @@ alwaysApply: true
 
 | ルール | 内容 |
 |--------|------|
-| `responsive-build-workflow.mdc` | **工程**（本ファイル） |
-| `responsive-fluid-pattern.mdc` | **実装 API**（第一選択 / 補助） |
-| `site-layout-tokens.mdc` | **本サイトの数値・例外・未移行** |
-| `typography-rem-clamp.mdc` | **タイポ・margin-top・em**（余白 clamp 以外） |
+| `responsive-build-workflow.mdc` | **工程・帯の分離**（本ファイル・汎用） |
+| `responsive-fluid-pattern.mdc` | **実装 API**（汎用） |
+| `site-layout-tokens.mdc` | **サイト固有の数値・例外・実装メモ** |
+| `typography-rem-clamp.mdc` | **タイポ・margin-top・em**（汎用） |

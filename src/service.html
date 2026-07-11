@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<script>
+  document.documentElement.classList.add("js");
+
+  (function () {
+    var mobileQuery = "(max-width: 768px)";
+
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+
+    function snapMobileBelowTop() {
+      if (!window.matchMedia(mobileQuery).matches) return;
+      if (window.scrollY < 1) {
+        window.scrollTo(0, 1);
+      }
+    }
+
+    snapMobileBelowTop();
+    document.addEventListener("DOMContentLoaded", snapMobileBelowTop);
+    window.addEventListener("pageshow", snapMobileBelowTop);
+    window.addEventListener("load", snapMobileBelowTop);
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", snapMobileBelowTop);
+    }
+  })();
+</script>
+<title>サービス | BizLife</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/brands.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="./public/assets/css/main.css?v=104" />
+
+  </head>
+  <body>
+    <!-- WP: get_header() / template-parts/header.php -->
+<header class="top-header">
+  <div class="top-header__inner">
+    <a class="top-header__logo" href="./index.html"><img src="./public/assets/img/common/logo-header.svg" alt="BizLife" width="104" height="24" /></a>
+    <nav id="top-header-nav" class="top-header__nav" aria-label="メインナビゲーション">
+      <button type="button" class="top-header__drawer-close" aria-label="メニューを閉じる">
+        <span aria-hidden="true">×</span>
+      </button>
+      <a class="top-header__nav-link" href="./about.html"><span class="top-header__nav-link-inner">About</span></a>
+      <a class="top-header__nav-link" href="./service.html"><span class="top-header__nav-link-inner">Service</span></a>
+      <a class="top-header__nav-link" href="./works-archive.html"><span class="top-header__nav-link-inner">Works</span></a>
+      <a class="top-header__nav-link" href="./recruit.html"><span class="top-header__nav-link-inner">Recruit</span></a>
+      <a class="top-header__nav-link" href="./blog-archive.html"><span class="top-header__nav-link-inner">Blog</span></a>
+      <a class="top-header__nav-link top-header__nav-link--contact" href="./contact.html"><span class="top-header__nav-link-inner">Contact</span></a>
+    </nav>
+    <button type="button" class="top-header__menu-toggle" aria-expanded="false" aria-controls="top-header-nav" aria-label="メニューを開く">
+      <span class="top-header__menu-toggle-bar" aria-hidden="true"></span>
+      <span class="top-header__menu-toggle-bar" aria-hidden="true"></span>
+      <span class="top-header__menu-toggle-bar" aria-hidden="true"></span>
+    </button>
+  </div>
+  <div class="top-header__backdrop" aria-hidden="true"></div>
+</header>
+
+
+    <!-- WP: page-service.php / 固定ページ Service -->
+    <main class="service-page">
+      <!-- 下層ページ共通ヒーロー（BEM: page-hero）。マークアップ変更はこの1ファイルで全ページに反映されます。 -->
+<section class="page-hero page-hero--light" aria-labelledby="service-hero-heading">
+  
+  <div class="page-hero__inner container">
+    <h1 id="service-hero-heading" class="page-hero__title">Service</h1>
+    <p class="page-hero__lead">私たちが提供するサービス</p>
+  </div>
+</section>
+
+
+      <section class="service-intro" aria-label="サービス紹介">
+        <div class="container service-intro__inner">
+          <p class="service-intro__text">Biz Lifeでは現代のテクノロジーとライフスタイルに即した福利厚生プログラムとして、<br class="service-intro__br" />社員の悩みや不安に寄り添い、健康で幸せな職場環境を構築します。</p>
+        </div>
+      </section>
+
+      <!-- Service 01 -->
+      <article class="service-detail service-detail--first" aria-labelledby="service-detail-01-heading">
+        <div class="container service-detail__inner">
+          <div class="service-detail__layout">
+            <div class="service-detail__content">
+              <div class="service-detail__head">
+                <p class="service-detail__num">01</p>
+                <h2 id="service-detail-01-heading" class="service-detail__title">みんなの福利厚生クラウド</h2>
+              </div>
+              <p class="service-detail__text">みんなの福利厚生クラウドでは、社員がデジタルストレスやデバイスの過剰使用による影響を軽減するための支援が提供されます。具体的には、定期的なデジタル断食やストレス管理プログラムを通じて、社員がリラックスする時間を確保し、健康でバランスの取れたデジタルライフを実現できます。</p>
+              <!-- WP: 固定ページリンク / アーカイブリンク -->
+<a class="btn-more btn-more--service" href="#"><span class="btn-more__label">サービスサイト</span><span class="btn-more__icon" aria-hidden="true"><span class="material-icons">keyboard_arrow_right</span></span></a>
+
+            </div>
+            <figure class="service-detail__figure">
+              <img src="./public/assets/img/service/service_01.svg" alt="" width="528" height="330" loading="lazy" />
+            </figure>
+          </div>
+
+          <div class="service-detail__effects service-effects">
+            <div class="service-effects__heading">
+              <h3 class="service-effects__title">導入の効果</h3>
+            </div>
+            <ul class="service-effects__list">
+              <li class="service-effects__item service-effect-card">
+                <p class="service-effect-card__num">01</p>
+                <h4 class="service-effect-card__title">ストレス軽減と心理的な<br />健康の促進</h4>
+                <p class="service-effect-card__text">社員のデジタルストレスを軽減し、心理的な健康を支援します。定期的なデジタルデトックスやストレス管理プログラムにより、従業員のメンタルヘルスが向上します。</p>
+              </li>
+              <li class="service-effects__item service-effect-card">
+                <p class="service-effect-card__num">02</p>
+                <h4 class="service-effect-card__title">生産性と集中力の<br />向上</h4>
+                <p class="service-effect-card__text">プログラムの活用により、社員の生産性と集中力が向上します。デジタルデトックスやストレス管理の取り組みで、より集中でき、業務を効率的にこなせるようになります。</p>
+              </li>
+              <li class="service-effects__item service-effect-card">
+                <p class="service-effect-card__num">03</p>
+                <h4 class="service-effect-card__title">健康的な<br />デジタルライフの促進</h4>
+                <p class="service-effect-card__text">社員の健康的なデジタルライフを支援します。プログラムに参加することで、社員はデジタルデバイスの適切な使用方法を学び、生活の質を向上させることができます。</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="service-detail__voice service-voice">
+          <a class="service-voice__card" href="#">
+            <span class="service-voice__badge">導入の声</span>
+            <span class="service-voice__layout">
+              <span class="service-voice__figure">
+                <img src="./public/assets/img/service/voice_01.png" alt="" width="400" height="240" loading="lazy" />
+              </span>
+              <span class="service-voice__content">
+                <span class="service-voice__title">内部崩壊しかけていた弊社を救うきっかけになった「福利厚生」の話</span>
+                <span class="service-voice__excerpt">BizLifeとの出会いは、従業員のメンタルヘルスを重視する企業として知られるようになったからです。Q まずは、BizLifeにお声がけいただいた経緯をお聞かせ...</span>
+                <span class="service-voice__link">詳しくはこちら<span class="material-icons" aria-hidden="true">keyboard_arrow_right</span></span>
+              </span>
+            </span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Service 02 -->
+      <article class="service-detail" aria-labelledby="service-detail-02-heading">
+        <div class="container service-detail__inner">
+          <div class="service-detail__layout service-detail__layout--reverse">
+            <div class="service-detail__content">
+              <div class="service-detail__head">
+                <p class="service-detail__num">02</p>
+                <h2 id="service-detail-02-heading" class="service-detail__title">つながるワークフロー</h2>
+              </div>
+              <div class="service-detail__body">
+                <p class="service-detail__text">効率的なワークフロー支援は、従業員が効果的にタスクを管理し、仕事を効率的に遂行できるように支援します。</p>
+                <p class="service-detail__text">重要なタスクの優先順位付けや時間の使い方を学び、効率的なスケジュールを作成する方法を身につけます。また、ワークフロー改善や効率化のコンサルティングも提供し、より効果的に業務を遂行できるようサポートします。</p>
+              </div>
+              <!-- WP: 固定ページリンク / アーカイブリンク -->
+<a class="btn-more btn-more--service" href="#"><span class="btn-more__label">サービスサイト</span><span class="btn-more__icon" aria-hidden="true"><span class="material-icons">keyboard_arrow_right</span></span></a>
+
+            </div>
+            <figure class="service-detail__figure">
+              <img src="./public/assets/img/service/service_02.svg" alt="" width="528" height="330" loading="lazy" />
+            </figure>
+          </div>
+
+          <div class="service-detail__effects service-effects">
+            <div class="service-effects__heading">
+              <h3 class="service-effects__title">導入の効果</h3>
+            </div>
+            <ul class="service-effects__list">
+              <li class="service-effects__item service-effect-card">
+                <p class="service-effect-card__num">01</p>
+                <h4 class="service-effect-card__title">ストレス軽減と<br />作業効率の向上</h4>
+                <p class="service-effect-card__text">プログラムの活用により、従業員の生産性と集中力が向上します。デジタルデトックスやストレス管理の取り組みで、仕事により集中でき、業務を効率的にこなせるようになります。</p>
+              </li>
+              <li class="service-effects__item service-effect-card">
+                <p class="service-effect-card__num">02</p>
+                <h4 class="service-effect-card__title">コラボレーションと<br />チームワークの促進</h4>
+                <p class="service-effect-card__text">適切なツールやプロセスの導入により、従業員はより効果的に情報を共有し、これにより従業員は協力して仕事を進めることができ、チーム全体のパフォーマンスが向上します。</p>
+              </li>
+              <li class="service-effects__item service-effect-card">
+                <p class="service-effect-card__num">03</p>
+                <h4 class="service-effect-card__title">自己成長と<br />スキルアップの機会の提供</h4>
+                <p class="service-effect-card__text">従業員は新しいツールやプロセスを学び、自分の能力を向上させることができます。これにより、従業員は自己成長の機会を享受し、キャリアの発展を図ることができます。</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="service-detail__voice service-voice">
+          <a class="service-voice__card" href="#">
+            <span class="service-voice__badge">導入の声</span>
+            <span class="service-voice__layout">
+              <span class="service-voice__figure">
+                <img src="./public/assets/img/service/voice_02.png" alt="" width="400" height="240" loading="lazy" />
+              </span>
+              <span class="service-voice__content">
+                <span class="service-voice__title">従業員の悩みや不安に本気で向き合うことで会社全体の『人』に対する考え方が変わった</span>
+                <span class="service-voice__excerpt">BizLifeとの出会いは、従業員のメンタルヘルスを重視する企業として知られるようになったからです。Q まずは、BizLifeにお声がけいただいた経緯をお聞かせ...</span>
+                <span class="service-voice__link">詳しくはこちら<span class="material-icons" aria-hidden="true">keyboard_arrow_right</span></span>
+              </span>
+            </span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Service 03 -->
+      <article class="service-detail service-detail--last" aria-labelledby="service-detail-03-heading">
+        <div class="container service-detail__inner">
+          <div class="service-detail__layout">
+            <div class="service-detail__content">
+              <div class="service-detail__head">
+                <p class="service-detail__num">03</p>
+                <h2 id="service-detail-03-heading" class="service-detail__title">あなたのメンタルコーチ</h2>
+              </div>
+              <div class="service-detail__body">
+                <p class="service-detail__text">オンラインカウンセリングやストレス管理コースの提供を行います。従業員は、自宅やオフィスからオンラインで心理カウンセラーとのセッションを予約し、ストレスや不安に対処する方法を学ぶことができます。</p>
+                <p class="service-detail__text">また、リラクゼーションアプリなどのデジタルツールも利用可能で、従業員は日常生活でのストレス管理に役立つリソースを活用できます。</p>
+              </div>
+              <!-- WP: 固定ページリンク / アーカイブリンク -->
+<a class="btn-more btn-more--service" href="#"><span class="btn-more__label">サービスサイト</span><span class="btn-more__icon" aria-hidden="true"><span class="material-icons">keyboard_arrow_right</span></span></a>
+
+            </div>
+            <figure class="service-detail__figure">
+              <img src="./public/assets/img/service/service_03.svg" alt="" width="528" height="330" loading="lazy" />
+            </figure>
+          </div>
+
+          <div class="service-detail__effects service-effects">
+            <div class="service-effects__heading">
+              <h3 class="service-effects__title">導入の効果</h3>
+            </div>
+            <ul class="service-effects__list">
+              <li class="service-effects__item service-effect-card">
+                <p class="service-effect-card__num">01</p>
+                <h4 class="service-effect-card__title">ストレスへの適切な<br />対処法の習得</h4>
+                <p class="service-effect-card__text">従業員がストレスや不安などの心理的な課題に適切に対処する方法を学ぶ機会を提供します。日常生活や仕事でのストレスに対処する能力を向上させることができます。</p>
+              </li>
+              <li class="service-effects__item service-effect-card">
+                <p class="service-effect-card__num">02</p>
+                <h4 class="service-effect-card__title">心理的な強さと<br />レジリエンスの向上</h4>
+                <p class="service-effect-card__text">困難な状況に対処するための精神的な強さを養います。これにより、ストレスや挑戦に対処する能力が向上し、ポジティブな心理的な状態を維持することができます。</p>
+              </li>
+              <li class="service-effects__item service-effect-card">
+                <p class="service-effect-card__num">03</p>
+                <h4 class="service-effect-card__title">ワーク・ライフ・バランスの<br />改善</h4>
+                <p class="service-effect-card__text">従業員はワーク・ライフ・バランスを改善し、より充実した生活を送ることができます。仕事やプライベートの両方でより良いパフォーマンスを発揮し、生活の満足度が向上します。</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="service-detail__voice service-voice">
+          <a class="service-voice__card" href="#">
+            <span class="service-voice__badge">導入の声</span>
+            <span class="service-voice__layout">
+              <span class="service-voice__figure">
+                <img src="./public/assets/img/service/voice_03.png" alt="" width="400" height="240" loading="lazy" />
+              </span>
+              <span class="service-voice__content">
+                <span class="service-voice__title">従業員満足度が前年比200％Up！「従業員」の本質を語れるBiz Lifeのサービス</span>
+                <span class="service-voice__excerpt">BizLifeとの出会いは、従業員のメンタルヘルスを重視する企業として知られるようになったからです。Q まずは、BizLifeにお声がけいただいた経緯をお聞かせ...</span>
+                <span class="service-voice__link">詳しくはこちら<span class="material-icons" aria-hidden="true">keyboard_arrow_right</span></span>
+              </span>
+            </span>
+          </a>
+        </div>
+      </article>
+
+      <!-- WP: get_template_part('template-parts/cta-contact') — 複数ページで include -->
+<section class="section section-cta">
+  <div class="section-cta__wrap">
+    <div class="container section-cta__inner">
+      <div class="section-cta__head">
+        <p class="section-cta__title">CONTACT</p>
+        <p class="section-cta__lead">数ある会社から弊社にご興味·関心をいただきありがとうございます。<br />まずはお気軽にご相談ください。<br />お客様の現状を把握し、最適なご提案をさせていただきます。</p>
+      </div>
+      <div class="section-cta__cards">
+        <a class="section-cta__card" href="./contact.html">
+          <div class="section-cta__card-head">
+            <span class="material-icons section-cta__card-icon" aria-hidden="true">mail_outline</span>
+            <span class="section-cta__card-title">お問い合わせ</span>
+          </div>
+          <p class="section-cta__card-desc">数ある会社から弊社にご興味·関心をいただきありがとうございます。</p>
+        </a>
+        <a class="section-cta__card" href="./download.html">
+          <div class="section-cta__card-head">
+            <span class="material-icons section-cta__card-icon" aria-hidden="true">insert_drive_file</span>
+            <span class="section-cta__card-title">資料ダウンロード</span>
+          </div>
+          <p class="section-cta__card-desc">数ある会社から弊社にご興味·関心をいただきありがとうございます。</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+    </main>
+
+    <!-- WP: get_footer() / template-parts/footer.php — Options Page（会社情報・SNS） -->
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__main">
+      <div class="site-footer__brand">
+        <div class="site-footer__logo-row">
+          <a class="site-footer__logo" href="./index.html"><img src="./public/assets/img/common/logo-footer.svg" alt="BizLife" width="120" height="27" /></a>
+          <p class="site-footer__tagline">Empower Your Workforce,<br />Elevate Your Success with Biz Care Life.</p>
+        </div>
+        <div class="site-footer__company">
+          <p class="site-footer__company-name">株式会社BizLife</p>
+          <p class="site-footer__address"><span>〒361-9841</span><span>東京都中央区0-00-0 シルバービルディング9F</span></p>
+        </div>
+        <ul class="site-footer__social">
+          <li><a class="site-footer__social-link" href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
+          <li><a class="site-footer__social-link" href="#" aria-label="X"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a></li>
+          <li><a class="site-footer__social-link" href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a></li>
+        </ul>
+        <div class="site-footer__legal">
+          <a class="site-footer__legal-link" href="./privacy-policy.html">プライバシーポリシー</a>
+          <a class="site-footer__legal-link" href="./terms.html">利用規約</a>
+        </div>
+      </div>
+      <div class="site-footer__nav-col">
+        <nav class="site-footer__nav" aria-label="フッターナビゲーション">
+          <a class="site-footer__nav-link" href="./about.html">私たちについて</a>
+          <a class="site-footer__nav-link" href="./service.html">事業内容</a>
+          <a class="site-footer__nav-link" href="./works-archive.html">実績紹介</a>
+          <a class="site-footer__nav-link" href="./blog-archive.html">ブログ</a>
+          <a class="site-footer__nav-link" href="./company.html">会社概要</a>
+          <a class="site-footer__nav-link" href="./news-archive.html">お知らせ</a>
+        </nav>
+        <div class="site-footer__actions">
+          <a class="site-footer__action-btn" href="./recruit.html">Recruit<span class="material-icons" aria-hidden="true">keyboard_arrow_right</span></a>
+          <a class="site-footer__action-btn" href="./contact.html">Contact<span class="material-icons" aria-hidden="true">keyboard_arrow_right</span></a>
+        </div>
+      </div>
+    </div>
+    <p class="site-footer__copy">©︎ 2029 BizLife Inc.</p>
+  </div>
+</footer>
+
+    <script src="./public/assets/js/script.js?v=17"></script>
+  </body>
+</html>

@@ -1,12 +1,19 @@
 ---
-description: BizLife 固有トークン — 境界・container・セクション値・例外・未移行
+description: BizLife 固有トークン — 境界・container・確定値・例外・実装メモ（他サイトにはコピーしない）
 globs: src/sass/**/*.scss,src/**/*.html
 alwaysApply: true
 ---
 
 # サイトレイアウトトークン（BizLife）
 
-**汎用**: `responsive-build-workflow.mdc` / `responsive-fluid-pattern.mdc` / `typography-rem-clamp.mdc`
+**このファイルは BizLife 固有のみ。** 工程・実装 API の汎用ルールは下記を参照。
+
+| ルール | 役割 |
+|--------|------|
+| `responsive-build-workflow.mdc` | 工程・帯の分離（汎用） |
+| `responsive-fluid-pattern.mdc` | fluid 実装 API（汎用） |
+| `typography-rem-clamp.mdc` | タイポ・margin-top・em（汎用） |
+| **本ファイル** | **境界・数値・例外・実装メモ（BizLife のみ）** |
 
 ## 基準点（工程 ①③ で確定・変更しない）
 
@@ -16,6 +23,7 @@ alwaysApply: true
 | SP 最小 | `375px` |
 | 列切替 | `768px`（SP） / `769px`（PC） |
 | コンテナ最大（ボックス） | `1184px` |
+| 狭い PC 帯用 mq | `@include mq-top-pc-narrow`（769〜1183px） |
 
 **検証幅**: `375` → `768` → `767` / `769` → `1184` → `1905`
 
@@ -30,7 +38,7 @@ alwaysApply: true
 
 - ベース: `max-width: 1184px`、padding **`32px`**（769 未満は `fluid-padding-inline`）
 - **トップ PC では `_top.scss` が優先**。下層ページ移行時に 1190 / 35px へ揃える
-- **About 下層**（`mq-hero-pc`）: `.about-page .container:not(.about-statements__inner):not(.page-hero__inner)` — **`.page-hero__inner` は page-hero 側の padding ルールを正とする**（詳細度競合を避ける）
+- **About 下層**（`mq-hero-pc`）: `.about-page .container:not(.about-statements__inner):not(.page-hero__inner)` — 詳細度競合は下記「詳細度・ページ上書き」を参照
 
 ### `.l-inset-comp-1920`
 
@@ -43,6 +51,46 @@ alwaysApply: true
 | SP | `375` | `768` |
 | PC 標準 | `769` | `1184` |
 | PC カンプ外周 | `769` | `1905` |
+
+## `$max-vw` の使い分け（本サイト）
+
+| `$max-vw` | いつ使う | 要素例 |
+|-----------|---------|--------|
+| **`1184`（デフォルト）** | コンテナ内のタイポ・2カラム gap・カード幅・padding-inline | `about-purpose__title` 30→40、`about-gallery__figure` 258→456 |
+| **`1905`（カンプ幅）** | セクション外周・ヒーロー帯などカンプ全体幅基準の余白 | `page-hero--light` padding-top 140→150、`about-purpose__inner` padding-top 80 固定 |
+
+## 狭い2カラム（769〜1183px）— 実装メモ
+
+ミキシン: **`@include mq-top-pc-narrow`**
+
+```scss
+@include mq-top-pc-narrow {
+  .about-purpose__content {
+    flex: 550 1 0;
+    width: auto;
+    max-width: none;
+  }
+  .about-purpose__visual {
+    flex: 538 1 0;
+    width: auto;
+    max-width: none;
+  }
+  @include about-purpose-visual-scale;
+}
+```
+
+| ブロック | カンプ比率 | 1184px+ |
+|---------|-----------|---------|
+| `about-purpose__content` / `__visual` | **550:538** | 550px / 538px 固定 |
+| `about-panel__title` / `__body` | **520:520** | 520px 各 固定 |
+| トップ `about__content` / `about__visual` | **48%** 各 | — |
+
+## 詳細度・ページ上書き（本サイト）
+
+- About 下層（`mq-hero-pc`）: **`.about-page .container:not(.about-statements__inner):not(.page-hero__inner)`** が **`.page-hero__inner.container`** と詳細度同率で競合しうる
+- **`.page-hero__inner` は page-hero 側の padding を正とする** — ページ共通ルールから `:not(.page-hero__inner)` で除外
+- 代替: コンポーネント側で `main .page-hero .page-hero__inner.container` と詳細度を上げる
+- 汎用の対処方針は `responsive-build-workflow.mdc`「詳細度・ページ上書き」
 
 ## タイポグラフィ例外
 
@@ -63,6 +111,45 @@ alwaysApply: true
 | `company.section` padding-top | 1184→1905 | 120 → 0 |
 | `site-footer` padding-inline | 375→768 | 35 → 50px |
 | `site-footer` padding-inline | 769+ | **35px 固定**（`.container` と揃える） |
+| `about__content` / `about__visual` 幅 | 769〜1183 | **48%** 各（`mq-top-pc-narrow`） |
+
+## About 下層・確定 clamp / 固定値
+
+| 要素 | 帯 | 値 |
+|------|-----|-----|
+| `page-hero--light` padding-top | 375→768 | 100 → 120px |
+| `page-hero--light` padding-top | 769→1905 | 140 → **150px** |
+| `page-hero--light` padding-bottom | 375→768 | 40 → 64px |
+| `page-hero--light` padding-bottom | 769+ | **64px 固定** |
+| `page-hero__inner` padding-inline | 769→1184 | 35 → 32px |
+| `about-purpose__inner` padding-top | 375→768 | 48 → 80px |
+| `about-purpose__inner` padding-top | 769+ | **80px 固定**（`$max-vw: 1905`） |
+| `about-purpose__inner` padding-inline | 769→1184 | 35 → 32px |
+| `about-purpose__inner` gap | 769→1184 | 15 → 32px |
+| `about-purpose__title` font-size | 375→768 | 25 → 35px |
+| `about-purpose__title` font-size | 769→1184 | 30 → 40px |
+| `about-purpose__text` font-size | 375→768 | 14 → 15px |
+| `about-purpose__text` font-size | 769+ | **16px 固定** |
+| `about-purpose__content` / `__visual` | 769〜1183 | flex **550:538**（`mq-top-pc-narrow`） |
+| `about-purpose__content` / `__visual` | 1184+ | **550px / 538px 固定** |
+| `about-panel__content` gap（Vision） | 769→1184 | 30 → 40px |
+| `about-panel__content` gap（Mission） | 769→1184 | 30 → 24px |
+| `about-panel__layout` gap | 769→1184 | 24 → 80px |
+| `about-panel__title` font-size | 769→1184 | 22 → 24px |
+| `about-panel__title` / `__body` | 769〜1183 | flex **520:520**（`mq-top-pc-narrow`） |
+| `about-panel__title` / `__body` | 1184+ | **520px 各 固定** |
+| `about-gallery` margin-top | 375→768 | 30 → 60px |
+| `about-gallery` margin-top | 769→1184 | 60 → **120px** |
+| `about-gallery__figure` width | 375→768 | **320px**（`@include mq`） |
+| `about-gallery__figure` width | 769→1184 | 258 → 456px |
+| `about-statements` padding-bottom | 375→768 | 48 → 80px |
+| `about-statements` padding-bottom | 769→1184 | 60 → 80px |
+| `about-value__title` font-size | 375→768 | 25 → 28px |
+| `about-value__title` font-size | 769+ | **24px 固定** |
+| `about-value__inner` padding-top | 375→768 | 32 → 60px |
+| `about-value__inner` padding-top | 769+ | **60px 固定**（`$max-vw: 1905`） |
+| `about-value__inner` padding-bottom | 375→768 | 40 → 60px |
+| `about-value__inner` padding-bottom | 769+ | **100px 固定**（`$max-vw: 1905`） |
 
 ## 未移行（769 基準へ寄せる）
 

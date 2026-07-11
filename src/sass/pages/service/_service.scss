@@ -1,0 +1,430 @@
+@use "../../foundation/functions" as *;
+@use "../../foundation/mixins" as *;
+
+// ---------------------------------------------------------------------------
+// Service page
+// ---------------------------------------------------------------------------
+
+.service-page {
+  padding-top: 0;
+}
+
+// ---------------------------------------------------------------------------
+// Intro
+// ---------------------------------------------------------------------------
+
+.service-intro__inner {
+  @include fluid-pc-range(padding-top, 80, 80, $max-vw: 1905);
+  @include fluid-sp-range(padding-top, 48, 80);
+}
+
+.service-intro__text {
+  margin: 0;
+  font-size: rem(16);
+  font-weight: 600;
+  line-height: calc(28.8 / 16);
+  letter-spacing: rem(1.6);
+  color: var(--color-text);
+}
+
+.service-intro__br {
+  @include mq {
+    display: none;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Service detail block
+// ---------------------------------------------------------------------------
+
+.service-detail__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @include fluid-pc-range(padding-top, 96, 120, $max-vw: 1905);
+  @include fluid-pc-range(padding-bottom, 80, 80, $max-vw: 1905);
+  @include fluid-sp-range(padding-top, 64, 120);
+  @include fluid-sp-range(padding-bottom, 48, 80);
+}
+
+.service-detail--first .service-detail__inner {
+  @include fluid-pc-range(padding-top, 96, 96, $max-vw: 1905);
+  @include fluid-sp-range(padding-top, 64, 96);
+}
+
+.service-detail--last .service-detail__voice {
+  @include fluid-pc-range(padding-bottom, 160, 160, $max-vw: 1905);
+  @include fluid-sp-range(padding-bottom, 80, 160);
+}
+
+.service-detail__layout {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  @include fluid-pc-range(gap, 32, 64);
+  @include fluid-sp-range(gap, 32, 64);
+}
+
+.service-detail__layout--reverse {
+  flex-direction: row-reverse;
+
+  @include mq {
+    flex-direction: column;
+  }
+}
+
+.service-detail__content {
+  flex: 1 1 rem(528);
+  min-width: 0;
+  max-width: rem(528);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.service-detail__head {
+  display: flex;
+  flex-direction: column;
+  gap: rem(12);
+}
+
+.service-detail__num {
+  margin: 0;
+  font-size: rem(32);
+  font-weight: 600;
+  line-height: calc(44.8 / 32);
+  color: var(--color-primary);
+}
+
+.service-detail__title {
+  margin: 0;
+  font-size: rem(32);
+  font-weight: 700;
+  line-height: calc(44.8 / 32);
+  letter-spacing: rem(4.8);
+  color: var(--color-text);
+}
+
+.service-detail__text {
+  margin: rem(24) 0 0;
+  font-size: rem(14);
+  font-weight: 500;
+  line-height: calc(25.2 / 14);
+  letter-spacing: rem(1.4);
+  color: var(--color-text);
+}
+
+.service-detail__body {
+  margin-top: rem(24);
+  display: flex;
+  flex-direction: column;
+
+  .service-detail__text {
+    margin: 0;
+  }
+}
+
+.service-detail .btn-more--service {
+  margin-top: rem(24);
+  gap: rem(40);
+  padding: rem(2) rem(2) rem(2) rem(26);
+}
+
+.service-detail .btn-more--service .btn-more__label {
+  font-size: rem(14);
+  line-height: calc(22.4 / 14);
+  letter-spacing: rem(1.4);
+}
+
+.service-detail .btn-more--service .btn-more__icon {
+  width: rem(48);
+  height: rem(48);
+}
+
+.service-detail__figure {
+  flex: 1 1 rem(528);
+  min-width: 0;
+  max-width: rem(528);
+  margin: 0;
+  aspect-ratio: 528 / 330;
+  overflow: hidden;
+  border-radius: rem(2);
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Effects (導入の効果)
+// ---------------------------------------------------------------------------
+
+.service-detail__effects {
+  margin-top: rem(80);
+  width: 100%;
+  max-width: rem(1120);
+  border-bottom: rem(2) solid var(--color-border);
+}
+
+.service-effects__heading {
+  position: relative;
+  text-align: center;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: rem(2);
+    background: var(--color-border);
+    transform: translateY(-50%);
+  }
+}
+
+.service-effects__title {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  padding: 0 rem(12);
+  background: var(--color-white);
+  font-size: rem(24);
+  font-weight: 600;
+  line-height: calc(43.2 / 24);
+  letter-spacing: rem(2.4);
+  color: var(--color-text);
+}
+
+.service-effects__list {
+  margin: rem(16) 0 0;
+  padding: 0 0 rem(50);
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.service-effects__item {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.service-effect-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: rem(32);
+  text-align: center;
+}
+
+.service-effect-card__num {
+  margin: 0;
+  font-size: rem(24);
+  font-weight: 500;
+  line-height: calc(28.8 / 24);
+  letter-spacing: rem(1.2);
+  color: var(--color-accent-orange);
+}
+
+.service-effect-card__title {
+  margin: rem(24) 0 0;
+  min-height: rem(80);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: rem(20);
+  font-weight: 600;
+  line-height: calc(28 / 20);
+  letter-spacing: rem(2);
+  color: var(--color-text);
+}
+
+.service-effect-card__text {
+  margin: rem(24) 0 0;
+  max-width: rem(310);
+  align-self: flex-start;
+  text-align: left;
+  font-size: rem(14);
+  font-weight: 500;
+  line-height: calc(25.2 / 14);
+  letter-spacing: rem(1.4);
+  color: var(--color-text);
+}
+
+// ---------------------------------------------------------------------------
+// Voice (導入の声)
+// ---------------------------------------------------------------------------
+
+.service-detail__voice {
+  @include fluid-pc-range(padding-bottom, 80, 80, $max-vw: 1905);
+  @include fluid-sp-range(padding-bottom, 48, 80);
+}
+
+.service-voice {
+  display: flex;
+  justify-content: center;
+  padding-left: rem(32);
+  padding-right: rem(32);
+  box-sizing: border-box;
+}
+
+.service-voice__card {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: rem(960);
+  padding: rem(32) rem(48);
+  border-radius: rem(16);
+  background: var(--color-bg-light);
+  text-decoration: none;
+  color: inherit;
+  box-sizing: border-box;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.service-voice__badge {
+  position: absolute;
+  top: 0;
+  left: rem(24);
+  padding: rem(4) rem(16);
+  border-radius: 0 0 rem(8) rem(8);
+  background: var(--color-primary);
+  font-size: rem(18);
+  font-weight: 700;
+  line-height: calc(30.6 / 18);
+  letter-spacing: rem(1.8);
+  color: var(--color-white);
+}
+
+.service-voice__layout {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: rem(64);
+}
+
+.service-voice__figure {
+  flex: 0 0 rem(400);
+  width: rem(400);
+  max-width: 100%;
+  aspect-ratio: 400 / 240;
+  border-radius: rem(8);
+  overflow: hidden;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.service-voice__content {
+  flex: 1 1 rem(400);
+  min-width: 0;
+  max-width: rem(400);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.service-voice__title {
+  display: block;
+  width: 100%;
+  font-size: rem(18);
+  font-weight: 600;
+  line-height: calc(30.6 / 18);
+  letter-spacing: rem(1.8);
+  color: var(--color-text);
+}
+
+.service-voice__excerpt {
+  display: block;
+  margin-top: rem(16);
+  width: 100%;
+  font-size: rem(14);
+  font-weight: 500;
+  line-height: calc(25.2 / 14);
+  letter-spacing: rem(1.4);
+  color: var(--color-text-muted);
+}
+
+.service-voice__link {
+  display: inline-flex;
+  align-items: center;
+  gap: rem(16);
+  margin-top: rem(32);
+  font-size: rem(15);
+  font-weight: 600;
+  line-height: calc(25.5 / 15);
+  letter-spacing: rem(1.5);
+  color: var(--color-text);
+
+  .material-icons {
+    font-size: rem(24);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Responsive
+// ---------------------------------------------------------------------------
+
+@include mq {
+  .service-detail__layout {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .service-detail__content,
+  .service-detail__figure {
+    flex: none;
+    max-width: none;
+    width: 100%;
+  }
+
+  .service-effects__list {
+    flex-direction: column;
+  }
+
+  .service-effect-card__title {
+    min-height: 0;
+  }
+
+  .service-voice__layout {
+    flex-direction: column;
+    gap: rem(32);
+  }
+
+  .service-voice__figure {
+    flex: none;
+    width: 100%;
+  }
+
+  .service-voice__content {
+    max-width: none;
+    align-items: flex-start;
+  }
+
+  .service-voice__card {
+    padding: rem(32) rem(24);
+  }
+}
+
+@include mq-top-pc-narrow {
+  .service-detail__content,
+  .service-detail__figure {
+    flex: 528 1 0;
+    width: auto;
+    max-width: none;
+  }
+}

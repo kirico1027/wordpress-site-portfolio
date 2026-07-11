@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    @@include('partials/head.html', { "title": "サービス | BizLife" })
+  </head>
+  <body>
+    @@include('partials/header.html')
+
+    <!-- WP: page-service.php / 固定ページ Service -->
+    <main class="service-page">
+      @@include('partials/page-hero.html', {
+        "heroModifier": "page-hero--light",
+        "heroHeadingId": "service-hero-heading",
+        "heroTitleEn": "Service",
+        "heroTitleJa": "私たちが提供するサービス",
+        "heroImgSrc": ""
+      })
+
+      <section class="service-intro" aria-label="サービス紹介">
+        <div class="container service-intro__inner">
+          <p class="service-intro__text">Biz Lifeでは現代のテクノロジーとライフスタイルに即した福利厚生プログラムとして、<br class="service-intro__br" />社員の悩みや不安に寄り添い、健康で幸せな職場環境を構築します。</p>
+        </div>
+      </section>
+
+      <!-- Service 01 -->
+      <article class="service-detail service-detail--first" aria-labelledby="service-detail-01-heading">
+        <div class="container service-detail__inner">
+          <div class="service-detail__layout">
+            <div class="service-detail__content">
+              <div class="service-detail__head">
+                <p class="service-detail__num">01</p>
+                <h2 id="service-detail-01-heading" class="service-detail__title">みんなの福利厚生クラウド</h2>
+              </div>
+              <p class="service-detail__text">みんなの福利厚生クラウドでは、社員がデジタルストレスやデバイスの過剰使用による影響を軽減するための支援が提供されます。具体的には、定期的なデジタル断食やストレス管理プログラムを通じて、社員がリラックスする時間を確保し、健康でバランスの取れたデジタルライフを実現できます。</p>
+              @@include('partials/sections/btn-more.html', { "modifier": "btn-more--service", "href": "#", "label": "サービスサイト" })
+            </div>
+            <figure class="service-detail__figure">
+              <img src="./public/assets/img/service/service_01.svg" alt="" width="528" height="330" loading="lazy" />
+            </figure>
+          </div>
+
+          <div class="service-detail__effects service-effects">
+            <div class="service-effects__heading">
+              <h3 class="service-effects__title">導入の効果</h3>
+            </div>
+            <ul class="service-effects__list">
+              <li class="service-effects__item service-effect-card">
+                <p class="service-effect-card__num">01</p>
+                <h4 class="service-effect-card__title">ストレス軽減と心理的な<br />健康の促進</h4>
+                <p class="service-effect-card__text">社員のデジタルストレスを軽減し、心理的な健康を支援します。定期的なデジタルデトックスやストレス管理プログラムにより、従業員のメンタルヘルスが向上します。</p>
+              </li>
+              <li class="service-effects__item service-effect-card">
+                <p class="service-effect-card__num">02</p>
+                <h4 class="service-effect-card__title">生産性と集中力の<br />向上</h4>
+                <p class="service-effect-card__text">プログラムの活用により、社員の生産性と集中力が向上します。デジタルデトックスやストレス管理の取り組みで、より集中でき、業務を効率的にこなせるようになります。</p>
+              </li>
+              <li class="service-effects__item service-effect-card">
+                <p class="service-effect-card__num">03</p>
+                <h4 class="service-effect-card__title">健康的な<br />デジタルライフの促進</h4>
+                <p class="service-effect-card__text">社員の健康的なデジタルライフを支援します。プログラムに参加することで、社員はデジタルデバイスの適切な使用方法を学び、生活の質を向上させることができます。</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="service-detail__voice service-voice">
+          <a class="service-voice__card" href="#">
+            <span class="service-voice__badge">導入の声</span>
+            <span class="service-voice__layout">
+              <span class="service-voice__figure">
+                <img src="./public/assets/img/service/voice_01.png" alt="" width="400" height="240" loading="lazy" />
+              </span>
+              <span class="service-voice__content">
+                <span class="service-voice__title">内部崩壊しかけていた弊社を救うきっかけになった「福利厚生」の話</span>
+                <span class="service-voice__excerpt">BizLifeとの出会いは、従業員のメンタルヘルスを重視する企業として知られるようになったからです。Q まずは、BizLifeにお声がけいただいた経緯をお聞かせ...</span>
+                <span class="service-voice__link">詳しくはこちら<span class="material-icons" aria-hidden="true">keyboard_arrow_right</span></span>
+              </span>
+            </span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Service 02 -->
+      <article class="service-detail" aria-labelledby="service-detail-02-heading">
+        <div class="container service-detail__inner">
+          <div class="service-detail__layout service-detail__layout--reverse">
+            <div class="service-detail__content">
+              <div class="service-detail__head">
+                <p class="service-detail__num">02</p>
+                <h2 id="service-detail-02-heading" class="service-detail__title">つながるワークフロー</h2>
+              </div>
+              <div class="service-detail__body">
+                <p class="service-detail__text">効率的なワークフロー支援は、従業員が効果的にタスクを管理し、仕事を効率的に遂行できるように支援します。</p>
+                <p class="service-detail__text">重要なタスクの優先順位付けや時間の使い方を学び、効率的なスケジュールを作成する方法を身につけます。また、ワークフロー改善や効率化のコンサルティングも提供し、より効果的に業務を遂行できるようサポートします。</p>
+              </div>
+              @@include('partials/sections/btn-more.html', { "modifier": "btn-more--service", "href": "#", "label": "サービスサイト" })
+            </div>
+            <figure class="service-detail__figure">
+              <img src="./public/assets/img/service/service_02.svg" alt="" width="528" height="330" loading="lazy" />
+            </figure>
+          </div>
+
+          <div class="service-detail__effects service-effects">
+            <div class="service-effects__heading">
+              <h3 class="service-effects__title">導入の効果</h3>
+            </div>
+            <ul class="service-effects__list">
+              <li class="service-effects__item service-effect-card">
+                <p class="service-effect-card__num">01</p>
+                <h4 class="service-effect-card__title">ストレス軽減と<br />作業効率の向上</h4>
+                <p class="service-effect-card__text">プログラムの活用により、従業員の生産性と集中力が向上します。デジタルデトックスやストレス管理の取り組みで、仕事により集中でき、業務を効率的にこなせるようになります。</p>
+              </li>
+              <li class="service-effects__item service-effect-card">
+                <p class="service-effect-card__num">02</p>
+                <h4 class="service-effect-card__title">コラボレーションと<br />チームワークの促進</h4>
+                <p class="service-effect-card__text">適切なツールやプロセスの導入により、従業員はより効果的に情報を共有し、これにより従業員は協力して仕事を進めることができ、チーム全体のパフォーマンスが向上します。</p>
+              </li>
+              <li class="service-effects__item service-effect-card">
+                <p class="service-effect-card__num">03</p>
+                <h4 class="service-effect-card__title">自己成長と<br />スキルアップの機会の提供</h4>
+                <p class="service-effect-card__text">従業員は新しいツールやプロセスを学び、自分の能力を向上させることができます。これにより、従業員は自己成長の機会を享受し、キャリアの発展を図ることができます。</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="service-detail__voice service-voice">
+          <a class="service-voice__card" href="#">
+            <span class="service-voice__badge">導入の声</span>
+            <span class="service-voice__layout">
+              <span class="service-voice__figure">
+                <img src="./public/assets/img/service/voice_02.png" alt="" width="400" height="240" loading="lazy" />
+              </span>
+              <span class="service-voice__content">
+                <span class="service-voice__title">従業員の悩みや不安に本気で向き合うことで会社全体の『人』に対する考え方が変わった</span>
+                <span class="service-voice__excerpt">BizLifeとの出会いは、従業員のメンタルヘルスを重視する企業として知られるようになったからです。Q まずは、BizLifeにお声がけいただいた経緯をお聞かせ...</span>
+                <span class="service-voice__link">詳しくはこちら<span class="material-icons" aria-hidden="true">keyboard_arrow_right</span></span>
+              </span>
+            </span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Service 03 -->
+      <article class="service-detail service-detail--last" aria-labelledby="service-detail-03-heading">
+        <div class="container service-detail__inner">
+          <div class="service-detail__layout">
+            <div class="service-detail__content">
+              <div class="service-detail__head">
+                <p class="service-detail__num">03</p>
+                <h2 id="service-detail-03-heading" class="service-detail__title">あなたのメンタルコーチ</h2>
+              </div>
+              <div class="service-detail__body">
+                <p class="service-detail__text">オンラインカウンセリングやストレス管理コースの提供を行います。従業員は、自宅やオフィスからオンラインで心理カウンセラーとのセッションを予約し、ストレスや不安に対処する方法を学ぶことができます。</p>
+                <p class="service-detail__text">また、リラクゼーションアプリなどのデジタルツールも利用可能で、従業員は日常生活でのストレス管理に役立つリソースを活用できます。</p>
+              </div>
+              @@include('partials/sections/btn-more.html', { "modifier": "btn-more--service", "href": "#", "label": "サービスサイト" })
+            </div>
+            <figure class="service-detail__figure">
+              <img src="./public/assets/img/service/service_03.svg" alt="" width="528" height="330" loading="lazy" />
+            </figure>
+          </div>
+
+          <div class="service-detail__effects service-effects">
+            <div class="service-effects__heading">
+              <h3 class="service-effects__title">導入の効果</h3>
+            </div>
+            <ul class="service-effects__list">
+              <li class="service-effects__item service-effect-card">
+                <p class="service-effect-card__num">01</p>
+                <h4 class="service-effect-card__title">ストレスへの適切な<br />対処法の習得</h4>
+                <p class="service-effect-card__text">従業員がストレスや不安などの心理的な課題に適切に対処する方法を学ぶ機会を提供します。日常生活や仕事でのストレスに対処する能力を向上させることができます。</p>
+              </li>
+              <li class="service-effects__item service-effect-card">
+                <p class="service-effect-card__num">02</p>
+                <h4 class="service-effect-card__title">心理的な強さと<br />レジリエンスの向上</h4>
+                <p class="service-effect-card__text">困難な状況に対処するための精神的な強さを養います。これにより、ストレスや挑戦に対処する能力が向上し、ポジティブな心理的な状態を維持することができます。</p>
+              </li>
+              <li class="service-effects__item service-effect-card">
+                <p class="service-effect-card__num">03</p>
+                <h4 class="service-effect-card__title">ワーク・ライフ・バランスの<br />改善</h4>
+                <p class="service-effect-card__text">従業員はワーク・ライフ・バランスを改善し、より充実した生活を送ることができます。仕事やプライベートの両方でより良いパフォーマンスを発揮し、生活の満足度が向上します。</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="service-detail__voice service-voice">
+          <a class="service-voice__card" href="#">
+            <span class="service-voice__badge">導入の声</span>
+            <span class="service-voice__layout">
+              <span class="service-voice__figure">
+                <img src="./public/assets/img/service/voice_03.png" alt="" width="400" height="240" loading="lazy" />
+              </span>
+              <span class="service-voice__content">
+                <span class="service-voice__title">従業員満足度が前年比200％Up！「従業員」の本質を語れるBiz Lifeのサービス</span>
+                <span class="service-voice__excerpt">BizLifeとの出会いは、従業員のメンタルヘルスを重視する企業として知られるようになったからです。Q まずは、BizLifeにお声がけいただいた経緯をお聞かせ...</span>
+                <span class="service-voice__link">詳しくはこちら<span class="material-icons" aria-hidden="true">keyboard_arrow_right</span></span>
+              </span>
+            </span>
+          </a>
+        </div>
+      </article>
+
+      @@include('partials/sections/cta-contact.html')
+    </main>
+
+    @@include('partials/footer.html')
+    <script src="./public/assets/js/script.js?v=17"></script>
+  </body>
+</html>

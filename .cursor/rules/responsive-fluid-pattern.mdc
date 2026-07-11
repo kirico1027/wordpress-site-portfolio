@@ -6,7 +6,7 @@ alwaysApply: true
 
 # レスポンシブ・fluid 実装 API（汎用）
 
-**工程**: `responsive-build-workflow.mdc`。**数値**: 各サイトの `site-layout-tokens.mdc`。
+**工程**: `responsive-build-workflow.mdc`。**数値・サイト固有の例**: 各プロジェクトの `site-layout-tokens.mdc`。
 
 ## 第一選択: 幅基準点間の線形補間
 
@@ -29,12 +29,12 @@ alwaysApply: true
 **768px 端 ≠ カンプ値** — タイポ（ベースにカンプ `rem()`、SP のみ mq 内）:
 
 ```scss
-.about-purpose__title {
-  font-size: rem(40); // カンプ固定（1184px+）
+.block__title {
+  font-size: rem($comp-px); // カンプ固定
 }
 @include mq {
-  .about-purpose__title {
-    @include fluid-sp-range(font-size, 25, 35); // 375→768
+  .block__title {
+    @include fluid-sp-range(font-size, $sp-min-px, $sp-max-px);
   }
 }
 ```
@@ -42,12 +42,12 @@ alwaysApply: true
 **768 端 ≠ カンプ値** — 余白・margin（ベース PC、SP は mq 内）:
 
 ```scss
-.about-gallery {
-  @include fluid-pc-range(margin-top, 60, 120); // 769→1184（カンプ 120）
+.block__section {
+  @include fluid-pc-range(margin-top, $pc-min-px, $comp-px);
 }
 @include mq {
-  .about-gallery {
-    @include fluid-sp-range(margin-top, 30, 60); // 375→768
+  .block__section {
+    @include fluid-sp-range(margin-top, $sp-min-px, $sp-max-px);
   }
 }
 ```
@@ -58,10 +58,10 @@ alwaysApply: true
 
 - **769px 幅の修正** = `fluid-pc-range` の **第2引数**（`min-width: 769px` の clamp min）
 - ベースセレクタに `@include fluid-pc-range(...)` を書く（`@include mq` 内だけに書かない）
-- **769〜1183px のみ**（カンプ 1184px+ 不変）→ `@include mq-top-pc-narrow { ... }`
+- **769〜コンテナ最大の手前まで**（カンプ不変）→ サイトの狭い PC 帯用 mq（本サイト: `@include mq-top-pc-narrow { ... }`）
 
 ```scss
-@include fluid-pc-range(font-size, 30, 40); // 769px: 30 → 1184px: 40
+@include fluid-pc-range(font-size, $pc-min-px, $comp-px);
 ```
 
 ## 禁止（同一プロパティ）
@@ -69,11 +69,46 @@ alwaysApply: true
 - ベースに **`fluid-sp-range` のみ**
 - ベースに **`fluid-pc-range` + `fluid-sp-range` を併記**（SP は必ず `@include mq` 内へ）
 
-### 1184 とカンプ幅の関係
+### `$max-vw` の使い分け（汎用）
 
-- **`fluid-pc-range` の `$max-vw` デフォルト** = サイトのコンテナ最大（本サイト `1184`）
-- **1184 以降〜カンプ幅**は clamp の max で**固定**（追加の vw 伸びなし）
-- カンプ端で別値にしたいときだけ **`$max-vw: カンプ幅`**（例: 1905）
+`fluid-pc-range` の第4引数 `$max-vw` は **clamp が線形補間する上限のビューポート幅**。
+
+| 種類 | いつ使う |
+|------|---------|
+| **コンテナ最大（デフォルト）** | タイポ・2カラム gap・カード幅・padding-inline など **コンテナ内**のプロパティ |
+| **カンプ幅** | セクション外周・ヒーロー帯など **コンテナを超えてカンプ端まで**伸ばす余白 |
+
+- **迷ったらコンテナ最大**。カンプ外周だけカンプ幅を渡す。
+- **各サイトの具体値・要素別の選択**は `site-layout-tokens.mdc` を正とする。
+
+### 狭い2カラム（769〜コンテナ最大の手前）— flex 比率維持
+
+固定幅の合計がコンテナ内に収まらないとき、**狭い PC 帯用 mq 内**でカンプ比率を flex に置き換える。gap は **`fluid-pc-range`**（769→コンテナ最大）。**コンテナ最大以上はカンプ固定幅のまま**。
+
+```scss
+@include mq-narrow-pc { // サイトごとのミキシン名に読み替え
+  .block__content {
+    flex: $left-comp-px 1 0;
+    width: auto;
+    max-width: none;
+  }
+  .block__visual {
+    flex: $right-comp-px 1 0;
+    width: auto;
+    max-width: none;
+  }
+  // ビジュアル縮小が必要ならサイト用 scale mixin を呼ぶ
+}
+```
+
+- 比率は **カンプの左右 px 比**
+- **本サイトの実装例**（Purpose 550:538 等）は `site-layout-tokens.mdc`「狭い2カラム」を参照
+
+### コンテナ最大とカンプ幅の関係
+
+- **`fluid-pc-range` の `$max-vw` デフォルト** = サイトのコンテナ最大
+- **コンテナ最大以降〜カンプ幅**は clamp の max で**固定**（追加の vw 伸びなし）
+- カンプ端で別値にしたいときだけ **`$max-vw: カンプ幅`**
 
 ## 補助: `fluid-spacing`（vw 中央項）
 
@@ -88,17 +123,12 @@ alwaysApply: true
 
 ## コンテナ系の二系統（混同しない）
 
-| クラス | 用途 | 定義 |
-|--------|------|------|
-| `.container` | トップ等の標準コンテナ | `src/sass/layout/_container.scss` + ページ別上書き |
-| `.l-inset-comp-1920` | Safari 向け採用ページ等 | `_container.scss`（別カンプ系） |
+| クラス | 用途 |
+|--------|------|
+| `.container` | 標準コンテナ（サイトごとに定義が異なる） |
+| サイト固有の inset クラス | 別カンプ系ページ用（例: `.l-inset-comp-1920`） |
 
-**サイトごとにどちらを正とするか**は `site-layout-tokens.mdc` に書く。
-
-### ページ共通 `.container` 上書き（本サイト）
-
-- About 下層: `@include mq-hero-pc` 内の **`.about-page .container:not(...)`** が、ヒーロー等の **`.page-hero__inner.container`** と競合しうる
-- 個別ブロックは **`:not(.page-hero__inner)` 等で除外**するか、コンポーネント側で **詳細度を上げる**（`responsive-build-workflow.mdc`「詳細度・ページ上書き」）
+**どちらを正とするか・ページ別上書き**は `site-layout-tokens.mdc` に書く。
 
 ## やらないこと
 

@@ -28,23 +28,23 @@ alwaysApply: true
 2. **大きな見出し** … **カンプ幅 = ベース固定 `rem()`**。**SP 帯**（768 端 ≠ カンプ値）は **`@include mq` + `fluid-sp-range`**。**PC 帯**（769 〜 コンテナ最大で値が変わる）は **`fluid-pc-range`**（`responsive-fluid-pattern.mdc`）
 
 ```scss
-// ✅ SP 端 ≠ カンプ値の大見出し（工程④ — about-purpose__title 等）
-.about-purpose__title {
-  font-size: rem(40); // カンプ固定
+// ✅ SP 端 ≠ カンプ値の大見出し（工程④）
+.block__title {
+  font-size: rem($comp-px);
 }
 @include mq {
-  .about-purpose__title {
-    @include fluid-sp-range(font-size, 25, 38);
+  .block__title {
+    @include fluid-sp-range(font-size, $sp-min-px, $sp-max-px);
   }
 }
 
-// ✅ PC 帯でも 769→1184 でサイズが変わる大見出し（工程⑤）
-.hero__title {
-  font-size: rem(48); // カンプ固定
+// ✅ PC 帯でも 769→コンテナ最大でサイズが変わる大見出し（工程⑤）
+.block__hero-title {
+  font-size: rem($comp-px);
 }
 @include mq-hero-pc {
-  .hero__title {
-    @include fluid-pc-range(font-size, 30, 48);
+  .block__hero-title {
+    @include fluid-pc-range(font-size, $pc-min-px, $comp-px);
   }
 }
 
