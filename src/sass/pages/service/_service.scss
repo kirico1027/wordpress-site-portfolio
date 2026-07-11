@@ -49,12 +49,16 @@
 
 .service-detail--first .service-detail__inner {
   @include fluid-pc-range(padding-top, 96, 96, $max-vw: 1905);
-  @include fluid-sp-range(padding-top, 64, 96);
+  @include fluid-sp-range(padding-top, 64, 70);
+}
+
+.service-detail:not(.service-detail--first) .service-detail__inner {
+  @include fluid-sp-range(padding-top, 0, 0);
 }
 
 .service-detail--last .service-detail__voice {
   @include fluid-pc-range(padding-bottom, 160, 160, $max-vw: 1905);
-  @include fluid-sp-range(padding-bottom, 28, 160);
+  @include fluid-sp-range(padding-bottom, 28, 60);
 }
 
 .service-detail__layout {
@@ -381,7 +385,7 @@
 
 @include mq {
   .service-detail__title {
-    font-size: rem(25);
+    @include fluid-sp-range(font-size, 25, 30);
     letter-spacing: rem(2);
   }
 
@@ -399,6 +403,13 @@
 
   .service-effects__list {
     flex-direction: column;
+    align-items: center;
+  }
+
+  .service-effects__item {
+    flex: none;
+    width: fit-content;
+    max-width: 100%;
   }
 
   .service-effect-card {
