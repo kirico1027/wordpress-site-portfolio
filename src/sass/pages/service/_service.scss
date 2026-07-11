@@ -54,7 +54,7 @@
 
 .service-detail--last .service-detail__voice {
   @include fluid-pc-range(padding-bottom, 160, 160, $max-vw: 1905);
-  @include fluid-sp-range(padding-bottom, 80, 160);
+  @include fluid-sp-range(padding-bottom, 28, 160);
 }
 
 .service-detail__layout {
@@ -262,7 +262,7 @@
 
 .service-detail__voice {
   @include fluid-pc-range(padding-bottom, 80, 80, $max-vw: 1905);
-  @include fluid-sp-range(padding-bottom, 48, 80);
+  @include fluid-sp-range(padding-bottom, 28, 80);
 }
 
 .service-voice {
@@ -380,6 +380,11 @@
 // ---------------------------------------------------------------------------
 
 @include mq {
+  .service-detail__title {
+    font-size: rem(25);
+    letter-spacing: rem(2);
+  }
+
   .service-detail__layout {
     flex-direction: column;
     align-items: stretch;
@@ -394,6 +399,10 @@
 
   .service-effects__list {
     flex-direction: column;
+  }
+
+  .service-effect-card {
+    padding-inline: rem(24);
   }
 
   .service-effect-card__title {
@@ -411,6 +420,8 @@
   }
 
   .service-voice__content {
+    flex: none;
+    width: 100%;
     max-width: none;
     align-items: flex-start;
   }
