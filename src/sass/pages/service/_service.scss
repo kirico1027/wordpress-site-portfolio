@@ -67,8 +67,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  @include fluid-pc-range(gap, 32, 64);
-  @include fluid-sp-range(gap, 32, 64);
+  @include fluid-pc-range(gap, 24, 64);
 }
 
 .service-detail__layout--reverse {
@@ -223,6 +222,7 @@
   flex-direction: column;
   align-items: center;
   padding: rem(32);
+  @include fluid-pc-range(padding-inline, 15, 32);
   text-align: center;
 }
 
@@ -314,7 +314,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: rem(64);
+  @include fluid-pc-range(gap, 40, 64);
 }
 
 .service-voice__figure {
@@ -392,6 +392,7 @@
   .service-detail__layout {
     flex-direction: column;
     align-items: stretch;
+    @include fluid-sp-range(gap, 32, 64);
   }
 
   .service-detail__content,
@@ -446,6 +447,13 @@
   .service-detail__content,
   .service-detail__figure {
     flex: 528 1 0;
+    width: auto;
+    max-width: none;
+  }
+
+  .service-voice__figure,
+  .service-voice__content {
+    flex: 400 1 0;
     width: auto;
     max-width: none;
   }
