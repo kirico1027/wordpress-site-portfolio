@@ -1,0 +1,12 @@
+{
+  "source": "get_design_context",
+  "nodeId": "1:2024",
+  "fetchedAt": "2026-07-12T23:48:00+09:00",
+  "page": "recruit",
+  "section": "full-page",
+  "data": {
+    "pageTitle": "Recruit",
+    "pageTitleJa": "採用情報",
+    "sections": ["intro", "culture", "welfare", "member", "jobs", "flow", "entry"]
+  }
+}

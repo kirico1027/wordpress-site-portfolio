@@ -1,0 +1,37 @@
+{
+  "source": "get_design_context",
+  "nodeId": "1:1672",
+  "fetchedAt": "2026-07-12T15:29:00+09:00",
+  "page": "works-archive",
+  "section": "full-page",
+  "data": {
+    "pageTitle": "Works / 実績紹介",
+    "filters": ["すべて", "あなたのメンタルコーチ", "つながるワークフロー", "みんなの福利厚生クラウド"],
+    "cards": [
+      {
+        "company": "株式会社giraffe",
+        "title": "意地でも従業員満足度を高めたかった。とことん向き合うことで見えたこれからの福利厚生",
+        "tags": ["つながるワークフロー", "あなたのメンタルコーチ"],
+        "image": "works_01.png"
+      },
+      {
+        "company": "株式会社Rabbit",
+        "title": "従業員満足度が前年比200％Up！「従業員」の本質を語れるBiz Lifeのサービス",
+        "tags": ["つながるワークフロー", "みんなの福利厚生クラウド"],
+        "image": "works_02.png"
+      },
+      {
+        "company": "株式会社turtle",
+        "title": "これはただの福利厚生ではないと確信。これからより求められる働き方だと感じた",
+        "tags": ["つながるワークフロー"],
+        "image": "works_03.png"
+      },
+      {
+        "company": "株式会社monkey",
+        "title": "内部崩壊しかけていた弊社を救うきっかけになった「福利厚生」の話",
+        "tags": ["あなたのメンタルコーチ"],
+        "image": "works_04.png"
+      }
+    ]
+  }
+}

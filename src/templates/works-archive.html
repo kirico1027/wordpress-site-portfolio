@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    @@include('partials/head.html', { "title": "実績紹介 | BizLife" })
+  </head>
+  <body>
+    @@include('partials/header.html')
+
+    <!-- WP: archive-works.php / CPT works アーカイブ -->
+    <main class="works-archive-page">
+      @@include('partials/page-hero.html', {
+        "heroModifier": "page-hero--light",
+        "heroHeadingId": "works-hero-heading",
+        "heroTitleEn": "Works",
+        "heroTitleJa": "実績紹介",
+        "heroImgSrc": ""
+      })
+
+      <section class="works-archive" aria-label="実績一覧">
+        <div class="container works-archive__inner">
+          <nav class="works-archive__filters" aria-label="カテゴリフィルター">
+            <a class="works-archive__filter works-archive__filter--active" href="./works-archive.html" aria-current="page">すべて</a>
+            <ul class="works-archive__filter-list">
+              <li class="works-archive__filter-item">
+                <a class="works-archive__filter" href="#">あなたのメンタルコーチ</a>
+              </li>
+              <li class="works-archive__filter-item">
+                <a class="works-archive__filter" href="#">つながるワークフロー</a>
+              </li>
+              <li class="works-archive__filter-item">
+                <a class="works-archive__filter" href="#">みんなの福利厚生クラウド</a>
+              </li>
+            </ul>
+          </nav>
+
+          <div class="works-archive__grid">
+            @@include('partials/cards/works-card.html', {
+              "href": "./works-single.html",
+              "thumbnail": "./public/assets/img/works/works_01.png",
+              "tags": "<li class=\"works-card__tag\"># つながるワークフロー</li><li class=\"works-card__tag\"># あなたのメンタルコーチ</li>",
+              "title": "意地でも従業員満足度を高めたかった。とことん向き合うことで見えたこれからの福利厚生",
+              "company": "株式会社giraffe"
+            })
+            @@include('partials/cards/works-card.html', {
+              "href": "./works-single.html",
+              "thumbnail": "./public/assets/img/works/works_02.png",
+              "tags": "<li class=\"works-card__tag\"># つながるワークフロー</li><li class=\"works-card__tag\"># みんなの福利厚生クラウド</li>",
+              "title": "従業員満足度が前年比200％Up！「従業員」の本質を語れるBiz Lifeのサービス",
+              "company": "株式会社Rabbit"
+            })
+            @@include('partials/cards/works-card.html', {
+              "href": "./works-single.html",
+              "thumbnail": "./public/assets/img/works/works_03.png",
+              "tags": "<li class=\"works-card__tag\"># つながるワークフロー</li>",
+              "title": "これはただの福利厚生ではないと確信。これからより求められる働き方だと感じた",
+              "company": "株式会社turtle"
+            })
+            @@include('partials/cards/works-card.html', {
+              "href": "./works-single.html",
+              "thumbnail": "./public/assets/img/works/works_04.png",
+              "tags": "<li class=\"works-card__tag\"># あなたのメンタルコーチ</li>",
+              "title": "内部崩壊しかけていた弊社を救うきっかけになった「福利厚生」の話",
+              "company": "株式会社monkey"
+            })
+          </div>
+
+          <div class="works-archive__more-wrap">
+            <button class="works-archive__more" type="button">
+              <span class="works-archive__more-label">もっと見る</span>
+              <span class="works-archive__more-icon" aria-hidden="true"><span class="material-icons">keyboard_arrow_down</span></span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      @@include('partials/sections/cta-contact.html')
+    </main>
+
+    @@include('partials/footer.html')
+    <script src="./public/assets/js/script.js?v=17"></script>
+  </body>
+</html>
