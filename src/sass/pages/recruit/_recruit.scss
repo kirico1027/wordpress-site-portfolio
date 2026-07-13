@@ -672,8 +672,8 @@
   }
 
   .recruit-intro__title {
-    @include fluid-sp-range(font-size, 25, 28);
-    line-height: calc(42 / 28);
+    @include fluid-sp-range(font-size, 25, 32);
+    line-height: calc(48 / 32);
     letter-spacing: rem(3.5);
     text-align: left;
   }
@@ -693,13 +693,13 @@
   }
 
   .recruit-section-head__title {
-    font-size: rem(24);
-    line-height: calc(33.6 / 24);
+    @include fluid-sp-range(font-size, 24, 28);
+    line-height: calc(39.2 / 28);
     letter-spacing: rem(2.4);
   }
 
   .recruit-culture__inner {
-    padding-top: rem(50);
+    padding-top: rem(60);
     padding-bottom: rem(10);
   }
 
@@ -728,7 +728,13 @@
   }
 
   .recruit-welfare__inner {
+    padding-top: rem(60);
     padding-bottom: rem(10);
+  }
+
+  .recruit-member__inner {
+    padding-top: rem(60);
+    padding-bottom: rem(60);
   }
 
   .recruit-member__list {
@@ -736,8 +742,18 @@
     gap: rem(40) rem(32);
   }
 
+  .recruit-jobs__inner {
+    padding-top: rem(60);
+    padding-bottom: rem(60);
+  }
+
   .recruit-jobs__grid {
     margin-top: rem(40);
+  }
+
+  .recruit-flow__inner {
+    padding-top: rem(60);
+    padding-bottom: rem(60);
   }
 
   .recruit-flow__steps {
