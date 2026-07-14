@@ -3997,24 +3997,20 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 3rem;
+  padding-top: 5rem;
 }
 @media (min-width: 769px) {
   .recruit-intro__inner {
-    padding-top: clamp(3rem, 3rem + (100vw - 769px) * 32 / 1136, 5rem);
+    padding-top: clamp(5rem, 5rem + (100vw - 769px) * 0 / 1136, 5rem);
   }
 }
 .recruit-intro__inner {
-  padding-bottom: 3rem;
+  padding-bottom: 2.5rem;
 }
 @media (min-width: 769px) {
   .recruit-intro__inner {
-    padding-bottom: clamp(3rem, 3rem + (100vw - 769px) * 32 / 1136, 5rem);
+    padding-bottom: clamp(2.5rem, 2.5rem + (100vw - 769px) * 40 / 1136, 5rem);
   }
-}
-.recruit-intro__inner {
-  padding-top: clamp(2.5rem, 2.5rem + (100vw - 375px) * 40 / 393, 5rem);
-  padding-bottom: clamp(2.5rem, 2.5rem + (100vw - 375px) * 40 / 393, 5rem);
 }
 
 .recruit-intro__head {
@@ -4028,7 +4024,14 @@ body {
 .recruit-intro__title {
   margin: 0;
   max-width: 38.875rem;
-  font-size: 2.5rem;
+  font-size: 2.1875rem;
+}
+@media (min-width: 769px) {
+  .recruit-intro__title {
+    font-size: clamp(2.1875rem, 2.1875rem + (100vw - 769px) * 5 / 415, 2.5rem);
+  }
+}
+.recruit-intro__title {
   font-weight: 700;
   line-height: 1.5;
   letter-spacing: 0.25rem;
@@ -4041,7 +4044,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 38.875rem;
 }
 
 .recruit-intro__text {
@@ -4131,23 +4133,18 @@ body {
   }
 }
 .recruit-culture__inner {
-  padding-bottom: 3rem;
+  padding-bottom: 2.5rem;
 }
 @media (min-width: 769px) {
   .recruit-culture__inner {
-    padding-bottom: clamp(3rem, 3rem + (100vw - 769px) * 32 / 1136, 5rem);
+    padding-bottom: clamp(2.5rem, 2.5rem + (100vw - 769px) * 0 / 1136, 2.5rem);
   }
-}
-.recruit-culture__inner {
-  padding-top: clamp(2.5rem, 2.5rem + (100vw - 375px) * 40 / 393, 5rem);
-  padding-bottom: clamp(2.5rem, 2.5rem + (100vw - 375px) * 40 / 393, 5rem);
 }
 
 .recruit-culture__list {
   margin-top: 4rem;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.5rem;
   width: 100%;
   max-width: 70rem;
@@ -4157,21 +4154,22 @@ body {
 }
 
 .recruit-culture__item {
-  flex: 0 0 22.333rem;
-  width: 22.333rem;
   min-width: 0;
+  height: 100%;
 }
 
 .culture-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 1rem;
+  height: 100%;
   padding: 0 2rem 1.5rem;
   border-radius: 1rem;
   background: var(--color-bg-light);
   overflow: visible;
+  box-sizing: border-box;
 }
 
 .culture-card__num-wrap {
@@ -4217,41 +4215,36 @@ body {
 }
 
 .recruit-welfare__inner {
-  padding-top: 3rem;
+  padding-top: 3.75rem;
 }
 @media (min-width: 769px) {
   .recruit-welfare__inner {
-    padding-top: clamp(3rem, 3rem + (100vw - 769px) * 32 / 1136, 5rem);
+    padding-top: clamp(3.75rem, 3.75rem + (100vw - 769px) * 20 / 1136, 5rem);
   }
 }
 .recruit-welfare__inner {
-  padding-bottom: 3rem;
+  padding-bottom: 0rem;
 }
 @media (min-width: 769px) {
   .recruit-welfare__inner {
-    padding-bottom: clamp(3rem, 3rem + (100vw - 769px) * 32 / 1136, 5rem);
+    padding-bottom: clamp(0rem, 0rem + (100vw - 769px) * 80 / 1136, 5rem);
   }
-}
-.recruit-welfare__inner {
-  padding-top: clamp(2.5rem, 2.5rem + (100vw - 375px) * 40 / 393, 5rem);
-  padding-bottom: clamp(2.5rem, 2.5rem + (100vw - 375px) * 40 / 393, 5rem);
 }
 
 .recruit-welfare__list {
   margin-top: 1.5rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1.5rem;
+  width: 100%;
+  max-width: 70rem;
   margin-inline: 0;
   padding: 0;
   list-style: none;
 }
 
 .recruit-welfare__item {
-  flex: 1 1 13.75rem;
-  min-width: min(100%, 13.75rem);
-  max-width: 16.375rem;
+  min-width: 0;
 }
 
 .welfare-card {
@@ -4320,16 +4313,12 @@ body {
   }
 }
 .recruit-member__inner {
-  padding-bottom: 5rem;
+  padding-bottom: 3.75rem;
 }
 @media (min-width: 769px) {
   .recruit-member__inner {
-    padding-bottom: clamp(5rem, 5rem + (100vw - 769px) * 40 / 1136, 7.5rem);
+    padding-bottom: clamp(3.75rem, 3.75rem + (100vw - 769px) * 60 / 1136, 7.5rem);
   }
-}
-.recruit-member__inner {
-  padding-top: clamp(2.5rem, 2.5rem + (100vw - 375px) * 40 / 393, 5rem);
-  padding-bottom: clamp(3.75rem, 3.75rem + (100vw - 375px) * 60 / 393, 7.5rem);
 }
 
 .recruit-member__list {
@@ -4407,24 +4396,20 @@ body {
 }
 
 .recruit-jobs__inner {
-  padding-top: 5rem;
+  padding-top: 3.75rem;
 }
 @media (min-width: 769px) {
   .recruit-jobs__inner {
-    padding-top: clamp(5rem, 5rem + (100vw - 769px) * 40 / 1136, 7.5rem);
+    padding-top: clamp(3.75rem, 3.75rem + (100vw - 769px) * 60 / 1136, 7.5rem);
   }
 }
 .recruit-jobs__inner {
-  padding-bottom: 5rem;
+  padding-bottom: 3.75rem;
 }
 @media (min-width: 769px) {
   .recruit-jobs__inner {
-    padding-bottom: clamp(5rem, 5rem + (100vw - 769px) * 40 / 1136, 7.5rem);
+    padding-bottom: clamp(3.75rem, 3.75rem + (100vw - 769px) * 60 / 1136, 7.5rem);
   }
-}
-.recruit-jobs__inner {
-  padding-top: clamp(3.75rem, 3.75rem + (100vw - 375px) * 60 / 393, 7.5rem);
-  padding-bottom: clamp(3.75rem, 3.75rem + (100vw - 375px) * 60 / 393, 7.5rem);
 }
 
 .recruit-jobs__grid {
@@ -4520,24 +4505,20 @@ body {
 }
 
 .recruit-flow__inner {
-  padding-top: 5rem;
+  padding-top: 3.75rem;
 }
 @media (min-width: 769px) {
   .recruit-flow__inner {
-    padding-top: clamp(5rem, 5rem + (100vw - 769px) * 40 / 1136, 7.5rem);
+    padding-top: clamp(3.75rem, 3.75rem + (100vw - 769px) * 60 / 1136, 7.5rem);
   }
 }
 .recruit-flow__inner {
-  padding-bottom: 5rem;
+  padding-bottom: 3.75rem;
 }
 @media (min-width: 769px) {
   .recruit-flow__inner {
-    padding-bottom: clamp(5rem, 5rem + (100vw - 769px) * 40 / 1136, 7.5rem);
+    padding-bottom: clamp(3.75rem, 3.75rem + (100vw - 769px) * 60 / 1136, 7.5rem);
   }
-}
-.recruit-flow__inner {
-  padding-top: clamp(3.75rem, 3.75rem + (100vw - 375px) * 60 / 393, 7.5rem);
-  padding-bottom: clamp(3.75rem, 3.75rem + (100vw - 375px) * 60 / 393, 7.5rem);
 }
 
 .recruit-flow__box {
@@ -4692,18 +4673,27 @@ body {
   margin-left: auto;
 }
 
-@media (max-width: 1400px) {
-  .recruit-welfare__item {
-    max-width: none;
+@media (min-width: 769px) and (max-width: 1183px) {
+  .recruit-culture__inner {
+    padding-top: 3.75rem;
+    padding-bottom: 0.625rem;
   }
-}
-@media (max-width: 1400px) {
+  .recruit-culture__list {
+    margin-top: 3.125rem;
+    max-width: none;
+    gap: 3rem;
+    grid-template-columns: 1fr;
+  }
+  .recruit-welfare__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
   .recruit-jobs__grid {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: 1fr;
   }
 }
 @media (max-width: 768px) {
   .recruit-intro__inner {
+    padding-top: clamp(2.5rem, 2.5rem + (100vw - 375px) * 40 / 393, 5rem);
     padding-bottom: 0.625rem;
   }
   .recruit-intro__title {
@@ -4736,10 +4726,7 @@ body {
     margin-top: 3.125rem;
     max-width: none;
     gap: 3rem;
-  }
-  .recruit-culture__item {
-    flex: 1 1 100%;
-    width: 100%;
+    grid-template-columns: 1fr;
   }
   .welfare-card {
     padding-inline: 2rem;
@@ -4750,6 +4737,8 @@ body {
   }
   .recruit-welfare__list {
     margin-top: 2.125rem;
+    max-width: none;
+    grid-template-columns: 1fr;
   }
   .recruit-welfare__inner {
     padding-top: 3.75rem;
@@ -4769,6 +4758,7 @@ body {
   }
   .recruit-jobs__grid {
     margin-top: 2.5rem;
+    grid-template-columns: 1fr;
   }
   .recruit-flow__inner {
     padding-top: 3.75rem;
