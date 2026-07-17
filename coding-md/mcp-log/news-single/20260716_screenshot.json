@@ -1,0 +1,26 @@
+{
+  "source": "get_screenshot + Playwright",
+  "nodeId": "1:3177",
+  "fetchedAt": "2026-07-16T00:20:00+09:00",
+  "page": "news-single",
+  "section": "comparison",
+  "figma": {
+    "fullPage": "1:3177",
+    "main": "1:3229",
+    "article": "1:3250"
+  },
+  "playwright": {
+    "r1": [
+      "coding-md/screenshots/news-single-page_fullpage_pc_20260716_001854.png",
+      "coding-md/screenshots/news-single-page_fullpage_sp_20260716_001854.png",
+      "coding-md/screenshots/news-single-article_pc_20260716_001901.png",
+      "coding-md/screenshots/news-single-breadcrumb_pc_20260716_001903.png"
+    ],
+    "r2": [
+      "coding-md/screenshots/news-single-page-r2_fullpage_pc_20260716_001952.png",
+      "coding-md/screenshots/news-single-page-r2_fullpage_sp_20260716_001952.png",
+      "coding-md/screenshots/news-single-article-r2_pc_20260716_001955.png"
+    ]
+  },
+  "notes": "ラウンド2で SP の戻るボタン gap を調整。PC はパンくず・白カード・本文・btn-more・フッターが Figma と整合。"
+}

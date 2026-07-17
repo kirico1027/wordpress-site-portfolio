@@ -1,0 +1,26 @@
+{
+  "source": "get_screenshot",
+  "nodeId": "1:3957",
+  "fetchedAt": "2026-07-16T10:37:00+09:00",
+  "page": "works-single",
+  "section": "full-page",
+  "comparison": {
+    "round1": {
+      "pc": "coding-md/screenshots/works-single-page_fullpage_pc_20260716_103613.png",
+      "sp": "coding-md/screenshots/works-single-page_fullpage_sp_20260716_103613.png",
+      "fixes": ["pickup tags flex-direction column"]
+    },
+    "round2": {
+      "pc": "coding-md/screenshots/works-single-page-r2_fullpage_pc_20260716_103744.png",
+      "sp": "coding-md/screenshots/works-single-page-r2_fullpage_sp_20260716_103744.png",
+      "pickup": "coding-md/screenshots/works-single-pickup-r2_pc_20260716_103748.png",
+      "article": "coding-md/screenshots/works-single-article-r2_pc_20260716_103750.png"
+    }
+  },
+  "figmaNodes": {
+    "fullPage": "1:3957",
+    "main": "1:4320",
+    "article": "1:4341",
+    "pickup": "1:4478"
+  }
+}

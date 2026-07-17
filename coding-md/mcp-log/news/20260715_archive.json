@@ -1,0 +1,35 @@
+{
+  "source": "get_design_context",
+  "nodeId": "1:3448",
+  "fetchedAt": "2026-07-15T16:52:00+09:00",
+  "page": "news",
+  "section": "archive",
+  "data": {
+    "containerMax": 1184,
+    "paddingInline": 32,
+    "paddingTop": 80,
+    "paddingBottom": 200,
+    "columnGap": 16,
+    "filterColumnWidth": 240,
+    "filterButtonWidth": 160,
+    "filterGap": 8,
+    "filterActiveBg": "#0096df",
+    "filterInactiveBg": "#f9f9f9",
+    "listWidth": 864,
+    "cardGap": 8,
+    "cardPadding": 32,
+    "cardRadius": 16,
+    "cardBg": "#f9f9f9",
+    "dateColor": "#808080",
+    "tagBg": "#ffffff",
+    "tagColor": "#0096df",
+    "filters": ["すべて", "お知らせ", "イベント", "メディア掲載", "採用", "サービス情報", "その他"],
+    "items": [
+      { "date": "2024.3.8", "tag": "採用", "title": "2025年卒 インターンシップ募集開始のお知らせ" },
+      { "date": "2024.3.8", "tag": "お知らせ", "title": "夏季休業のお知らせ" },
+      { "date": "2024.3.1", "tag": "メディア掲載", "title": "イベント出展のお知らせ【2024夏】" },
+      { "date": "2024.3.1", "tag": "お知らせ", "title": "【ご報告】導入社数1000社を突破しました！" },
+      { "date": "2024.3.1", "tag": "お知らせ", "title": "革新的な福利厚生サービスが登場！次世代の完全従業員ファーストの新サービス" }
+    ]
+  }
+}

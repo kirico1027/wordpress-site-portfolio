@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<script>
+  document.documentElement.classList.add("js");
+
+  (function () {
+    var mobileQuery = "(max-width: 768px)";
+
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+
+    function snapMobileBelowTop() {
+      if (!window.matchMedia(mobileQuery).matches) return;
+      if (window.scrollY < 1) {
+        window.scrollTo(0, 1);
+      }
+    }
+
+    snapMobileBelowTop();
+    document.addEventListener("DOMContentLoaded", snapMobileBelowTop);
+    window.addEventListener("pageshow", snapMobileBelowTop);
+    window.addEventListener("load", snapMobileBelowTop);
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", snapMobileBelowTop);
+    }
+  })();
+</script>
+<title>内部崩壊しかけていた弊社を救うきっかけになった「福利厚生」の話 | BizLife</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/brands.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="./public/assets/css/main.css?v=116" />
+
+  </head>
+  <body>
+    <!-- WP: get_header() / template-parts/header.php -->
+<header class="top-header">
+  <div class="top-header__inner">
+    <a class="top-header__logo" href="./index.html"><img src="./public/assets/img/common/logo-header.svg" alt="BizLife" width="104" height="24" /></a>
+    <nav id="top-header-nav" class="top-header__nav" aria-label="メインナビゲーション">
+      <button type="button" class="top-header__drawer-close" aria-label="メニューを閉じる">
+        <span aria-hidden="true">×</span>
+      </button>
+      <a class="top-header__nav-link" href="./about.html"><span class="top-header__nav-link-inner">About</span></a>
+      <a class="top-header__nav-link" href="./service.html"><span class="top-header__nav-link-inner">Service</span></a>
+      <a class="top-header__nav-link" href="./works-archive.html"><span class="top-header__nav-link-inner">Works</span></a>
+      <a class="top-header__nav-link" href="./recruit.html"><span class="top-header__nav-link-inner">Recruit</span></a>
+      <a class="top-header__nav-link" href="./blog-archive.html"><span class="top-header__nav-link-inner">Blog</span></a>
+      <a class="top-header__nav-link top-header__nav-link--contact" href="./contact.html"><span class="top-header__nav-link-inner">Contact</span></a>
+    </nav>
+    <button type="button" class="top-header__menu-toggle" aria-expanded="false" aria-controls="top-header-nav" aria-label="メニューを開く">
+      <span class="top-header__menu-toggle-bar" aria-hidden="true"></span>
+      <span class="top-header__menu-toggle-bar" aria-hidden="true"></span>
+      <span class="top-header__menu-toggle-bar" aria-hidden="true"></span>
+    </button>
+  </div>
+  <div class="top-header__backdrop" aria-hidden="true"></div>
+</header>
+
+
+    <!-- WP: single-works.php / CPT works シングル -->
+    <main class="works-single-page works-single">
+      <div class="works-single__breadcrumb-area">
+        <div class="container works-single__breadcrumb-inner">
+          <nav class="works-single__breadcrumb" aria-label="パンくずリスト">
+            <a class="works-single__breadcrumb-parent" href="./works-archive.html">
+              <span class="works-single__breadcrumb-en">Works</span>
+              <span class="works-single__breadcrumb-ja">実績紹介</span>
+            </a>
+            <span class="works-single__breadcrumb-sep" aria-hidden="true">
+              <span class="material-icons">chevron_right</span>
+            </span>
+            <span class="works-single__breadcrumb-current" aria-current="page">内部崩壊しかけていた弊社を救う...</span>
+          </nav>
+        </div>
+      </div>
+
+      <article class="works-single__article" aria-labelledby="works-single-heading">
+        <div class="container works-single__inner">
+          <div class="works-single__content">
+            <time class="works-single__date" datetime="2024-03-08T15:45">2024/3/8 15:45</time>
+            <h1 id="works-single-heading" class="works-single__title">
+              内部崩壊しかけていた弊社を救うきっかけになった「福利厚生」の話
+            </h1>
+
+            <figure class="works-single__hero">
+              <img
+                src="./public/assets/img/works-single/works-single_01.png"
+                alt=""
+                width="720"
+                height="432"
+              />
+            </figure>
+
+            <div class="works-single__client">
+              <div class="works-single__client-head">
+                <figure class="works-single__client-logo">
+                  <img
+                    src="./public/assets/img/works-single/works-single_02.png"
+                    alt="株式会社monkey"
+                    width="120"
+                    height="60"
+                  />
+                </figure>
+                <p class="works-single__client-name">株式会社monkey</p>
+              </div>
+              <p class="works-single__client-desc">
+                モンキーは、クリエイティブなデザインとブランディングソリューションを提供する会社です。当社のデザインチームは、顧客企業のビジュアルアイデンティティを強化し、魅力的なブランドイメージを構築するための戦略的なアプローチを提供しています。
+              </p>
+            </div>
+
+            <div class="works-single__body">
+              <h2 class="works-single__heading">
+                BizLifeとの出会いは、従業員のメンタルヘルスを重視する企業として知られるようになったからです。
+              </h2>
+
+              <h3 class="works-single__question">
+                Q まずは、BizLifeにお声がけいただいた経緯をお聞かせください。
+              </h3>
+              <p class="works-single__paragraph">
+                BizLifeとの出会いは、従業員のメンタルヘルスを重視する企業として知られるようになったからです。数年前、私たちの会社でも従業員のストレスやメンタルヘルスの問題に取り組む必要性を感じました。
+              </p>
+              <p class="works-single__paragraph">
+                特に、最近のプロジェクトのストレスや長時間の業務による疲労が顕著になり、生産性やチームの士気に影響を与えるようになったことがきっかけでした。
+              </p>
+              <p class="works-single__paragraph">
+                なるほど、それは大変だったでしょうね。具体的にはどのような問題が起きていたんですか？
+              </p>
+              <p class="works-single__paragraph">
+                はい、確かに大変でした。特に、プロジェクトの締め切りに追われる中、従業員たちのストレスが増加し、コミュニケーションの不足やワークライフバランスの崩れが問題となっていました。
+              </p>
+              <p class="works-single__paragraph">
+                それに伴い、従業員の離職率が上昇し、チーム全体のパフォーマンスが低下する傾向が見られました。
+              </p>
+
+              <figure class="works-single__figure">
+                <img
+                  src="./public/assets/img/works-single/works-single_03.png"
+                  alt=""
+                  width="720"
+                  height="540"
+                />
+              </figure>
+
+              <p class="works-single__paragraph">
+                なるほど、そうした課題に直面していたわけですね。
+              </p>
+
+              <h2 class="works-single__heading">
+                離職率が減少し、生産性も向上。これらの変化は、BizLifeのアプローチが非常に効果的だと実感させられた
+              </h2>
+
+              <h3 class="works-single__question">
+                Q そこで、BizLifeのサービスに注目されたということですが、具体的にはどのような点が魅力的でしたか？
+              </h3>
+              <p class="works-single__paragraph">
+                BizLifeのサービスが魅力的だったのは、従業員のメンタルヘルスを真剣に考えているところです。彼らのプログラムは、従業員のニーズに合わせてカスタマイズされており、ストレス管理やメンタルヘルスのサポートを提供しています。
+              </p>
+              <p class="works-single__paragraph">
+                また、定期的なアンケートやワークショップを通じて、従業員の声を直接取り入れている姿勢にも感銘を受けました。
+              </p>
+
+              <figure class="works-single__figure works-single__figure--short">
+                <img
+                  src="./public/assets/img/works-single/works-single_04.png"
+                  alt=""
+                  width="720"
+                  height="480"
+                />
+              </figure>
+
+              <p class="works-single__paragraph">
+                それは素晴らしいですね。具体的な成果として、どのような変化が見られたのでしょうか？
+              </p>
+              <p class="works-single__paragraph">
+                BizLifeのサービス導入後、従業員のストレスレベルが明らかに減少しました。特に、ストレス管理プログラムやメンタルヘルスサポートの提供により、従業員のストレスレベルが平均して20％も減少したというデータがあります。
+              </p>
+              <p class="works-single__paragraph">
+                さらに、離職率が減少し、生産性も向上しました。これらの変化は、BizLifeのアプローチが非常に効果的であることを示しています。
+              </p>
+              <p class="works-single__paragraph">
+                それは素晴らしい結果ですね。私たちもそういったお声をいただけてとても光栄です！
+              </p>
+
+              <h3 class="works-single__question">
+                Q 今後、BizLifeに期待することはありますか？
+              </h3>
+              <p class="works-single__paragraph">
+                そうですね、今後はさらなる発展を期待しています。特に、従業員のメンタルヘルスに関する革新的なアプローチやサービスの提供を期待しています。従業員の幸福と企業の成功に貢献しているBizLifeの取り組みを、これからも応援しています。
+              </p>
+            </div>
+
+            <div class="works-single__share">
+              <p class="works-single__share-label">\ Let's shere ! /</p>
+              <ul class="works-single__share-list">
+                <li>
+                  <a class="works-single__share-link" href="#" aria-label="Xでシェア"
+                    ><i class="fa-brands fa-x-twitter" aria-hidden="true"></i
+                  ></a>
+                </li>
+                <li>
+                  <a class="works-single__share-link" href="#" aria-label="Facebookでシェア"
+                    ><i class="fa-brands fa-facebook-f" aria-hidden="true"></i
+                  ></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="works-single__back">
+            <!-- WP: 固定ページリンク / アーカイブリンク -->
+<a class="btn-more " href="./works-archive.html"><span class="btn-more__label">一覧ページに戻る</span><span class="btn-more__icon" aria-hidden="true"><span class="material-icons">keyboard_arrow_right</span></span></a>
+
+          </div>
+        </div>
+      </article>
+
+      <section class="works-single__pickup" aria-labelledby="works-pickup-heading">
+        <div class="container works-single__pickup-inner">
+          <!-- WP: get_template_part('template-parts/sections/section-heading') -->
+<div class="section-heading">
+  <p class="section-heading__en"><span class="section-heading__dot" aria-hidden="true"></span>Pick up</p>
+  <h2 class="section-heading__title">おすすめ記事</h2>
+</div>
+
+
+          <div class="works-single__pickup-grid">
+            <!-- WP: get_template_part('template-parts/cards/works-card') — CPT works ループ -->
+<article class="works-card">
+  <a class="works-card__link" href="./works-single.html">
+    <figure class="works-card__figure">
+      
+      <img src="./public/assets/img/works-single/works-single_05.png" alt="" width="432" height="259" />
+       
+    </figure>
+    <div class="works-card__body">
+      <ul class="works-card__tags">
+        
+        <li class="works-card__tag"># つながるワークフロー</li>
+        
+        <li class="works-card__tag"># あなたのメンタルコーチ</li>
+        
+      </ul>
+      <h3 class="works-card__title">意地でも従業員満足度を高めたかった。とことん向き合うことで見えたこれからの福利厚生</h3>
+      <p class="works-card__company">株式会社giraffe</p>
+    </div>
+  </a>
+</article>
+
+            <!-- WP: get_template_part('template-parts/cards/works-card') — CPT works ループ -->
+<article class="works-card">
+  <a class="works-card__link" href="./works-single.html">
+    <figure class="works-card__figure">
+      
+      <img src="./public/assets/img/works-single/works-single_06.png" alt="" width="432" height="259" />
+       
+    </figure>
+    <div class="works-card__body">
+      <ul class="works-card__tags">
+        
+        <li class="works-card__tag"># つながるワークフロー</li>
+        
+      </ul>
+      <h3 class="works-card__title">これはただの福利厚生ではないと確信。これからより求められる働き方だと感じた</h3>
+      <p class="works-card__company">株式会社turtle</p>
+    </div>
+  </a>
+</article>
+
+            <!-- WP: get_template_part('template-parts/cards/works-card') — CPT works ループ -->
+<article class="works-card">
+  <a class="works-card__link" href="./works-single.html">
+    <figure class="works-card__figure">
+      
+      <img src="./public/assets/img/works-single/works-single_07.png" alt="" width="432" height="259" />
+       
+    </figure>
+    <div class="works-card__body">
+      <ul class="works-card__tags">
+        
+        <li class="works-card__tag"># つながるワークフロー</li>
+        
+        <li class="works-card__tag"># みんなの福利厚生クラウド</li>
+        
+      </ul>
+      <h3 class="works-card__title">従業員満足度が前年比200％Up！「従業員」の本質を語れるBiz Lifeのサービス</h3>
+      <p class="works-card__company">株式会社Rabbit</p>
+    </div>
+  </a>
+</article>
+
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- WP: get_footer() / template-parts/footer.php — Options Page（会社情報・SNS） -->
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__main">
+      <div class="site-footer__brand">
+        <div class="site-footer__logo-row">
+          <a class="site-footer__logo" href="./index.html"><img src="./public/assets/img/common/logo-footer.svg" alt="BizLife" width="120" height="27" /></a>
+          <p class="site-footer__tagline">Empower Your Workforce,<br />Elevate Your Success with Biz Care Life.</p>
+        </div>
+        <div class="site-footer__company">
+          <p class="site-footer__company-name">株式会社BizLife</p>
+          <p class="site-footer__address"><span>〒361-9841</span><span>東京都中央区0-00-0 シルバービルディング9F</span></p>
+        </div>
+        <ul class="site-footer__social">
+          <li><a class="site-footer__social-link" href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
+          <li><a class="site-footer__social-link" href="#" aria-label="X"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a></li>
+          <li><a class="site-footer__social-link" href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a></li>
+        </ul>
+        <div class="site-footer__legal">
+          <a class="site-footer__legal-link" href="./privacy-policy.html">プライバシーポリシー</a>
+          <a class="site-footer__legal-link" href="./terms.html">利用規約</a>
+        </div>
+      </div>
+      <div class="site-footer__nav-col">
+        <nav class="site-footer__nav" aria-label="フッターナビゲーション">
+          <a class="site-footer__nav-link" href="./about.html">私たちについて</a>
+          <a class="site-footer__nav-link" href="./service.html">事業内容</a>
+          <a class="site-footer__nav-link" href="./works-archive.html">実績紹介</a>
+          <a class="site-footer__nav-link" href="./blog-archive.html">ブログ</a>
+          <a class="site-footer__nav-link" href="./company.html">会社概要</a>
+          <a class="site-footer__nav-link" href="./news-archive.html">お知らせ</a>
+        </nav>
+        <div class="site-footer__actions">
+          <a class="site-footer__action-btn" href="./recruit.html">Recruit<span class="material-icons" aria-hidden="true">keyboard_arrow_right</span></a>
+          <a class="site-footer__action-btn" href="./contact.html">Contact<span class="material-icons" aria-hidden="true">keyboard_arrow_right</span></a>
+        </div>
+      </div>
+    </div>
+    <p class="site-footer__copy">©︎ 2029 BizLife Inc.</p>
+  </div>
+</footer>
+
+    <script src="./public/assets/js/script.js?v=17"></script>
+  </body>
+</html>

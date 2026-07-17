@@ -1,0 +1,23 @@
+{
+  "source": "get_design_context",
+  "nodeId": "1:3957",
+  "fetchedAt": "2026-07-16T10:30:00+09:00",
+  "page": "works-single",
+  "section": "full-page",
+  "data": {
+    "name": "内部崩壊しかけていた弊社を救うきっかけになった「福利厚生」の話 | 全てが揃うコーポレートサイト",
+    "size": { "width": 1905, "height": 5083 },
+    "background": "#f9f9f9",
+    "structure": [
+      "Header (common)",
+      "Breadcrumb (Works 実績紹介 > title)",
+      "Article (date / title / hero / client / body / share)",
+      "Back button (一覧ページに戻る)",
+      "Pick up / おすすめ記事 (3 works-cards)",
+      "Footer (common)"
+    ],
+    "contentWidth": 720,
+    "containerMax": 1184,
+    "containerPaddingInline": 32
+  }
+}

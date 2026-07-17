@@ -1,0 +1,21 @@
+<!-- WP: get_template_part('template-parts/cards/blog-card') — Post ループ -->
+<article class="blog-card">
+  <a class="blog-card__link" href="@@href">
+    <figure class="blog-card__figure">
+      @@if (thumbnail) {
+      <img src="@@thumbnail" alt="" width="328" height="197" />
+      } @@if (!thumbnail) {
+      <span class="blog-card__placeholder" aria-hidden="true"></span>
+      }
+    </figure>
+    <div class="blog-card__body">
+      <ul class="blog-card__tags">
+        @@for (var i = 0; i < tags.length; i++) {
+        <li class="blog-card__tag">`+tags[i]+`</li>
+        }
+      </ul>
+      <h3 class="blog-card__title">@@title</h3>
+      <time class="blog-card__date" datetime="@@datetime">@@date</time>
+    </div>
+  </a>
+</article>

@@ -9,7 +9,11 @@
       }
     </figure>
     <div class="works-card__body">
-      <ul class="works-card__tags">@@tags</ul>
+      <ul class="works-card__tags">
+        @@for (var i = 0; i < tags.length; i++) {
+        <li class="works-card__tag"># `+tags[i]+`</li>
+        }
+      </ul>
       <h3 class="works-card__title">@@title</h3>
       <p class="works-card__company">@@company</p>
     </div>

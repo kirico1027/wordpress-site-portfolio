@@ -1,0 +1,17 @@
+{
+  "source": "get_design_context",
+  "nodeId": "1:3439",
+  "fetchedAt": "2026-07-15T16:52:00+09:00",
+  "page": "news",
+  "section": "hero",
+  "data": {
+    "bg": "#f9f9f9",
+    "borderRadiusBottom": 64,
+    "paddingTop": 140,
+    "paddingBottom": 64,
+    "titleEn": "News",
+    "titleJa": "お知らせ",
+    "titleEnSize": 56,
+    "titleJaSize": 18
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "source": "get_screenshot + playwright",
+  "page": "company",
+  "fetchedAt": "2026-07-15T01:10:00+09:00",
+  "figmaNodeId": "1:2907",
+  "rounds": [
+    {
+      "round": 1,
+      "siteScreenshots": [
+        "coding-md/screenshots/company-page_fullpage_pc_20260715_010857.png",
+        "coding-md/screenshots/company-page_fullpage_sp_20260715_010857.png",
+        "coding-md/screenshots/company-profile_pc_20260715_010900.png",
+        "coding-md/screenshots/company-access_pc_20260715_010902.png",
+        "coding-md/screenshots/company-hero_pc_20260715_010904.png"
+      ],
+      "adjustments": [
+        "company-profile__inner の max-width:1024 を削除し、Figma の 1184 コンテナに合わせた"
+      ]
+    },
+    {
+      "round": 2,
+      "siteScreenshots": [
+        "coding-md/screenshots/company-page-r2_fullpage_pc_20260715_011003.png",
+        "coding-md/screenshots/company-page-r2_fullpage_sp_20260715_011003.png",
+        "coding-md/screenshots/company-profile-r2_pc_20260715_011007.png",
+        "coding-md/screenshots/company-access-r2_pc_20260715_011008.png"
+      ],
+      "result": "構成・余白・タイポ・カラーが Figma と整合。アクセス枠 max-width 1024 / マップ 960×400 を維持。"
+    }
+  ]
+}

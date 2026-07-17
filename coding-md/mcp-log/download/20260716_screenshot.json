@@ -1,0 +1,31 @@
+{
+  "source": "get_screenshot + playwright",
+  "nodeId": "1:3677",
+  "fetchedAt": "2026-07-16T00:39:48+09:00",
+  "page": "download",
+  "rounds": [
+    {
+      "round": 1,
+      "playwright": [
+        "coding-md/screenshots/download-page_fullpage_fullpage_pc_20260716_003806.png",
+        "coding-md/screenshots/download-page_fullpage_fullpage_sp_20260716_003806.png",
+        "coding-md/screenshots/download-intro_pc_20260716_003810.png",
+        "coding-md/screenshots/download-form_pc_20260716_003812.png",
+        "coding-md/screenshots/download-hero_pc_20260716_003814.png"
+      ],
+      "adjustments": [
+        "狭い PC（mq-top-pc-narrow）で intro の flex-wrap 崩れを抑制（figure 縮小・本文 max-width 解除）"
+      ]
+    },
+    {
+      "round": 2,
+      "playwright": [
+        "coding-md/screenshots/download-page-r2_fullpage_fullpage_pc_20260716_003948.png",
+        "coding-md/screenshots/download-page-r2_fullpage_fullpage_sp_20260716_003948.png",
+        "coding-md/screenshots/download-intro-r2_pc_20260716_003952.png",
+        "coding-md/screenshots/download-form-r2_pc_20260716_003953.png"
+      ],
+      "result": "Figma（ヒーロー / イントロパネル / フォーム / フッター）と整合。CTA なしはデザイン準拠。"
+    }
+  ]
+}

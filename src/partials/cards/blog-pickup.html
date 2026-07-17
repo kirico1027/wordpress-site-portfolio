@@ -1,0 +1,14 @@
+<!-- WP: get_template_part('template-parts/cards/blog-pickup') — Pick up ループ -->
+<a class="blog-pickup" href="@@href">
+  <figure class="blog-pickup__figure">
+    @@if (thumbnail) {
+    <img src="@@thumbnail" alt="" width="272" height="163" />
+    } @@if (!thumbnail) {
+    <span class="blog-pickup__placeholder" aria-hidden="true"></span>
+    }
+  </figure>
+  <div class="blog-pickup__body">
+    <p class="blog-pickup__title">@@title</p>
+    <p class="blog-pickup__category"><span class="blog-pickup__dot" aria-hidden="true"></span>@@category</p>
+  </div>
+</a>

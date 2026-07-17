@@ -1,0 +1,167 @@
+@use "../../foundation/functions" as *;
+@use "../../foundation/mixins" as *;
+
+// ---------------------------------------------------------------------------
+// News archive page — Figma 1:3386 / list 1:3448
+// ---------------------------------------------------------------------------
+
+.news-archive-page {
+  padding-top: 0;
+}
+
+.news-archive__inner {
+  display: flex;
+  align-items: flex-start;
+  gap: rem(16);
+  @include fluid-pc-range(padding-top, 64, 80, $max-vw: 1905);
+  @include fluid-pc-range(padding-bottom, 120, 200, $max-vw: 1905);
+}
+
+// ---------------------------------------------------------------------------
+// Filters（PC: 縦並びサイドバー / SP: 横ラップ）
+// ---------------------------------------------------------------------------
+
+.news-archive__filters {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 rem(240);
+  width: rem(240);
+  gap: rem(8);
+}
+
+.news-archive__filter-list {
+  display: flex;
+  flex-direction: column;
+  gap: rem(8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.news-archive__filter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: rem(160);
+  padding: rem(16) rem(24);
+  border-radius: rem(32);
+  background: var(--color-bg-light);
+  font-size: rem(14);
+  font-weight: 700;
+  line-height: calc(14 / 14);
+  letter-spacing: rem(1.4);
+  color: var(--color-text);
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    color: var(--color-primary);
+  }
+}
+
+.news-archive__filter--active {
+  background: var(--color-primary);
+  color: var(--color-white);
+
+  &:hover {
+    color: var(--color-white);
+    opacity: 0.9;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// List（カード型 news-item 上書き）
+// ---------------------------------------------------------------------------
+
+.news-archive__list {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: rem(8);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.news-archive .news-item__link {
+  padding: rem(32);
+  border-top: none;
+  border-radius: rem(16);
+  background: var(--color-bg-light);
+}
+
+.news-archive .news-item__date {
+  font-weight: 600;
+  letter-spacing: rem(1.5);
+  color: #808080;
+}
+
+.news-archive .news-item__tag {
+  background: var(--color-white);
+  font-weight: 700;
+  letter-spacing: rem(1.3);
+  color: var(--color-primary);
+}
+
+.news-archive .news-item__title {
+  margin-top: rem(16);
+  font-size: rem(16);
+  font-weight: 700;
+  line-height: calc(27.2 / 16);
+  letter-spacing: rem(1.6);
+}
+
+// ---------------------------------------------------------------------------
+// Responsive
+// ---------------------------------------------------------------------------
+
+@include mq {
+  .news-archive__inner {
+    flex-direction: column;
+    gap: rem(40);
+    @include fluid-sp-range(padding-top, 48, 64);
+    @include fluid-sp-range(padding-bottom, 40, 60);
+  }
+
+  .news-archive__filters {
+    flex: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  // ul / li を消してフィルターリンクを nav の flex-wrap に直接参加させる
+  .news-archive__filter-list,
+  .news-archive__filter-item {
+    display: contents;
+  }
+
+  .news-archive__filter {
+    width: auto;
+    min-width: rem(104);
+  }
+
+  .news-archive .news-item__link {
+    padding: rem(24);
+  }
+
+  .news-archive .news-item__title {
+    font-size: rem(15);
+    line-height: calc(25.5 / 15);
+    letter-spacing: rem(1.5);
+  }
+}
+
+@include mq-top-pc-narrow {
+  .news-archive__filters {
+    flex: 0 0 rem(180);
+    width: rem(180);
+  }
+
+  .news-archive__filter {
+    width: 100%;
+  }
+}

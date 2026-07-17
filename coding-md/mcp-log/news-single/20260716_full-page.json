@@ -1,0 +1,52 @@
+{
+  "source": "get_design_context",
+  "nodeId": "1:3177",
+  "fetchedAt": "2026-07-16T00:15:00+09:00",
+  "page": "news-single",
+  "section": "full-page",
+  "notes": "News 詳細ページ全体。Header / パンくず / 記事カード / 戻るボタン / Footer。CTA Contact なし。",
+  "data": {
+    "pageBg": "#f9f9f9",
+    "breadcrumb": {
+      "paddingTop": 200,
+      "containerMax": 1184,
+      "paddingInline": 32,
+      "en": { "text": "News", "size": 18, "weight": 600, "color": "#0096df", "tracking": 1.8 },
+      "ja": { "text": "お知らせ", "size": 14, "weight": 700, "color": "#373737", "tracking": 1.4 },
+      "chevron": "chevron_right",
+      "current": { "text": "夏季休業のお知らせ", "size": 14, "weight": 700, "color": "#373737", "tracking": 1.4 },
+      "gap": 12,
+      "parentGap": 16
+    },
+    "article": {
+      "sectionPaddingTop": 48,
+      "sectionPaddingBottom": 160,
+      "gapToButton": 64,
+      "cardMaxWidth": 800,
+      "cardPadding": 48,
+      "cardRadius": 16,
+      "cardBg": "#ffffff",
+      "date": { "text": "2024/4/10 15:14", "size": 16, "weight": 500, "color": "#777", "tracking": 0.8 },
+      "title": { "text": "夏季休業のお知らせ", "size": 28, "weight": 700, "color": "#1e1e1e", "tracking": 2.8, "lineHeight": 39.2, "marginTop": 24 },
+      "body": {
+        "marginTop": 32,
+        "paragraphGap": 16,
+        "size": 15,
+        "weight": 500,
+        "lineHeight": 25.5,
+        "tracking": 0.75,
+        "color": "#1e1e1e"
+      }
+    },
+    "backButton": {
+      "label": "一覧ページに戻る",
+      "border": "2px solid #0096df",
+      "radius": 96,
+      "bg": "#ffffff",
+      "color": "#0096df",
+      "labelSize": 16,
+      "labelWeight": 700,
+      "icon": "keyboard_arrow_right"
+    }
+  }
+}

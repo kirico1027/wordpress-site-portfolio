@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    @@include('partials/head.html', { "title": "お問い合わせ | BizLife" })
+  </head>
+  <body>
+    @@include('partials/header.html')
+
+    <!-- WP: page-contact.php / 固定ページ Contact（Phase 2〜 CF7） -->
+    <main class="contact-page">
+      @@include('partials/page-hero.html', {
+        "heroModifier": "page-hero--light",
+        "heroHeadingId": "contact-hero-heading",
+        "heroTitleEn": "Contact",
+        "heroTitleJa": "お問い合わせ",
+        "heroImgSrc": ""
+      })
+
+      <section class="contact-form" aria-labelledby="contact-form-heading">
+        <h2 id="contact-form-heading" class="u-visually-hidden">お問い合わせフォーム</h2>
+        <div class="container contact-form__inner">
+          <form class="contact-form__form" action="#" method="post" novalidate>
+            <div
+              class="contact-form__field contact-form__field--radios"
+              role="group"
+              aria-labelledby="contact-inquiry-label"
+              aria-required="true"
+            >
+              <p id="contact-inquiry-label" class="contact-form__label">
+                お問い合わせ項目<span class="contact-form__required" aria-hidden="true">*</span>
+                <span class="u-visually-hidden">（必須）</span>
+              </p>
+              <div class="contact-form__radios">
+                <label class="contact-form__radio">
+                  <input class="contact-form__radio-input" type="radio" name="inquiry_type" value="consultation" required />
+                  <span class="contact-form__radio-text">導入相談/お見積もり</span>
+                </label>
+                <label class="contact-form__radio">
+                  <input class="contact-form__radio-input" type="radio" name="inquiry_type" value="seminar" />
+                  <span class="contact-form__radio-text">セミナー/イベント申し込み</span>
+                </label>
+                <label class="contact-form__radio">
+                  <input class="contact-form__radio-input" type="radio" name="inquiry_type" value="media" />
+                  <span class="contact-form__radio-text">メディア掲載/その他</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="contact-form__field">
+              <label class="contact-form__label" for="contact-name">
+                お名前<span class="contact-form__required" aria-hidden="true">*</span>
+                <span class="u-visually-hidden">（必須）</span>
+              </label>
+              <input
+                class="contact-form__input"
+                id="contact-name"
+                name="name"
+                type="text"
+                placeholder="お名前"
+                autocomplete="name"
+                required
+              />
+            </div>
+
+            <div class="contact-form__field">
+              <label class="contact-form__label" for="contact-furigana">
+                フリガナ<span class="contact-form__required" aria-hidden="true">*</span>
+                <span class="u-visually-hidden">（必須）</span>
+              </label>
+              <input
+                class="contact-form__input"
+                id="contact-furigana"
+                name="furigana"
+                type="text"
+                placeholder="フリガナ"
+                autocomplete="off"
+                required
+              />
+            </div>
+
+            <div class="contact-form__field">
+              <label class="contact-form__label" for="contact-email">
+                メールアドレス<span class="contact-form__required" aria-hidden="true">*</span>
+                <span class="u-visually-hidden">（必須）</span>
+              </label>
+              <input
+                class="contact-form__input"
+                id="contact-email"
+                name="email"
+                type="email"
+                placeholder="メールアドレス"
+                autocomplete="email"
+                required
+              />
+            </div>
+
+            <div class="contact-form__field">
+              <label class="contact-form__label" for="contact-email-confirm">
+                メールアドレス（確認用）<span class="contact-form__required" aria-hidden="true">*</span>
+                <span class="u-visually-hidden">（必須）</span>
+              </label>
+              <input
+                class="contact-form__input"
+                id="contact-email-confirm"
+                name="email_confirm"
+                type="email"
+                placeholder="メールアドレス（確認用）"
+                autocomplete="email"
+                required
+              />
+            </div>
+
+            <div class="contact-form__field">
+              <label class="contact-form__label" for="contact-company">
+                会社名<span class="contact-form__required" aria-hidden="true">*</span>
+                <span class="u-visually-hidden">（必須）</span>
+              </label>
+              <input
+                class="contact-form__input"
+                id="contact-company"
+                name="company"
+                type="text"
+                placeholder="会社名"
+                autocomplete="organization"
+                required
+              />
+            </div>
+
+            <div class="contact-form__field">
+              <label class="contact-form__label" for="contact-message">
+                お問い合わせ内容<span class="contact-form__required" aria-hidden="true">*</span>
+                <span class="u-visually-hidden">（必須）</span>
+              </label>
+              <textarea
+                class="contact-form__textarea"
+                id="contact-message"
+                name="message"
+                placeholder="お問い合わせ内容"
+                required
+              ></textarea>
+            </div>
+
+            <div class="contact-form__field contact-form__field--agree">
+              <label class="contact-form__agree">
+                <input class="contact-form__checkbox" type="checkbox" name="privacy" value="1" required />
+                <span class="contact-form__agree-text">プライバシーポリシーに同意する</span>
+              </label>
+            </div>
+
+            <div class="contact-form__actions">
+              <button class="contact-form__submit" type="submit">送信する</button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    @@include('partials/footer.html')
+    <script src="./public/assets/js/script.js?v=17"></script>
+  </body>
+</html>

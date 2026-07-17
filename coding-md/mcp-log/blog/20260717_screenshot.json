@@ -1,0 +1,29 @@
+{
+  "source": "get_screenshot",
+  "nodeId": "1:2",
+  "fetchedAt": "2026-07-17T01:13:00+09:00",
+  "page": "blog",
+  "section": "full-page",
+  "rounds": [
+    {
+      "round": 1,
+      "playwright": [
+        "coding-md/screenshots/blog-page_fullpage_pc_20260717_011105.png",
+        "coding-md/screenshots/blog-page_fullpage_sp_20260717_011105.png",
+        "coding-md/screenshots/blog-featured_pc_20260717_011113.png",
+        "coding-md/screenshots/blog-archive_pc_20260717_011114.png"
+      ],
+      "notes": "featured peek/centering OK (translateX 440), main 744 / sidebar 336 match. Adjusted featured title rhythm and paddings."
+    },
+    {
+      "round": 2,
+      "playwright": [
+        "coding-md/screenshots/blog-page-r2_fullpage_pc_20260717_011307.png",
+        "coding-md/screenshots/blog-page-r2_fullpage_sp_20260717_011307.png",
+        "coding-md/screenshots/blog-featured-r2_pc_20260717_011310.png",
+        "coding-md/screenshots/blog-archive-r2_pc_20260717_011312.png"
+      ],
+      "notes": "Typography/color verified against design-context. Layout widths match Figma."
+    }
+  ]
+}

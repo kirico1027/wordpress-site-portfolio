@@ -84,8 +84,52 @@
     });
   }
 
+  function initBlogFeaturedSlider() {
+    var featured = document.querySelector(".blog-featured");
+    if (!featured) return;
+
+    var viewport = featured.querySelector(".blog-featured__viewport");
+    var track = featured.querySelector(".blog-featured__track");
+    var slides = featured.querySelectorAll(".blog-featured__slide");
+    var prevBtn = featured.querySelector(".blog-featured__nav-btn--prev");
+    var nextBtn = featured.querySelector(".blog-featured__nav-btn--next");
+    if (!viewport || !track || slides.length === 0) return;
+
+    // Figma 初期表示: 中央が「社員インタビュー」、左右に「お役立ち情報」が覗く
+    var index = slides.length > 1 ? 1 : 0;
+
+    function update() {
+      var slide = slides[index];
+      var viewportWidth = viewport.offsetWidth;
+      var slideWidth = slide.offsetWidth;
+      var offset = slide.offsetLeft - (viewportWidth - slideWidth) / 2;
+      track.style.transform = "translateX(" + -offset + "px)";
+    }
+
+    function goTo(nextIndex) {
+      index = (nextIndex + slides.length) % slides.length;
+      update();
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", function () {
+        goTo(index - 1);
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", function () {
+        goTo(index + 1);
+      });
+    }
+
+    window.addEventListener("resize", update);
+    update();
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initHeaderDrawer();
     initWorksSlider();
+    initBlogFeaturedSlider();
   });
 })();

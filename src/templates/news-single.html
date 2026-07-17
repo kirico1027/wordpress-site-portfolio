@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    @@include('partials/head.html', { "title": "夏季休業のお知らせ | BizLife" })
+  </head>
+  <body>
+    @@include('partials/header.html')
+
+    <!-- WP: single-news.php / CPT news シングル -->
+    <main class="news-single-page news-single">
+      <div class="news-single__breadcrumb-area">
+        <div class="container news-single__breadcrumb-inner">
+          <nav class="news-single__breadcrumb" aria-label="パンくずリスト">
+            <a class="news-single__breadcrumb-parent" href="./news-archive.html">
+              <span class="news-single__breadcrumb-en">News</span>
+              <span class="news-single__breadcrumb-ja">お知らせ</span>
+            </a>
+            <span class="news-single__breadcrumb-sep" aria-hidden="true">
+              <span class="material-icons">chevron_right</span>
+            </span>
+            <span class="news-single__breadcrumb-current" aria-current="page">夏季休業のお知らせ</span>
+          </nav>
+        </div>
+      </div>
+
+      <article class="news-single__article" aria-labelledby="news-single-heading">
+        <div class="container news-single__inner">
+          <div class="news-single__card">
+            <time class="news-single__date" datetime="2024-04-10T15:14">2024/4/10 15:14</time>
+            <h1 id="news-single-heading" class="news-single__title">夏季休業のお知らせ</h1>
+            <div class="news-single__body">
+              <p class="news-single__paragraph">
+                平素は格別のお引き立てをいただき厚くお礼申し上げます。<br />
+                弊社では、誠に勝手ながら下記日程を夏季休業とさせていただきます。
+              </p>
+              <p class="news-single__paragraph">
+                ■夏季休業期間<br />
+                2024年08月13日(火) ～ 08月16日(金)
+              </p>
+              <p class="news-single__paragraph">
+                休業期間中にいただいたお問合せについては、営業開始日以降に順次回答させていただきます。<br />
+                皆様には大変ご不便をおかけいたしますが、何卒ご理解の程お願い申し上げます。
+              </p>
+            </div>
+          </div>
+
+          <div class="news-single__back">
+            @@include('partials/sections/btn-more.html', {
+              "modifier": "",
+              "href": "./news-archive.html",
+              "label": "一覧ページに戻る"
+            })
+          </div>
+        </div>
+      </article>
+    </main>
+
+    @@include('partials/footer.html')
+    <script src="./public/assets/js/script.js?v=17"></script>
+  </body>
+</html>

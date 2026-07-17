@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    @@include('partials/head.html', { "title": "採用エントリー | BizLife" })
+  </head>
+  <body>
+    @@include('partials/header.html')
+
+    <!-- WP: page-entry.php / 固定ページ Entry（Phase 2〜 CF7 + job CPT） -->
+    <main class="entry-page">
+      @@include('partials/page-hero.html', {
+        "heroModifier": "page-hero--light",
+        "heroHeadingId": "entry-hero-heading",
+        "heroTitleEn": "Entry",
+        "heroTitleJa": "採用エントリー",
+        "heroImgSrc": ""
+      })
+
+      <section class="entry-form" aria-labelledby="entry-form-heading">
+        <h2 id="entry-form-heading" class="u-visually-hidden">採用エントリーフォーム</h2>
+        <div class="container entry-form__inner">
+          <form class="entry-form__form" action="#" method="post" enctype="multipart/form-data" novalidate>
+            <div class="entry-form__field">
+              <label class="entry-form__label" for="entry-name">
+                お名前<span class="entry-form__required" aria-hidden="true">*</span>
+                <span class="u-visually-hidden">（必須）</span>
+              </label>
+              <input
+                class="entry-form__input"
+                id="entry-name"
+                name="name"
+                type="text"
+                placeholder="お名前"
+                autocomplete="name"
+                required
+              />
+            </div>
+
+            <div class="entry-form__field">
+              <label class="entry-form__label" for="entry-furigana">
+                フリガナ<span class="entry-form__required" aria-hidden="true">*</span>
+                <span class="u-visually-hidden">（必須）</span>
+              </label>
+              <input
+                class="entry-form__input"
+                id="entry-furigana"
+                name="furigana"
+                type="text"
+                placeholder="フリガナ"
+                autocomplete="off"
+                required
+              />
+            </div>
+
+            <div class="entry-form__field">
+              <label class="entry-form__label" for="entry-email">
+                メールアドレス<span class="entry-form__required" aria-hidden="true">*</span>
+                <span class="u-visually-hidden">（必須）</span>
+              </label>
+              <input
+                class="entry-form__input"
+                id="entry-email"
+                name="email"
+                type="email"
+                placeholder="メールアドレス"
+                autocomplete="email"
+                required
+              />
+            </div>
+
+            <div class="entry-form__field">
+              <label class="entry-form__label" for="entry-email-confirm">
+                メールアドレス（確認用）<span class="entry-form__required" aria-hidden="true">*</span>
+                <span class="u-visually-hidden">（必須）</span>
+              </label>
+              <input
+                class="entry-form__input"
+                id="entry-email-confirm"
+                name="email_confirm"
+                type="email"
+                placeholder="メールアドレス（確認用）"
+                autocomplete="email"
+                required
+              />
+            </div>
+
+            <div class="entry-form__field">
+              <label class="entry-form__label" for="entry-age">
+                ご年齢<span class="entry-form__required" aria-hidden="true">*</span>
+                <span class="u-visually-hidden">（必須）</span>
+              </label>
+              <input
+                class="entry-form__input"
+                id="entry-age"
+                name="age"
+                type="text"
+                inputmode="numeric"
+                placeholder="25"
+                autocomplete="bday-year"
+                required
+              />
+            </div>
+
+            <div class="entry-form__field">
+              <label class="entry-form__label entry-form__label--select" for="entry-occupation">
+                現在のご職業<span class="entry-form__required" aria-hidden="true">*</span>
+                <span class="u-visually-hidden">（必須）</span>
+              </label>
+              <div class="entry-form__select-wrap">
+                <select class="entry-form__select" id="entry-occupation" name="occupation" required>
+                  <option value="" selected disabled>選択してください</option>
+                  <option value="company">会社員</option>
+                  <option value="public">公務員</option>
+                  <option value="self">自営業</option>
+                  <option value="freelance">フリーランス</option>
+                  <option value="student">学生</option>
+                  <option value="part">パート・アルバイト</option>
+                  <option value="unemployed">無職</option>
+                  <option value="other">その他</option>
+                </select>
+                <span class="material-icons entry-form__select-icon" aria-hidden="true">keyboard_arrow_down</span>
+              </div>
+            </div>
+
+            <div class="entry-form__field">
+              <label class="entry-form__label entry-form__label--select" for="entry-job">
+                希望職種<span class="entry-form__required" aria-hidden="true">*</span>
+                <span class="u-visually-hidden">（必須）</span>
+              </label>
+              <div class="entry-form__select-wrap">
+                <!-- WP: job CPT から動的生成 -->
+                <select class="entry-form__select" id="entry-job" name="desired_job" required>
+                  <option value="" selected disabled>選択してください</option>
+                  <option value="product-manager">プロダクトマネージャー（正社員）</option>
+                  <option value="web-marketer">WEBマーケター（正社員）</option>
+                  <option value="inside-sales">インサイドセールス（正社員）</option>
+                  <option value="back-office">バックオフィス（正社員）</option>
+                </select>
+                <span class="material-icons entry-form__select-icon" aria-hidden="true">keyboard_arrow_down</span>
+              </div>
+            </div>
+
+            <div class="entry-form__field">
+              <p id="entry-file-label" class="entry-form__label entry-form__label--select">
+                ファイル添付<span class="entry-form__required" aria-hidden="true">*</span>
+                <span class="u-visually-hidden">（必須）</span>
+              </p>
+              <label class="entry-form__file" for="entry-file">
+                <input
+                  class="entry-form__file-input u-visually-hidden"
+                  id="entry-file"
+                  name="attachment"
+                  type="file"
+                  accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
+                  aria-labelledby="entry-file-label"
+                  required
+                />
+                <span class="entry-form__file-text">ファイルを添付してください</span>
+              </label>
+            </div>
+
+            <div class="entry-form__field">
+              <label class="entry-form__label entry-form__label--select" for="entry-message">
+                質問や面談時に聞きたいこと
+              </label>
+              <textarea
+                class="entry-form__textarea"
+                id="entry-message"
+                name="message"
+                placeholder="事前に確認しておきたいことや、質問等がありましたらご記載ください。"
+              ></textarea>
+            </div>
+
+            <div class="entry-form__field entry-form__field--agree">
+              <label class="entry-form__agree">
+                <input class="entry-form__checkbox" type="checkbox" name="privacy" value="1" required />
+                <span class="entry-form__agree-text">プライバシーポリシーに同意する</span>
+              </label>
+            </div>
+
+            <div class="entry-form__actions">
+              <button class="entry-form__submit" type="submit">エントリー</button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    @@include('partials/footer.html')
+    <script src="./public/assets/js/script.js?v=17"></script>
+  </body>
+</html>

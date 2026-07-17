@@ -1,0 +1,70 @@
+{
+  "source": "get_design_context",
+  "nodeId": "1:2631",
+  "fetchedAt": "2026-07-15T00:33:00+09:00",
+  "page": "contact",
+  "section": "full-page",
+  "frameName": "全てが揃うコーポレートサイト",
+  "viewport": { "width": 1905, "height": 1990 },
+  "data": {
+    "sections": [
+      {
+        "name": "page-hero",
+        "nodeId": "1:2684",
+        "background": "#f9f9f9",
+        "borderRadiusBottom": 64,
+        "padding": { "top": 140, "bottom": 64, "inline": 48 },
+        "titleEn": "Contact",
+        "titleJa": "お問い合わせ",
+        "titleEnStyle": { "fontSize": 56, "fontWeight": 600, "lineHeight": 78.4, "letterSpacing": 2.8, "color": "#1e1e1e" },
+        "titleJaStyle": { "fontSize": 18, "fontWeight": 700, "lineHeight": 18, "letterSpacing": 1.8, "color": "#1e1e1e" }
+      },
+      {
+        "name": "contact-form",
+        "nodeId": "1:2695",
+        "formWidth": 560,
+        "outerPadding": { "top": 80, "bottom": 120, "inline": 32 },
+        "fieldGap": 24,
+        "labelInputGap": 12,
+        "requiredColor": "#f23a3c",
+        "input": {
+          "minHeight": 50,
+          "border": "#dfdfdf",
+          "borderRadius": 8,
+          "placeholderColor": "#dfdfdf"
+        },
+        "textarea": { "minHeight": 160, "placeholderColor": "#ccc" },
+        "submit": {
+          "width": 320,
+          "height": 64,
+          "borderRadius": 48,
+          "background": "#373737",
+          "label": "送信する",
+          "fontSize": 16,
+          "fontWeight": 700,
+          "letterSpacing": 1.6
+        },
+        "fields": [
+          { "name": "inquiry_type", "label": "お問い合わせ項目", "type": "radio", "options": ["導入相談/お見積もり", "セミナー/イベント申し込み", "メディア掲載/その他"], "required": true },
+          { "name": "name", "label": "お名前", "type": "text", "required": true },
+          { "name": "furigana", "label": "フリガナ", "type": "text", "required": true },
+          { "name": "email", "label": "メールアドレス", "type": "email", "required": true },
+          { "name": "email_confirm", "label": "メールアドレス（確認用）", "type": "email", "required": true },
+          { "name": "company", "label": "会社名", "type": "text", "required": true },
+          { "name": "message", "label": "お問い合わせ内容", "type": "textarea", "required": true },
+          { "name": "privacy", "label": "プライバシーポリシーに同意する", "type": "checkbox", "required": true }
+        ]
+      },
+      {
+        "name": "header",
+        "nodeId": "1:2639",
+        "note": "共通 partials/header.html を流用"
+      },
+      {
+        "name": "footer",
+        "nodeId": "1:2803",
+        "note": "共通 partials/footer.html を流用"
+      }
+    ]
+  }
+}

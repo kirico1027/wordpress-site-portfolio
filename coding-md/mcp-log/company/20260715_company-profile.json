@@ -1,0 +1,33 @@
+{
+  "source": "get_design_context",
+  "nodeId": "1:2970",
+  "fetchedAt": "2026-07-15T01:13:00+09:00",
+  "page": "company",
+  "section": "company-profile",
+  "notes": "ユーザー指定ノード。正確再現のため再取得。",
+  "data": {
+    "outer": { "width": 1184, "paddingInline": 32, "paddingBlock": 80, "align": "center" },
+    "content": { "width": 960, "offsetFromContentEdge": 80 },
+    "label": { "size": 16, "weight": 600, "tracking": 1.6, "lineHeight": 27.2, "dot": 8, "gap": 8 },
+    "list": { "paddingTop": 40 },
+    "row": {
+      "padding": { "top": 32, "bottom": 33, "left": 48, "right": 24 },
+      "termWidth": 222,
+      "descWidth": 666,
+      "border": "#dfdfdf bottom only",
+      "singleRowHeight": 91,
+      "businessRowHeight": 166
+    },
+    "verified": {
+      "inner": "1184/32",
+      "contentOffset": 80,
+      "listW": 960,
+      "termW": 222,
+      "termWeight": 600,
+      "label": "16/600/1.6px",
+      "rowH": 91.2,
+      "lastRowH": 166.75,
+      "gapLabelList": 40
+    }
+  }
+}

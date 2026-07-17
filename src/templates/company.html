@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    @@include('partials/head.html', { "title": "会社概要 | BizLife" })
+  </head>
+  <body>
+    @@include('partials/header.html')
+
+    <!-- WP: page-company.php / 固定ページ Company -->
+    <main class="company-page">
+      @@include('partials/page-hero.html', {
+        "heroModifier": "page-hero--light",
+        "heroHeadingId": "company-hero-heading",
+        "heroTitleEn": "Company",
+        "heroTitleJa": "会社について",
+        "heroImgSrc": ""
+      })
+
+      <section class="company-profile" aria-labelledby="company-profile-heading">
+        <div class="container company-profile__inner">
+          <div class="company-profile__content">
+            <h2 id="company-profile-heading" class="section-label">
+              <span class="section-label__dot" aria-hidden="true"></span>
+              <span class="section-label__text">会社概要</span>
+            </h2>
+            <dl class="company-profile__list">
+              <div class="company-profile__row">
+                <dt class="company-profile__term">会社名</dt>
+                <dd class="company-profile__desc">株式会社Biz Life</dd>
+              </div>
+              <div class="company-profile__row">
+                <dt class="company-profile__term">設立</dt>
+                <dd class="company-profile__desc">2029年3月15日</dd>
+              </div>
+              <div class="company-profile__row">
+                <dt class="company-profile__term">代表</dt>
+                <dd class="company-profile__desc">一ノ瀬 一茶</dd>
+              </div>
+              <div class="company-profile__row">
+                <dt class="company-profile__term">資本金</dt>
+                <dd class="company-profile__desc">2000万円</dd>
+              </div>
+              <div class="company-profile__row">
+                <dt class="company-profile__term">住所</dt>
+                <dd class="company-profile__desc">〒361-9841 東京都中央区3-20-2シルバービルディング9F</dd>
+              </div>
+              <div class="company-profile__row">
+                <dt class="company-profile__term">事業内容</dt>
+                <dd class="company-profile__desc">
+                  <p class="company-profile__desc-line">社員の幸福と健康を第一に考えた、これからの福利厚生プログラム</p>
+                  <p class="company-profile__desc-line">・Digital Wellbeing Program（デジタルデトックス推進）</p>
+                  <p class="company-profile__desc-line">・Workflow Management Program（セルフマネジメント推進）</p>
+                  <p class="company-profile__desc-line">・Mental Health Care Program（メンタルヘルスケア推進）</p>
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      <section class="company-access" aria-labelledby="company-access-heading">
+        <div class="container company-access__inner">
+          <h2 id="company-access-heading" class="section-label section-label--orange">
+            <span class="section-label__dot" aria-hidden="true"></span>
+            <span class="section-label__text">アクセス</span>
+          </h2>
+          <p class="company-access__address">〒361-9841 東京都中央区3-20-2シルバービルディング9F</p>
+          <div class="company-access__map" role="img" aria-label="所在地マップ（準備中）"></div>
+        </div>
+      </section>
+
+      @@include('partials/sections/cta-contact.html')
+    </main>
+
+    @@include('partials/footer.html')
+    <script src="./public/assets/js/script.js?v=17"></script>
+  </body>
+</html>

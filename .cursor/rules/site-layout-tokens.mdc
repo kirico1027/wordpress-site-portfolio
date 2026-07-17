@@ -151,6 +151,109 @@ alwaysApply: true
 | `about-value__inner` padding-bottom | 375→768 | 40 → 60px |
 | `about-value__inner` padding-bottom | 769+ | **100px 固定**（`$max-vw: 1905`） |
 
+## News 一覧（archive）・確定 clamp / 固定値
+
+| 要素 | 帯 | 値 |
+|------|-----|-----|
+| `news-archive__inner` padding-top | 375→768 | 48 → 64px |
+| `news-archive__inner` padding-top | 769→1905 | 64 → **80px** |
+| `news-archive__inner` padding-bottom | 375→768 | 40 → 60px |
+| `news-archive__inner` padding-bottom | 769→1905 | 120 → **200px** |
+| `news-archive__filters` 列幅 | 1184+ | **240px**（ボタン 160px） |
+| `news-archive__filters` 列幅 | 769〜1183 | **180px**（`mq-top-pc-narrow`） |
+| `news-archive` カード padding | 769+ | **32px** / SP **24px** |
+| `news-archive` カード gap | 全帯 | **8px** |
+
+## News 詳細（single）・確定 clamp / 固定値
+
+| 要素 | 帯 | 値 |
+|------|-----|-----|
+| `news-single-page` bg | 全帯 | `#f9f9f9`（`--color-bg-light`） |
+| `news-single__breadcrumb-area` padding-top | 375→768 | **100px** 固定 |
+| `news-single__breadcrumb-area` padding-top | 769→1905 | 160 → **200px** |
+| `news-single__inner` padding-top | 375→768 | 32 → 40px |
+| `news-single__inner` padding-top | 769→1905 | 40 → **48px** |
+| `news-single__inner` padding-bottom | 375→768 | 64 → 100px |
+| `news-single__inner` padding-bottom | 769→1905 | 100 → **160px** |
+| `news-single__card` max-width | 769+ | **800px** |
+| `news-single__card` padding | 769+ | **48px** / SP **32×24px** |
+| `news-single__back` margin-top | 769+ | **64px** / SP **40px** |
+
+## Works 詳細（single）・確定 clamp / 固定値
+
+| 要素 | 帯 | 値 |
+|------|-----|-----|
+| `works-single-page` bg | 全帯 | `#f9f9f9`（`--color-bg-light`） |
+| `works-single__breadcrumb-area` padding-top | 375→768 | **100px** 固定 |
+| `works-single__breadcrumb-area` padding-top | 769→1905 | 160 → **200px** |
+| `works-single__inner` padding-top | 375→768 | 32 → 40px |
+| `works-single__inner` padding-top | 769→1905 | 40 → **48px** |
+| `works-single__inner` padding-bottom | 375→768 | 64 → 100px |
+| `works-single__inner` padding-bottom | 769→1905 | 100 → **160px** |
+| `works-single__content` max-width | 769+ | **720px** |
+| `works-single__title` font-size | 769+ | **32px** / SP 22→28 |
+| `works-single__back` margin-top | 769+ | **80px** / SP **48px** |
+| `works-single__pickup-inner` padding-top | 375→768 | 40 → 48px |
+| `works-single__pickup-inner` padding-top | 769→1905 | 48 → **64px** |
+| `works-single__pickup-inner` padding-bottom | 375→768 | 64 → 80px |
+| `works-single__pickup-inner` padding-bottom | 769→1905 | 80 → **120px** |
+| `works-single__pickup-grid` | 1184+ | 3列 × **352px** / gap **32** |
+| `works-single__pickup-grid` | 769〜1183 | 3列 `1fr`（`mq-top-pc-narrow`） |
+| `works-single__pickup-grid` | ≤768 | 1列 |
+
+## Download・確定 clamp / 固定値
+
+| 要素 | 帯 | 値 |
+|------|-----|-----|
+| `download-content` padding-top | 375→768 | 48 → 64px |
+| `download-content` padding-top | 769→1905 | 64 → **80px** |
+| `download-content` padding-bottom | 375→768 | 64 → 80px |
+| `download-content` padding-bottom | 769→1905 | 80 → **120px** |
+| `download-intro` max-width | 1184+ | **896px** |
+| `download-intro` padding | 769+ | **40 / 64 / 40 / 40**（T/R/B/L）/ SP **24** |
+| `download-intro` gap | 1184+ | **64px** / 769〜1183 **32px** |
+| `download-intro__figure` | 1184+ | **400×210**（aspect-ratio） |
+| `download-form` max-width | 全帯 | **560px** |
+| `download-form` margin-top | 769+ | **64px** / SP **40px** |
+| `download-form__submit` | 769+ | max **320×64** / SP min-height **56** |
+
+## Entry・確定 clamp / 固定値
+
+| 要素 | 帯 | 値 |
+|------|-----|-----|
+| `entry-form` padding-top | 375→768 | 48 → 64px |
+| `entry-form` padding-top | 769→1905 | 64 → **80px** |
+| `entry-form` padding-bottom | 375→768 | 64 → 80px |
+| `entry-form` padding-bottom | 769→1905 | 80 → **120px** |
+| `entry-form__form` max-width | 全帯 | **560px** |
+| `entry-form__input` | 全帯 | min-height **50** / radius **2** |
+| `entry-form__select` | 全帯 | min-height **53** / radius **4** |
+| `entry-form__textarea` | 全帯 | min-height **160** / radius **2** |
+| `entry-form__submit` | 769+ | max **320×64** / SP min-height **56** |
+
+## Blog 一覧（archive）・確定 clamp / 固定値
+
+| 要素 | 帯 | 値 |
+|------|-----|-----|
+| `blog-featured` padding-top | 375→768 | **120px** 固定 |
+| `blog-featured` padding-top | 769+ | **160px** 固定 |
+| `blog-featured__slide` | 1184+ | **1040px**（peek カルーセル） |
+| `blog-featured__slide` | 769〜1183 | **100%**（親幅に収める） |
+| `blog-featured__slide` | ≤768 | **100%** |
+| `blog-featured__card` | 769+ | padding **41** / radius **16** / gap **48**（769〜1183 gap **24** / width **100%**） |
+| `blog-featured__content` / `__figure` | 1184+ | **280px / 550px** 固定 |
+| `blog-featured__content` / `__figure` | 769〜1183 | content **220→280px** / figure 残り幅 |
+| `blog-archive__inner` padding-top | 375→768 | 48 → 64px |
+| `blog-archive__inner` padding-top | 769→1905 | 64 → **80px** |
+| `blog-archive__inner` padding-bottom | 375→768 | **48px** 固定 |
+| `blog-archive__inner` padding-bottom | 769→1905 | 64 → **200px** |
+| `blog-archive__main` / `__sidebar` | 1184+ | main flex / sidebar **336px** 固定 |
+| `blog-archive__main` / `__sidebar` | 769〜1183 | main 残り幅 / sidebar **250→336px** |
+| `blog-archive__grid` | 769+ | 2列 gap **48** / SP 1列 gap **40** |
+| `blog-archive__more-wrap` margin-top | 375→768 | **35px** 固定（PC 48） |
+| `blog-archive__sidebar` margin-top | 375→768 | **32px** 固定 |
+| `blog-archive__widget-title-en` font-size | 375→768 | **18px** 固定（PC 14） |
+
 ## 未移行（769 基準へ寄せる）
 
 - **`.section`** の `fluid-padding-y(64, 10vw, 120)` → 触る際 `fluid-pc-range` へ

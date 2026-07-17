@@ -1,0 +1,48 @@
+{
+  "source": "get_design_context",
+  "nodeId": "1:4670",
+  "fetchedAt": "2026-07-16T10:53:00+09:00",
+  "page": "entry",
+  "section": "full-page",
+  "data": {
+    "name": "全てが揃うコーポレートサイト",
+    "width": 1905,
+    "height": 2129,
+    "structure": [
+      "Header（共通）",
+      "Page Hero — Entry / 採用エントリー（page-hero--light）",
+      "Entry Form（採用エントリーフォーム）",
+      "Footer（共通）"
+    ],
+    "formFields": [
+      { "label": "お名前", "type": "text", "required": true, "placeholder": "お名前" },
+      { "label": "フリガナ", "type": "text", "required": true, "placeholder": "フリガナ" },
+      { "label": "メールアドレス", "type": "email", "required": true, "placeholder": "メールアドレス" },
+      { "label": "メールアドレス（確認用）", "type": "email", "required": true, "placeholder": "メールアドレス（確認用）" },
+      { "label": "ご年齢", "type": "text", "required": true, "placeholder": "25" },
+      { "label": "現在のご職業", "type": "select", "required": true },
+      { "label": "希望職種", "type": "select", "required": true },
+      { "label": "ファイル添付", "type": "file", "required": true, "placeholder": "ファイルを添付してください" },
+      { "label": "質問や面談時に聞きたいこと", "type": "textarea", "required": false, "placeholder": "事前に確認しておきたいことや、質問等がありましたらご記載ください。" },
+      { "label": "プライバシーポリシーに同意する", "type": "checkbox", "required": true }
+    ],
+    "submitLabel": "エントリー",
+    "layout": {
+      "heroBg": "#f9f9f9",
+      "heroRadiusBottom": 64,
+      "heroPadding": "140 / 64 / 48",
+      "formOuter": "1184 / padding 32 / pt 80 / pb 120",
+      "formWidth": 560,
+      "fieldGap": 24,
+      "labelInputGap": 12,
+      "inputMinHeight": 50,
+      "inputRadius": 2,
+      "selectHeight": 53,
+      "selectRadius": 4,
+      "textareaMinHeight": 160,
+      "submitSize": "320×64",
+      "submitRadius": 48,
+      "submitBg": "#373737"
+    }
+  }
+}

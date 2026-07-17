@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    @@include('partials/head.html', { "title": "お知らせ | BizLife" })
+  </head>
+  <body>
+    @@include('partials/header.html')
+
+    <!-- WP: archive-news.php / CPT news アーカイブ -->
+    <main class="news-archive-page">
+      @@include('partials/page-hero.html', {
+        "heroModifier": "page-hero--light",
+        "heroHeadingId": "news-hero-heading",
+        "heroTitleEn": "News",
+        "heroTitleJa": "お知らせ",
+        "heroImgSrc": ""
+      })
+
+      <section class="news-archive" aria-label="お知らせ一覧">
+        <div class="container news-archive__inner">
+          <nav class="news-archive__filters" aria-label="カテゴリフィルター">
+            <a class="news-archive__filter news-archive__filter--active" href="./news-archive.html" aria-current="page">すべて</a>
+            <ul class="news-archive__filter-list">
+              <li class="news-archive__filter-item">
+                <a class="news-archive__filter" href="#">お知らせ</a>
+              </li>
+              <li class="news-archive__filter-item">
+                <a class="news-archive__filter" href="#">イベント</a>
+              </li>
+              <li class="news-archive__filter-item">
+                <a class="news-archive__filter" href="#">メディア掲載</a>
+              </li>
+              <li class="news-archive__filter-item">
+                <a class="news-archive__filter" href="#">採用</a>
+              </li>
+              <li class="news-archive__filter-item">
+                <a class="news-archive__filter" href="#">サービス情報</a>
+              </li>
+              <li class="news-archive__filter-item">
+                <a class="news-archive__filter" href="#">その他</a>
+              </li>
+            </ul>
+          </nav>
+
+          <ul class="news-archive__list">
+            @@include('partials/cards/news-item.html', {
+              "href": "./news-single.html",
+              "datetime": "2024-03-08",
+              "date": "2024.3.8",
+              "tag": "採用",
+              "title": "2025年卒 インターンシップ募集開始のお知らせ"
+            })
+            @@include('partials/cards/news-item.html', {
+              "href": "./news-single.html",
+              "datetime": "2024-03-08",
+              "date": "2024.3.8",
+              "tag": "お知らせ",
+              "title": "夏季休業のお知らせ"
+            })
+            @@include('partials/cards/news-item.html', {
+              "href": "./news-single.html",
+              "datetime": "2024-03-01",
+              "date": "2024.3.1",
+              "tag": "メディア掲載",
+              "title": "イベント出展のお知らせ【2024夏】"
+            })
+            @@include('partials/cards/news-item.html', {
+              "href": "./news-single.html",
+              "datetime": "2024-03-01",
+              "date": "2024.3.1",
+              "tag": "お知らせ",
+              "title": "【ご報告】導入社数1000社を突破しました！"
+            })
+            @@include('partials/cards/news-item.html', {
+              "href": "./news-single.html",
+              "datetime": "2024-03-01",
+              "date": "2024.3.1",
+              "tag": "お知らせ",
+              "title": "革新的な福利厚生サービスが登場！次世代の完全従業員ファーストの新サービス"
+            })
+          </ul>
+        </div>
+      </section>
+
+      @@include('partials/sections/cta-contact.html')
+    </main>
+
+    @@include('partials/footer.html')
+    <script src="./public/assets/js/script.js?v=17"></script>
+  </body>
+</html>

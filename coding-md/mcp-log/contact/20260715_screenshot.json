@@ -1,0 +1,41 @@
+{
+  "source": "get_screenshot + playwright",
+  "page": "contact",
+  "fetchedAt": "2026-07-15T00:50:00+09:00",
+  "figma": {
+    "nodeId": "1:2631",
+    "sections": [
+      { "name": "full-page", "nodeId": "1:2631" },
+      { "name": "form", "nodeId": "1:2695" }
+    ]
+  },
+  "playwright": {
+    "url": "http://localhost:8080/contact.html",
+    "files": [
+      "coding-md/screenshots/contact-page_fullpage_pc_20260715_004823.png",
+      "coding-md/screenshots/contact-page_fullpage_sp_20260715_004823.png",
+      "coding-md/screenshots/contact-page-r2_fullpage_pc_20260715_004938.png",
+      "coding-md/screenshots/contact-page-r2_fullpage_sp_20260715_004938.png",
+      "coding-md/screenshots/contact-page-r3_fullpage_pc_20260715_005014.png",
+      "coding-md/screenshots/contact-form_pc_20260715_004829.png",
+      "coding-md/screenshots/contact-form-r2_pc_20260715_004941.png",
+      "coding-md/screenshots/contact-form-r3_pc_20260715_005012.png",
+      "coding-md/screenshots/contact-hero_pc_20260715_004831.png"
+    ]
+  },
+  "comparisonRound1": {
+    "result": "needs_fix",
+    "notes": [
+      "全体構成・ヒーロー・フォーム項目はFigma一致",
+      "fieldset/legend のクリップ懸念あり → role=group に変更"
+    ]
+  },
+  "comparisonRound2": {
+    "result": "pass",
+    "notes": [
+      "お問い合わせ項目ラベルを p + role=group に変更して安定表示",
+      "PC/SP フルページともデザイン意図と一致",
+      "セクション単体スクショは固定ヘッダー重叠で先頭が隠れることがあるが、ページ全体では問題なし"
+    ]
+  }
+}

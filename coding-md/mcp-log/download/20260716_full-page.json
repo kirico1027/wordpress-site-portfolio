@@ -1,0 +1,53 @@
+{
+  "source": "get_design_context",
+  "nodeId": "1:3677",
+  "fetchedAt": "2026-07-16T00:34:00+09:00",
+  "page": "download",
+  "section": "full-page",
+  "frameName": "全てが揃うコーポレートサイト",
+  "notes": "資料ダウンロードページ。Contact CTA「資料ダウンロード」のリンク先。Header / page-hero(Download) / intro panel + form / Footer。CTA セクションなし。",
+  "structure": {
+    "hero": {
+      "en": "Download",
+      "ja": "資料ダウンロード",
+      "bg": "#f9f9f9",
+      "radiusBottom": 64,
+      "padding": { "top": 140, "bottom": 64 }
+    },
+    "intro": {
+      "bg": "#f9f9f9",
+      "radius": 16,
+      "padding": { "block": 40, "inlineStart": 40, "inlineEnd": 64 },
+      "gap": 64,
+      "image": { "width": 400, "height": 210, "radius": 4 },
+      "title": "この資料でわかること",
+      "titleColor": "#0096df",
+      "titleSize": 20,
+      "listGap": 8,
+      "checkColor": "#ffa76c",
+      "items": [
+        "BizLifeの３つのサービスが分かる",
+        "サービス導入後の効果事例が分かる",
+        "具体的な導入フローが分かる",
+        "これから求められる福利厚生が分かる"
+      ]
+    },
+    "form": {
+      "width": 560,
+      "fieldGap": 24,
+      "labelInputGap": 12,
+      "inputMinHeight": 50,
+      "fields": [
+        { "name": "お名前", "required": true },
+        { "name": "フリガナ", "required": true },
+        { "name": "メールアドレス", "required": true },
+        { "name": "メールアドレス（確認用）", "required": true },
+        { "name": "電話番号", "required": false },
+        { "name": "会社名", "required": true },
+        { "name": "プライバシーポリシーに同意する", "type": "checkbox", "required": true }
+      ],
+      "submit": { "label": "送信する", "width": 320, "height": 64 }
+    },
+    "contentPadding": { "top": 80, "bottom": 120, "inline": 32, "gap": 64, "maxWidth": 1184 }
+  }
+}

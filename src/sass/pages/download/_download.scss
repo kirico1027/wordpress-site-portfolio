@@ -1,0 +1,326 @@
+@use "../../foundation/functions" as *;
+@use "../../foundation/mixins" as *;
+
+// ---------------------------------------------------------------------------
+// Download page（Figma 1:3677）
+// ---------------------------------------------------------------------------
+
+.download-page {
+  padding-top: 0;
+}
+
+// ---------------------------------------------------------------------------
+// Content（intro + form）— 外枠 1184 / padding 32 / pt 80 / pb 120 / gap 64
+// ---------------------------------------------------------------------------
+
+.download-content {
+  @include fluid-pc-range(padding-top, 64, 80, $max-vw: 1905);
+  @include fluid-pc-range(padding-bottom, 80, 120, $max-vw: 1905);
+}
+
+.download-content__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+// ---------------------------------------------------------------------------
+// Intro panel — 資料カバー + わかることリスト
+// ---------------------------------------------------------------------------
+
+.download-intro {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: rem(896);
+  margin: 0;
+  padding: rem(40) rem(64) rem(40) rem(40);
+  border-radius: rem(16);
+  background: var(--color-bg-light);
+  column-gap: rem(64);
+  row-gap: rem(32);
+}
+
+.download-intro__figure {
+  flex: 0 1 rem(400);
+  width: 100%;
+  max-width: rem(400);
+  margin: 0;
+  aspect-ratio: 400 / 210;
+  border-radius: rem(4);
+  overflow: hidden;
+}
+
+.download-intro__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.download-intro__body {
+  flex: 1 1 rem(280);
+  min-width: 0;
+  max-width: rem(326);
+}
+
+.download-intro__title {
+  margin: 0;
+  font-size: rem(20);
+  font-weight: 700;
+  line-height: calc(30 / 20);
+  letter-spacing: 0.1em;
+  color: var(--color-primary);
+}
+
+.download-intro__list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0;
+  margin-top: rem(24);
+  padding: 0;
+  list-style: none;
+  row-gap: rem(8);
+}
+
+.download-intro__item {
+  display: flex;
+  align-items: center;
+  column-gap: rem(8);
+}
+
+.download-intro__check {
+  flex-shrink: 0;
+  font-size: rem(20);
+  line-height: 1;
+  color: var(--color-accent-orange);
+}
+
+.download-intro__text {
+  font-size: rem(16);
+  font-weight: 600;
+  line-height: calc(24 / 16);
+  letter-spacing: 0.1em;
+  color: var(--color-text);
+}
+
+// ---------------------------------------------------------------------------
+// Form — Contact と同型（幅 560 / gap 24）
+// ---------------------------------------------------------------------------
+
+.download-form {
+  width: 100%;
+  max-width: rem(560);
+  margin-top: rem(64);
+}
+
+.download-form__form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.download-form__field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.download-form__field + .download-form__field,
+.download-form__field + .download-form__actions {
+  margin-top: rem(24);
+}
+
+.download-form__label {
+  display: block;
+  margin: 0;
+  padding: 0;
+  font-size: rem(14);
+  font-weight: 700;
+  line-height: calc(19.6 / 14);
+  letter-spacing: 0.1em;
+  color: var(--color-text);
+}
+
+.download-form__required {
+  display: inline-block;
+  margin-left: rem(5);
+  color: var(--color-required);
+  font-size: rem(15);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.download-form__input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: rem(50);
+  margin: 0;
+  margin-top: rem(12);
+  padding: rem(11) rem(17);
+  border: 1px solid var(--color-border);
+  border-radius: rem(8);
+  background: var(--color-white);
+  color: var(--color-text);
+  font-family: var(--font-base);
+  font-size: rem(14);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.1em;
+  appearance: none;
+}
+
+.download-form__input::placeholder {
+  color: var(--color-border);
+  opacity: 1;
+}
+
+.download-form__input:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+}
+
+.download-form__agree {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.download-form__checkbox {
+  flex-shrink: 0;
+  width: rem(13);
+  height: rem(13);
+  margin: 0;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
+.download-form__agree-text {
+  margin-left: rem(10);
+  font-size: rem(14);
+  font-weight: 400;
+  line-height: calc(19.6 / 14);
+  letter-spacing: 0.05em;
+  color: var(--color-text);
+}
+
+.download-form__actions {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: rem(24);
+  padding-top: rem(24);
+}
+
+.download-form__submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: rem(320);
+  min-height: rem(64);
+  margin: 0;
+  padding: rem(15) rem(24);
+  border: 0;
+  border-radius: rem(48);
+  background: var(--color-dark);
+  color: var(--color-white);
+  font-family: var(--font-base);
+  font-size: rem(16);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-align: center;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.download-form__submit:hover {
+  opacity: 0.85;
+}
+
+.download-form__submit:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+@include mq {
+  .download-content {
+    @include fluid-sp-range(padding-top, 48, 64);
+    @include fluid-sp-range(padding-bottom, 64, 80);
+  }
+
+  .download-intro {
+    flex-direction: column;
+    align-items: stretch;
+    padding: rem(24);
+    column-gap: 0;
+    row-gap: rem(24);
+  }
+
+  .download-intro__figure {
+    flex: none;
+    max-width: none;
+  }
+
+  .download-intro__body {
+    flex: none;
+    max-width: none;
+  }
+
+  .download-intro__title {
+    @include fluid-sp-range(font-size, 18, 20);
+  }
+
+  .download-intro__text {
+    @include fluid-sp-range(font-size, 14, 16);
+  }
+
+  .download-form {
+    margin-top: rem(40);
+  }
+
+  .download-form__actions {
+    padding-top: rem(16);
+  }
+
+  .download-form__submit {
+    @include fluid-sp-range(font-size, 14, 16);
+    min-height: rem(56);
+  }
+}
+
+@include mq-top-pc-narrow {
+  .download-intro {
+    flex-wrap: nowrap;
+    padding-inline: rem(32);
+    column-gap: rem(32);
+  }
+
+  .download-intro__figure {
+    flex: 0 1 rem(340);
+  }
+
+  .download-intro__body {
+    flex: 1 1 0;
+    max-width: none;
+  }
+
+  .download-intro__text {
+    letter-spacing: 0.08em;
+  }
+}

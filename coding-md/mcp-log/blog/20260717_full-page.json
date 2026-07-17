@@ -1,0 +1,18 @@
+{
+  "source": "get_metadata",
+  "nodeId": "1:2",
+  "fetchedAt": "2026-07-17T01:02:00+09:00",
+  "page": "blog",
+  "section": "full-page",
+  "data": {
+    "name": "全てが揃うコーポレートサイト",
+    "width": 1920,
+    "height": 3325,
+    "sections": [
+      { "nodeId": "1:56", "name": "Featured Slider", "height": 692 },
+      { "nodeId": "1:194", "name": "Archive + Sidebar", "height": 1568 },
+      { "nodeId": "cta", "name": "CTA Contact (shared)" },
+      { "nodeId": "footer", "name": "Footer (shared)" }
+    ]
+  }
+}

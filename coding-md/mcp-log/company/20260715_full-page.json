@@ -1,0 +1,83 @@
+{
+  "source": "get_design_context",
+  "nodeId": "1:2907",
+  "fetchedAt": "2026-07-15T01:02:00+09:00",
+  "page": "company",
+  "section": "full-page",
+  "frameName": "全てが揃うコーポレートサイト",
+  "notes": "画像取得なし。デザイン情報のみ。",
+  "data": {
+    "structure": [
+      "Header（共通）",
+      "Page Hero: Company / 会社について",
+      "会社概要（定義リスト）",
+      "アクセス（住所 + マッププレースホルダ）",
+      "CTA CONTACT（共通）",
+      "Footer（共通）"
+    ],
+    "hero": {
+      "en": "Company",
+      "ja": "会社について",
+      "bg": "#f9f9f9",
+      "radiusBottom": 64,
+      "paddingTop": 140,
+      "paddingBottom": 64
+    },
+    "profile": {
+      "label": "会社概要",
+      "dot": "#0096df",
+      "contentWidth": 960,
+      "sectionPaddingY": 80,
+      "listPaddingTop": 40,
+      "rowPadding": { "top": 32, "bottom": 33, "left": 48, "right": 24 },
+      "border": "#dfdfdf",
+      "rows": [
+        { "term": "会社名", "desc": "株式会社Biz Life" },
+        { "term": "設立", "desc": "2029年3月15日" },
+        { "term": "代表", "desc": "一ノ瀬 一茶" },
+        { "term": "資本金", "desc": "2000万円" },
+        { "term": "住所", "desc": "〒361-9841 東京都中央区3-20-2シルバービルディング9F" },
+        {
+          "term": "事業内容",
+          "desc": [
+            "社員の幸福と健康を第一に考えた、これからの福利厚生プログラム",
+            "・Digital Wellbeing Program（デジタルデトックス推進）",
+            "・Workflow Management Program（セルフマネジメント推進）",
+            "・Mental Health Care Program（メンタルヘルスケア推進）"
+          ]
+        }
+      ],
+      "termWidth": 222,
+      "fontSize": 14,
+      "letterSpacing": "0.1em",
+      "termWeight": 700,
+      "descWeight": 500
+    },
+    "access": {
+      "label": "アクセス",
+      "dot": "#ffa76c",
+      "paddingTop": 80,
+      "paddingBottom": 160,
+      "addressMarginTop": 48,
+      "mapMarginTop": 24,
+      "map": { "width": 960, "height": 400, "bg": "#eeeeee", "radius": 4 },
+      "address": "〒361-9841 東京都中央区3-20-2シルバービルディング9F"
+    },
+    "cta": "既存 section-cta / cta-contact を流用",
+    "typography": {
+      "fontFamily": "Poppins",
+      "labelSize": 16,
+      "labelTracking": "0.1em",
+      "labelLineHeight": 1.7
+    },
+    "colors": {
+      "text": "#1e1e1e",
+      "primary": "#0096df",
+      "accentOrange": "#ffa76c",
+      "border": "#dfdfdf",
+      "bgLight": "#f9f9f9",
+      "mapBg": "#eeeeee",
+      "ctaBg": "#0096df"
+    }
+  }
+}
