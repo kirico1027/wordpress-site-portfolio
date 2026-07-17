@@ -1,0 +1,12 @@
+{
+  "source": "screenshot.cjs",
+  "page": "terms",
+  "url": "http://localhost:8080/terms.html",
+  "fetchedAt": "2026-07-17T17:43:37+09:00",
+  "viewport": "both",
+  "outputs": {
+    "pc": "coding-md/screenshots/terms_fullpage_fullpage_pc_20260717_174337.png",
+    "sp": "coding-md/screenshots/terms_fullpage_fullpage_sp_20260717_174337.png"
+  },
+  "figmaNodeId": "1:6108"
+}

@@ -1,0 +1,41 @@
+{
+  "source": "get_design_context",
+  "nodeId": "1:6108",
+  "fetchedAt": "2026-07-17T17:40:00+09:00",
+  "page": "terms",
+  "section": "full-page",
+  "data": {
+    "pageName": "利用規約",
+    "breadcrumb": {
+      "parent": { "en": "Home", "ja": "ホーム", "href": "./index.html" },
+      "current": "利用規約"
+    },
+    "layout": {
+      "background": "#ffffff",
+      "breadcrumbPaddingTop": "200px",
+      "contentPaddingTop": "80px",
+      "contentPaddingBottom": "160px",
+      "contentMaxWidth": "720px",
+      "listPaddingLeft": "20px"
+    },
+    "typography": {
+      "h1": { "fontSize": "28px", "fontWeight": 700, "lineHeight": "39.2px", "letterSpacing": "1.4px" },
+      "body": { "fontSize": "15px", "fontWeight": 500, "lineHeight": "27px", "letterSpacing": "0.75px" },
+      "sectionTitle": { "fontSize": "15px", "fontWeight": 900, "lineHeight": "27px", "letterSpacing": "0.75px" }
+    },
+    "colors": {
+      "text": "#1e1e1e",
+      "primary": "#0096df"
+    },
+    "sections": [
+      "利用規約の適用範囲",
+      "アカウントの作成",
+      "禁止事項",
+      "サービスの提供",
+      "知的財産権",
+      "免責事項",
+      "利用規約の変更"
+    ],
+    "closing": "以上が当社の利用規約です。ご理解とご同意の上、サービスをご利用いただきますようお願いいたします。"
+  }
+}

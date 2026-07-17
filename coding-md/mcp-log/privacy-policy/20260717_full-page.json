@@ -1,0 +1,35 @@
+{
+  "source": "get_design_context",
+  "nodeId": "1:5844",
+  "fetchedAt": "2026-07-17T17:32:00+09:00",
+  "page": "privacy-policy",
+  "section": "full-page",
+  "data": {
+    "pageName": "プライバシーポリシー",
+    "breadcrumb": {
+      "parent": { "en": "Home", "ja": "ホーム", "href": "./index.html" },
+      "current": "プライバシーポリシー"
+    },
+    "layout": {
+      "background": "#ffffff",
+      "breadcrumbPaddingTop": "200px",
+      "contentPaddingTop": "80px",
+      "contentPaddingBottom": "160px",
+      "contentMaxWidth": "720px",
+      "listPaddingLeft": "20px"
+    },
+    "typography": {
+      "h1": { "fontSize": "28px", "fontWeight": 700, "lineHeight": "39.2px", "letterSpacing": "1.4px" },
+      "body": { "fontSize": "15px", "fontWeight": 500, "lineHeight": "27px", "letterSpacing": "0.75px" },
+      "sectionTitle": { "fontSize": "15px", "fontWeight": 900, "lineHeight": "27px", "letterSpacing": "0.75px" }
+    },
+    "colors": {
+      "text": "#1e1e1e",
+      "primary": "#0096df",
+      "link": "#007cff"
+    },
+    "hasPageHero": false,
+    "hasCta": false,
+    "hasBackButton": false
+  }
+}

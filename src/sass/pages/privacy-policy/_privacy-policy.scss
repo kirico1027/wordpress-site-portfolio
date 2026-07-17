@@ -1,0 +1,249 @@
+@use "../../foundation/functions" as *;
+@use "../../foundation/mixins" as *;
+
+// ---------------------------------------------------------------------------
+// Privacy Policy page — Figma 1:5844 / main 1:5896 / content 1:5915
+// ---------------------------------------------------------------------------
+
+.privacy-policy-page {
+  background: var(--color-bg);
+}
+
+// ---------------------------------------------------------------------------
+// Breadcrumb
+// ---------------------------------------------------------------------------
+
+.privacy-policy__breadcrumb-area {
+  @include fluid-pc-range(padding-top, 160, 200, $max-vw: 1905);
+}
+
+.privacy-policy__breadcrumb-inner {
+  display: flex;
+  align-items: center;
+}
+
+.privacy-policy__breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: rem(12);
+  margin: 0;
+  padding: 0;
+}
+
+.privacy-policy__breadcrumb-parent {
+  display: inline-flex;
+  align-items: center;
+  gap: rem(16);
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.privacy-policy__breadcrumb-en {
+  font-size: rem(18);
+  font-weight: 600;
+  line-height: calc(25.2 / 18);
+  letter-spacing: rem(1.8);
+  color: var(--color-primary);
+}
+
+.privacy-policy__breadcrumb-ja {
+  font-size: rem(14);
+  font-weight: 700;
+  line-height: calc(14 / 14);
+  letter-spacing: rem(1.4);
+  color: var(--color-text);
+}
+
+.privacy-policy__breadcrumb-sep {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text);
+
+  .material-icons {
+    font-size: rem(24);
+  }
+}
+
+.privacy-policy__breadcrumb-current {
+  font-size: rem(14);
+  font-weight: 700;
+  line-height: calc(14 / 14);
+  letter-spacing: rem(1.4);
+  color: var(--color-text);
+}
+
+// ---------------------------------------------------------------------------
+// Content
+// ---------------------------------------------------------------------------
+
+.privacy-policy__inner {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: rem(720);
+  margin-inline: auto;
+  @include fluid-pc-range(padding-top, 64, 80, $max-vw: 1905);
+  @include fluid-pc-range(padding-bottom, 100, 160, $max-vw: 1905);
+}
+
+.privacy-policy__title {
+  margin: 0;
+  font-size: rem(28);
+  font-weight: 700;
+  line-height: calc(39.2 / 28);
+  letter-spacing: rem(1.4);
+  color: var(--color-text);
+}
+
+.privacy-policy__body {
+  margin-top: rem(32);
+}
+
+.privacy-policy__intro {
+  margin: 0;
+  font-size: rem(15);
+  font-weight: 500;
+  line-height: calc(27 / 15);
+  letter-spacing: rem(0.75);
+  color: var(--color-text);
+}
+
+.privacy-policy__list {
+  margin: rem(24) 0 0;
+  padding-left: rem(20);
+  list-style: decimal;
+}
+
+.privacy-policy__item {
+  font-size: rem(15);
+  font-weight: 500;
+  line-height: calc(27 / 15);
+  letter-spacing: rem(0.75);
+  color: var(--color-text);
+}
+
+.privacy-policy__item + .privacy-policy__item {
+  margin-top: rem(24);
+}
+
+.privacy-policy__item-title {
+  margin: 0;
+  font-size: inherit;
+  font-weight: 900;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+}
+
+.privacy-policy__item-text {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+}
+
+.privacy-policy__item-text + .privacy-policy__item-text,
+.privacy-policy__item-title + .privacy-policy__item-text {
+  margin-top: 0;
+}
+
+.privacy-policy__item-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.privacy-policy__item-list-entry {
+  margin: 0;
+}
+
+.privacy-policy__link {
+  color: #007cff;
+  text-decoration: underline;
+  text-underline-position: from-font;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.privacy-policy__revision {
+  margin-top: rem(24);
+}
+
+.privacy-policy__revision-text {
+  margin: 0;
+  font-size: rem(15);
+  font-weight: 500;
+  line-height: calc(27 / 15);
+  letter-spacing: rem(0.75);
+  color: var(--color-text);
+}
+
+// ---------------------------------------------------------------------------
+// Responsive
+// ---------------------------------------------------------------------------
+
+@include mq {
+  .privacy-policy__breadcrumb-area {
+    padding-top: rem(100);
+  }
+
+  .privacy-policy__breadcrumb-en {
+    font-size: rem(16);
+    letter-spacing: rem(1.6);
+  }
+
+  .privacy-policy__breadcrumb-ja,
+  .privacy-policy__breadcrumb-current {
+    font-size: rem(13);
+    letter-spacing: rem(1.3);
+  }
+
+  .privacy-policy__breadcrumb-parent {
+    gap: rem(10);
+  }
+
+  .privacy-policy__inner {
+    @include fluid-sp-range(padding-top, 48, 64);
+    @include fluid-sp-range(padding-bottom, 64, 100);
+  }
+
+  .privacy-policy__title {
+    @include fluid-sp-range(font-size, 22, 26);
+    line-height: 1.4;
+    letter-spacing: rem(1.1);
+  }
+
+  .privacy-policy__body {
+    margin-top: rem(24);
+  }
+
+  .privacy-policy__intro,
+  .privacy-policy__item,
+  .privacy-policy__revision-text {
+    font-size: rem(14);
+    line-height: calc(25.2 / 14);
+    letter-spacing: rem(0.7);
+  }
+
+  .privacy-policy__list {
+    margin-top: rem(20);
+    padding-left: rem(16);
+  }
+
+  .privacy-policy__item + .privacy-policy__item {
+    margin-top: rem(20);
+  }
+
+  .privacy-policy__revision {
+    margin-top: rem(20);
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "source": "get_screenshot",
+  "nodeId": "1:5844",
+  "fetchedAt": "2026-07-17T17:32:00+09:00",
+  "page": "privacy-policy",
+  "screenshots": {
+    "figma": "MCP get_screenshot (inline preview)",
+    "implementation": {
+      "pc": "coding-md/screenshots/privacy-policy_fullpage_fullpage_pc_20260717_173631.png",
+      "sp": "coding-md/screenshots/privacy-policy_fullpage_fullpage_sp_20260717_173631.png"
+    }
+  },
+  "viewports": {
+    "pc": { "width": 1920, "height": 1080 },
+    "sp": { "width": 375, "height": 812 }
+  },
+  "notes": "Figma カンプと実装を目視比較。レイアウト・タイポ・色は概ね一致。条項見出しは font-weight 900（Poppins Black）指定。"
+}
