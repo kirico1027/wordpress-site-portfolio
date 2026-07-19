@@ -1,0 +1,48 @@
+---
+description: 開閉UIはネイティブ details/summary を第一選択（汎用）
+globs: src/templates/**/*.html,src/sass/**/*.scss,src/public/assets/js/**/*.js
+alwaysApply: false
+---
+
+# ネイティブ `<details>` アコーディオン（汎用）
+
+開閉が必要な UI（募集要項・FAQ 等）は、**まず HTML の `<details>` / `<summary>`** を使う。
+
+## マークアップ
+
+```html
+<details class="{block}">
+  <summary class="{block}__summary">
+    <!-- 常時見える見出し・要約 -->
+  </summary>
+  <!-- 開いたときに見える本文（summary の外） -->
+</details>
+```
+
+- 初期オープンが必要なら `open` 属性
+- アイコンは CSS（`details[open]`）で向きを切り替える
+
+## スタイル
+
+- `summary` のデフォルトマーカーを消す:
+
+```scss
+{block}__summary {
+  list-style: none;
+  &::-webkit-details-marker {
+    display: none;
+  }
+}
+```
+
+- 開閉アニメや余白は BEM 要素で制御。JS で `display` を切り替えない
+
+## JS / ライブラリ
+
+- **アコーディオン専用ライブラリや自前トグルを新規導入しない**（キーボード・アクセシビリティはネイティブに任せる）
+- 例外: デザインがネイティブでは再現不能、またはユーザーが明示指定した場合のみ
+
+## 禁止
+
+- `button` + JS で同等の開閉をゼロから作り直す（既存 `details` パターンがある案件）
+- `summary` 内にインタラクティブな入れ子（リンクだらけ）を無理に詰め込む

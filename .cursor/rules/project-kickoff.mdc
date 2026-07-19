@@ -26,6 +26,18 @@ alwaysApply: true
 | タイポ（汎用） | `typography-rem-clamp.mdc` |
 | 数値・例外（BizLife） | `site-layout-tokens.mdc` |
 
+## 静的コーディングの構成（汎用）
+
+| 種別 | ルール |
+|------|--------|
+| templates / partials | `templates-partials.mdc` |
+| 下層ヒーロー | `page-hero.mdc` |
+| フォーム | `form-patterns.mdc` |
+| Sass 登録 | `sass-structure.mdc` |
+| アーカイブ一覧 | `archive-filter-cards.mdc` |
+| アコーディオン | `details-accordion.mdc` |
+| `?v=` | `cache-buster.mdc` |
+
 ## 後続工程
 
 ```

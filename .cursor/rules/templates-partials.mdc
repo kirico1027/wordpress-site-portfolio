@@ -1,0 +1,51 @@
+---
+description: 静的HTMLの templates / partials 構成と編集元（汎用）
+globs: src/templates/**/*.html,src/partials/**/*.html,src/*.html
+alwaysApply: false
+---
+
+# templates / partials 規約（汎用）
+
+## 編集元（正）
+
+| 編集する | 編集しない |
+|----------|------------|
+| `src/templates/*.html` | 生成物の `src/*.html` |
+| `src/partials/**` | （ビルドで上書きされる） |
+
+変更後は `npm run build`（`site-reflect-on-request.mdc`）。
+
+## ページ骨格
+
+```html
+<!doctype html>
+<html lang="ja">
+  <head>
+    @@include('partials/head.html', { "title": "ページ名 | サイト名" })
+  </head>
+  <body>
+    @@include('partials/header.html')
+    <main class="{page}-page">
+      <!-- コンテンツ -->
+    </main>
+    @@include('partials/footer.html')
+    <script src="./public/assets/js/script.js?v=N"></script>
+  </body>
+</html>
+```
+
+- `{page}` はページ識別子（例: `about-page`, `news-archive-page`）。
+- 共通シェル（head / header / footer）は **必ず partial**。ページ固有セクションも再利用なら `partials/sections/` または `partials/cards/`。
+
+## partials の置き場
+
+| 種類 | パス例 |
+|------|--------|
+| シェル | `partials/head.html`, `header.html`, `footer.html` |
+| 下層ヒーロー | `partials/page-hero.html` |
+| セクション | `partials/sections/*.html` |
+| カード | `partials/cards/*.html` |
+
+## WordPress 移行コメント
+
+テンプレート先頭付近に `<!-- WP: template名 / 役割 -->` を残す（例: `<!-- WP: archive-news.php / CPT news アーカイブ -->`）。

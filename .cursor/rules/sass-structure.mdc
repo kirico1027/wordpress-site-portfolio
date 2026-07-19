@@ -1,0 +1,42 @@
+---
+description: Sass ディレクトリ構成と main.scss への @use 登録（汎用）
+globs: src/sass/**/*.scss
+alwaysApply: false
+---
+
+# Sass ディレクトリ規約（汎用）
+
+## ディレクトリ
+
+| 層 | 役割 | 例 |
+|----|------|-----|
+| `foundation/` | 変数・リセット・mixin | `_variables.scss`, `_reset.scss` |
+| `layout/` | 土台レイアウト | `_container.scss` |
+| `components/` | 再利用パーツ（1コンポーネント1フォルダ） | `page-hero/_page-hero.scss` |
+| `pages/` | ページ固有 | `about/_about.scss` |
+
+- CSS の手編集はしない。正は Sass → `npm run build`（`markup-bem-css.mdc` / `site-reflect-on-request.mdc`）
+
+## 新規追加時の必須手順
+
+1. 適切な層に `_name.scss` を作成
+2. **エントリー（`src/sass/main.scss`）に `@use` を追加**
+3. `npm run build` で `main.css` を再生成
+
+```scss
+// ❌ BAD — ファイルを作っただけで @use していない
+// ✅ GOOD
+@use "components/page-hero/page-hero";
+@use "pages/about/about";
+```
+
+## 置き場所の判断
+
+- **2ページ以上で同じ見た目・意味** → `components/`
+- **1ページだけ** → `pages/{page}/`
+- ヘッダー・フッター等のグローバルシェルは、案件で「どの SCSS が単一ソースか」を固定し、そこ以外に複製しない
+
+## 禁止
+
+- `main.scss` 未登録のままスタイルを期待する
+- コンパイル後の `src/public/assets/css/*.css` を正として編集する

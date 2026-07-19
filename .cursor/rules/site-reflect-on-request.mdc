@@ -10,8 +10,8 @@ alwaysApply: true
 ## 毎回実行する手順
 
 1. **`npm run build`** — `gulp styles` + `htmlIncludes` で `src/*.html` と `main.css` を再生成
-2. **キャッシュバスター** — `main.css` / `script.js` を変更したら `src/partials/head.html` と各 `src/templates/*.html` の `?v=` をインクリメントしてから再ビルド
-3. **編集元の確認** — 生成 HTML（`src/index.html` 等）を直接編集しない。正は `templates/` + `partials/`
+2. **キャッシュバスター** — `main.css` / `script.js` を変更したら `?v=` を更新してから再ビルド（詳細は `cache-buster.mdc`）
+3. **編集元の確認** — 生成 HTML（`src/index.html` 等）を直接編集しない。正は `templates/` + `partials/`（骨格は `templates-partials.mdc`）
 
 ## 対象ファイル
 

@@ -1,0 +1,39 @@
+---
+description: 下層ページ共通ヒーロー（page-hero partial）。トップFVとは別（汎用）
+globs: src/partials/page-hero.html,src/templates/**/*.html,src/sass/components/page-hero/**/*.scss
+alwaysApply: false
+---
+
+# 下層 Page Hero（汎用）
+
+トップのフルビューポート FV（`hero-viewport-height.mdc`）とは **別系統**。下層の H1 帯は共有 partial を使う。
+
+## 必須
+
+- マークアップは **`src/partials/page-hero.html` のみ**。各テンプレートへ直書きしない。
+- スタイルは `src/sass/components/page-hero/`（または同等の components 配下）。ページ SCSS にヒーロー本体を複製しない。
+
+## include パラメータ
+
+| キー | 用途 |
+|------|------|
+| `heroModifier` | 修飾クラス（例: `page-hero--light`）。不要なら空文字 |
+| `heroHeadingId` | `h1` の `id`（ページ固有・一意） |
+| `heroTitleEn` | 英字タイトル（`h1`） |
+| `heroTitleJa` | 日本語リード（`p.page-hero__lead`） |
+| `heroImgSrc` | 背景画像パス。無しなら `""` |
+
+```html
+@@include('partials/page-hero.html', {
+  "heroModifier": "page-hero--light",
+  "heroHeadingId": "about-hero-heading",
+  "heroTitleEn": "About",
+  "heroTitleJa": "私たちについて",
+  "heroImgSrc": ""
+})
+```
+
+## 禁止
+
+- 下層だけ別クラス名のヒーローを新設する（見た目差は **修飾子** で吸収）。
+- トップ FV 用クラス（例: `.hero`）を下層に流用する。

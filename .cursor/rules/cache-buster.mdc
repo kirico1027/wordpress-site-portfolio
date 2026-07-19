@@ -1,0 +1,36 @@
+---
+description: CSS/JS の ?v= キャッシュバスターを一箇所・全ページ同値に揃える（汎用）
+globs: src/partials/head.html,src/templates/**/*.html
+alwaysApply: false
+---
+
+# キャッシュバスター `?v=`（汎用）
+
+`main.css` / `script.js` を変えたらクエリを上げる（`site-reflect-on-request.mdc` / `js-structure.mdc` と併用）。
+
+## 置き場所
+
+| アセット | 書く場所 | ルール |
+|----------|----------|--------|
+| `main.css` | **`partials/head.html` のみ** | 1箇所。テンプレートに CSS の `?v=` を書かない |
+| `script.js` | **各 `templates/*.html` 末尾** | **全ページ同じ数字** |
+
+```html
+<!-- head.html -->
+<link rel="stylesheet" href="./public/assets/css/main.css?v=116" />
+
+<!-- 各 template 末尾 — すべて同じ N -->
+<script src="./public/assets/js/script.js?v=17"></script>
+```
+
+## 更新手順
+
+1. CSS 変更 → `head.html` の `main.css?v=` を +1
+2. JS 変更 → **全 template** の `script.js?v=` を同じ値に +1（1ページだけ上げない）
+3. `npm run build`
+
+## 禁止
+
+- ページによって `script.js?v=` が違う状態を残す
+- 生成 HTML（`src/*.html`）だけ `?v=` をいじる
+- CSS のバージョンを template 側に分散させる

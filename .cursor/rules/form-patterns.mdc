@@ -1,0 +1,53 @@
+---
+description: お問い合わせ系フォームの静的マークアップ規約（汎用・CF7移行前）
+globs: src/templates/**/{contact,download,entry}*.html,src/sass/pages/**/{contact,download,entry}*.scss
+alwaysApply: false
+---
+
+# フォーム実装パターン（汎用）
+
+Contact / Download / Entry など **送信フォーム** は次の構造に揃える（フィールド名は案件で変えてよい）。
+
+## 骨格
+
+```html
+<section class="{block}" aria-labelledby="{block}-heading">
+  <h2 id="{block}-heading" class="u-visually-hidden">フォームの見出し</h2>
+  <div class="container {block}__inner">
+    <form class="{block}__form" action="#" method="post" novalidate>
+      <!-- fields -->
+    </form>
+  </div>
+</section>
+```
+
+- `{block}` 例: `contact-form`, `download-form`, `entry-form`
+- 静的段階は `novalidate`。本番検証は WP / CF7 側を想定
+
+## 必須フィールドのラベル
+
+```html
+<label class="{block}__label" for="...">
+  ラベル文<span class="{block}__required" aria-hidden="true">*</span>
+  <span class="u-visually-hidden">（必須）</span>
+</label>
+```
+
+- 視覚の `*` は `aria-hidden="true"`
+- 読み上げ用に `u-visually-hidden` で「（必須）」を併記
+- 入力には `required` / 適切な `autocomplete` / `type`
+
+## 同意・送信
+
+- プライバシー等の同意は `type="checkbox"` + `required`
+- 送信は `{block}__submit`（または同等）。ページごとに見た目だけ変える
+
+## スタイル
+
+- フォーム幅はコンテナ内で **`max-width` で制限**（本プロジェクト例: `560px`）。全幅べた張りにしない
+- ページ SCSS に置く。共通化が必要になったら `components/` へ昇格
+
+## 禁止
+
+- 必須を色や `*` だけに頼る（スクリーンリーダー用テキスト無し）
+- ページごとに `__field` / `__label` / `__required` の意味を変える

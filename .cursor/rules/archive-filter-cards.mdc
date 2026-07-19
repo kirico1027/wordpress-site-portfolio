@@ -1,0 +1,46 @@
+---
+description: アーカイブ一覧のカテゴリフィルターとカード partial（汎用）
+globs: src/templates/**/*archive*.html,src/partials/cards/**/*.html,src/sass/pages/**/*archive*.scss
+alwaysApply: false
+---
+
+# Archive フィルター + カードリスト（汎用）
+
+News / Works など **一覧アーカイブ** は次の型に揃える。
+
+## フィルター
+
+```html
+<nav class="{archive}__filters" aria-label="カテゴリフィルター">
+  <a class="{archive}__filter {archive}__filter--active" href="..." aria-current="page">すべて</a>
+  <ul class="{archive}__filter-list">
+    <li class="{archive}__filter-item">
+      <a class="{archive}__filter" href="#">カテゴリ名</a>
+    </li>
+  </ul>
+</nav>
+```
+
+- 現在地は **`--active` + `aria-current="page"`** の両方
+- 静的段階はリンク先 `#` でも可。WP 化時にターム URL へ差し替え
+
+## カードリスト
+
+- 各行・各カードは **`@@include('partials/cards/...')`**。テンプレート内にカード HTML を直書きしない
+- リストは `<ul class="{archive}__list">` + カード partial（または `<li>` を partial 内に含む）
+
+```html
+<ul class="news-archive__list">
+  @@include('partials/cards/news-item.html', { "href": "...", "title": "..." })
+</ul>
+```
+
+## 共通化の目安
+
+- フィルター UI が News / Works で同型なら、後から `partials/` に `filter-tabs` 等へ寄せてよい
+- **先にテンプレ直書きを増やさない**。差は BEM ブロック名とカード partial の差で吸収
+
+## 禁止
+
+- アーカイブごとにフィルターの ARIA / active 表現を変える
+- 同じカード見た目をページ SCSS + テンプレ直書きで二重管理する
