@@ -127,9 +127,142 @@
     update();
   }
 
+  function prefersReducedMotion() {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }
+
+  function isElementInViewport(el, bottomOffsetRatio) {
+    var ratio = typeof bottomOffsetRatio === "number" ? bottomOffsetRatio : 0.2;
+    var rect = el.getBoundingClientRect();
+    var triggerLine = window.innerHeight * (1 - ratio);
+    return rect.top < triggerLine && rect.bottom > 0;
+  }
+
+  function markRevealedOnAnimationEnd(el) {
+    function onEnd(event) {
+      if (event.target !== el) return;
+      el.classList.add("is-revealed");
+      el.removeEventListener("animationend", onEnd);
+    }
+    el.addEventListener("animationend", onEnd);
+  }
+
+  function markHeadingRevealedOnLastChild(heading) {
+    var title = heading.querySelector(".section-heading__title");
+    var target = title || heading;
+
+    function onEnd(event) {
+      if (event.target !== target) return;
+      heading.classList.add("is-revealed");
+      target.removeEventListener("animationend", onEnd);
+    }
+
+    target.addEventListener("animationend", onEnd);
+  }
+
+  function activateRevealEl(el) {
+    if (el.classList.contains("is-inview")) return;
+    el.classList.add("is-inview");
+
+    if (el.classList.contains("works__slider-wrap")) {
+      var cards = el.querySelectorAll(".works-card");
+      var last = cards.length ? cards[cards.length - 1] : el;
+
+      function onEnd(event) {
+        if (event.target !== last) return;
+        el.classList.add("is-revealed");
+        last.removeEventListener("animationend", onEnd);
+      }
+
+      last.addEventListener("animationend", onEnd);
+      return;
+    }
+
+    markRevealedOnAnimationEnd(el);
+  }
+
+  function activateHeadingReveal(heading) {
+    if (heading.classList.contains("is-inview")) return;
+    heading.classList.add("is-inview");
+    markHeadingRevealedOnLastChild(heading);
+  }
+
+  function observeRevealTargets(targets, activateFn) {
+    if (!targets.length) return;
+
+    if (prefersReducedMotion()) {
+      targets.forEach(function (el) {
+        el.classList.add("is-inview", "is-revealed");
+      });
+      return;
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      targets.forEach(activateFn);
+      return;
+    }
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          activateFn(entry.target);
+          observer.unobserve(entry.target);
+        });
+      },
+      { root: null, rootMargin: "0px 0px -10% 0px", threshold: 0 }
+    );
+
+    targets.forEach(function (el) {
+      if (isElementInViewport(el, 0.1)) {
+        activateFn(el);
+        return;
+      }
+      observer.observe(el);
+    });
+  }
+
+  function enableScrollReveal() {
+    document.documentElement.classList.add("scroll-reveal-active");
+  }
+
+  function primeSectionHeadingRevealIfVisible() {
+    document.querySelectorAll(".js-section-heading-reveal").forEach(function (el) {
+      el.classList.add("is-inview", "is-revealed");
+    });
+  }
+
+  function primeScrollRevealIfVisible() {
+    document.querySelectorAll(".js-scroll-reveal").forEach(function (el) {
+      el.classList.add("is-inview", "is-revealed");
+    });
+  }
+
+  function initSectionHeadingScrollReveal() {
+    var headings = document.querySelectorAll(".js-section-heading-reveal");
+    if (!headings.length) return;
+    enableScrollReveal();
+    observeRevealTargets(Array.prototype.slice.call(headings), activateHeadingReveal);
+  }
+
+  function initScrollReveal() {
+    var parts = document.querySelectorAll(".js-scroll-reveal");
+    if (!parts.length) return;
+    enableScrollReveal();
+    observeRevealTargets(Array.prototype.slice.call(parts), activateRevealEl);
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initHeaderDrawer();
     initWorksSlider();
     initBlogFeaturedSlider();
+    initSectionHeadingScrollReveal();
+    initScrollReveal();
+  });
+
+  window.addEventListener("pageshow", function (event) {
+    if (!event.persisted) return;
+    primeSectionHeadingRevealIfVisible();
+    primeScrollRevealIfVisible();
   });
 })();

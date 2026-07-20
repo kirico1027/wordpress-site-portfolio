@@ -108,6 +108,10 @@ body {
   transform: translateY(-0.0625rem);
 }
 
+.section-heading__en-text {
+  display: inline-block;
+}
+
 .section-heading__title {
   margin: 0.5rem 0 0;
   font-size: clamp(1.375rem, 4vw, 1.75rem);
@@ -117,6 +121,74 @@ body {
   color: var(--color-text);
 }
 
+@keyframes section-heading-dot-in {
+  from {
+    opacity: 0;
+    transform: translateY(-0.0625rem) scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-0.0625rem) scale(1);
+  }
+}
+@keyframes section-heading-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html.js.scroll-reveal-active .js-section-heading-reveal:not(.is-inview) .section-heading__dot,
+  html.js.scroll-reveal-active .js-section-heading-reveal:not(.is-inview) .section-heading__en-text,
+  html.js.scroll-reveal-active .js-section-heading-reveal:not(.is-inview) .section-heading__title {
+    opacity: 0;
+  }
+  html.js.scroll-reveal-active .js-section-heading-reveal:not(.is-inview) .section-heading__dot {
+    transform: translateY(-0.0625rem) scale(0);
+  }
+  html.js.scroll-reveal-active .js-section-heading-reveal:not(.is-inview) .section-heading__en-text,
+  html.js.scroll-reveal-active .js-section-heading-reveal:not(.is-inview) .section-heading__title {
+    transform: translateY(0.75rem);
+  }
+  html.js.scroll-reveal-active .js-section-heading-reveal.is-inview:not(.is-revealed) .section-heading__dot,
+  html.js.scroll-reveal-active .js-section-heading-reveal.is-inview:not(.is-revealed) .section-heading__en-text,
+  html.js.scroll-reveal-active .js-section-heading-reveal.is-inview:not(.is-revealed) .section-heading__title {
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+  html.js.scroll-reveal-active .js-section-heading-reveal.is-inview:not(.is-revealed) .section-heading__dot {
+    animation-name: section-heading-dot-in;
+    animation-duration: 0.4s;
+    animation-delay: 0ms;
+  }
+  html.js.scroll-reveal-active .js-section-heading-reveal.is-inview:not(.is-revealed) .section-heading__en-text {
+    animation-name: section-heading-fade-up;
+    animation-duration: 0.5s;
+    animation-delay: 120ms;
+  }
+  html.js.scroll-reveal-active .js-section-heading-reveal.is-inview:not(.is-revealed) .section-heading__title {
+    animation-name: section-heading-fade-up;
+    animation-duration: 0.55s;
+    animation-delay: 240ms;
+  }
+  html.js.scroll-reveal-active .js-section-heading-reveal.is-revealed .section-heading__dot,
+  html.js.scroll-reveal-active .js-section-heading-reveal.is-revealed .section-heading__en-text,
+  html.js.scroll-reveal-active .js-section-heading-reveal.is-revealed .section-heading__title {
+    opacity: 1;
+    animation: none;
+  }
+  html.js.scroll-reveal-active .js-section-heading-reveal.is-revealed .section-heading__dot {
+    transform: translateY(-0.0625rem);
+  }
+  html.js.scroll-reveal-active .js-section-heading-reveal.is-revealed .section-heading__en-text,
+  html.js.scroll-reveal-active .js-section-heading-reveal.is-revealed .section-heading__title {
+    transform: none;
+  }
+}
 @media (max-width: 768px) {
   .section-heading__en {
     font-size: clamp(1rem, 1rem + (100vw - 375px) * 2 / 393, 1.125rem);
@@ -1422,6 +1494,123 @@ body {
   overflow-wrap: anywhere;
 }
 
+@keyframes header-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes hero-fade-up-sm {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes hero-figure-grow {
+  from {
+    opacity: 0;
+    transform: scale(0.1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes hero-divider-in {
+  from {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html.js body:has(.hero) .top-header__inner {
+    animation-name: header-fade-in;
+    animation-duration: 0.55s;
+    animation-delay: 0.06s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+  html.js .hero__title-line,
+  html.js .hero__divider,
+  html.js .hero__lead,
+  html.js .hero__shape,
+  html.js .hero__figure,
+  html.js .hero-news {
+    animation-duration: 0.6s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+  html.js .hero__title-line {
+    animation-name: hero-fade-up;
+  }
+  html.js .hero__title-line:nth-child(1) {
+    animation-delay: 0.4s;
+  }
+  html.js .hero__title-line:nth-child(2) {
+    animation-delay: 0.52s;
+    animation-duration: 0.7s;
+  }
+  html.js .hero__title-line:nth-child(3) {
+    animation-delay: 0.64s;
+  }
+  html.js .hero__divider {
+    transform-origin: left center;
+    animation-name: hero-divider-in;
+    animation-delay: 0.78s;
+    animation-duration: 0.5s;
+  }
+  html.js .hero__lead {
+    animation-name: hero-fade-up-sm;
+    animation-delay: 0.88s;
+  }
+  html.js .hero__shape,
+  html.js .hero__figure {
+    transform-origin: center center;
+    animation-name: hero-figure-grow;
+    animation-duration: 1.15s;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  html.js .hero__shape--orange {
+    animation-delay: 0.72s;
+  }
+  html.js .hero__figure--main {
+    animation-delay: 0.8s;
+  }
+  html.js .hero__shape--green {
+    animation-delay: 0.88s;
+  }
+  html.js .hero__shape--blue {
+    animation-delay: 0.96s;
+  }
+  html.js .hero__figure--sub {
+    animation-delay: 1.04s;
+  }
+  html.js .hero-news {
+    animation-name: hero-fade-up-sm;
+    animation-delay: 1.22s;
+    animation-duration: 0.55s;
+  }
+}
 @media (min-width: 769px) {
   .hero__visual {
     container-type: inline-size;
@@ -1731,6 +1920,63 @@ body {
   letter-spacing: 0.1rem;
 }
 
+@keyframes about-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes about-grow {
+  from {
+    opacity: 0;
+    transform: scale(0.55);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html.js.scroll-reveal-active .about .js-scroll-reveal:not(.is-inview) {
+    opacity: 0;
+  }
+  html.js.scroll-reveal-active .about .about__text.js-scroll-reveal:not(.is-inview),
+  html.js.scroll-reveal-active .about .btn-more.js-scroll-reveal:not(.is-inview) {
+    transform: translateY(1rem);
+  }
+  html.js.scroll-reveal-active .about .about__figure.js-scroll-reveal:not(.is-inview),
+  html.js.scroll-reveal-active .about .about__shape.js-scroll-reveal:not(.is-inview) {
+    transform: scale(0.55);
+  }
+  html.js.scroll-reveal-active .about .js-scroll-reveal.is-inview:not(.is-revealed) {
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+  html.js.scroll-reveal-active .about .about__text.js-scroll-reveal.is-inview:not(.is-revealed),
+  html.js.scroll-reveal-active .about .btn-more.js-scroll-reveal.is-inview:not(.is-revealed) {
+    animation-name: about-fade-up;
+    animation-duration: 0.55s;
+  }
+  html.js.scroll-reveal-active .about .about__figure.js-scroll-reveal.is-inview:not(.is-revealed),
+  html.js.scroll-reveal-active .about .about__shape.js-scroll-reveal.is-inview:not(.is-revealed) {
+    transform-origin: center center;
+    animation-name: about-grow;
+    animation-duration: 0.85s;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  html.js.scroll-reveal-active .about .btn-more.js-scroll-reveal.is-inview:not(.is-revealed) {
+    animation-duration: 0.5s;
+  }
+  html.js.scroll-reveal-active .about .js-scroll-reveal.is-revealed {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
 @media (max-width: 768px) {
   .about.section {
     padding-bottom: 4rem;
@@ -1834,6 +2080,26 @@ body {
   list-style: none;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  html.js.scroll-reveal-active .services .js-scroll-reveal:not(.is-inview) {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  html.js.scroll-reveal-active .services .js-scroll-reveal.is-inview:not(.is-revealed) {
+    animation-name: about-fade-up;
+    animation-duration: 0.55s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+  html.js.scroll-reveal-active .services .service-card.js-scroll-reveal.is-inview:not(.is-revealed) {
+    animation-duration: 0.6s;
+  }
+  html.js.scroll-reveal-active .services .js-scroll-reveal.is-revealed {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
 @media (max-width: 768px) {
   .services__inner {
     display: flex;
@@ -1904,6 +2170,65 @@ body {
   display: none;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  html.js.scroll-reveal-active .works .works__text.js-scroll-reveal:not(.is-inview),
+  html.js.scroll-reveal-active .works .btn-more.js-scroll-reveal:not(.is-inview) {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  html.js.scroll-reveal-active .works .works__text.js-scroll-reveal.is-inview:not(.is-revealed),
+  html.js.scroll-reveal-active .works .btn-more.js-scroll-reveal.is-inview:not(.is-revealed) {
+    animation-name: about-fade-up;
+    animation-duration: 0.55s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+  html.js.scroll-reveal-active .works .works__slider-wrap.js-scroll-reveal:not(.is-inview) .works-card {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  html.js.scroll-reveal-active .works .works__slider-wrap.js-scroll-reveal.is-inview:not(.is-revealed) .works-card {
+    animation-name: about-fade-up;
+    animation-duration: 0.55s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+  html.js.scroll-reveal-active .works .works__slider-wrap.js-scroll-reveal.is-inview:not(.is-revealed) .works-card:nth-child(1) {
+    animation-delay: 0ms;
+  }
+  html.js.scroll-reveal-active .works .works__slider-wrap.js-scroll-reveal.is-inview:not(.is-revealed) .works-card:nth-child(2) {
+    animation-delay: 70ms;
+  }
+  html.js.scroll-reveal-active .works .works__slider-wrap.js-scroll-reveal.is-inview:not(.is-revealed) .works-card:nth-child(3) {
+    animation-delay: 140ms;
+  }
+  html.js.scroll-reveal-active .works .works__slider-wrap.js-scroll-reveal.is-inview:not(.is-revealed) .works-card:nth-child(4) {
+    animation-delay: 210ms;
+  }
+  html.js.scroll-reveal-active .works .works__slider-wrap.js-scroll-reveal.is-inview:not(.is-revealed) .works-card:nth-child(5) {
+    animation-delay: 280ms;
+  }
+  html.js.scroll-reveal-active .works .works__slider-wrap.js-scroll-reveal.is-inview:not(.is-revealed) .works-card:nth-child(6) {
+    animation-delay: 350ms;
+  }
+  html.js.scroll-reveal-active .works .works__slider-wrap.js-scroll-reveal.is-inview:not(.is-revealed) .works-card:nth-child(7) {
+    animation-delay: 420ms;
+  }
+  html.js.scroll-reveal-active .works .works__slider-wrap.js-scroll-reveal.is-inview:not(.is-revealed) .works-card:nth-child(8) {
+    animation-delay: 490ms;
+  }
+  html.js.scroll-reveal-active .works .works__text.js-scroll-reveal.is-revealed,
+  html.js.scroll-reveal-active .works .btn-more.js-scroll-reveal.is-revealed {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+  html.js.scroll-reveal-active .works .works__slider-wrap.js-scroll-reveal.is-revealed .works-card {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
 @media (max-width: 768px) {
   .works__header {
     flex-direction: column;

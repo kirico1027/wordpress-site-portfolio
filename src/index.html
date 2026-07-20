@@ -37,7 +37,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/brands.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="./public/assets/css/main.css?v=144" />
+<link rel="stylesheet" href="./public/assets/css/main.css?v=164" />
 
   </head>
   <body>
@@ -164,12 +164,12 @@
     <div class="about__visual">
       <div class="about__visual-scaler">
         <div class="about__visual-collage">
-        <figure class="about__figure about__figure--main">
+        <figure class="about__figure about__figure--main js-scroll-reveal">
           <img src="./public/assets/img/top/about-01.png" alt="" width="350" height="233" />
         </figure>
         <div class="about__figure-row">
-          <span class="about__shape" aria-hidden="true"></span>
-          <figure class="about__figure about__figure--sub">
+          <span class="about__shape js-scroll-reveal" aria-hidden="true"></span>
+          <figure class="about__figure about__figure--sub js-scroll-reveal">
             <img src="./public/assets/img/top/about-02.png" alt="" width="240" height="160" />
           </figure>
         </div>
@@ -178,16 +178,19 @@
     </div>
     <div class="about__content">
       <!-- WP: get_template_part('template-parts/sections/section-heading') -->
-<div class="section-heading">
-  <p class="section-heading__en"><span class="section-heading__dot" aria-hidden="true"></span>About us</p>
+<div class="section-heading js-section-heading-reveal">
+  <p class="section-heading__en">
+    <span class="section-heading__dot" aria-hidden="true"></span>
+    <span class="section-heading__en-text">About us</span>
+  </p>
   <h2 class="section-heading__title">私たちについて</h2>
 </div>
 
       <!-- WP: get_template_part('template-parts/sections/section-body') -->
-<p class="about__text section-body section-body--about">Biz Lifeは社員の幸せと企業の成功を追求し、革新的なメンタルヘルスサポートを提供しています。私たちは社員ファーストの理念に基づき、社員が健康で充実した人生を送り、企業が持続可能な成功を収めるためのパートナーとして、常に前進しています。</p>
+<p class="about__text js-scroll-reveal section-body section-body--about">Biz Lifeは社員の幸せと企業の成功を追求し、革新的なメンタルヘルスサポートを提供しています。私たちは社員ファーストの理念に基づき、社員が健康で充実した人生を送り、企業が持続可能な成功を収めるためのパートナーとして、常に前進しています。</p>
 
       <!-- WP: 固定ページリンク / アーカイブリンク -->
-<a class="btn-more " href="./about.html"><span class="btn-more__label">私たちについて</span><span class="btn-more__icon" aria-hidden="true"><span class="material-icons">keyboard_arrow_right</span></span></a>
+<a class="btn-more js-scroll-reveal" href="./about.html"><span class="btn-more__label">私たちについて</span><span class="btn-more__icon" aria-hidden="true"><span class="material-icons">keyboard_arrow_right</span></span></a>
 
     </div>
   </div>
@@ -198,21 +201,24 @@
   <div class="container services__inner">
     <div class="services__intro">
       <!-- WP: get_template_part('template-parts/sections/section-heading') -->
-<div class="section-heading">
-  <p class="section-heading__en"><span class="section-heading__dot" aria-hidden="true"></span>Service</p>
+<div class="section-heading js-section-heading-reveal">
+  <p class="section-heading__en">
+    <span class="section-heading__dot" aria-hidden="true"></span>
+    <span class="section-heading__en-text">Service</span>
+  </p>
   <h2 class="section-heading__title">事業内容</h2>
 </div>
 
       <!-- WP: get_template_part('template-parts/sections/section-body') -->
-<p class="services__text section-body ">Biz Lifeでは現代のテクノロジーとライフスタイルに即した福利厚生プログラムとして、社員の悩みや不安に寄り添い、健康で幸せな職場環境を構築します。</p>
+<p class="services__text js-scroll-reveal section-body ">Biz Lifeでは現代のテクノロジーとライフスタイルに即した福利厚生プログラムとして、社員の悩みや不安に寄り添い、健康で幸せな職場環境を構築します。</p>
 
       <!-- WP: 固定ページリンク / アーカイブリンク -->
-<a class="btn-more " href="./service.html"><span class="btn-more__label">サービスについて</span><span class="btn-more__icon" aria-hidden="true"><span class="material-icons">keyboard_arrow_right</span></span></a>
+<a class="btn-more js-scroll-reveal" href="./service.html"><span class="btn-more__label">サービスについて</span><span class="btn-more__icon" aria-hidden="true"><span class="material-icons">keyboard_arrow_right</span></span></a>
 
     </div>
     <ul class="services__list">
       <!-- WP: get_template_part('template-parts/cards/service-card') — Service 固定ページ Repeater / 外部URL -->
-<li class="service-card">
+<li class="service-card js-scroll-reveal">
   <div class="service-card__head">
     <p class="service-card__num">01</p>
     <h3 class="service-card__title">みんなの福利厚生クラウド</h3>
@@ -223,7 +229,7 @@
 </li>
 
       <!-- WP: get_template_part('template-parts/cards/service-card') — Service 固定ページ Repeater / 外部URL -->
-<li class="service-card">
+<li class="service-card js-scroll-reveal">
   <div class="service-card__head">
     <p class="service-card__num">02</p>
     <h3 class="service-card__title">つながるワークフロー</h3>
@@ -234,7 +240,7 @@
 </li>
 
       <!-- WP: get_template_part('template-parts/cards/service-card') — Service 固定ページ Repeater / 外部URL -->
-<li class="service-card">
+<li class="service-card js-scroll-reveal">
   <div class="service-card__head">
     <p class="service-card__num">03</p>
     <h3 class="service-card__title">あなたのメンタルコーチ</h3>
@@ -253,20 +259,23 @@
   <div class="container works__header">
     <div class="works__intro">
       <!-- WP: get_template_part('template-parts/sections/section-heading') -->
-<div class="section-heading">
-  <p class="section-heading__en"><span class="section-heading__dot" aria-hidden="true"></span>Works</p>
+<div class="section-heading js-section-heading-reveal">
+  <p class="section-heading__en">
+    <span class="section-heading__dot" aria-hidden="true"></span>
+    <span class="section-heading__en-text">Works</span>
+  </p>
   <h2 class="section-heading__title">実績紹介</h2>
 </div>
 
       <!-- WP: get_template_part('template-parts/sections/section-body') -->
-<p class="works__text section-body ">業種や形態問わず、さまざまなクライアント様にご活用いただいております。<br />新しい福利厚生の形として事業規模や用途に合わせご支援が可能です。</p>
+<p class="works__text js-scroll-reveal section-body ">業種や形態問わず、さまざまなクライアント様にご活用いただいております。<br />新しい福利厚生の形として事業規模や用途に合わせご支援が可能です。</p>
 
     </div>
     <!-- WP: 固定ページリンク / アーカイブリンク -->
-<a class="btn-more btn-more--header" href="./works-archive.html"><span class="btn-more__label">一覧をみる</span><span class="btn-more__icon" aria-hidden="true"><span class="material-icons">keyboard_arrow_right</span></span></a>
+<a class="btn-more btn-more--header js-scroll-reveal" href="./works-archive.html"><span class="btn-more__label">一覧をみる</span><span class="btn-more__icon" aria-hidden="true"><span class="material-icons">keyboard_arrow_right</span></span></a>
 
   </div>
-  <div class="works__slider-wrap">
+  <div class="works__slider-wrap js-scroll-reveal">
     <div class="works__slider" tabindex="0">
       <!-- WP: get_template_part('template-parts/cards/works-card') — CPT works ループ -->
 <article class="works-card">
@@ -395,8 +404,11 @@
   <div class="container company__inner">
     <div class="company__content">
       <!-- WP: get_template_part('template-parts/sections/section-heading') -->
-<div class="section-heading">
-  <p class="section-heading__en"><span class="section-heading__dot" aria-hidden="true"></span>Company</p>
+<div class="section-heading js-section-heading-reveal">
+  <p class="section-heading__en">
+    <span class="section-heading__dot" aria-hidden="true"></span>
+    <span class="section-heading__en-text">Company</span>
+  </p>
   <h2 class="section-heading__title">会社について</h2>
 </div>
 
@@ -439,8 +451,11 @@
   <div class="container news__inner">
     <div class="news__sidebar">
       <!-- WP: get_template_part('template-parts/sections/section-heading') -->
-<div class="section-heading">
-  <p class="section-heading__en"><span class="section-heading__dot" aria-hidden="true"></span>News</p>
+<div class="section-heading js-section-heading-reveal">
+  <p class="section-heading__en">
+    <span class="section-heading__dot" aria-hidden="true"></span>
+    <span class="section-heading__en-text">News</span>
+  </p>
   <h2 class="section-heading__title">お知らせ</h2>
 </div>
 
@@ -592,6 +607,6 @@
   </div>
 </footer>
 
-    <script src="./public/assets/js/script.js?v=17"></script>
+    <script src="./public/assets/js/script.js?v=25"></script>
   </body>
 </html>

@@ -22,6 +22,10 @@
   transform: translateY(rem(-1));
 }
 
+.section-heading__en-text {
+  display: inline-block;
+}
+
 .section-heading__title {
   margin: rem(8) 0 0;
   font-size: clamp(#{rem(22)}, 4vw, #{rem(28)});
@@ -29,6 +33,100 @@
   line-height: calc(39.2 / 28);
   letter-spacing: 0.15em;
   color: var(--color-text);
+}
+
+// ---------------------------------------------------------------------------
+// Scroll reveal（共通）: dot → 英字 → 日本語
+// ---------------------------------------------------------------------------
+
+@keyframes section-heading-dot-in {
+  from {
+    opacity: 0;
+    transform: translateY(rem(-1)) scale(0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(rem(-1)) scale(1);
+  }
+}
+
+@keyframes section-heading-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js.scroll-reveal-active {
+    .js-section-heading-reveal:not(.is-inview) {
+      .section-heading__dot,
+      .section-heading__en-text,
+      .section-heading__title {
+        opacity: 0;
+      }
+
+      .section-heading__dot {
+        transform: translateY(rem(-1)) scale(0);
+      }
+
+      .section-heading__en-text,
+      .section-heading__title {
+        transform: translateY(0.75rem);
+      }
+    }
+
+    .js-section-heading-reveal.is-inview:not(.is-revealed) {
+      .section-heading__dot,
+      .section-heading__en-text,
+      .section-heading__title {
+        animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+        animation-fill-mode: both;
+      }
+
+      .section-heading__dot {
+        animation-name: section-heading-dot-in;
+        animation-duration: 0.4s;
+        animation-delay: 0ms;
+      }
+
+      .section-heading__en-text {
+        animation-name: section-heading-fade-up;
+        animation-duration: 0.5s;
+        animation-delay: 120ms;
+      }
+
+      .section-heading__title {
+        animation-name: section-heading-fade-up;
+        animation-duration: 0.55s;
+        animation-delay: 240ms;
+      }
+    }
+
+    .js-section-heading-reveal.is-revealed {
+      .section-heading__dot,
+      .section-heading__en-text,
+      .section-heading__title {
+        opacity: 1;
+        animation: none;
+      }
+
+      .section-heading__dot {
+        transform: translateY(rem(-1));
+      }
+
+      .section-heading__en-text,
+      .section-heading__title {
+        transform: none;
+      }
+    }
+  }
 }
 
 @include mq {

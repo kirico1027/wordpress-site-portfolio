@@ -4,14 +4,14 @@
     <div class="works__intro">
       @@include('partials/sections/section-heading.html', { "en": "Works", "title": "実績紹介" })
       @@include('partials/sections/section-body.html', {
-        "blockClass": "works__text",
+        "blockClass": "works__text js-scroll-reveal",
         "modifier": "",
         "text": "業種や形態問わず、さまざまなクライアント様にご活用いただいております。<br />新しい福利厚生の形として事業規模や用途に合わせご支援が可能です。"
       })
     </div>
-    @@include('partials/sections/btn-more.html', { "href": "./works-archive.html", "label": "一覧をみる", "modifier": "btn-more--header" })
+    @@include('partials/sections/btn-more.html', { "href": "./works-archive.html", "label": "一覧をみる", "modifier": "btn-more--header js-scroll-reveal" })
   </div>
-  <div class="works__slider-wrap">
+  <div class="works__slider-wrap js-scroll-reveal">
     <div class="works__slider" tabindex="0">
       @@include('partials/cards/works-card.html', {
         "href": "./works-single.html",

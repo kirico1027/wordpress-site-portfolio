@@ -649,6 +649,155 @@ $hero-collage-fit-w: calc(#{$hero-collage-base-w} + #{$hero-collage-overflow-lef
   overflow-wrap: anywhere;
 }
 
+// ---------------------------------------------------------------------------
+// Hero opening（header → 言葉 → コラージュ組み立て）
+// ---------------------------------------------------------------------------
+
+@keyframes header-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-fade-up-sm {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-figure-grow {
+  from {
+    opacity: 0;
+    transform: scale(0.1);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes hero-divider-in {
+  from {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  // トップ（.hero あり）のみ：header を先に出し、続けてヒーロー一連
+  html.js body:has(.hero) .top-header__inner {
+    animation-name: header-fade-in;
+    animation-duration: 0.55s;
+    animation-delay: 0.06s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+
+  html.js {
+    .hero__title-line,
+    .hero__divider,
+    .hero__lead,
+    .hero__shape,
+    .hero__figure,
+    .hero-news {
+      animation-duration: 0.6s;
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+      animation-fill-mode: both;
+    }
+
+    .hero__title-line {
+      animation-name: hero-fade-up;
+    }
+
+    .hero__title-line:nth-child(1) {
+      animation-delay: 0.4s;
+    }
+
+    .hero__title-line:nth-child(2) {
+      animation-delay: 0.52s;
+      animation-duration: 0.7s;
+    }
+
+    .hero__title-line:nth-child(3) {
+      animation-delay: 0.64s;
+    }
+
+    .hero__divider {
+      transform-origin: left center;
+      animation-name: hero-divider-in;
+      animation-delay: 0.78s;
+      animation-duration: 0.5s;
+    }
+
+    .hero__lead {
+      animation-name: hero-fade-up-sm;
+      animation-delay: 0.88s;
+    }
+
+    .hero__shape,
+    .hero__figure {
+      transform-origin: center center;
+      animation-name: hero-figure-grow;
+      animation-duration: 1.15s;
+      animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hero__shape--orange {
+      animation-delay: 0.72s;
+    }
+
+    .hero__figure--main {
+      animation-delay: 0.8s;
+    }
+
+    .hero__shape--green {
+      animation-delay: 0.88s;
+    }
+
+    .hero__shape--blue {
+      animation-delay: 0.96s;
+    }
+
+    .hero__figure--sub {
+      animation-delay: 1.04s;
+    }
+
+    .hero-news {
+      animation-name: hero-fade-up-sm;
+      animation-delay: 1.22s;
+      animation-duration: 0.55s;
+    }
+  }
+}
+
 // Hero レスポンシブ
 // - レイアウト境界: 768px（SP） / 769px（PC）— site-layout-tokens.mdc
 // - 768px 以下: SP 微調整（@include mq）
@@ -1015,6 +1164,81 @@ $about-visual-base-h: rem(393.328);
   letter-spacing: rem(1.6);
 }
 
+// ---------------------------------------------------------------------------
+// About scroll-reveal（テキスト先行 → コラージュ組み立て）
+// ---------------------------------------------------------------------------
+
+@keyframes about-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes about-grow {
+  from {
+    opacity: 0;
+    transform: scale(0.55);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js.scroll-reveal-active .about {
+    .js-scroll-reveal:not(.is-inview) {
+      opacity: 0;
+    }
+
+    .about__text.js-scroll-reveal:not(.is-inview),
+    .btn-more.js-scroll-reveal:not(.is-inview) {
+      transform: translateY(1rem);
+    }
+
+    .about__figure.js-scroll-reveal:not(.is-inview),
+    .about__shape.js-scroll-reveal:not(.is-inview) {
+      transform: scale(0.55);
+    }
+
+    .js-scroll-reveal.is-inview:not(.is-revealed) {
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+      animation-fill-mode: both;
+    }
+
+    .about__text.js-scroll-reveal.is-inview:not(.is-revealed),
+    .btn-more.js-scroll-reveal.is-inview:not(.is-revealed) {
+      animation-name: about-fade-up;
+      animation-duration: 0.55s;
+    }
+
+    .about__figure.js-scroll-reveal.is-inview:not(.is-revealed),
+    .about__shape.js-scroll-reveal.is-inview:not(.is-revealed) {
+      transform-origin: center center;
+      animation-name: about-grow;
+      animation-duration: 0.85s;
+      animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-more.js-scroll-reveal.is-inview:not(.is-revealed) {
+      animation-duration: 0.5s;
+    }
+
+    .js-scroll-reveal.is-revealed {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+  }
+}
+
 @include mq {
   .about.section {
     padding-bottom: rem(64);
@@ -1109,6 +1333,36 @@ $about-visual-base-h: rem(393.328);
   list-style: none;
 }
 
+// ---------------------------------------------------------------------------
+// Services scroll-reveal（イントロ → カード1枚ずつ）
+// ---------------------------------------------------------------------------
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js.scroll-reveal-active .services {
+    .js-scroll-reveal:not(.is-inview) {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+
+    .js-scroll-reveal.is-inview:not(.is-revealed) {
+      animation-name: about-fade-up;
+      animation-duration: 0.55s;
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+      animation-fill-mode: both;
+    }
+
+    .service-card.js-scroll-reveal.is-inview:not(.is-revealed) {
+      animation-duration: 0.6s;
+    }
+
+    .js-scroll-reveal.is-revealed {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+  }
+}
+
 @include mq {
   .services__inner {
     display: flex;
@@ -1175,6 +1429,59 @@ $about-visual-base-h: rem(393.328);
 
 .works__slider::-webkit-scrollbar {
   display: none;
+}
+
+// ---------------------------------------------------------------------------
+// Works scroll-reveal（イントロ個別 → スライダー左からスタガー）
+// ---------------------------------------------------------------------------
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js.scroll-reveal-active .works {
+    .works__text.js-scroll-reveal:not(.is-inview),
+    .btn-more.js-scroll-reveal:not(.is-inview) {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+
+    .works__text.js-scroll-reveal.is-inview:not(.is-revealed),
+    .btn-more.js-scroll-reveal.is-inview:not(.is-revealed) {
+      animation-name: about-fade-up;
+      animation-duration: 0.55s;
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+      animation-fill-mode: both;
+    }
+
+    .works__slider-wrap.js-scroll-reveal:not(.is-inview) .works-card {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+
+    .works__slider-wrap.js-scroll-reveal.is-inview:not(.is-revealed) .works-card {
+      animation-name: about-fade-up;
+      animation-duration: 0.55s;
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+      animation-fill-mode: both;
+    }
+
+    @for $i from 1 through 8 {
+      .works__slider-wrap.js-scroll-reveal.is-inview:not(.is-revealed) .works-card:nth-child(#{$i}) {
+        animation-delay: #{($i - 1) * 70}ms;
+      }
+    }
+
+    .works__text.js-scroll-reveal.is-revealed,
+    .btn-more.js-scroll-reveal.is-revealed {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+
+    .works__slider-wrap.js-scroll-reveal.is-revealed .works-card {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+  }
 }
 
 @include mq {
