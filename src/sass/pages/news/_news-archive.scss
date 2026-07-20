@@ -91,6 +91,10 @@
   border-top: none;
   border-radius: rem(16);
   background: var(--color-bg-light);
+
+  &:hover {
+    background-color: var(--color-white);
+  }
 }
 
 .news-archive .news-item__date {

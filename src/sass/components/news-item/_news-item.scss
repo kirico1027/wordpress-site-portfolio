@@ -11,10 +11,11 @@
   border-top: 1px solid var(--color-text-muted);
   text-decoration: none;
   color: inherit;
-  transition: opacity 0.2s ease;
+  background-color: transparent;
+  transition: background-color 0.2s ease;
 
   &:hover {
-    opacity: 0.75;
+    background-color: var(--color-bg-light);
   }
 }
 
@@ -51,6 +52,11 @@
   line-height: calc(22.5 / 15);
   letter-spacing: rem(0.75);
   color: var(--color-text);
+  transition: color 0.2s ease;
+}
+
+.news-item__link:hover .news-item__title {
+  color: var(--color-primary);
 }
 
 @include mq {

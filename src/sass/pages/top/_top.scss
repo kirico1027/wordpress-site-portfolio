@@ -78,7 +78,6 @@
   text-decoration: none;
   color: var(--color-text);
   white-space: nowrap;
-  transition: opacity 0.2s ease;
 }
 
 .top-header__nav-link-inner {
@@ -95,8 +94,49 @@
   letter-spacing: 0;
 }
 
-.top-header__nav-link:hover {
-  opacity: 0.75;
+.top-header__nav-link-swap {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: rem(22.4);
+  overflow: hidden;
+}
+
+.top-header__nav-link-en,
+.top-header__nav-link-ja {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: rem(22.4);
+  transition: transform 0.25s ease;
+}
+
+.top-header__nav-link-ja {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: rem(13);
+  transform: translateY(100%);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .top-header__nav-link:hover .top-header__nav-link-en,
+  .top-header__nav-link:focus-visible .top-header__nav-link-en {
+    transform: translateY(-100%);
+  }
+
+  .top-header__nav-link:hover .top-header__nav-link-ja,
+  .top-header__nav-link:focus-visible .top-header__nav-link-ja {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .top-header__nav-link-en,
+  .top-header__nav-link-ja {
+    transition: none;
+  }
 }
 
 .top-header__nav-link--contact {
@@ -108,6 +148,7 @@
   border-radius: rem(48);
   background: var(--color-primary);
   color: var(--color-white);
+  transition: opacity 0.2s ease;
 }
 
 .top-header__nav-link--contact .top-header__nav-link-inner {
@@ -116,6 +157,10 @@
   padding: 0;
   font-weight: 700;
   color: inherit;
+}
+
+.top-header__nav-link--contact .top-header__nav-link-ja {
+  font-size: rem(14);
 }
 
 .top-header__nav-link--contact:hover {
@@ -297,6 +342,15 @@
     justify-content: flex-start;
   }
 
+  .top-header__nav-link-en,
+  .top-header__nav-link-ja {
+    justify-content: flex-start;
+  }
+
+  .top-header__nav-link-ja {
+    font-size: rem(16);
+  }
+
   .top-header__nav-link--contact {
     align-items: center;
     min-width: 0;
@@ -311,6 +365,11 @@
     width: 100%;
     min-height: 0;
     padding: 0;
+    justify-content: center;
+  }
+
+  .top-header__nav-link--contact .top-header__nav-link-en,
+  .top-header__nav-link--contact .top-header__nav-link-ja {
     justify-content: center;
   }
 }
@@ -560,11 +619,11 @@ $hero-collage-fit-w: calc(#{$hero-collage-base-w} + #{$hero-collage-overflow-lef
   box-shadow: 0 0 rem(6) rgba(125, 125, 125, 0.2);
   text-decoration: none;
   color: inherit;
-  transition: opacity 0.2s ease;
+  transition: background-color 0.2s ease;
 }
 
 .hero-news__link:hover {
-  opacity: 0.85;
+  background-color: var(--color-bg-light);
 }
 
 .hero-news__date {
@@ -1815,11 +1874,11 @@ $about-visual-base-h: rem(393.328);
   text-align: center;
   text-decoration: none;
   color: var(--color-text);
-  transition: opacity 0.2s ease;
+  transition: background-color 0.2s ease;
 }
 
 .section-cta__card:hover {
-  opacity: 0.9;
+  background-color: var(--color-bg-light);
 }
 
 .section-cta__card-head {
@@ -1833,6 +1892,7 @@ $about-visual-base-h: rem(393.328);
   font-size: rem(32);
   line-height: rem(32);
   color: var(--color-text);
+  transition: color 0.2s ease;
 }
 
 .section-cta__card-title {
@@ -1842,6 +1902,12 @@ $about-visual-base-h: rem(393.328);
   line-height: calc(35.2 / 22);
   letter-spacing: 0.1em;
   color: var(--color-text);
+  transition: color 0.2s ease;
+}
+
+.section-cta__card:hover .section-cta__card-icon,
+.section-cta__card:hover .section-cta__card-title {
+  color: var(--color-primary);
 }
 
 .section-cta__card-desc {
@@ -1975,6 +2041,11 @@ $about-visual-base-h: rem(393.328);
   line-height: 0;
   flex-shrink: 0;
   text-decoration: none;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.75;
+  }
 }
 
 .site-footer__logo img {
@@ -2128,16 +2199,31 @@ $about-visual-base-h: rem(393.328);
   letter-spacing: 0.1em;
   text-decoration: none;
   color: var(--color-dark);
-  transition: opacity 0.2s ease;
-}
-
-.site-footer__action-btn:hover {
-  opacity: 0.85;
+  transition: background-color 0.2s ease;
 }
 
 .site-footer__action-btn .material-icons {
   font-size: rem(14);
   line-height: rem(14);
+  transition: transform 0.25s ease;
+}
+
+.site-footer__action-btn:hover .material-icons {
+  transform: translateX(rem(4));
+}
+
+.site-footer__action-btn--recruit:hover {
+  background-color: var(--color-accent-orange);
+}
+
+.site-footer__action-btn--contact:hover {
+  background-color: #e8e8e8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-footer__action-btn .material-icons {
+    transition: none;
+  }
 }
 
 .site-footer__copy {

@@ -13,10 +13,11 @@
   background: var(--color-white);
   text-decoration: none;
   color: var(--color-primary);
-  transition: opacity 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
 
   &:hover {
-    opacity: 0.85;
+    background-color: var(--color-primary);
+    color: var(--color-white);
   }
 }
 
@@ -40,6 +41,17 @@
 
   .material-icons {
     font-size: rem(24);
+    transition: transform 0.25s ease;
+  }
+}
+
+.btn-more:hover .btn-more__icon .material-icons {
+  transform: translateX(rem(4));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-more__icon .material-icons {
+    transition: none;
   }
 }
 
