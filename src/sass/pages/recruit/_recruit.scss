@@ -630,9 +630,16 @@
   border-color: var(--color-white);
   background: transparent;
   color: var(--color-white);
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 
   .btn-more__icon {
     margin-left: auto;
+  }
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--color-white);
+    border-color: var(--color-white);
   }
 }
 

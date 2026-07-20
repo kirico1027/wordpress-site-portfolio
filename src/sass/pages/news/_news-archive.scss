@@ -57,6 +57,7 @@
   transition: background-color 0.2s ease, color 0.2s ease;
 
   &:hover {
+    background: #f3f3f3;
     color: var(--color-primary);
   }
 }
@@ -67,7 +68,7 @@
 
   &:hover {
     color: var(--color-white);
-    opacity: 0.9;
+    filter: brightness(1.08);
   }
 }
 
@@ -91,9 +92,11 @@
   border-top: none;
   border-radius: rem(16);
   background: var(--color-bg-light);
+  transition: background-color 0.2s ease, box-shadow 0.25s ease;
 
   &:hover {
     background-color: var(--color-white);
+    box-shadow: 0 rem(8) rem(24) rgb(0 0 0 / 8%);
   }
 }
 

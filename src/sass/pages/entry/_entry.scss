@@ -257,11 +257,11 @@
   letter-spacing: 0.05em;
   text-align: center;
   cursor: pointer;
-  transition: opacity 0.2s ease;
+  transition: background-color 0.2s ease;
 }
 
 .entry-form__submit:hover {
-  opacity: 0.85;
+  background: var(--color-primary);
 }
 
 .entry-form__submit:focus-visible {

@@ -26,6 +26,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.4s ease;
   }
 }
 
@@ -55,8 +56,8 @@
   align-items: center;
   justify-content: center;
   color: var(--color-white);
-  font-size: rem(16);
-  font-weight: 700;
+  font-size: rem(18);
+  font-weight: 500;
   line-height: 1.4;
   letter-spacing: 0.1em;
 }
@@ -101,6 +102,10 @@
   line-height: calc(20.4 / 12);
   letter-spacing: 0.1em;
   color: var(--color-text-muted);
+}
+
+.works-card__link:hover .works-card__figure img {
+  transform: scale(1.05);
 }
 
 .works-card__link:hover .works-card__dim,

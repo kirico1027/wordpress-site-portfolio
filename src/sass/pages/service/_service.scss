@@ -289,10 +289,21 @@
   text-decoration: none;
   color: inherit;
   box-sizing: border-box;
-  transition: opacity 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.25s ease;
 
   &:hover {
-    opacity: 0.85;
+    background-color: var(--color-white);
+    box-shadow: 0 rem(8) rem(24) rgb(0 0 0 / 8%);
+  }
+
+  &:hover .service-voice__link {
+    color: var(--color-primary);
+  }
+
+  &:hover .service-voice__link .material-icons {
+    transform: translateX(rem(4));
   }
 }
 
@@ -374,9 +385,18 @@
   line-height: calc(25.5 / 15);
   letter-spacing: rem(1.5);
   color: var(--color-text);
+  transition: color 0.2s ease;
 
   .material-icons {
     font-size: rem(24);
+    transition: transform 0.25s ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-voice__card,
+  .service-voice__link .material-icons {
+    transition: none;
   }
 }
 

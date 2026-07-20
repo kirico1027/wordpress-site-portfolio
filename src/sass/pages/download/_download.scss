@@ -246,11 +246,11 @@
   letter-spacing: 0.1em;
   text-align: center;
   cursor: pointer;
-  transition: opacity 0.2s ease;
+  transition: background-color 0.2s ease;
 }
 
 .download-form__submit:hover {
-  opacity: 0.85;
+  background: var(--color-primary);
 }
 
 .download-form__submit:focus-visible {
