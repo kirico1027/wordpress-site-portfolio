@@ -304,6 +304,56 @@
     observer.observe(trigger);
   }
 
+  // About Purpose: 画面内でテキスト先行 → コラージュ → カルーセル開始
+  function initAboutPurposeReveal() {
+    var section = document.querySelector(".about-purpose");
+    if (!section) return;
+
+    var CAROUSEL_READY_MS = 2000;
+
+    function start() {
+      if (section.classList.contains("is-ready")) return;
+
+      if (prefersReducedMotion()) {
+        section.classList.add("is-ready", "about-purpose--carousel-ready");
+        return;
+      }
+
+      section.classList.add("is-ready");
+      window.setTimeout(function () {
+        section.classList.add("about-purpose--carousel-ready");
+      }, CAROUSEL_READY_MS);
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      start();
+      return;
+    }
+
+    if (isElementInViewport(section, 0.1)) {
+      start();
+      return;
+    }
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          observer.disconnect();
+          start();
+        });
+      },
+      { root: null, rootMargin: "0px 0px -10% 0px", threshold: 0 }
+    );
+    observer.observe(section);
+  }
+
+  function primeAboutPurposeIfVisible() {
+    var section = document.querySelector(".about-purpose");
+    if (!section) return;
+    section.classList.add("is-ready", "about-purpose--carousel-ready");
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initHeaderDrawer();
     initWorksSlider();
@@ -311,11 +361,13 @@
     initSectionHeadingScrollReveal();
     initScrollReveal();
     initCompanyCollageReveal();
+    initAboutPurposeReveal();
   });
 
   window.addEventListener("pageshow", function (event) {
     if (!event.persisted) return;
     primeSectionHeadingRevealIfVisible();
     primeScrollRevealIfVisible();
+    primeAboutPurposeIfVisible();
   });
 })();

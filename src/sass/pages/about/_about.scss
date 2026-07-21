@@ -48,6 +48,10 @@
   color: var(--color-text);
 }
 
+.about-purpose__title-line {
+  display: block;
+}
+
 .about-purpose__body {
   margin-top: rem(48);
   display: flex;
@@ -94,14 +98,36 @@ $about-purpose-collage-h: rem(506.594);
 
 @keyframes about-purpose-slide {
   0%,
-  20%,
-  100% {
+  20% {
+    opacity: 1;
+  }
+
+  25%,
+  95% {
     opacity: 0;
   }
 
-  5%,
-  15% {
+  100% {
     opacity: 1;
+  }
+}
+
+@keyframes about-purpose-zoom-out {
+  0% {
+    transform: scale(1.08);
+  }
+
+  20%,
+  25% {
+    transform: scale(1);
+  }
+
+  95% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1.08);
   }
 }
 
@@ -157,23 +183,46 @@ $about-purpose-collage-h: rem(506.594);
   margin: 0;
   overflow: hidden;
   opacity: 0;
+}
+
+.about-purpose--carousel-ready .about-purpose__slide {
   animation: about-purpose-slide 16s infinite;
 }
 
-.about-purpose__slide:nth-child(1) {
+.about-purpose--carousel-ready .about-purpose__slide img {
+  animation: about-purpose-zoom-out 16s linear infinite;
+  transform-origin: center center;
+}
+
+// 4枚を4秒ずつずらし、切り替え時は空白なしでクロスフェード
+.about-purpose--carousel-ready .about-purpose__slide:nth-child(1),
+.about-purpose--carousel-ready .about-purpose__slide:nth-child(1) img {
   animation-delay: 0s;
 }
 
-.about-purpose__slide:nth-child(2) {
-  animation-delay: 4s;
+.about-purpose--carousel-ready .about-purpose__slide:nth-child(2),
+.about-purpose--carousel-ready .about-purpose__slide:nth-child(2) img {
+  animation-delay: -12s;
 }
 
-.about-purpose__slide:nth-child(3) {
-  animation-delay: 8s;
+.about-purpose--carousel-ready .about-purpose__slide:nth-child(3),
+.about-purpose--carousel-ready .about-purpose__slide:nth-child(3) img {
+  animation-delay: -8s;
 }
 
-.about-purpose__slide:nth-child(4) {
-  animation-delay: 12s;
+.about-purpose--carousel-ready .about-purpose__slide:nth-child(4),
+.about-purpose--carousel-ready .about-purpose__slide:nth-child(4) img {
+  animation-delay: -4s;
+}
+
+// 組み立て中は1枚目だけ見せる（カルーセル開始時のカクつき防止に開始スケールへ合わせる）
+.about-purpose:not(.about-purpose--carousel-ready) .about-purpose__slide:first-child {
+  opacity: 1;
+}
+
+.about-purpose:not(.about-purpose--carousel-ready) .about-purpose__slide:first-child img {
+  transform: scale(1.08);
+  transform-origin: center center;
 }
 
 .about-purpose__slide img {
@@ -219,8 +268,145 @@ $about-purpose-collage-h: rem(506.594);
     opacity: 0;
   }
 
+  .about-purpose__slide img {
+    animation: none;
+    transform: none;
+  }
+
   .about-purpose__slide:first-child {
     opacity: 1;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Purpose opening（ラベル → 見出し → 本文 → コラージュ → カルーセル開始）
+// ---------------------------------------------------------------------------
+
+@keyframes about-purpose-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes about-purpose-dot-in {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes about-purpose-grow {
+  from {
+    opacity: 0;
+    transform: scale(0.1);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js .about-purpose:not(.is-ready) {
+    .section-label__dot,
+    .section-label__text,
+    .about-purpose__title,
+    .about-purpose__body,
+    .about-purpose__accent,
+    .about-purpose__carousel,
+    .about-purpose__shape {
+      opacity: 0;
+    }
+
+    .section-label__dot {
+      transform: scale(0);
+    }
+
+    .section-label__text,
+    .about-purpose__title,
+    .about-purpose__body {
+      transform: translateY(1rem);
+    }
+
+    .about-purpose__accent,
+    .about-purpose__carousel,
+    .about-purpose__shape {
+      transform: scale(0.1);
+    }
+  }
+
+  html.js .about-purpose.is-ready {
+    .section-label__dot,
+    .section-label__text,
+    .about-purpose__title,
+    .about-purpose__body,
+    .about-purpose__accent,
+    .about-purpose__carousel,
+    .about-purpose__shape {
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+      animation-fill-mode: both;
+    }
+
+    .section-label__dot {
+      animation-name: about-purpose-dot-in;
+      animation-duration: 0.4s;
+      animation-delay: 0ms;
+    }
+
+    .section-label__text {
+      animation-name: about-purpose-fade-up;
+      animation-duration: 0.5s;
+      animation-delay: 120ms;
+    }
+
+    .about-purpose__title {
+      animation-name: about-purpose-fade-up;
+      animation-duration: 0.55s;
+      animation-delay: 280ms;
+    }
+
+    .about-purpose__body {
+      animation-name: about-purpose-fade-up;
+      animation-duration: 0.55s;
+      animation-delay: 400ms;
+    }
+
+    .about-purpose__accent,
+    .about-purpose__carousel,
+    .about-purpose__shape {
+      transform-origin: center center;
+      animation-name: about-purpose-grow;
+      animation-duration: 1.15s;
+      animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .about-purpose__accent {
+      animation-delay: 480ms;
+    }
+
+    .about-purpose__carousel {
+      animation-delay: 560ms;
+    }
+
+    .about-purpose__shape--peach {
+      animation-delay: 640ms;
+    }
+
+    .about-purpose__shape--green {
+      animation-delay: 720ms;
+    }
   }
 }
 
