@@ -1183,7 +1183,7 @@ $about-visual-base-h: rem(393.328);
 @keyframes about-grow {
   from {
     opacity: 0;
-    transform: scale(0.55);
+    transform: scale(0.1);
   }
 
   to {
@@ -1205,7 +1205,7 @@ $about-visual-base-h: rem(393.328);
 
     .about__figure.js-scroll-reveal:not(.is-inview),
     .about__shape.js-scroll-reveal:not(.is-inview) {
-      transform: scale(0.55);
+      transform: scale(0.1);
     }
 
     .js-scroll-reveal.is-inview:not(.is-revealed) {
@@ -1223,7 +1223,7 @@ $about-visual-base-h: rem(393.328);
     .about__shape.js-scroll-reveal.is-inview:not(.is-revealed) {
       transform-origin: center center;
       animation-name: about-grow;
-      animation-duration: 0.85s;
+      animation-duration: 1.15s;
       animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -1800,6 +1800,57 @@ $about-visual-base-h: rem(393.328);
   background: var(--color-tag);
 }
 
+// ---------------------------------------------------------------------------
+// Company scroll-reveal（テキスト先行 → コラージュ組み立て）
+// ---------------------------------------------------------------------------
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js.scroll-reveal-active .company {
+    .js-scroll-reveal:not(.is-inview) {
+      opacity: 0;
+    }
+
+    .company__text.js-scroll-reveal:not(.is-inview),
+    .btn-more.js-scroll-reveal:not(.is-inview) {
+      transform: translateY(1rem);
+    }
+
+    .company__figure.js-scroll-reveal:not(.is-inview),
+    .company__shape.js-scroll-reveal:not(.is-inview) {
+      transform: scale(0.1);
+    }
+
+    .js-scroll-reveal.is-inview:not(.is-revealed) {
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+      animation-fill-mode: both;
+    }
+
+    .company__text.js-scroll-reveal.is-inview:not(.is-revealed),
+    .btn-more.js-scroll-reveal.is-inview:not(.is-revealed) {
+      animation-name: about-fade-up;
+      animation-duration: 0.55s;
+    }
+
+    .company__figure.js-scroll-reveal.is-inview:not(.is-revealed),
+    .company__shape.js-scroll-reveal.is-inview:not(.is-revealed) {
+      transform-origin: center center;
+      animation-name: about-grow;
+      animation-duration: 1.15s;
+      animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-more.js-scroll-reveal.is-inview:not(.is-revealed) {
+      animation-duration: 0.5s;
+    }
+
+    .js-scroll-reveal.is-revealed {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+  }
+}
+
 @include mq {
   $company-collage-cols-top: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
   // SP サンプル計測比（青:中画像:ベージュ ≒ 64:120:90 → 32:60:45）
@@ -2038,6 +2089,55 @@ $about-visual-base-h: rem(393.328);
   list-style: none;
 }
 
+// ---------------------------------------------------------------------------
+// News scroll-reveal（記事を上から順 → 装飾ブロック → ボタン）
+// ---------------------------------------------------------------------------
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js.scroll-reveal-active .news {
+    .js-scroll-reveal:not(.is-inview) {
+      opacity: 0;
+    }
+
+    .news-item.js-scroll-reveal:not(.is-inview),
+    .btn-more.js-scroll-reveal:not(.is-inview) {
+      transform: translateY(1rem);
+    }
+
+    .news__deco-block.js-scroll-reveal:not(.is-inview) {
+      transform: scale(0.1);
+    }
+
+    .js-scroll-reveal.is-inview:not(.is-revealed) {
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+      animation-fill-mode: both;
+    }
+
+    .news-item.js-scroll-reveal.is-inview:not(.is-revealed),
+    .btn-more.js-scroll-reveal.is-inview:not(.is-revealed) {
+      animation-name: about-fade-up;
+      animation-duration: 0.55s;
+    }
+
+    .btn-more.js-scroll-reveal.is-inview:not(.is-revealed) {
+      animation-duration: 0.5s;
+    }
+
+    .news__deco-block.js-scroll-reveal.is-inview:not(.is-revealed) {
+      transform-origin: center center;
+      animation-name: about-grow;
+      animation-duration: 1.15s;
+      animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .js-scroll-reveal.is-revealed {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+  }
+}
+
 @include mq {
   .news.section {
     padding-top: rem(64);
@@ -2227,6 +2327,73 @@ $about-visual-base-h: rem(393.328);
   letter-spacing: 0.1em;
   color: var(--color-text-muted);
   text-align: left;
+}
+
+// ---------------------------------------------------------------------------
+// Section CTA scroll-reveal（タイトル → リード → カード左→右）
+// ---------------------------------------------------------------------------
+
+@keyframes cta-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(1rem) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js.scroll-reveal-active .section-cta {
+    .js-scroll-reveal:not(.is-inview) {
+      opacity: 0;
+    }
+
+    .section-cta__title.js-scroll-reveal:not(.is-inview),
+    .section-cta__lead.js-scroll-reveal:not(.is-inview) {
+      transform: translateY(1rem);
+    }
+
+    .section-cta__card.js-scroll-reveal:not(.is-inview) {
+      transform: translateY(1rem) scale(0.96);
+    }
+
+    .js-scroll-reveal.is-inview:not(.is-revealed) {
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+      animation-fill-mode: both;
+    }
+
+    .section-cta__title.js-scroll-reveal.is-inview:not(.is-revealed),
+    .section-cta__lead.js-scroll-reveal.is-inview:not(.is-revealed) {
+      animation-name: about-fade-up;
+      animation-duration: 0.55s;
+    }
+
+    .section-cta__lead.js-scroll-reveal.is-inview:not(.is-revealed) {
+      animation-delay: 80ms;
+    }
+
+    .section-cta__card.js-scroll-reveal.is-inview:not(.is-revealed) {
+      animation-name: cta-card-in;
+      animation-duration: 0.6s;
+    }
+
+    .section-cta__card.js-scroll-reveal:nth-child(1).is-inview:not(.is-revealed) {
+      animation-delay: 0ms;
+    }
+
+    .section-cta__card.js-scroll-reveal:nth-child(2).is-inview:not(.is-revealed) {
+      animation-delay: 100ms;
+    }
+
+    .js-scroll-reveal.is-revealed {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+  }
 }
 
 @include mq {

@@ -3,7 +3,7 @@
   <div class="container company__inner">
     <div class="company__content">
       @@include('partials/sections/section-heading.html', { "en": "Company", "title": "会社について" })
-      <div class="company__text">
+      <div class="company__text js-scroll-reveal">
         @@include('partials/sections/section-body.html', {
           "blockClass": "company__text-paragraph",
           "modifier": "section-body--company",
@@ -15,23 +15,23 @@
           "text": "また、ご支援する企業様の成長は私たちの成長にもつながります。"
         })
       </div>
-      @@include('partials/sections/btn-more.html', { "href": "./company.html", "label": "会社概要", "modifier": "" })
+      @@include('partials/sections/btn-more.html', { "href": "./company.html", "label": "会社概要", "modifier": "js-scroll-reveal" })
     </div>
     <div class="company__visual">
       <div class="company__visual-scaler">
         <div class="company__collage">
           <div class="company__collage-row company__collage-row--top">
-            <figure class="company__figure company__figure--main">
+            <figure class="company__figure company__figure--main js-scroll-reveal js-company-collage-reveal">
               <img src="./public/assets/img/top/company-01.png" alt="" width="335" height="223" />
             </figure>
-            <span class="company__shape company__shape--orange" aria-hidden="true"></span>
+            <span class="company__shape company__shape--orange js-scroll-reveal js-company-collage-reveal" aria-hidden="true"></span>
           </div>
           <div class="company__collage-row company__collage-row--bottom">
-            <span class="company__shape company__shape--blue" aria-hidden="true"></span>
-            <figure class="company__figure company__figure--sub">
+            <span class="company__shape company__shape--blue js-scroll-reveal js-company-collage-reveal" aria-hidden="true"></span>
+            <figure class="company__figure company__figure--sub js-scroll-reveal js-company-collage-reveal">
               <img src="./public/assets/img/top/company-02.png" alt="" width="200" height="133" />
             </figure>
-            <span class="company__shape company__shape--tag" aria-hidden="true"></span>
+            <span class="company__shape company__shape--tag js-scroll-reveal js-company-collage-reveal" aria-hidden="true"></span>
           </div>
         </div>
       </div>

@@ -246,10 +246,62 @@
   }
 
   function initScrollReveal() {
-    var parts = document.querySelectorAll(".js-scroll-reveal");
+    var parts = document.querySelectorAll(
+      ".js-scroll-reveal:not(.js-company-collage-reveal)"
+    );
     if (!parts.length) return;
     enableScrollReveal();
     observeRevealTargets(Array.prototype.slice.call(parts), activateRevealEl);
+  }
+
+  // Company: コラージュ自身が画面に入ったら、テキスト先行の間を置いて組み立てる
+  function initCompanyCollageReveal() {
+    var trigger = document.querySelector(".company__visual");
+    var parts = document.querySelectorAll(".js-company-collage-reveal");
+    if (!trigger || !parts.length) return;
+
+    enableScrollReveal();
+
+    var started = false;
+    function startCollage() {
+      if (started) return;
+      started = true;
+
+      if (prefersReducedMotion()) {
+        Array.prototype.forEach.call(parts, function (el) {
+          el.classList.add("is-inview", "is-revealed");
+        });
+        return;
+      }
+
+      Array.prototype.forEach.call(parts, function (el, index) {
+        window.setTimeout(function () {
+          activateRevealEl(el);
+        }, 320 + index * 70);
+      });
+    }
+
+    if (prefersReducedMotion() || !("IntersectionObserver" in window)) {
+      startCollage();
+      return;
+    }
+
+    if (isElementInViewport(trigger, 0.1)) {
+      startCollage();
+      return;
+    }
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          observer.disconnect();
+          startCollage();
+        });
+      },
+      { root: null, rootMargin: "0px 0px -10% 0px", threshold: 0 }
+    );
+    observer.observe(trigger);
   }
 
   document.addEventListener("DOMContentLoaded", function () {
@@ -258,6 +310,7 @@
     initBlogFeaturedSlider();
     initSectionHeadingScrollReveal();
     initScrollReveal();
+    initCompanyCollageReveal();
   });
 
   window.addEventListener("pageshow", function (event) {
