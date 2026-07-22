@@ -50,38 +50,147 @@
     });
   }
 
-  function initWorksSlider() {
-    var slider = document.querySelector(".works__slider");
-    if (!slider) return;
+  function initDragScrollSlider(slider, options) {
+    if (!slider) return null;
 
+    var opts = options || {};
     var isDragging = false;
     var startX = 0;
     var scrollLeft = 0;
+    var hasMoved = false;
+    var activePointerId = null;
+    var state = { dragging: false };
 
-    slider.addEventListener("mousedown", function (event) {
+    function getPageX(event) {
+      if (typeof event.clientX === "number") return event.clientX;
+      return 0;
+    }
+
+    function onPointerDown(event) {
+      if (event.pointerType === "touch") return;
+
       isDragging = true;
-      startX = event.pageX - slider.offsetLeft;
+      state.dragging = true;
+      hasMoved = false;
+      activePointerId = event.pointerId;
+      startX = getPageX(event);
       scrollLeft = slider.scrollLeft;
-      slider.style.cursor = "grabbing";
-    });
+      slider.classList.add("is-dragging");
+      if (typeof opts.onDragStart === "function") opts.onDragStart();
 
-    slider.addEventListener("mouseleave", function () {
-      isDragging = false;
-      slider.style.cursor = "";
-    });
+      if (slider.setPointerCapture) {
+        try {
+          slider.setPointerCapture(event.pointerId);
+        } catch (error) {
+          // ignore
+        }
+      }
+    }
 
-    slider.addEventListener("mouseup", function () {
-      isDragging = false;
-      slider.style.cursor = "";
-    });
-
-    slider.addEventListener("mousemove", function (event) {
+    function onPointerMove(event) {
       if (!isDragging) return;
+      if (activePointerId !== null && event.pointerId !== activePointerId) return;
+
       event.preventDefault();
-      var x = event.pageX - slider.offsetLeft;
+      var x = getPageX(event);
       var walk = (x - startX) * 1.2;
+      if (Math.abs(walk) > 3) hasMoved = true;
       slider.scrollLeft = scrollLeft - walk;
+    }
+
+    function onPointerUp(event) {
+      if (!isDragging) return;
+      if (activePointerId !== null && event.pointerId !== activePointerId) return;
+
+      isDragging = false;
+      state.dragging = false;
+      activePointerId = null;
+      slider.classList.remove("is-dragging");
+      if (typeof opts.onDragEnd === "function") opts.onDragEnd();
+
+      if (slider.releasePointerCapture && event.pointerId != null) {
+        try {
+          slider.releasePointerCapture(event.pointerId);
+        } catch (error) {
+          // ignore
+        }
+      }
+    }
+
+    slider.addEventListener("pointerdown", onPointerDown);
+    slider.addEventListener("pointermove", onPointerMove);
+    slider.addEventListener("pointerup", onPointerUp);
+    slider.addEventListener("pointercancel", onPointerUp);
+    slider.addEventListener("lostpointercapture", onPointerUp);
+
+    slider.addEventListener(
+      "click",
+      function (event) {
+        if (!hasMoved) return;
+        event.preventDefault();
+        event.stopPropagation();
+        hasMoved = false;
+      },
+      true
+    );
+
+    return state;
+  }
+
+  function initWorksSlider() {
+    initDragScrollSlider(document.querySelector(".works__slider"));
+  }
+
+  function initAboutGallerySlider() {
+    var gallery = document.querySelector(".about-gallery");
+    var slider = gallery && gallery.querySelector(".about-gallery__slider");
+    var list = slider && slider.querySelector(".about-gallery__list");
+    if (!gallery || !slider || !list || !list.children.length) return;
+
+    // シームレスループ用にアイテムを複製（枚数不足ではなく、途切れなく流すため）
+    var originals = Array.prototype.slice.call(list.children);
+    originals.forEach(function (item) {
+      var clone = item.cloneNode(true);
+      clone.setAttribute("aria-hidden", "true");
+      list.appendChild(clone);
     });
+
+    if (prefersReducedMotion()) {
+      gallery.classList.add("about-gallery--static");
+      return;
+    }
+
+    gallery.classList.add("about-gallery--marquee");
+
+    var offset = 0;
+    var speed = 0.5;
+    var halfWidth = 0;
+
+    function measure() {
+      halfWidth = list.scrollWidth / 2;
+    }
+
+    measure();
+    window.addEventListener("resize", measure);
+
+    // 画像読み込み後に幅が変わる場合に備える
+    list.querySelectorAll("img").forEach(function (img) {
+      if (img.complete) return;
+      img.addEventListener("load", measure);
+    });
+
+    function tick() {
+      if (halfWidth > 0) {
+        offset += speed;
+        if (offset >= halfWidth) offset -= halfWidth;
+        list.style.transform = "translate3d(" + -offset + "px, 0, 0)";
+      } else {
+        measure();
+      }
+      window.requestAnimationFrame(tick);
+    }
+
+    window.requestAnimationFrame(tick);
   }
 
   function initBlogFeaturedSlider() {
@@ -175,6 +284,34 @@
       }
 
       last.addEventListener("animationend", onEnd);
+      return;
+    }
+
+    if (el.classList.contains("about-panel")) {
+      var body = el.querySelector(".about-panel__body");
+      var panelTarget = body || el;
+
+      function onPanelEnd(event) {
+        if (event.target !== panelTarget) return;
+        el.classList.add("is-revealed");
+        panelTarget.removeEventListener("animationend", onPanelEnd);
+      }
+
+      panelTarget.addEventListener("animationend", onPanelEnd);
+      return;
+    }
+
+    if (el.classList.contains("about-value__head")) {
+      var valueTitle = el.querySelector(".about-value__title");
+      var valueHeadTarget = valueTitle || el;
+
+      function onValueHeadEnd(event) {
+        if (event.target !== valueHeadTarget) return;
+        el.classList.add("is-revealed");
+        valueHeadTarget.removeEventListener("animationend", onValueHeadEnd);
+      }
+
+      valueHeadTarget.addEventListener("animationend", onValueHeadEnd);
       return;
     }
 
@@ -304,59 +441,153 @@
     observer.observe(trigger);
   }
 
-  // About Purpose: 画面内でテキスト先行 → コラージュ → カルーセル開始
+  // About Purpose: テキストは content、コラージュは SP でパーツ個別
   function initAboutPurposeReveal() {
     var section = document.querySelector(".about-purpose");
     if (!section) return;
 
-    var CAROUSEL_READY_MS = 2000;
+    var content = section.querySelector(".about-purpose__content");
+    var pieces = [
+      section.querySelector(".about-purpose__accent"),
+      section.querySelector(".about-purpose__carousel"),
+      section.querySelector(".about-purpose__shape--peach"),
+      section.querySelector(".about-purpose__shape--green"),
+    ].filter(Boolean);
+    var CAROUSEL_READY_MS_PC = 2000;
+    var mqSp = window.matchMedia("(max-width: 768px)");
 
-    function start() {
+    function revealPiecesImmediate() {
+      pieces.forEach(function (piece) {
+        piece.classList.add("is-inview", "is-revealed");
+      });
+    }
+
+    function revealAllImmediate() {
+      section.classList.add(
+        "is-ready",
+        "is-visual-ready",
+        "about-purpose--carousel-ready"
+      );
+      revealPiecesImmediate();
+    }
+
+    function startText() {
       if (section.classList.contains("is-ready")) return;
-
       if (prefersReducedMotion()) {
-        section.classList.add("is-ready", "about-purpose--carousel-ready");
+        revealAllImmediate();
+        return;
+      }
+      section.classList.add("is-ready");
+    }
+
+    function startVisual(carouselMs) {
+      if (section.classList.contains("is-visual-ready")) return;
+      if (prefersReducedMotion()) {
+        revealAllImmediate();
+        return;
+      }
+      section.classList.add("is-visual-ready");
+      window.setTimeout(function () {
+        section.classList.add("about-purpose--carousel-ready");
+      }, carouselMs);
+    }
+
+    function activatePiece(piece) {
+      if (piece.classList.contains("is-inview")) return;
+      piece.classList.add("is-inview");
+
+      function onEnd(event) {
+        if (event.target !== piece) return;
+        piece.classList.add("is-revealed");
+        piece.removeEventListener("animationend", onEnd);
+
+        if (piece.classList.contains("about-purpose__carousel")) {
+          section.classList.add("about-purpose--carousel-ready");
+        }
+      }
+
+      piece.addEventListener("animationend", onEnd);
+    }
+
+    function observeOnce(el, onEnter) {
+      if (!el) {
+        onEnter();
         return;
       }
 
-      section.classList.add("is-ready");
-      window.setTimeout(function () {
+      if (!("IntersectionObserver" in window)) {
+        onEnter();
+        return;
+      }
+
+      if (isElementInViewport(el, 0.1)) {
+        onEnter();
+        return;
+      }
+
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            observer.disconnect();
+            onEnter();
+          });
+        },
+        { root: null, rootMargin: "0px 0px -10% 0px", threshold: 0 }
+      );
+      observer.observe(el);
+    }
+
+    if (mqSp.matches) {
+      observeOnce(content || section, startText);
+
+      if (prefersReducedMotion()) {
+        revealAllImmediate();
+        return;
+      }
+
+      if (!pieces.length) {
         section.classList.add("about-purpose--carousel-ready");
-      }, CAROUSEL_READY_MS);
-    }
+        return;
+      }
 
-    if (!("IntersectionObserver" in window)) {
-      start();
-      return;
-    }
-
-    if (isElementInViewport(section, 0.1)) {
-      start();
-      return;
-    }
-
-    var observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          observer.disconnect();
-          start();
+      pieces.forEach(function (piece) {
+        observeOnce(piece, function () {
+          activatePiece(piece);
         });
-      },
-      { root: null, rootMargin: "0px 0px -10% 0px", threshold: 0 }
-    );
-    observer.observe(section);
+      });
+      return;
+    }
+
+    observeOnce(section, function () {
+      startText();
+      startVisual(CAROUSEL_READY_MS_PC);
+    });
   }
 
   function primeAboutPurposeIfVisible() {
     var section = document.querySelector(".about-purpose");
     if (!section) return;
-    section.classList.add("is-ready", "about-purpose--carousel-ready");
+    section.classList.add(
+      "is-ready",
+      "is-visual-ready",
+      "about-purpose--carousel-ready"
+    );
+    [
+      ".about-purpose__accent",
+      ".about-purpose__carousel",
+      ".about-purpose__shape--peach",
+      ".about-purpose__shape--green",
+    ].forEach(function (selector) {
+      var piece = section.querySelector(selector);
+      if (piece) piece.classList.add("is-inview", "is-revealed");
+    });
   }
 
   document.addEventListener("DOMContentLoaded", function () {
     initHeaderDrawer();
     initWorksSlider();
+    initAboutGallerySlider();
     initBlogFeaturedSlider();
     initSectionHeadingScrollReveal();
     initScrollReveal();

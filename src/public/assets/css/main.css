@@ -3678,6 +3678,14 @@ body {
     transform: translateY(0);
   }
 }
+@keyframes about-purpose-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 @keyframes about-purpose-dot-in {
   from {
     opacity: 0;
@@ -3702,10 +3710,7 @@ body {
   html.js .about-purpose:not(.is-ready) .section-label__dot,
   html.js .about-purpose:not(.is-ready) .section-label__text,
   html.js .about-purpose:not(.is-ready) .about-purpose__title,
-  html.js .about-purpose:not(.is-ready) .about-purpose__body,
-  html.js .about-purpose:not(.is-ready) .about-purpose__accent,
-  html.js .about-purpose:not(.is-ready) .about-purpose__carousel,
-  html.js .about-purpose:not(.is-ready) .about-purpose__shape {
+  html.js .about-purpose:not(.is-ready) .about-purpose__body {
     opacity: 0;
   }
   html.js .about-purpose:not(.is-ready) .section-label__dot {
@@ -3716,18 +3721,10 @@ body {
   html.js .about-purpose:not(.is-ready) .about-purpose__body {
     transform: translateY(1rem);
   }
-  html.js .about-purpose:not(.is-ready) .about-purpose__accent,
-  html.js .about-purpose:not(.is-ready) .about-purpose__carousel,
-  html.js .about-purpose:not(.is-ready) .about-purpose__shape {
-    transform: scale(0.1);
-  }
   html.js .about-purpose.is-ready .section-label__dot,
   html.js .about-purpose.is-ready .section-label__text,
   html.js .about-purpose.is-ready .about-purpose__title,
-  html.js .about-purpose.is-ready .about-purpose__body,
-  html.js .about-purpose.is-ready .about-purpose__accent,
-  html.js .about-purpose.is-ready .about-purpose__carousel,
-  html.js .about-purpose.is-ready .about-purpose__shape {
+  html.js .about-purpose.is-ready .about-purpose__body {
     animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
     animation-fill-mode: both;
   }
@@ -3751,25 +3748,62 @@ body {
     animation-duration: 0.55s;
     animation-delay: 400ms;
   }
-  html.js .about-purpose.is-ready .about-purpose__accent,
-  html.js .about-purpose.is-ready .about-purpose__carousel,
-  html.js .about-purpose.is-ready .about-purpose__shape {
+}
+@media (prefers-reduced-motion: no-preference) and (min-width: 769px) {
+  html.js .about-purpose:not(.is-visual-ready) .about-purpose__accent,
+  html.js .about-purpose:not(.is-visual-ready) .about-purpose__carousel,
+  html.js .about-purpose:not(.is-visual-ready) .about-purpose__shape {
+    opacity: 0;
+    transform: scale(0.1);
+  }
+  html.js .about-purpose.is-visual-ready .about-purpose__accent,
+  html.js .about-purpose.is-visual-ready .about-purpose__carousel,
+  html.js .about-purpose.is-visual-ready .about-purpose__shape {
     transform-origin: center center;
     animation-name: about-purpose-grow;
     animation-duration: 1.15s;
     animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    animation-fill-mode: both;
   }
-  html.js .about-purpose.is-ready .about-purpose__accent {
+  html.js .about-purpose.is-visual-ready .about-purpose__accent {
     animation-delay: 480ms;
   }
-  html.js .about-purpose.is-ready .about-purpose__carousel {
+  html.js .about-purpose.is-visual-ready .about-purpose__carousel {
     animation-delay: 560ms;
   }
-  html.js .about-purpose.is-ready .about-purpose__shape--peach {
+  html.js .about-purpose.is-visual-ready .about-purpose__shape--peach {
     animation-delay: 640ms;
   }
-  html.js .about-purpose.is-ready .about-purpose__shape--green {
+  html.js .about-purpose.is-visual-ready .about-purpose__shape--green {
     animation-delay: 720ms;
+  }
+}
+@media (prefers-reduced-motion: no-preference) and (max-width: 768px) {
+  html.js .about-purpose .about-purpose__accent,
+  html.js .about-purpose .about-purpose__carousel,
+  html.js .about-purpose .about-purpose__shape {
+    transform-origin: center center;
+  }
+  html.js .about-purpose .about-purpose__accent:not(.is-inview),
+  html.js .about-purpose .about-purpose__carousel:not(.is-inview),
+  html.js .about-purpose .about-purpose__shape:not(.is-inview) {
+    opacity: 0;
+    transform: scale(0.1);
+  }
+  html.js .about-purpose .about-purpose__accent.is-inview:not(.is-revealed),
+  html.js .about-purpose .about-purpose__carousel.is-inview:not(.is-revealed),
+  html.js .about-purpose .about-purpose__shape.is-inview:not(.is-revealed) {
+    animation-name: about-purpose-grow;
+    animation-duration: 1.15s;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    animation-fill-mode: both;
+  }
+  html.js .about-purpose .about-purpose__accent.is-revealed,
+  html.js .about-purpose .about-purpose__carousel.is-revealed,
+  html.js .about-purpose .about-purpose__shape.is-revealed {
+    opacity: 1;
+    transform: scale(1);
+    animation: none;
   }
 }
 .about-statements {
@@ -3897,6 +3931,60 @@ body {
   color: var(--color-text);
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  html.js.scroll-reveal-active .about-panel.js-scroll-reveal:not(.is-inview) .section-label__dot,
+  html.js.scroll-reveal-active .about-panel.js-scroll-reveal:not(.is-inview) .section-label__text,
+  html.js.scroll-reveal-active .about-panel.js-scroll-reveal:not(.is-inview) .about-panel__title,
+  html.js.scroll-reveal-active .about-panel.js-scroll-reveal:not(.is-inview) .about-panel__body {
+    opacity: 0;
+  }
+  html.js.scroll-reveal-active .about-panel.js-scroll-reveal:not(.is-inview) .section-label__dot {
+    transform: scale(0);
+  }
+  html.js.scroll-reveal-active .about-panel.js-scroll-reveal:not(.is-inview) .section-label__text,
+  html.js.scroll-reveal-active .about-panel.js-scroll-reveal:not(.is-inview) .about-panel__title,
+  html.js.scroll-reveal-active .about-panel.js-scroll-reveal:not(.is-inview) .about-panel__body {
+    transform: translateY(1rem);
+  }
+  html.js.scroll-reveal-active .about-panel.js-scroll-reveal.is-inview:not(.is-revealed) .section-label__dot,
+  html.js.scroll-reveal-active .about-panel.js-scroll-reveal.is-inview:not(.is-revealed) .section-label__text,
+  html.js.scroll-reveal-active .about-panel.js-scroll-reveal.is-inview:not(.is-revealed) .about-panel__title,
+  html.js.scroll-reveal-active .about-panel.js-scroll-reveal.is-inview:not(.is-revealed) .about-panel__body {
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+  html.js.scroll-reveal-active .about-panel.js-scroll-reveal.is-inview:not(.is-revealed) .section-label__dot {
+    animation-name: about-purpose-dot-in;
+    animation-duration: 0.4s;
+    animation-delay: 0ms;
+  }
+  html.js.scroll-reveal-active .about-panel.js-scroll-reveal.is-inview:not(.is-revealed) .section-label__text {
+    animation-name: about-purpose-fade-up;
+    animation-duration: 0.5s;
+    animation-delay: 120ms;
+  }
+  html.js.scroll-reveal-active .about-panel.js-scroll-reveal.is-inview:not(.is-revealed) .about-panel__title {
+    animation-name: about-purpose-fade-up;
+    animation-duration: 0.55s;
+    animation-delay: 280ms;
+  }
+  html.js.scroll-reveal-active .about-panel.js-scroll-reveal.is-inview:not(.is-revealed) .about-panel__body {
+    animation-name: about-purpose-fade-up;
+    animation-duration: 0.55s;
+    animation-delay: 400ms;
+  }
+  html.js.scroll-reveal-active .about-panel.js-scroll-reveal.is-revealed .section-label__dot,
+  html.js.scroll-reveal-active .about-panel.js-scroll-reveal.is-revealed .section-label__text,
+  html.js.scroll-reveal-active .about-panel.js-scroll-reveal.is-revealed .about-panel__title,
+  html.js.scroll-reveal-active .about-panel.js-scroll-reveal.is-revealed .about-panel__body {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+  html.js.scroll-reveal-active .about-panel.js-scroll-reveal.is-revealed .section-label__dot {
+    transform: scale(1);
+  }
+}
 .about-gallery {
   overflow: hidden;
   margin-top: 3.75rem;
@@ -3908,15 +3996,13 @@ body {
 }
 
 .about-gallery__slider {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-
-.about-gallery__slider::-webkit-scrollbar {
-  display: none;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  padding-left: clamp(1.5rem, 5vw, 4rem);
+  padding-right: clamp(1.5rem, 5vw, 4rem);
 }
 
 .about-gallery__list {
@@ -3924,15 +4010,20 @@ body {
   flex-direction: row;
   align-items: stretch;
   gap: 1.5rem;
+  width: max-content;
+  max-width: none;
   margin: 0;
   padding: 0;
   list-style: none;
-  min-width: min-content;
+  will-change: transform;
+}
+
+.about-gallery--marquee .about-gallery__list {
+  backface-visibility: hidden;
 }
 
 .about-gallery__item {
   flex: 0 0 auto;
-  scroll-snap-align: start;
 }
 
 .about-gallery__figure {
@@ -3956,6 +4047,9 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
 }
 
 .about-value {
@@ -4074,6 +4168,79 @@ body {
   text-align: left;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  html.js.scroll-reveal-active .about-value__head.js-scroll-reveal:not(.is-inview) .section-label__dot,
+  html.js.scroll-reveal-active .about-value__head.js-scroll-reveal:not(.is-inview) .section-label__text,
+  html.js.scroll-reveal-active .about-value__head.js-scroll-reveal:not(.is-inview) .about-value__title {
+    opacity: 0;
+  }
+  html.js.scroll-reveal-active .about-value__head.js-scroll-reveal:not(.is-inview) .section-label__dot {
+    transform: scale(0);
+  }
+  html.js.scroll-reveal-active .about-value__head.js-scroll-reveal:not(.is-inview) .section-label__text,
+  html.js.scroll-reveal-active .about-value__head.js-scroll-reveal:not(.is-inview) .about-value__title {
+    transform: translateY(1rem);
+  }
+  html.js.scroll-reveal-active .about-value__head.js-scroll-reveal.is-inview:not(.is-revealed) .section-label__dot,
+  html.js.scroll-reveal-active .about-value__head.js-scroll-reveal.is-inview:not(.is-revealed) .section-label__text,
+  html.js.scroll-reveal-active .about-value__head.js-scroll-reveal.is-inview:not(.is-revealed) .about-value__title {
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+  html.js.scroll-reveal-active .about-value__head.js-scroll-reveal.is-inview:not(.is-revealed) .section-label__dot {
+    animation-name: about-purpose-dot-in;
+    animation-duration: 0.4s;
+    animation-delay: 0ms;
+  }
+  html.js.scroll-reveal-active .about-value__head.js-scroll-reveal.is-inview:not(.is-revealed) .section-label__text {
+    animation-name: about-purpose-fade-up;
+    animation-duration: 0.5s;
+    animation-delay: 120ms;
+  }
+  html.js.scroll-reveal-active .about-value__head.js-scroll-reveal.is-inview:not(.is-revealed) .about-value__title {
+    animation-name: about-purpose-fade-up;
+    animation-duration: 0.55s;
+    animation-delay: 280ms;
+  }
+  html.js.scroll-reveal-active .about-value__head.js-scroll-reveal.is-revealed .section-label__dot,
+  html.js.scroll-reveal-active .about-value__head.js-scroll-reveal.is-revealed .section-label__text,
+  html.js.scroll-reveal-active .about-value__head.js-scroll-reveal.is-revealed .about-value__title {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+  html.js.scroll-reveal-active .about-value__head.js-scroll-reveal.is-revealed .section-label__dot {
+    transform: scale(1);
+  }
+  html.js.scroll-reveal-active .value-card__head.js-scroll-reveal:not(.is-inview) {
+    opacity: 0;
+  }
+  html.js.scroll-reveal-active .value-card__head.js-scroll-reveal.is-inview:not(.is-revealed) {
+    animation-name: about-purpose-fade-in;
+    animation-duration: 0.5s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+  html.js.scroll-reveal-active .value-card__head.js-scroll-reveal.is-revealed {
+    opacity: 1;
+    animation: none;
+  }
+  html.js.scroll-reveal-active .value-card__text.js-scroll-reveal:not(.is-inview) {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  html.js.scroll-reveal-active .value-card__text.js-scroll-reveal.is-inview:not(.is-revealed) {
+    animation-name: about-purpose-fade-up;
+    animation-duration: 0.55s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+  html.js.scroll-reveal-active .value-card__text.js-scroll-reveal.is-revealed {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
 @media (max-width: 768px) {
   .about-purpose__inner {
     flex-direction: column;

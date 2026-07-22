@@ -294,6 +294,16 @@ $about-purpose-collage-h: rem(506.594);
   }
 }
 
+@keyframes about-purpose-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 @keyframes about-purpose-dot-in {
   from {
     opacity: 0;
@@ -319,14 +329,12 @@ $about-purpose-collage-h: rem(506.594);
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  // テキスト: is-ready
   html.js .about-purpose:not(.is-ready) {
     .section-label__dot,
     .section-label__text,
     .about-purpose__title,
-    .about-purpose__body,
-    .about-purpose__accent,
-    .about-purpose__carousel,
-    .about-purpose__shape {
+    .about-purpose__body {
       opacity: 0;
     }
 
@@ -339,22 +347,13 @@ $about-purpose-collage-h: rem(506.594);
     .about-purpose__body {
       transform: translateY(1rem);
     }
-
-    .about-purpose__accent,
-    .about-purpose__carousel,
-    .about-purpose__shape {
-      transform: scale(0.1);
-    }
   }
 
   html.js .about-purpose.is-ready {
     .section-label__dot,
     .section-label__text,
     .about-purpose__title,
-    .about-purpose__body,
-    .about-purpose__accent,
-    .about-purpose__carousel,
-    .about-purpose__shape {
+    .about-purpose__body {
       animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
       animation-fill-mode: both;
     }
@@ -382,30 +381,74 @@ $about-purpose-collage-h: rem(506.594);
       animation-duration: 0.55s;
       animation-delay: 400ms;
     }
+  }
 
-    .about-purpose__accent,
-    .about-purpose__carousel,
-    .about-purpose__shape {
-      transform-origin: center center;
-      animation-name: about-purpose-grow;
-      animation-duration: 1.15s;
-      animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  // コラージュ PC: is-visual-ready（テキストと同時発火・delay で順送り）
+  @include mq-hero-pc {
+    html.js .about-purpose:not(.is-visual-ready) {
+      .about-purpose__accent,
+      .about-purpose__carousel,
+      .about-purpose__shape {
+        opacity: 0;
+        transform: scale(0.1);
+      }
     }
 
-    .about-purpose__accent {
-      animation-delay: 480ms;
-    }
+    html.js .about-purpose.is-visual-ready {
+      .about-purpose__accent,
+      .about-purpose__carousel,
+      .about-purpose__shape {
+        transform-origin: center center;
+        animation-name: about-purpose-grow;
+        animation-duration: 1.15s;
+        animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+        animation-fill-mode: both;
+      }
 
-    .about-purpose__carousel {
-      animation-delay: 560ms;
-    }
+      .about-purpose__accent {
+        animation-delay: 480ms;
+      }
 
-    .about-purpose__shape--peach {
-      animation-delay: 640ms;
-    }
+      .about-purpose__carousel {
+        animation-delay: 560ms;
+      }
 
-    .about-purpose__shape--green {
-      animation-delay: 720ms;
+      .about-purpose__shape--peach {
+        animation-delay: 640ms;
+      }
+
+      .about-purpose__shape--green {
+        animation-delay: 720ms;
+      }
+    }
+  }
+
+  // コラージュ SP: 各パーツ個別 IO（is-inview）
+  @include mq {
+    html.js .about-purpose {
+      .about-purpose__accent,
+      .about-purpose__carousel,
+      .about-purpose__shape {
+        transform-origin: center center;
+
+        &:not(.is-inview) {
+          opacity: 0;
+          transform: scale(0.1);
+        }
+
+        &.is-inview:not(.is-revealed) {
+          animation-name: about-purpose-grow;
+          animation-duration: 1.15s;
+          animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+          animation-fill-mode: both;
+        }
+
+        &.is-revealed {
+          opacity: 1;
+          transform: scale(1);
+          animation: none;
+        }
+      }
     }
   }
 }
@@ -502,21 +545,96 @@ $about-purpose-collage-h: rem(506.594);
   color: var(--color-text);
 }
 
+// ---------------------------------------------------------------------------
+// Vision / Mission scroll-reveal（ラベル → 見出し＋本文まとめて）
+// ---------------------------------------------------------------------------
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js.scroll-reveal-active .about-panel.js-scroll-reveal {
+    &:not(.is-inview) {
+      .section-label__dot,
+      .section-label__text,
+      .about-panel__title,
+      .about-panel__body {
+        opacity: 0;
+      }
+
+      .section-label__dot {
+        transform: scale(0);
+      }
+
+      .section-label__text,
+      .about-panel__title,
+      .about-panel__body {
+        transform: translateY(1rem);
+      }
+    }
+
+    &.is-inview:not(.is-revealed) {
+      .section-label__dot,
+      .section-label__text,
+      .about-panel__title,
+      .about-panel__body {
+        animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+        animation-fill-mode: both;
+      }
+
+      .section-label__dot {
+        animation-name: about-purpose-dot-in;
+        animation-duration: 0.4s;
+        animation-delay: 0ms;
+      }
+
+      .section-label__text {
+        animation-name: about-purpose-fade-up;
+        animation-duration: 0.5s;
+        animation-delay: 120ms;
+      }
+
+      .about-panel__title {
+        animation-name: about-purpose-fade-up;
+        animation-duration: 0.55s;
+        animation-delay: 280ms;
+      }
+
+      .about-panel__body {
+        animation-name: about-purpose-fade-up;
+        animation-duration: 0.55s;
+        animation-delay: 400ms;
+      }
+    }
+
+    &.is-revealed {
+      .section-label__dot,
+      .section-label__text,
+      .about-panel__title,
+      .about-panel__body {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
+
+      .section-label__dot {
+        transform: scale(1);
+      }
+    }
+  }
+}
+
 .about-gallery {
   overflow: hidden;
   @include fluid-pc-range(margin-top, 60, 120);
 }
 
 .about-gallery__slider {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-
-.about-gallery__slider::-webkit-scrollbar {
-  display: none;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  $about-gallery-edge: clamp(#{rem(24)}, 5vw, #{rem(64)});
+  padding-left: $about-gallery-edge;
+  padding-right: $about-gallery-edge;
 }
 
 .about-gallery__list {
@@ -524,15 +642,20 @@ $about-purpose-collage-h: rem(506.594);
   flex-direction: row;
   align-items: stretch;
   gap: rem(24);
+  width: max-content;
+  max-width: none;
   margin: 0;
   padding: 0;
   list-style: none;
-  min-width: min-content;
+  will-change: transform;
+}
+
+.about-gallery--marquee .about-gallery__list {
+  backface-visibility: hidden;
 }
 
 .about-gallery__item {
   flex: 0 0 auto;
-  scroll-snap-align: start;
 }
 
 .about-gallery__figure {
@@ -549,6 +672,9 @@ $about-purpose-collage-h: rem(506.594);
   width: 100%;
   height: 100%;
   object-fit: cover;
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
 }
 
 // ---------------------------------------------------------------------------
@@ -656,6 +782,110 @@ $about-purpose-collage-h: rem(506.594);
   letter-spacing: 0.1em;
   color: var(--color-text);
   text-align: left;
+}
+
+// ---------------------------------------------------------------------------
+// Value scroll-reveal（見出し / カードそれぞれ IO 発火）
+// ---------------------------------------------------------------------------
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js.scroll-reveal-active .about-value__head.js-scroll-reveal {
+    &:not(.is-inview) {
+      .section-label__dot,
+      .section-label__text,
+      .about-value__title {
+        opacity: 0;
+      }
+
+      .section-label__dot {
+        transform: scale(0);
+      }
+
+      .section-label__text,
+      .about-value__title {
+        transform: translateY(1rem);
+      }
+    }
+
+    &.is-inview:not(.is-revealed) {
+      .section-label__dot,
+      .section-label__text,
+      .about-value__title {
+        animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+        animation-fill-mode: both;
+      }
+
+      .section-label__dot {
+        animation-name: about-purpose-dot-in;
+        animation-duration: 0.4s;
+        animation-delay: 0ms;
+      }
+
+      .section-label__text {
+        animation-name: about-purpose-fade-up;
+        animation-duration: 0.5s;
+        animation-delay: 120ms;
+      }
+
+      .about-value__title {
+        animation-name: about-purpose-fade-up;
+        animation-duration: 0.55s;
+        animation-delay: 280ms;
+      }
+    }
+
+    &.is-revealed {
+      .section-label__dot,
+      .section-label__text,
+      .about-value__title {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
+
+      .section-label__dot {
+        transform: scale(1);
+      }
+    }
+  }
+
+  html.js.scroll-reveal-active .value-card__head.js-scroll-reveal {
+    &:not(.is-inview) {
+      opacity: 0;
+    }
+
+    &.is-inview:not(.is-revealed) {
+      animation-name: about-purpose-fade-in;
+      animation-duration: 0.5s;
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+      animation-fill-mode: both;
+    }
+
+    &.is-revealed {
+      opacity: 1;
+      animation: none;
+    }
+  }
+
+  html.js.scroll-reveal-active .value-card__text.js-scroll-reveal {
+    &:not(.is-inview) {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+
+    &.is-inview:not(.is-revealed) {
+      animation-name: about-purpose-fade-up;
+      animation-duration: 0.55s;
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+      animation-fill-mode: both;
+    }
+
+    &.is-revealed {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+  }
 }
 
 // ---------------------------------------------------------------------------
