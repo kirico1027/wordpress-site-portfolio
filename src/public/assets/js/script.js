@@ -277,7 +277,10 @@
       scheduleServiceFigureAfterText(el);
     }
 
-    if (el.classList.contains("works__slider-wrap")) {
+    if (
+      el.classList.contains("works__slider-wrap") ||
+      el.classList.contains("works-single__pickup-grid")
+    ) {
       var cards = el.querySelectorAll(".works-card");
       var last = cards.length ? cards[cards.length - 1] : el;
 
@@ -937,6 +940,62 @@
     window.addEventListener("load", updateTop);
   }
 
+  function initWorksSingleOpeningReveal() {
+    var page = document.querySelector(".works-single-page");
+    if (!page) return;
+
+    function start() {
+      if (page.classList.contains("is-ready")) return;
+      page.classList.add("is-ready");
+    }
+
+    if (prefersReducedMotion()) {
+      start();
+      return;
+    }
+
+    window.setTimeout(start, 0);
+  }
+
+  function primeWorksSingleOpeningIfVisible() {
+    var page = document.querySelector(".works-single-page");
+    if (page) page.classList.add("is-ready");
+  }
+
+  function prepareWorksSingleScrollReveal() {
+    var page = document.querySelector(".works-single-page");
+    if (!page || page.getAttribute("data-scroll-reveal-prepared")) return;
+
+    page.setAttribute("data-scroll-reveal-prepared", "1");
+
+    var selectors = [
+      ".works-single__body .works-single__heading",
+      ".works-single__body .works-single__question",
+      ".works-single__body .works-single__figure",
+      ".works-single__share",
+      ".works-single__back",
+    ];
+
+    selectors.forEach(function (selector) {
+      page.querySelectorAll(selector).forEach(function (el) {
+        el.classList.add("js-scroll-reveal");
+      });
+    });
+
+    var pickupGrid = page.querySelector(".works-single__pickup-grid");
+    if (pickupGrid) {
+      var isSp = window.matchMedia("(max-width: 768px)").matches;
+
+      if (isSp) {
+        page.querySelectorAll(".works-single__pickup-grid .works-card").forEach(function (el) {
+          el.classList.add("js-scroll-reveal");
+        });
+      } else {
+        pickupGrid.classList.add("js-scroll-reveal");
+      }
+    }
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initHeaderDrawer();
     initWorksSlider();
@@ -944,6 +1003,7 @@
     initBlogFeaturedSlider();
     initSectionHeadingScrollReveal();
     prepareWorksArchiveCards();
+    prepareWorksSingleScrollReveal();
     initScrollReveal();
     initAboutCollageReveal();
     initCompanyCollageReveal();
@@ -951,6 +1011,7 @@
     initServiceOpeningReveal();
     initWorksArchiveOpeningReveal();
     initWorksArchiveStickyFilters();
+    initWorksSingleOpeningReveal();
   });
 
   window.addEventListener("pageshow", function (event) {
@@ -960,5 +1021,6 @@
     primeAboutPurposeIfVisible();
     primeServiceOpeningIfVisible();
     primeWorksArchiveOpeningIfVisible();
+    primeWorksSingleOpeningIfVisible();
   });
 })();

@@ -5314,6 +5314,137 @@ body {
   background: var(--color-bg-light);
 }
 
+@keyframes works-single-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes works-single-grow {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html.js .works-single-page:not(.is-ready) .works-single__breadcrumb,
+  html.js .works-single-page:not(.is-ready) .works-single__date,
+  html.js .works-single-page:not(.is-ready) .works-single__title,
+  html.js .works-single-page:not(.is-ready) .works-single__client {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  html.js .works-single-page:not(.is-ready) .works-single__hero {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  html.js .works-single-page.is-ready .works-single__breadcrumb {
+    animation: works-single-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  html.js .works-single-page.is-ready .works-single__date {
+    animation: works-single-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: 80ms;
+  }
+  html.js .works-single-page.is-ready .works-single__title {
+    animation: works-single-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: 240ms;
+  }
+  html.js .works-single-page.is-ready .works-single__hero {
+    transform-origin: center center;
+    animation: works-single-grow 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 360ms;
+  }
+  html.js .works-single-page.is-ready .works-single__client {
+    animation: works-single-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: 480ms;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html.js.scroll-reveal-active .works-single-page .works-single__heading.js-scroll-reveal:not(.is-inview),
+  html.js.scroll-reveal-active .works-single-page .works-single__question.js-scroll-reveal:not(.is-inview),
+  html.js.scroll-reveal-active .works-single-page .works-single__figure.js-scroll-reveal:not(.is-inview),
+  html.js.scroll-reveal-active .works-single-page .works-single__share.js-scroll-reveal:not(.is-inview),
+  html.js.scroll-reveal-active .works-single-page .works-single__back.js-scroll-reveal:not(.is-inview) {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  html.js.scroll-reveal-active .works-single-page .works-single__heading.js-scroll-reveal.is-inview:not(.is-revealed),
+  html.js.scroll-reveal-active .works-single-page .works-single__question.js-scroll-reveal.is-inview:not(.is-revealed),
+  html.js.scroll-reveal-active .works-single-page .works-single__figure.js-scroll-reveal.is-inview:not(.is-revealed),
+  html.js.scroll-reveal-active .works-single-page .works-single__share.js-scroll-reveal.is-inview:not(.is-revealed),
+  html.js.scroll-reveal-active .works-single-page .works-single__back.js-scroll-reveal.is-inview:not(.is-revealed) {
+    animation: works-single-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  html.js.scroll-reveal-active .works-single-page .works-single__heading.js-scroll-reveal.is-revealed,
+  html.js.scroll-reveal-active .works-single-page .works-single__question.js-scroll-reveal.is-revealed,
+  html.js.scroll-reveal-active .works-single-page .works-single__figure.js-scroll-reveal.is-revealed,
+  html.js.scroll-reveal-active .works-single-page .works-single__share.js-scroll-reveal.is-revealed,
+  html.js.scroll-reveal-active .works-single-page .works-single__back.js-scroll-reveal.is-revealed {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
+@media (prefers-reduced-motion: no-preference) and (max-width: 768px) {
+  html.js.scroll-reveal-active .works-single-page .works-single__pickup-grid .works-card.js-scroll-reveal:not(.is-inview) {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  html.js.scroll-reveal-active .works-single-page .works-single__pickup-grid .works-card.js-scroll-reveal.is-inview:not(.is-revealed) {
+    animation: works-single-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  html.js.scroll-reveal-active .works-single-page .works-single__pickup-grid .works-card.js-scroll-reveal.is-revealed {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
+@media (prefers-reduced-motion: no-preference) and (min-width: 769px) {
+  html.js.scroll-reveal-active .works-single-page .works-single__pickup-grid.js-scroll-reveal:not(.is-inview) .works-card {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  html.js.scroll-reveal-active .works-single-page .works-single__pickup-grid.js-scroll-reveal.is-inview:not(.is-revealed) .works-card {
+    animation: works-single-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  html.js.scroll-reveal-active .works-single-page .works-single__pickup-grid.js-scroll-reveal.is-inview:not(.is-revealed) .works-card:nth-child(1) {
+    animation-delay: 0ms;
+  }
+  html.js.scroll-reveal-active .works-single-page .works-single__pickup-grid.js-scroll-reveal.is-inview:not(.is-revealed) .works-card:nth-child(2) {
+    animation-delay: 70ms;
+  }
+  html.js.scroll-reveal-active .works-single-page .works-single__pickup-grid.js-scroll-reveal.is-inview:not(.is-revealed) .works-card:nth-child(3) {
+    animation-delay: 140ms;
+  }
+  html.js.scroll-reveal-active .works-single-page .works-single__pickup-grid.js-scroll-reveal.is-inview:not(.is-revealed) .works-card:nth-child(4) {
+    animation-delay: 210ms;
+  }
+  html.js.scroll-reveal-active .works-single-page .works-single__pickup-grid.js-scroll-reveal.is-inview:not(.is-revealed) .works-card:nth-child(5) {
+    animation-delay: 280ms;
+  }
+  html.js.scroll-reveal-active .works-single-page .works-single__pickup-grid.js-scroll-reveal.is-inview:not(.is-revealed) .works-card:nth-child(6) {
+    animation-delay: 350ms;
+  }
+  html.js.scroll-reveal-active .works-single-page .works-single__pickup-grid.js-scroll-reveal.is-inview:not(.is-revealed) .works-card:nth-child(7) {
+    animation-delay: 420ms;
+  }
+  html.js.scroll-reveal-active .works-single-page .works-single__pickup-grid.js-scroll-reveal.is-inview:not(.is-revealed) .works-card:nth-child(8) {
+    animation-delay: 490ms;
+  }
+  html.js.scroll-reveal-active .works-single-page .works-single__pickup-grid.js-scroll-reveal.is-revealed .works-card {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
 .works-single__breadcrumb-area {
   padding-top: 10rem;
 }

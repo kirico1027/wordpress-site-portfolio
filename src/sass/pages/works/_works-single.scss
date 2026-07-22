@@ -10,6 +10,152 @@
 }
 
 // ---------------------------------------------------------------------------
+// Opening（パンくず → 日付 → タイトル → ヒーロー → クライアント）
+// ---------------------------------------------------------------------------
+
+@keyframes works-single-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes works-single-grow {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js .works-single-page:not(.is-ready) {
+    .works-single__breadcrumb,
+    .works-single__date,
+    .works-single__title,
+    .works-single__client {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+
+    .works-single__hero {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+  }
+
+  html.js .works-single-page.is-ready {
+    .works-single__breadcrumb {
+      animation: works-single-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .works-single__date {
+      animation: works-single-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: 80ms;
+    }
+
+    .works-single__title {
+      animation: works-single-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: 240ms;
+    }
+
+    .works-single__hero {
+      transform-origin: center center;
+      animation: works-single-grow 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-delay: 360ms;
+    }
+
+    .works-single__client {
+      animation: works-single-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: 480ms;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Body scroll-reveal（見出し・質問・画像・share・back）
+// ---------------------------------------------------------------------------
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js.scroll-reveal-active .works-single-page {
+    .works-single__heading.js-scroll-reveal,
+    .works-single__question.js-scroll-reveal,
+    .works-single__figure.js-scroll-reveal,
+    .works-single__share.js-scroll-reveal,
+    .works-single__back.js-scroll-reveal {
+      &:not(.is-inview) {
+        opacity: 0;
+        transform: translateY(1rem);
+      }
+
+      &.is-inview:not(.is-revealed) {
+        animation: works-single-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+
+      &.is-revealed {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
+    }
+
+    // SP: カード個別発火
+    @include mq {
+      .works-single__pickup-grid .works-card.js-scroll-reveal {
+        &:not(.is-inview) {
+          opacity: 0;
+          transform: translateY(1rem);
+        }
+
+        &.is-inview:not(.is-revealed) {
+          animation: works-single-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        &.is-revealed {
+          opacity: 1;
+          transform: none;
+          animation: none;
+        }
+      }
+    }
+
+    // PC: グリッド入場でカードをスタガー
+    @include mq-hero-pc {
+      .works-single__pickup-grid.js-scroll-reveal:not(.is-inview) .works-card {
+        opacity: 0;
+        transform: translateY(1rem);
+      }
+
+      .works-single__pickup-grid.js-scroll-reveal.is-inview:not(.is-revealed) .works-card {
+        animation: works-single-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+
+      @for $i from 1 through 8 {
+        .works-single__pickup-grid.js-scroll-reveal.is-inview:not(.is-revealed)
+          .works-card:nth-child(#{$i}) {
+          animation-delay: #{($i - 1) * 70}ms;
+        }
+      }
+
+      .works-single__pickup-grid.js-scroll-reveal.is-revealed .works-card {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Breadcrumb
 // ---------------------------------------------------------------------------
 
