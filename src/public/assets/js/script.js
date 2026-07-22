@@ -273,6 +273,10 @@
     if (el.classList.contains("is-inview")) return;
     el.classList.add("is-inview");
 
+    if (isServiceFollowupText(el)) {
+      scheduleServiceFigureAfterText(el);
+    }
+
     if (el.classList.contains("works__slider-wrap")) {
       var cards = el.querySelectorAll(".works-card");
       var last = cards.length ? cards[cards.length - 1] : el;
@@ -394,27 +398,184 @@
   }
 
   function initScrollReveal() {
-    var parts = document.querySelectorAll(
-      ".js-scroll-reveal:not(.js-company-collage-reveal)"
+    var all = document.querySelectorAll(
+      ".js-scroll-reveal:not(.js-company-collage-reveal):not(.js-about-collage-reveal)"
     );
-    if (!parts.length) return;
+    if (!all.length) return;
     enableScrollReveal();
-    observeRevealTargets(Array.prototype.slice.call(parts), activateRevealEl);
+
+    if (prefersReducedMotion()) {
+      Array.prototype.forEach.call(all, function (el) {
+        el.classList.add("is-inview", "is-revealed");
+      });
+      return;
+    }
+
+    // Service 02/03: 図版はテキスト先行のあとで開始するため、単独監視しない
+    var parts = Array.prototype.filter.call(all, function (el) {
+      return !isServiceFollowupFigure(el);
+    });
+
+    observeRevealTargets(parts, activateRevealEl);
   }
 
-  // Company: コラージュ自身が画面に入ったら、テキスト先行の間を置いて組み立てる
-  function initCompanyCollageReveal() {
-    var trigger = document.querySelector(".company__visual");
-    var parts = document.querySelectorAll(".js-company-collage-reveal");
+  function isServiceFollowupFigure(el) {
+    // 01/02/03 すべてのイラストは単独 IO せず、テキスト後（＋SP は画面内）で開始
+    return !!(
+      el.classList.contains("service-detail__figure") &&
+      el.closest(".service-detail")
+    );
+  }
+
+  function isServiceFollowupText(el) {
+    var detail = el.closest(".service-detail");
+    if (!detail || detail.classList.contains("service-detail--first")) return false;
+    return (
+      el.classList.contains("service-detail__num") ||
+      el.classList.contains("service-detail__title") ||
+      el.classList.contains("service-detail__body") ||
+      el.classList.contains("btn-more--service")
+    );
+  }
+
+  function startServiceFigureReveal(figure, delayMs) {
+    if (!figure || figure.classList.contains("is-inview")) return;
+
+    var isSp = window.matchMedia("(max-width: 768px)").matches;
+    enableScrollReveal();
+
+    function startFigure() {
+      activateRevealEl(figure);
+    }
+
+    if (isSp) {
+      observeCollageTrigger(figure, function () {
+        window.setTimeout(startFigure, 120);
+      });
+      return;
+    }
+
+    window.setTimeout(startFigure, delayMs);
+  }
+
+  function scheduleServiceFigureAfterText(fromEl) {
+    // 番号だけでは始めず、タイトルか本文が出てから画像へ（テキスト先行を明確に）
+    if (
+      !fromEl.classList.contains("service-detail__title") &&
+      !fromEl.classList.contains("service-detail__body")
+    ) {
+      return;
+    }
+
+    var layout = fromEl.closest(".service-detail__layout");
+    if (!layout) return;
+    var figure = layout.querySelector(".service-detail__figure.js-scroll-reveal");
+    if (
+      !figure ||
+      figure.classList.contains("is-inview") ||
+      figure.getAttribute("data-reveal-scheduled")
+    ) {
+      return;
+    }
+
+    figure.setAttribute("data-reveal-scheduled", "1");
+
+    var delay = layout.classList.contains("service-detail__layout--reverse")
+      ? 450
+      : 320;
+    startServiceFigureReveal(figure, delay);
+  }
+
+  function scheduleFirstServiceFigure(first) {
+    if (!first) return;
+    var figure = first.querySelector(".service-detail__figure.js-scroll-reveal");
+    if (
+      !figure ||
+      figure.classList.contains("is-inview") ||
+      figure.getAttribute("data-reveal-scheduled")
+    ) {
+      return;
+    }
+    figure.setAttribute("data-reveal-scheduled", "1");
+    startServiceFigureReveal(figure, 400);
+  }
+
+  function isCollageInView(el) {
+    if (!el) return false;
+    var rect = el.getBoundingClientRect();
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    // SP 縦積み後: コラージュ上端が画面内に入ったら発火（下端 8%〜上端 92%）
+    return rect.top < vh * 0.92 && rect.bottom > vh * 0.08;
+  }
+
+  // コラージュ用: IO + SP は scroll フォールバック（レイアウト縦積み後の位置を確実に拾う）
+  function observeCollageTrigger(trigger, onEnter) {
+    if (!trigger) {
+      onEnter();
+      return;
+    }
+
+    var done = false;
+    var observer = null;
+    var isSp = window.matchMedia("(max-width: 768px)").matches;
+
+    function enter() {
+      if (done) return;
+      done = true;
+      if (observer) observer.disconnect();
+      window.removeEventListener("scroll", onScrollOrResize, true);
+      window.removeEventListener("resize", onScrollOrResize);
+      onEnter();
+    }
+
+    function onScrollOrResize() {
+      if (isCollageInView(trigger)) enter();
+    }
+
+    if (prefersReducedMotion() || !("IntersectionObserver" in window)) {
+      enter();
+      return;
+    }
+
+    observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          enter();
+        });
+      },
+      {
+        root: null,
+        // % rootMargin はモバイルで不安定なことがあるため px 指定
+        rootMargin: "0px 0px -64px 0px",
+        threshold: [0, 0.01, 0.15],
+      }
+    );
+    observer.observe(trigger);
+
+    if (isSp) {
+      window.addEventListener("scroll", onScrollOrResize, true);
+      window.addEventListener("resize", onScrollOrResize);
+      onScrollOrResize();
+      return;
+    }
+
+    if (isElementInViewport(trigger, 0.1) || isCollageInView(trigger)) {
+      enter();
+    }
+  }
+
+  // About: コラージュ枠が入ったらパーツを順に組み立て
+  function initAboutCollageReveal() {
+    var trigger =
+      document.querySelector(".about__visual-scaler") ||
+      document.querySelector(".about__visual");
+    var parts = document.querySelectorAll(".js-about-collage-reveal");
     if (!trigger || !parts.length) return;
 
     enableScrollReveal();
 
-    var started = false;
-    function startCollage() {
-      if (started) return;
-      started = true;
-
+    observeCollageTrigger(trigger, function () {
       if (prefersReducedMotion()) {
         Array.prototype.forEach.call(parts, function (el) {
           el.classList.add("is-inview", "is-revealed");
@@ -425,31 +586,35 @@
       Array.prototype.forEach.call(parts, function (el, index) {
         window.setTimeout(function () {
           activateRevealEl(el);
-        }, 320 + index * 70);
+        }, 200 + index * 80);
       });
-    }
+    });
+  }
 
-    if (prefersReducedMotion() || !("IntersectionObserver" in window)) {
-      startCollage();
-      return;
-    }
+  // Company: コラージュ自身が画面に入ったら、テキスト先行の間を置いて組み立てる
+  function initCompanyCollageReveal() {
+    var trigger =
+      document.querySelector(".company__visual-scaler") ||
+      document.querySelector(".company__visual");
+    var parts = document.querySelectorAll(".js-company-collage-reveal");
+    if (!trigger || !parts.length) return;
 
-    if (isElementInViewport(trigger, 0.1)) {
-      startCollage();
-      return;
-    }
+    enableScrollReveal();
 
-    var observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          observer.disconnect();
-          startCollage();
+    observeCollageTrigger(trigger, function () {
+      if (prefersReducedMotion()) {
+        Array.prototype.forEach.call(parts, function (el) {
+          el.classList.add("is-inview", "is-revealed");
         });
-      },
-      { root: null, rootMargin: "0px 0px -10% 0px", threshold: 0 }
-    );
-    observer.observe(trigger);
+        return;
+      }
+
+      Array.prototype.forEach.call(parts, function (el, index) {
+        window.setTimeout(function () {
+          activateRevealEl(el);
+        }, 200 + index * 80);
+      });
+    });
   }
 
   // About Purpose: テキストは content、コラージュは SP でパーツ個別
@@ -562,9 +727,16 @@
         return;
       }
 
-      pieces.forEach(function (piece) {
-        observeOnce(piece, function () {
-          activatePiece(piece);
+      var visual =
+        section.querySelector(".about-purpose__visual-scaler") ||
+        section.querySelector(".about-purpose__visual") ||
+        section;
+
+      observeCollageTrigger(visual, function () {
+        pieces.forEach(function (piece, index) {
+          window.setTimeout(function () {
+            activatePiece(piece);
+          }, index * 80);
         });
       });
       return;
@@ -595,11 +767,13 @@
     });
   }
 
-  // Service: ページ入場（intro → 01）
+  // Service: ページ入場（intro → 01 テキスト）+ 01 イラストは別途画面内で
   function initServiceOpeningReveal() {
     var intro = document.querySelector(".service-intro");
     var first = document.querySelector(".service-detail--first");
     if (!intro && !first) return;
+
+    enableScrollReveal();
 
     function start() {
       if (intro && intro.classList.contains("is-ready")) return;
@@ -607,12 +781,23 @@
 
       if (prefersReducedMotion()) {
         if (intro) intro.classList.add("is-ready");
-        if (first) first.classList.add("is-ready");
+        if (first) {
+          first.classList.add("is-ready");
+          var reducedFigure = first.querySelector(
+            ".service-detail__figure.js-scroll-reveal"
+          );
+          if (reducedFigure) {
+            reducedFigure.classList.add("is-inview", "is-revealed");
+          }
+        }
         return;
       }
 
       if (intro) intro.classList.add("is-ready");
-      if (first) first.classList.add("is-ready");
+      if (first) {
+        first.classList.add("is-ready");
+        scheduleFirstServiceFigure(first);
+      }
     }
 
     var trigger = intro || first;
@@ -635,7 +820,7 @@
           start();
         });
       },
-      { root: null, rootMargin: "0px 0px -10% 0px", threshold: 0 }
+      { root: null, rootMargin: "0px 0px -64px 0px", threshold: 0 }
     );
     observer.observe(trigger);
   }
@@ -644,7 +829,11 @@
     var intro = document.querySelector(".service-intro");
     var first = document.querySelector(".service-detail--first");
     if (intro) intro.classList.add("is-ready");
-    if (first) first.classList.add("is-ready");
+    if (first) {
+      first.classList.add("is-ready");
+      var figure = first.querySelector(".service-detail__figure.js-scroll-reveal");
+      if (figure) figure.classList.add("is-inview", "is-revealed");
+    }
   }
 
   document.addEventListener("DOMContentLoaded", function () {
@@ -654,6 +843,7 @@
     initBlogFeaturedSlider();
     initSectionHeadingScrollReveal();
     initScrollReveal();
+    initAboutCollageReveal();
     initCompanyCollageReveal();
     initAboutPurposeReveal();
     initServiceOpeningReveal();

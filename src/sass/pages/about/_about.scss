@@ -433,7 +433,6 @@ $about-purpose-collage-h: rem(506.594);
 
         &:not(.is-inview) {
           opacity: 0;
-          transform: scale(0.1);
         }
 
         &.is-inview:not(.is-revealed) {

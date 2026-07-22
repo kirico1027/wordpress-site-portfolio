@@ -1963,10 +1963,6 @@ body {
   html.js.scroll-reveal-active .about .btn-more.js-scroll-reveal:not(.is-inview) {
     transform: translateY(1rem);
   }
-  html.js.scroll-reveal-active .about .about__figure.js-scroll-reveal:not(.is-inview),
-  html.js.scroll-reveal-active .about .about__shape.js-scroll-reveal:not(.is-inview) {
-    transform: scale(0.1);
-  }
   html.js.scroll-reveal-active .about .js-scroll-reveal.is-inview:not(.is-revealed) {
     animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
     animation-fill-mode: both;
@@ -2025,6 +2021,9 @@ body {
     height: 24.583rem;
     transform: scale(calc(100cqw / 32.5rem));
     transform-origin: top left;
+  }
+  .about__visual-scaler {
+    min-height: 13.75rem;
   }
   .about__content {
     flex: none;
@@ -2574,10 +2573,6 @@ body {
   html.js.scroll-reveal-active .company .btn-more.js-scroll-reveal:not(.is-inview) {
     transform: translateY(1rem);
   }
-  html.js.scroll-reveal-active .company .company__figure.js-scroll-reveal:not(.is-inview),
-  html.js.scroll-reveal-active .company .company__shape.js-scroll-reveal:not(.is-inview) {
-    transform: scale(0.1);
-  }
   html.js.scroll-reveal-active .company .js-scroll-reveal.is-inview:not(.is-revealed) {
     animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
     animation-fill-mode: both;
@@ -2633,6 +2628,7 @@ body {
   .company__visual-scaler {
     width: 100%;
     height: auto;
+    min-height: 13.75rem;
     transform: none;
   }
   .company__collage {
@@ -2844,9 +2840,6 @@ body {
   html.js.scroll-reveal-active .news .news-item.js-scroll-reveal:not(.is-inview),
   html.js.scroll-reveal-active .news .btn-more.js-scroll-reveal:not(.is-inview) {
     transform: translateY(1rem);
-  }
-  html.js.scroll-reveal-active .news .news__deco-block.js-scroll-reveal:not(.is-inview) {
-    transform: scale(0.1);
   }
   html.js.scroll-reveal-active .news .js-scroll-reveal.is-inview:not(.is-revealed) {
     animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
@@ -3788,7 +3781,6 @@ body {
   html.js .about-purpose .about-purpose__carousel:not(.is-inview),
   html.js .about-purpose .about-purpose__shape:not(.is-inview) {
     opacity: 0;
-    transform: scale(0.1);
   }
   html.js .about-purpose .about-purpose__accent.is-inview:not(.is-revealed),
   html.js .about-purpose .about-purpose__carousel.is-inview:not(.is-revealed),
@@ -4471,10 +4463,6 @@ body {
     opacity: 0;
     transform: translateY(1rem);
   }
-  html.js .service-detail--first:not(.is-ready) .service-detail__figure {
-    opacity: 0;
-    transform: scale(0.9);
-  }
   html.js .service-detail--first.is-ready .service-detail__num,
   html.js .service-detail--first.is-ready .service-detail__title,
   html.js .service-detail--first.is-ready .service-detail__text,
@@ -4496,13 +4484,46 @@ body {
   html.js .service-detail--first.is-ready .btn-more--service {
     animation-delay: 520ms;
   }
-  html.js .service-detail--first.is-ready .service-detail__figure {
+}
+@media (prefers-reduced-motion: no-preference) {
+  html.js .service-detail__figure.js-scroll-reveal:not(.is-inview) {
+    opacity: 0;
+  }
+  html.js.scroll-reveal-active .service-detail:not(.service-detail--first) .service-detail__num.js-scroll-reveal:not(.is-inview),
+  html.js.scroll-reveal-active .service-detail:not(.service-detail--first) .service-detail__title.js-scroll-reveal:not(.is-inview),
+  html.js.scroll-reveal-active .service-detail:not(.service-detail--first) .service-detail__body.js-scroll-reveal:not(.is-inview),
+  html.js.scroll-reveal-active .service-detail:not(.service-detail--first) .btn-more--service.js-scroll-reveal:not(.is-inview) {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  html.js.scroll-reveal-active .service-detail:not(.service-detail--first) .service-detail__num.js-scroll-reveal.is-inview:not(.is-revealed),
+  html.js.scroll-reveal-active .service-detail:not(.service-detail--first) .service-detail__title.js-scroll-reveal.is-inview:not(.is-revealed),
+  html.js.scroll-reveal-active .service-detail:not(.service-detail--first) .service-detail__body.js-scroll-reveal.is-inview:not(.is-revealed),
+  html.js.scroll-reveal-active .service-detail:not(.service-detail--first) .btn-more--service.js-scroll-reveal.is-inview:not(.is-revealed) {
+    animation-name: service-fade-up;
+    animation-duration: 0.55s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+  html.js.scroll-reveal-active .service-detail:not(.service-detail--first) .service-detail__num.js-scroll-reveal.is-revealed,
+  html.js.scroll-reveal-active .service-detail:not(.service-detail--first) .service-detail__title.js-scroll-reveal.is-revealed,
+  html.js.scroll-reveal-active .service-detail:not(.service-detail--first) .service-detail__body.js-scroll-reveal.is-revealed,
+  html.js.scroll-reveal-active .service-detail:not(.service-detail--first) .btn-more--service.js-scroll-reveal.is-revealed {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+  html.js.scroll-reveal-active .service-detail__figure.js-scroll-reveal.is-inview:not(.is-revealed) {
     transform-origin: center center;
     animation-name: service-grow;
     animation-duration: 1.15s;
-    animation-delay: 400ms;
     animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
     animation-fill-mode: both;
+  }
+  html.js.scroll-reveal-active .service-detail__figure.js-scroll-reveal.is-revealed {
+    opacity: 1;
+    transform: none;
+    animation: none;
   }
 }
 .service-detail__inner {
@@ -4884,6 +4905,23 @@ body {
   transform: translateX(0.25rem);
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  html.js.scroll-reveal-active .service-voice__card.js-scroll-reveal:not(.is-inview) {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  html.js.scroll-reveal-active .service-voice__card.js-scroll-reveal.is-inview:not(.is-revealed) {
+    animation-name: service-fade-up;
+    animation-duration: 0.6s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+  html.js.scroll-reveal-active .service-voice__card.js-scroll-reveal.is-revealed {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
 .service-voice__badge {
   position: absolute;
   top: 0;

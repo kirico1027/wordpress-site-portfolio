@@ -1203,11 +1203,6 @@ $about-visual-base-h: rem(393.328);
       transform: translateY(1rem);
     }
 
-    .about__figure.js-scroll-reveal:not(.is-inview),
-    .about__shape.js-scroll-reveal:not(.is-inview) {
-      transform: scale(0.1);
-    }
-
     .js-scroll-reveal.is-inview:not(.is-revealed) {
       animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
       animation-fill-mode: both;
@@ -1256,6 +1251,11 @@ $about-visual-base-h: rem(393.328);
   }
 
   @include about-visual-scale;
+
+  // SP: cqw が取れない環境でも枠の高さを確保し、スクロール発火可能にする
+  .about__visual-scaler {
+    min-height: rem(220);
+  }
 
   .about__content {
     flex: none;
@@ -1815,11 +1815,6 @@ $about-visual-base-h: rem(393.328);
       transform: translateY(1rem);
     }
 
-    .company__figure.js-scroll-reveal:not(.is-inview),
-    .company__shape.js-scroll-reveal:not(.is-inview) {
-      transform: scale(0.1);
-    }
-
     .js-scroll-reveal.is-inview:not(.is-revealed) {
       animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
       animation-fill-mode: both;
@@ -1892,6 +1887,7 @@ $about-visual-base-h: rem(393.328);
   .company__visual-scaler {
     width: 100%;
     height: auto;
+    min-height: rem(220);
     transform: none;
   }
 
@@ -2102,10 +2098,6 @@ $about-visual-base-h: rem(393.328);
     .news-item.js-scroll-reveal:not(.is-inview),
     .btn-more.js-scroll-reveal:not(.is-inview) {
       transform: translateY(1rem);
-    }
-
-    .news__deco-block.js-scroll-reveal:not(.is-inview) {
-      transform: scale(0.1);
     }
 
     .js-scroll-reveal.is-inview:not(.is-revealed) {
