@@ -18,20 +18,22 @@
 
       <section class="works-archive" aria-label="実績一覧">
         <div class="container works-archive__inner">
-          <nav class="works-archive__filters" aria-label="カテゴリフィルター">
-            <a class="works-archive__filter works-archive__filter--active" href="./works-archive.html" aria-current="page">すべて</a>
-            <ul class="works-archive__filter-list">
-              <li class="works-archive__filter-item">
-                <a class="works-archive__filter" href="#">あなたのメンタルコーチ</a>
-              </li>
-              <li class="works-archive__filter-item">
-                <a class="works-archive__filter" href="#">つながるワークフロー</a>
-              </li>
-              <li class="works-archive__filter-item">
-                <a class="works-archive__filter" href="#">みんなの福利厚生クラウド</a>
-              </li>
-            </ul>
-          </nav>
+          <div class="works-archive__filters-sticky">
+            <nav class="works-archive__filters" aria-label="カテゴリフィルター">
+              <a class="works-archive__filter works-archive__filter--active" href="./works-archive.html" aria-current="page">すべて</a>
+              <ul class="works-archive__filter-list">
+                <li class="works-archive__filter-item">
+                  <a class="works-archive__filter" href="#">あなたのメンタルコーチ</a>
+                </li>
+                <li class="works-archive__filter-item">
+                  <a class="works-archive__filter" href="#">つながるワークフロー</a>
+                </li>
+                <li class="works-archive__filter-item">
+                  <a class="works-archive__filter" href="#">みんなの福利厚生クラウド</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
 
           <div class="works-archive__grid">
             @@include('partials/cards/works-card.html', {
@@ -77,6 +79,6 @@
     </main>
 
     @@include('partials/footer.html')
-    <script src="./public/assets/js/script.js?v=57"></script>
+    <script src="./public/assets/js/script.js?v=62"></script>
   </body>
 </html>

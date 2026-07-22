@@ -5084,6 +5084,50 @@ body {
   padding-top: 0;
 }
 
+@keyframes works-archive-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html.js .works-archive:not(.is-ready) .works-archive__filters,
+  html.js .works-archive:not(.is-ready) .works-card.is-opening {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  html.js .works-archive.is-ready .works-archive__filters {
+    animation: works-archive-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  html.js .works-archive.is-ready .works-card.is-opening:not(.is-revealed) {
+    animation: works-archive-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  html.js .works-archive.is-ready .works-card.is-opening.is-revealed {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+  html.js.scroll-reveal-active .works-archive .works-card.js-scroll-reveal:not(.is-inview),
+  html.js.scroll-reveal-active .works-archive .works-archive__more-wrap.js-scroll-reveal:not(.is-inview) {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  html.js.scroll-reveal-active .works-archive .works-card.js-scroll-reveal.is-inview:not(.is-revealed),
+  html.js.scroll-reveal-active .works-archive .works-archive__more-wrap.js-scroll-reveal.is-inview:not(.is-revealed) {
+    animation: works-archive-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-fill-mode: both;
+  }
+  html.js.scroll-reveal-active .works-archive .works-card.js-scroll-reveal.is-revealed,
+  html.js.scroll-reveal-active .works-archive .works-archive__more-wrap.js-scroll-reveal.is-revealed {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
 .works-archive__inner {
   padding-top: 5rem;
 }
@@ -5103,6 +5147,22 @@ body {
 .works-archive__inner {
   padding-top: clamp(3rem, 3rem + (100vw - 375px) * 32 / 393, 5rem);
   padding-bottom: clamp(5rem, 5rem + (100vw - 375px) * 40 / 393, 7.5rem);
+}
+
+.works-archive__filters-sticky {
+  position: sticky;
+  top: var(--works-archive-filters-top, 7.5rem);
+  z-index: 50;
+  margin-inline: -2rem;
+  padding-block: 0.75rem;
+  padding-inline: 2rem;
+  background: transparent;
+}
+@media (max-width: 768px) {
+  .works-archive__filters-sticky {
+    margin-inline: calc(-1 * clamp(1.5rem, 8.33vw, 4rem));
+    padding-inline: clamp(1.5rem, 8.33vw, 4rem);
+  }
 }
 
 .works-archive__filters {

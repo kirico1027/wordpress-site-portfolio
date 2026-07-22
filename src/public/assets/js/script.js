@@ -836,17 +836,121 @@
     }
   }
 
+  // Works archive: 入場はフィルター＋画面内カード、以降は scroll-reveal
+  function prepareWorksArchiveCards() {
+    var archive = document.querySelector(".works-archive-page .works-archive");
+    if (!archive || archive.getAttribute("data-reveal-prepared")) return;
+
+    var grid = archive.querySelector(".works-archive__grid");
+    var moreWrap = archive.querySelector(".works-archive__more-wrap");
+    if (!grid) return;
+
+    archive.setAttribute("data-reveal-prepared", "1");
+
+    var cards = grid.querySelectorAll(".works-card");
+    var isSp = window.matchMedia("(max-width: 768px)").matches;
+    var openingIndex = 0;
+    var openingCardBaseDelay = 300;
+
+    Array.prototype.forEach.call(cards, function (card, index) {
+      var isOpening = isSp ? index === 0 : isElementInViewport(card, 0.1);
+
+      if (isOpening) {
+        card.classList.add("is-opening");
+        card.style.animationDelay =
+          openingCardBaseDelay + openingIndex * 70 + "ms";
+        openingIndex += 1;
+        return;
+      }
+
+      card.classList.add("js-scroll-reveal");
+    });
+
+    if (moreWrap) {
+      moreWrap.classList.add("js-scroll-reveal");
+    }
+  }
+
+  function initWorksArchiveOpeningReveal() {
+    var archive = document.querySelector(".works-archive-page .works-archive");
+    if (!archive) return;
+
+    function start() {
+      if (archive.classList.contains("is-ready")) return;
+      archive.classList.add("is-ready");
+
+      if (prefersReducedMotion()) {
+        Array.prototype.forEach.call(
+          archive.querySelectorAll(".works-card.is-opening"),
+          function (card) {
+            card.classList.add("is-revealed");
+          }
+        );
+        return;
+      }
+
+      Array.prototype.forEach.call(
+        archive.querySelectorAll(".works-card.is-opening"),
+        function (card) {
+          markRevealedOnAnimationEnd(card);
+        }
+      );
+    }
+
+    if (prefersReducedMotion()) {
+      start();
+      return;
+    }
+
+    window.setTimeout(start, 550);
+  }
+
+  function primeWorksArchiveOpeningIfVisible() {
+    var archive = document.querySelector(".works-archive-page .works-archive");
+    if (!archive) return;
+    archive.classList.add("is-ready");
+    Array.prototype.forEach.call(
+      archive.querySelectorAll(".works-card.is-opening"),
+      function (card) {
+        card.classList.add("is-revealed");
+      }
+    );
+  }
+
+  function initWorksArchiveStickyFilters() {
+    var page = document.querySelector(".works-archive-page");
+    var header = document.querySelector(".top-header");
+    if (!page || !header) return;
+
+    var gap = 8;
+
+    function updateTop() {
+      var top = Math.ceil(header.getBoundingClientRect().bottom + gap);
+      document.documentElement.style.setProperty(
+        "--works-archive-filters-top",
+        top + "px"
+      );
+    }
+
+    updateTop();
+    window.addEventListener("resize", updateTop);
+    window.addEventListener("load", updateTop);
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initHeaderDrawer();
     initWorksSlider();
     initAboutGallerySlider();
     initBlogFeaturedSlider();
     initSectionHeadingScrollReveal();
+    prepareWorksArchiveCards();
     initScrollReveal();
     initAboutCollageReveal();
     initCompanyCollageReveal();
     initAboutPurposeReveal();
     initServiceOpeningReveal();
+    initWorksArchiveOpeningReveal();
+    initWorksArchiveStickyFilters();
   });
 
   window.addEventListener("pageshow", function (event) {
@@ -855,5 +959,6 @@
     primeScrollRevealIfVisible();
     primeAboutPurposeIfVisible();
     primeServiceOpeningIfVisible();
+    primeWorksArchiveOpeningIfVisible();
   });
 })();

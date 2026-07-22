@@ -37,7 +37,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/brands.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="./public/assets/css/main.css?v=208" />
+<link rel="stylesheet" href="./public/assets/css/main.css?v=214" />
 
   </head>
   <body>
@@ -122,20 +122,22 @@
 
       <section class="works-archive" aria-label="実績一覧">
         <div class="container works-archive__inner">
-          <nav class="works-archive__filters" aria-label="カテゴリフィルター">
-            <a class="works-archive__filter works-archive__filter--active" href="./works-archive.html" aria-current="page">すべて</a>
-            <ul class="works-archive__filter-list">
-              <li class="works-archive__filter-item">
-                <a class="works-archive__filter" href="#">あなたのメンタルコーチ</a>
-              </li>
-              <li class="works-archive__filter-item">
-                <a class="works-archive__filter" href="#">つながるワークフロー</a>
-              </li>
-              <li class="works-archive__filter-item">
-                <a class="works-archive__filter" href="#">みんなの福利厚生クラウド</a>
-              </li>
-            </ul>
-          </nav>
+          <div class="works-archive__filters-sticky">
+            <nav class="works-archive__filters" aria-label="カテゴリフィルター">
+              <a class="works-archive__filter works-archive__filter--active" href="./works-archive.html" aria-current="page">すべて</a>
+              <ul class="works-archive__filter-list">
+                <li class="works-archive__filter-item">
+                  <a class="works-archive__filter" href="#">あなたのメンタルコーチ</a>
+                </li>
+                <li class="works-archive__filter-item">
+                  <a class="works-archive__filter" href="#">つながるワークフロー</a>
+                </li>
+                <li class="works-archive__filter-item">
+                  <a class="works-archive__filter" href="#">みんなの福利厚生クラウド</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
 
           <div class="works-archive__grid">
             <!-- WP: get_template_part('template-parts/cards/works-card') — CPT works ループ -->
@@ -313,6 +315,6 @@
   </div>
 </footer>
 
-    <script src="./public/assets/js/script.js?v=57"></script>
+    <script src="./public/assets/js/script.js?v=62"></script>
   </body>
 </html>
