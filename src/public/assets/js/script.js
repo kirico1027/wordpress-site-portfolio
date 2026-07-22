@@ -193,6 +193,56 @@
     window.requestAnimationFrame(tick);
   }
 
+  function initRecruitIntroGallerySlider() {
+    var gallery = document.querySelector(".recruit-intro__gallery");
+    var slider = gallery && gallery.querySelector(".recruit-intro__gallery-slider");
+    var list = slider && slider.querySelector(".recruit-intro__gallery-list");
+    if (!gallery || !slider || !list || !list.children.length) return;
+
+    var originals = Array.prototype.slice.call(list.children);
+    originals.forEach(function (item) {
+      var clone = item.cloneNode(true);
+      clone.setAttribute("aria-hidden", "true");
+      list.appendChild(clone);
+    });
+
+    if (prefersReducedMotion()) {
+      gallery.classList.add("recruit-intro__gallery--static");
+      return;
+    }
+
+    gallery.classList.add("recruit-intro__gallery--marquee");
+
+    var offset = 0;
+    var speed = 0.5;
+    var halfWidth = 0;
+
+    function measure() {
+      halfWidth = list.scrollWidth / 2;
+    }
+
+    measure();
+    window.addEventListener("resize", measure);
+
+    list.querySelectorAll("img").forEach(function (img) {
+      if (img.complete) return;
+      img.addEventListener("load", measure);
+    });
+
+    function tick() {
+      if (halfWidth > 0) {
+        offset += speed;
+        if (offset >= halfWidth) offset -= halfWidth;
+        list.style.transform = "translate3d(" + -offset + "px, 0, 0)";
+      } else {
+        measure();
+      }
+      window.requestAnimationFrame(tick);
+    }
+
+    window.requestAnimationFrame(tick);
+  }
+
   function initBlogFeaturedSlider() {
     var featured = document.querySelector(".blog-featured");
     if (!featured) return;
@@ -996,10 +1046,33 @@
     }
   }
 
+  function initRecruitIntroOpeningReveal() {
+    var intro = document.querySelector(".recruit-intro");
+    if (!intro) return;
+
+    function start() {
+      if (intro.classList.contains("is-ready")) return;
+      intro.classList.add("is-ready");
+    }
+
+    if (prefersReducedMotion()) {
+      start();
+      return;
+    }
+
+    window.setTimeout(start, 550);
+  }
+
+  function primeRecruitIntroOpeningIfVisible() {
+    var intro = document.querySelector(".recruit-intro");
+    if (intro) intro.classList.add("is-ready");
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initHeaderDrawer();
     initWorksSlider();
     initAboutGallerySlider();
+    initRecruitIntroGallerySlider();
     initBlogFeaturedSlider();
     initSectionHeadingScrollReveal();
     prepareWorksArchiveCards();
@@ -1012,6 +1085,7 @@
     initWorksArchiveOpeningReveal();
     initWorksArchiveStickyFilters();
     initWorksSingleOpeningReveal();
+    initRecruitIntroOpeningReveal();
   });
 
   window.addEventListener("pageshow", function (event) {
@@ -1022,5 +1096,6 @@
     primeServiceOpeningIfVisible();
     primeWorksArchiveOpeningIfVisible();
     primeWorksSingleOpeningIfVisible();
+    primeRecruitIntroOpeningIfVisible();
   });
 })();
