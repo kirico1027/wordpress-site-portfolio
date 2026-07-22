@@ -4424,6 +4424,87 @@ body {
   }
 }
 
+@keyframes service-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes service-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes service-grow {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html.js .service-intro:not(.is-ready) .service-intro__text {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  html.js .service-intro.is-ready .service-intro__text {
+    animation-name: service-fade-up;
+    animation-duration: 0.55s;
+    animation-delay: 0ms;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+  html.js .service-detail--first:not(.is-ready) .service-detail__num,
+  html.js .service-detail--first:not(.is-ready) .service-detail__title,
+  html.js .service-detail--first:not(.is-ready) .service-detail__text,
+  html.js .service-detail--first:not(.is-ready) .btn-more--service {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  html.js .service-detail--first:not(.is-ready) .service-detail__figure {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  html.js .service-detail--first.is-ready .service-detail__num,
+  html.js .service-detail--first.is-ready .service-detail__title,
+  html.js .service-detail--first.is-ready .service-detail__text,
+  html.js .service-detail--first.is-ready .btn-more--service {
+    animation-name: service-fade-up;
+    animation-duration: 0.55s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+  html.js .service-detail--first.is-ready .service-detail__num {
+    animation-delay: 280ms;
+  }
+  html.js .service-detail--first.is-ready .service-detail__title {
+    animation-delay: 360ms;
+  }
+  html.js .service-detail--first.is-ready .service-detail__text {
+    animation-delay: 440ms;
+  }
+  html.js .service-detail--first.is-ready .btn-more--service {
+    animation-delay: 520ms;
+  }
+  html.js .service-detail--first.is-ready .service-detail__figure {
+    transform-origin: center center;
+    animation-name: service-grow;
+    animation-duration: 1.15s;
+    animation-delay: 400ms;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    animation-fill-mode: both;
+  }
+}
 .service-detail__inner {
   display: flex;
   flex-direction: column;
@@ -4591,26 +4672,28 @@ body {
 }
 
 .service-effects__heading {
-  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
   text-align: center;
 }
-.service-effects__heading::before {
+.service-effects__heading::before, .service-effects__heading::after {
   content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
+  flex: 1 1 auto;
   height: 0.125rem;
   background: var(--color-border);
-  transform: translateY(-50%);
+}
+.service-effects__heading::before {
+  transform-origin: right center;
+}
+.service-effects__heading::after {
+  transform-origin: left center;
 }
 
 .service-effects__title {
   position: relative;
-  display: inline-block;
+  flex: 0 0 auto;
   margin: 0;
-  padding: 0 0.75rem;
-  background: var(--color-white);
   font-size: 1.5rem;
   font-weight: 600;
   line-height: 1.8;
@@ -4618,6 +4701,74 @@ body {
   color: var(--color-text);
 }
 
+@keyframes service-line-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html.js.scroll-reveal-active .service-effects__heading.js-scroll-reveal:not(.is-inview) .service-effects__title {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  html.js.scroll-reveal-active .service-effects__heading.js-scroll-reveal:not(.is-inview)::before, html.js.scroll-reveal-active .service-effects__heading.js-scroll-reveal:not(.is-inview)::after {
+    transform: scaleX(0);
+  }
+  html.js.scroll-reveal-active .service-effects__heading.js-scroll-reveal.is-inview:not(.is-revealed) .service-effects__title {
+    animation-name: service-fade-up;
+    animation-duration: 0.55s;
+    animation-delay: 0ms;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+  html.js.scroll-reveal-active .service-effects__heading.js-scroll-reveal.is-inview:not(.is-revealed)::before, html.js.scroll-reveal-active .service-effects__heading.js-scroll-reveal.is-inview:not(.is-revealed)::after {
+    animation-name: service-line-grow;
+    animation-duration: 0.7s;
+    animation-delay: 200ms;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+  html.js.scroll-reveal-active .service-effects__heading.js-scroll-reveal.is-revealed .service-effects__title {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+  html.js.scroll-reveal-active .service-effects__heading.js-scroll-reveal.is-revealed::before, html.js.scroll-reveal-active .service-effects__heading.js-scroll-reveal.is-revealed::after {
+    transform: scaleX(1);
+    animation: none;
+  }
+  html.js.scroll-reveal-active .service-effect-card__head.js-scroll-reveal:not(.is-inview) {
+    opacity: 0;
+  }
+  html.js.scroll-reveal-active .service-effect-card__head.js-scroll-reveal.is-inview:not(.is-revealed) {
+    animation-name: service-fade-in;
+    animation-duration: 0.5s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+  html.js.scroll-reveal-active .service-effect-card__head.js-scroll-reveal.is-revealed {
+    opacity: 1;
+    animation: none;
+  }
+  html.js.scroll-reveal-active .service-effect-card__text.js-scroll-reveal:not(.is-inview) {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  html.js.scroll-reveal-active .service-effect-card__text.js-scroll-reveal.is-inview:not(.is-revealed) {
+    animation-name: service-fade-up;
+    animation-duration: 0.55s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+  html.js.scroll-reveal-active .service-effect-card__text.js-scroll-reveal.is-revealed {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
 .service-effects__list {
   margin: 1rem 0 0;
   padding: 0 0 3.125rem;
@@ -4646,6 +4797,13 @@ body {
 }
 .service-effect-card {
   text-align: center;
+}
+
+.service-effect-card__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 .service-effect-card__num {

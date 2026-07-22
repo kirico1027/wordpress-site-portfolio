@@ -315,6 +315,17 @@
       return;
     }
 
+    if (el.classList.contains("service-effects__heading")) {
+      function onEffectsHeadEnd(event) {
+        if (event.animationName !== "service-line-grow") return;
+        el.classList.add("is-revealed");
+        el.removeEventListener("animationend", onEffectsHeadEnd);
+      }
+
+      el.addEventListener("animationend", onEffectsHeadEnd);
+      return;
+    }
+
     markRevealedOnAnimationEnd(el);
   }
 
@@ -584,6 +595,58 @@
     });
   }
 
+  // Service: ページ入場（intro → 01）
+  function initServiceOpeningReveal() {
+    var intro = document.querySelector(".service-intro");
+    var first = document.querySelector(".service-detail--first");
+    if (!intro && !first) return;
+
+    function start() {
+      if (intro && intro.classList.contains("is-ready")) return;
+      if (!intro && first && first.classList.contains("is-ready")) return;
+
+      if (prefersReducedMotion()) {
+        if (intro) intro.classList.add("is-ready");
+        if (first) first.classList.add("is-ready");
+        return;
+      }
+
+      if (intro) intro.classList.add("is-ready");
+      if (first) first.classList.add("is-ready");
+    }
+
+    var trigger = intro || first;
+
+    if (!("IntersectionObserver" in window)) {
+      start();
+      return;
+    }
+
+    if (isElementInViewport(trigger, 0.1)) {
+      start();
+      return;
+    }
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          observer.disconnect();
+          start();
+        });
+      },
+      { root: null, rootMargin: "0px 0px -10% 0px", threshold: 0 }
+    );
+    observer.observe(trigger);
+  }
+
+  function primeServiceOpeningIfVisible() {
+    var intro = document.querySelector(".service-intro");
+    var first = document.querySelector(".service-detail--first");
+    if (intro) intro.classList.add("is-ready");
+    if (first) first.classList.add("is-ready");
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initHeaderDrawer();
     initWorksSlider();
@@ -593,6 +656,7 @@
     initScrollReveal();
     initCompanyCollageReveal();
     initAboutPurposeReveal();
+    initServiceOpeningReveal();
   });
 
   window.addEventListener("pageshow", function (event) {
@@ -600,5 +664,6 @@
     primeSectionHeadingRevealIfVisible();
     primeScrollRevealIfVisible();
     primeAboutPurposeIfVisible();
+    primeServiceOpeningIfVisible();
   });
 })();
