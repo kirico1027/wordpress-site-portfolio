@@ -6116,17 +6116,17 @@ body {
   pointer-events: none;
 }
 
-.recruit-culture .section-heading__en {
+.recruit-page .section-heading__en {
   font-size: 1.125rem;
   font-weight: 700;
   line-height: 1.4;
   color: var(--color-primary);
 }
-.recruit-culture .section-heading__dot {
+.recruit-page .section-heading__dot {
   width: 1rem;
   height: 1rem;
 }
-.recruit-culture .section-heading__title {
+.recruit-page .section-heading__title {
   margin-top: 0.5rem;
   font-size: 2rem;
   line-height: 1.4;
@@ -6322,6 +6322,14 @@ body {
   text-align: center;
 }
 
+.welfare-card__lead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
 .welfare-card__head {
   display: flex;
   flex-direction: column;
@@ -6355,6 +6363,36 @@ body {
   color: var(--color-primary);
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  html.js.scroll-reveal-active .recruit-welfare .welfare-card__lead.js-scroll-reveal:not(.is-inview) {
+    opacity: 0;
+  }
+  html.js.scroll-reveal-active .recruit-welfare .welfare-card__lead.js-scroll-reveal.is-inview:not(.is-revealed) {
+    animation-name: recruit-intro-fade-in;
+    animation-duration: 0.5s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+  html.js.scroll-reveal-active .recruit-welfare .welfare-card__lead.js-scroll-reveal.is-revealed {
+    opacity: 1;
+    animation: none;
+  }
+  html.js.scroll-reveal-active .recruit-welfare .welfare-card__text.js-scroll-reveal:not(.is-inview) {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  html.js.scroll-reveal-active .recruit-welfare .welfare-card__text.js-scroll-reveal.is-inview:not(.is-revealed) {
+    animation-name: recruit-intro-fade-up;
+    animation-duration: 0.55s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+  html.js.scroll-reveal-active .recruit-welfare .welfare-card__text.js-scroll-reveal.is-revealed {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
 .welfare-card__text {
   margin: 0;
   width: 100%;
@@ -6454,6 +6492,36 @@ body {
   text-align: center;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  html.js.scroll-reveal-active .recruit-member .member-card__figure.js-scroll-reveal:not(.is-inview) {
+    opacity: 0;
+  }
+  html.js.scroll-reveal-active .recruit-member .member-card__figure.js-scroll-reveal.is-inview:not(.is-revealed) {
+    animation-name: recruit-intro-fade-in;
+    animation-duration: 0.55s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+  html.js.scroll-reveal-active .recruit-member .member-card__figure.js-scroll-reveal.is-revealed {
+    opacity: 1;
+    animation: none;
+  }
+  html.js.scroll-reveal-active .recruit-member .member-card__body.js-scroll-reveal:not(.is-inview) {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  html.js.scroll-reveal-active .recruit-member .member-card__body.js-scroll-reveal.is-inview:not(.is-revealed) {
+    animation-name: recruit-intro-fade-up;
+    animation-duration: 0.55s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+  html.js.scroll-reveal-active .recruit-member .member-card__body.js-scroll-reveal.is-revealed {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
 .recruit-jobs {
   background: var(--color-bg-light);
 }
@@ -6479,18 +6547,42 @@ body {
   margin-top: 4rem;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
   gap: 1.5rem;
   width: 100%;
   max-width: 70rem;
 }
 
 .job-card {
+  align-self: start;
+  height: fit-content;
   border-bottom: 1px solid #eee;
   border-radius: 1rem;
   background: var(--color-white);
   overflow: hidden;
+  transition: background-color 0.2s ease;
+}
+.job-card:hover {
+  background-color: #eeeeee;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  html.js.scroll-reveal-active .job-card.js-scroll-reveal:not(.is-inview) {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  html.js.scroll-reveal-active .job-card.js-scroll-reveal.is-inview:not(.is-revealed) {
+    animation-name: recruit-intro-fade-up;
+    animation-duration: 0.55s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+  html.js.scroll-reveal-active .job-card.js-scroll-reveal.is-revealed {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
 .job-card__summary {
   display: flex;
   flex-direction: column;
@@ -6563,10 +6655,168 @@ body {
   transform: rotate(180deg);
 }
 
-.job-card:not([open]) .job-card__excerpt {
-  display: none;
+.job-card__collapse {
+  overflow: hidden;
 }
 
+.job-card__panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 1.5rem 2.5rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js .job-card--animated .job-card__icon {
+    transform: none;
+  }
+  html.js .job-card--animated.is-expanded .job-card__icon {
+    transform: rotate(180deg);
+  }
+}
+.job-card__block {
+  width: 100%;
+  max-width: 30.25rem;
+  padding: 1.5rem 1rem;
+  border-top: 1px solid var(--color-border);
+  box-sizing: border-box;
+}
+
+.job-card__block-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.1rem;
+  color: var(--color-text);
+}
+
+.job-card__list {
+  margin: 1rem 0 0;
+  padding: 0 0 0 1.25rem;
+  list-style: disc;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.8;
+  letter-spacing: 0.0875rem;
+  color: var(--color-text);
+}
+.job-card__list li + li {
+  margin-top: 0.25rem;
+}
+
+.job-card__list--plain {
+  padding-left: 0;
+  list-style: none;
+}
+
+.job-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.job-card__tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2rem;
+  padding: 0.5em 1em;
+  border-radius: 0.25rem;
+  background: rgba(0, 150, 223, 0.12);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.040625rem;
+  color: var(--color-primary);
+}
+
+.job-card__text,
+.job-card__hashtags,
+.job-card__meta-text {
+  margin: 1rem 0 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.8;
+  letter-spacing: 0.0875rem;
+  color: var(--color-text);
+}
+
+.job-card__meta + .job-card__meta {
+  margin-top: 1rem;
+}
+
+.job-card__meta-label {
+  margin: 1rem 0 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.8;
+  letter-spacing: 0.0875rem;
+  color: var(--color-text);
+}
+
+.job-card__meta .job-card__meta-label {
+  margin-top: 0;
+}
+
+.job-card__meta .job-card__list {
+  margin-top: 0.5rem;
+}
+
+.job-card__meta .job-card__meta-text {
+  margin-top: 0.5rem;
+}
+
+.job-card__actions {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 30.25rem;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+}
+
+.job-card__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 20rem;
+  min-height: 3.5rem;
+  padding: 0.875em 1.5em;
+  border-radius: 3rem;
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.05em;
+  text-align: center;
+  text-decoration: none;
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+.job-card__cta:hover {
+  filter: brightness(1.08);
+  transform: translateY(-0.125rem);
+}
+.job-card__cta:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .job-card__cta {
+    transition: filter 0.2s ease;
+  }
+  .job-card__cta:hover {
+    transform: none;
+  }
+}
 .recruit-flow__inner {
   padding-top: 3.75rem;
 }
@@ -6609,6 +6859,15 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  width: 100%;
+  max-width: 45rem;
+}
+
+.recruit-flow__bundle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
   width: 100%;
   max-width: 45rem;
 }
@@ -6670,6 +6929,26 @@ body {
   color: var(--color-primary);
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  html.js.scroll-reveal-active .recruit-flow__step.js-scroll-reveal:not(.is-inview),
+  html.js.scroll-reveal-active .recruit-flow__bundle.js-scroll-reveal:not(.is-inview) {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  html.js.scroll-reveal-active .recruit-flow__step.js-scroll-reveal.is-inview:not(.is-revealed),
+  html.js.scroll-reveal-active .recruit-flow__bundle.js-scroll-reveal.is-inview:not(.is-revealed) {
+    animation-name: recruit-intro-fade-up;
+    animation-duration: 0.55s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+  html.js.scroll-reveal-active .recruit-flow__step.js-scroll-reveal.is-revealed,
+  html.js.scroll-reveal-active .recruit-flow__bundle.js-scroll-reveal.is-revealed {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
 .recruit-entry {
   padding: 0 1.5rem 1.5rem;
 }
@@ -6680,6 +6959,50 @@ body {
   overflow: hidden;
 }
 
+@keyframes recruit-entry-btn-in {
+  from {
+    opacity: 0;
+    transform: translateY(1rem) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html.js.scroll-reveal-active .recruit-entry .js-scroll-reveal:not(.is-inview) {
+    opacity: 0;
+  }
+  html.js.scroll-reveal-active .recruit-entry .recruit-entry__title.js-scroll-reveal:not(.is-inview),
+  html.js.scroll-reveal-active .recruit-entry .recruit-entry__lead.js-scroll-reveal:not(.is-inview) {
+    transform: translateY(1rem);
+  }
+  html.js.scroll-reveal-active .recruit-entry .btn-more--entry.js-scroll-reveal:not(.is-inview) {
+    transform: translateY(1rem) scale(0.96);
+  }
+  html.js.scroll-reveal-active .recruit-entry .js-scroll-reveal.is-inview:not(.is-revealed) {
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+  }
+  html.js.scroll-reveal-active .recruit-entry .recruit-entry__title.js-scroll-reveal.is-inview:not(.is-revealed),
+  html.js.scroll-reveal-active .recruit-entry .recruit-entry__lead.js-scroll-reveal.is-inview:not(.is-revealed) {
+    animation-name: recruit-intro-fade-up;
+    animation-duration: 0.55s;
+  }
+  html.js.scroll-reveal-active .recruit-entry .recruit-entry__lead.js-scroll-reveal.is-inview:not(.is-revealed) {
+    animation-delay: 80ms;
+  }
+  html.js.scroll-reveal-active .recruit-entry .btn-more--entry.js-scroll-reveal.is-inview:not(.is-revealed) {
+    animation-name: recruit-entry-btn-in;
+    animation-duration: 0.6s;
+    animation-delay: 100ms;
+  }
+  html.js.scroll-reveal-active .recruit-entry .js-scroll-reveal.is-revealed {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
 .recruit-entry__inner {
   display: flex;
   flex-direction: column;
@@ -6793,7 +7116,7 @@ body {
     line-height: 1.4;
     letter-spacing: 0.15rem;
   }
-  .recruit-culture .section-heading__title {
+  .recruit-page .section-heading__title {
     font-size: clamp(1.5rem, 1.5rem + (100vw - 375px) * 4 / 393, 1.75rem);
     line-height: 1.4;
     letter-spacing: 0.15rem;

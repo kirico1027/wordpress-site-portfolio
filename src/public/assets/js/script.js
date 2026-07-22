@@ -464,12 +464,49 @@
       return;
     }
 
-    // Service 02/03: 図版はテキスト先行のあとで開始するため、単独監視しない
+    var entryParts = [];
+    // Service 図版は単独監視しない / ページ末 ENTRY CTA は別 rootMargin で監視
     var parts = Array.prototype.filter.call(all, function (el) {
-      return !isServiceFollowupFigure(el);
+      if (isServiceFollowupFigure(el)) return false;
+      if (el.closest(".recruit-entry")) {
+        entryParts.push(el);
+        return false;
+      }
+      return true;
     });
 
     observeRevealTargets(parts, activateRevealEl);
+    observeBottomRevealTargets(entryParts, activateRevealEl);
+  }
+
+  // ページ末要素: -10% rootMargin だと最下部で発火しないことがある
+  function observeBottomRevealTargets(targets, activateFn) {
+    if (!targets.length) return;
+
+    if (!("IntersectionObserver" in window)) {
+      targets.forEach(activateFn);
+      return;
+    }
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          activateFn(entry.target);
+          observer.unobserve(entry.target);
+        });
+      },
+      { root: null, rootMargin: "0px 0px 0px 0px", threshold: 0.12 }
+    );
+
+    targets.forEach(function (el) {
+      var rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        activateFn(el);
+        return;
+      }
+      observer.observe(el);
+    });
   }
 
   function isServiceFollowupFigure(el) {
@@ -1068,6 +1105,121 @@
     if (intro) intro.classList.add("is-ready");
   }
 
+  function initJobCardAccordion() {
+    var cards = document.querySelectorAll("details.job-card");
+    if (!cards.length) return;
+
+    cards.forEach(function (details) {
+      var summary = details.querySelector(".job-card__summary");
+      var collapse = details.querySelector(".job-card__collapse");
+      if (!summary || !collapse) return;
+
+      details.classList.add("job-card--animated");
+
+      if (prefersReducedMotion()) {
+        if (details.open) details.classList.add("is-expanded");
+        return;
+      }
+
+      if (details.open) {
+        details.classList.add("is-expanded");
+      } else {
+        collapse.style.height = "0px";
+      }
+
+      summary.addEventListener("click", function (event) {
+        event.preventDefault();
+        if (details.getAttribute("data-animating") === "true") return;
+
+        if (details.classList.contains("is-expanded")) {
+          animateJobCardClose(details, collapse);
+        } else {
+          animateJobCardOpen(details, collapse);
+        }
+      });
+    });
+  }
+
+  function animateJobCardOpen(details, collapse) {
+    details.setAttribute("data-animating", "true");
+    details.open = true;
+    details.classList.add("is-expanded");
+
+    collapse.style.height = "0px";
+    collapse.style.overflow = "hidden";
+
+    var endHeight = collapse.scrollHeight;
+
+    if (typeof collapse.animate === "function") {
+      var openAnim = collapse.animate(
+        [{ height: "0px" }, { height: endHeight + "px" }],
+        { duration: 300, easing: "ease-in-out", fill: "forwards" }
+      );
+
+      openAnim.onfinish = function () {
+        if (typeof openAnim.commitStyles === "function") {
+          openAnim.commitStyles();
+        }
+        openAnim.cancel();
+        collapse.style.height = "auto";
+        collapse.style.overflow = "";
+        details.removeAttribute("data-animating");
+      };
+      return;
+    }
+
+    collapse.style.transition = "height 300ms ease-in-out";
+    collapse.offsetHeight;
+    collapse.style.height = endHeight + "px";
+    window.setTimeout(function () {
+      collapse.style.transition = "";
+      collapse.style.height = "auto";
+      collapse.style.overflow = "";
+      details.removeAttribute("data-animating");
+    }, 300);
+  }
+
+  function animateJobCardClose(details, collapse) {
+    details.setAttribute("data-animating", "true");
+    details.classList.remove("is-expanded");
+
+    var startHeight = collapse.scrollHeight;
+    collapse.style.overflow = "hidden";
+    collapse.style.height = startHeight + "px";
+
+    function finishClose() {
+      details.open = false;
+      collapse.style.height = "0px";
+      collapse.style.overflow = "hidden";
+      collapse.style.transition = "";
+      details.removeAttribute("data-animating");
+    }
+
+    if (typeof collapse.animate === "function") {
+      // レイアウト確定後に 0 へ（同じフレームでの二重指定を避ける）
+      requestAnimationFrame(function () {
+        var closeAnim = collapse.animate(
+          [{ height: startHeight + "px" }, { height: "0px" }],
+          { duration: 380, easing: "ease-in-out", fill: "forwards" }
+        );
+
+        closeAnim.onfinish = function () {
+          if (typeof closeAnim.commitStyles === "function") {
+            closeAnim.commitStyles();
+          }
+          closeAnim.cancel();
+          finishClose();
+        };
+      });
+      return;
+    }
+
+    collapse.offsetHeight;
+    collapse.style.transition = "height 380ms ease-in-out";
+    collapse.style.height = "0px";
+    window.setTimeout(finishClose, 380);
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initHeaderDrawer();
     initWorksSlider();
@@ -1086,6 +1238,7 @@
     initWorksArchiveStickyFilters();
     initWorksSingleOpeningReveal();
     initRecruitIntroOpeningReveal();
+    initJobCardAccordion();
   });
 
   window.addEventListener("pageshow", function (event) {
