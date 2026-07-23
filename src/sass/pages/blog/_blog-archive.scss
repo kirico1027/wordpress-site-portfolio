@@ -20,6 +20,53 @@
   padding-bottom: rem(120);
 }
 
+@keyframes blog-featured-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blog-featured-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+// 入場案A: カード一塊 fade-up → ナビ fade-in
+@media (prefers-reduced-motion: no-preference) {
+  html.js .blog-featured:not(.is-ready) {
+    .blog-featured__card {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+
+    .blog-featured__nav {
+      opacity: 0;
+    }
+  }
+
+  html.js .blog-featured.is-ready {
+    .blog-featured__card {
+      animation: blog-featured-fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .blog-featured__nav {
+      animation: blog-featured-fade-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: 240ms;
+    }
+  }
+}
+
 .blog-featured__viewport {
   overflow: hidden;
   width: 100%;
@@ -194,6 +241,87 @@
   gap: rem(40);
   @include fluid-pc-range(padding-top, 64, 80, $max-vw: 1905);
   @include fluid-pc-range(padding-bottom, 64, 200, $max-vw: 1905);
+}
+
+// ---------------------------------------------------------------------------
+// Archive scroll-reveal（案A: Works一覧型 — 見出し/画面内カード入場 + 画面外個別）
+// ---------------------------------------------------------------------------
+
+@keyframes blog-archive-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js .blog-archive:not(.is-ready) {
+    .blog-archive__heading.is-opening,
+    .blog-card.is-opening,
+    .blog-archive__widget.is-opening,
+    .blog-archive__widget-title.is-opening,
+    .blog-pickup.is-opening {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+  }
+
+  html.js .blog-archive.is-ready {
+    .blog-archive__heading.is-opening:not(.is-revealed),
+    .blog-card.is-opening:not(.is-revealed),
+    .blog-archive__widget.is-opening:not(.is-revealed),
+    .blog-archive__widget-title.is-opening:not(.is-revealed),
+    .blog-pickup.is-opening:not(.is-revealed) {
+      animation: blog-archive-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .blog-archive__heading.is-opening.is-revealed,
+    .blog-card.is-opening.is-revealed,
+    .blog-archive__widget.is-opening.is-revealed,
+    .blog-archive__widget-title.is-opening.is-revealed,
+    .blog-pickup.is-opening.is-revealed {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+  }
+
+  html.js.scroll-reveal-active .blog-archive {
+    .blog-card.js-scroll-reveal:not(.is-inview),
+    .blog-archive__more-wrap.js-scroll-reveal:not(.is-inview),
+    .blog-archive__widget.js-scroll-reveal:not(.is-inview),
+    .blog-archive__widget-title.js-scroll-reveal:not(.is-inview),
+    .blog-pickup.js-scroll-reveal:not(.is-inview),
+    .blog-archive__heading.js-scroll-reveal:not(.is-inview) {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+
+    .blog-card.js-scroll-reveal.is-inview:not(.is-revealed),
+    .blog-archive__more-wrap.js-scroll-reveal.is-inview:not(.is-revealed),
+    .blog-archive__widget.js-scroll-reveal.is-inview:not(.is-revealed),
+    .blog-archive__widget-title.js-scroll-reveal.is-inview:not(.is-revealed),
+    .blog-pickup.js-scroll-reveal.is-inview:not(.is-revealed),
+    .blog-archive__heading.js-scroll-reveal.is-inview:not(.is-revealed) {
+      animation: blog-archive-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .blog-card.js-scroll-reveal.is-revealed,
+    .blog-archive__more-wrap.js-scroll-reveal.is-revealed,
+    .blog-archive__widget.js-scroll-reveal.is-revealed,
+    .blog-archive__widget-title.js-scroll-reveal.is-revealed,
+    .blog-pickup.js-scroll-reveal.is-revealed,
+    .blog-archive__heading.js-scroll-reveal.is-revealed {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+  }
 }
 
 .blog-archive__main {

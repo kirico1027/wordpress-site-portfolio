@@ -8568,6 +8568,40 @@ body {
   padding-bottom: 7.5rem;
 }
 
+@keyframes blog-featured-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes blog-featured-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html.js .blog-featured:not(.is-ready) .blog-featured__card {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  html.js .blog-featured:not(.is-ready) .blog-featured__nav {
+    opacity: 0;
+  }
+  html.js .blog-featured.is-ready .blog-featured__card {
+    animation: blog-featured-fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  html.js .blog-featured.is-ready .blog-featured__nav {
+    animation: blog-featured-fade-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: 240ms;
+  }
+}
 .blog-featured__viewport {
   overflow: hidden;
   width: 100%;
@@ -8745,6 +8779,69 @@ body {
   }
 }
 
+@keyframes blog-archive-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html.js .blog-archive:not(.is-ready) .blog-archive__heading.is-opening,
+  html.js .blog-archive:not(.is-ready) .blog-card.is-opening,
+  html.js .blog-archive:not(.is-ready) .blog-archive__widget.is-opening,
+  html.js .blog-archive:not(.is-ready) .blog-archive__widget-title.is-opening,
+  html.js .blog-archive:not(.is-ready) .blog-pickup.is-opening {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  html.js .blog-archive.is-ready .blog-archive__heading.is-opening:not(.is-revealed),
+  html.js .blog-archive.is-ready .blog-card.is-opening:not(.is-revealed),
+  html.js .blog-archive.is-ready .blog-archive__widget.is-opening:not(.is-revealed),
+  html.js .blog-archive.is-ready .blog-archive__widget-title.is-opening:not(.is-revealed),
+  html.js .blog-archive.is-ready .blog-pickup.is-opening:not(.is-revealed) {
+    animation: blog-archive-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  html.js .blog-archive.is-ready .blog-archive__heading.is-opening.is-revealed,
+  html.js .blog-archive.is-ready .blog-card.is-opening.is-revealed,
+  html.js .blog-archive.is-ready .blog-archive__widget.is-opening.is-revealed,
+  html.js .blog-archive.is-ready .blog-archive__widget-title.is-opening.is-revealed,
+  html.js .blog-archive.is-ready .blog-pickup.is-opening.is-revealed {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+  html.js.scroll-reveal-active .blog-archive .blog-card.js-scroll-reveal:not(.is-inview),
+  html.js.scroll-reveal-active .blog-archive .blog-archive__more-wrap.js-scroll-reveal:not(.is-inview),
+  html.js.scroll-reveal-active .blog-archive .blog-archive__widget.js-scroll-reveal:not(.is-inview),
+  html.js.scroll-reveal-active .blog-archive .blog-archive__widget-title.js-scroll-reveal:not(.is-inview),
+  html.js.scroll-reveal-active .blog-archive .blog-pickup.js-scroll-reveal:not(.is-inview),
+  html.js.scroll-reveal-active .blog-archive .blog-archive__heading.js-scroll-reveal:not(.is-inview) {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  html.js.scroll-reveal-active .blog-archive .blog-card.js-scroll-reveal.is-inview:not(.is-revealed),
+  html.js.scroll-reveal-active .blog-archive .blog-archive__more-wrap.js-scroll-reveal.is-inview:not(.is-revealed),
+  html.js.scroll-reveal-active .blog-archive .blog-archive__widget.js-scroll-reveal.is-inview:not(.is-revealed),
+  html.js.scroll-reveal-active .blog-archive .blog-archive__widget-title.js-scroll-reveal.is-inview:not(.is-revealed),
+  html.js.scroll-reveal-active .blog-archive .blog-pickup.js-scroll-reveal.is-inview:not(.is-revealed),
+  html.js.scroll-reveal-active .blog-archive .blog-archive__heading.js-scroll-reveal.is-inview:not(.is-revealed) {
+    animation: blog-archive-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  html.js.scroll-reveal-active .blog-archive .blog-card.js-scroll-reveal.is-revealed,
+  html.js.scroll-reveal-active .blog-archive .blog-archive__more-wrap.js-scroll-reveal.is-revealed,
+  html.js.scroll-reveal-active .blog-archive .blog-archive__widget.js-scroll-reveal.is-revealed,
+  html.js.scroll-reveal-active .blog-archive .blog-archive__widget-title.js-scroll-reveal.is-revealed,
+  html.js.scroll-reveal-active .blog-archive .blog-pickup.js-scroll-reveal.is-revealed,
+  html.js.scroll-reveal-active .blog-archive .blog-archive__heading.js-scroll-reveal.is-revealed {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
 .blog-archive__main {
   flex: 1 1 auto;
   min-width: 0;

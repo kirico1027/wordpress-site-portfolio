@@ -1284,6 +1284,203 @@
     window.setTimeout(finishClose, 380);
   }
 
+  function initBlogFeaturedOpeningReveal() {
+    var featured = document.querySelector(".blog-featured");
+    if (!featured) return;
+
+    function start() {
+      if (featured.classList.contains("is-ready")) return;
+      featured.classList.add("is-ready");
+    }
+
+    if (prefersReducedMotion()) {
+      start();
+      return;
+    }
+
+    // スライダー位置確定後に再生
+    window.setTimeout(start, 200);
+  }
+
+  function primeBlogFeaturedOpeningIfVisible() {
+    var featured = document.querySelector(".blog-featured");
+    if (featured) featured.classList.add("is-ready");
+  }
+
+  function observeScrollRevealElements(elements) {
+    var targets = Array.prototype.filter.call(elements, function (el) {
+      return (
+        el.classList.contains("js-scroll-reveal") &&
+        !el.classList.contains("is-inview")
+      );
+    });
+    if (!targets.length) return;
+    enableScrollReveal();
+    observeRevealTargets(targets, activateRevealEl);
+  }
+
+  // Blog archive: セクション入場時に見出し/画面内カードをスタガー、以降は scroll-reveal
+  function initBlogArchiveReveal() {
+    var archive = document.querySelector(".blog-archive-page .blog-archive");
+    if (!archive || archive.getAttribute("data-reveal-prepared")) return;
+    archive.setAttribute("data-reveal-prepared", "1");
+
+    function classifyAndStart() {
+      if (archive.classList.contains("is-ready")) return;
+
+      var heading = archive.querySelector(".blog-archive__heading");
+      var cards = archive.querySelectorAll(".blog-card");
+      var widgets = archive.querySelectorAll(".blog-archive__widget");
+      var moreWrap = archive.querySelector(".blog-archive__more-wrap");
+      var isSp = window.matchMedia("(max-width: 768px)").matches;
+      var openingCardIndex = 0;
+      var openingCardBaseDelay = 120;
+
+      if (prefersReducedMotion()) {
+        if (heading) heading.classList.add("is-opening", "is-revealed");
+        Array.prototype.forEach.call(cards, function (card) {
+          card.classList.add("is-opening", "is-revealed");
+        });
+        Array.prototype.forEach.call(widgets, function (widget) {
+          if (widget.classList.contains("blog-archive__widget--pickup")) {
+            var pickupTitle = widget.querySelector(".blog-archive__widget-title");
+            var pickups = widget.querySelectorAll(".blog-pickup");
+            if (pickupTitle) {
+              pickupTitle.classList.add("is-opening", "is-revealed");
+            }
+            Array.prototype.forEach.call(pickups, function (pickup) {
+              pickup.classList.add("is-opening", "is-revealed");
+            });
+            return;
+          }
+          widget.classList.add("is-opening", "is-revealed");
+        });
+        if (moreWrap) moreWrap.classList.add("is-inview", "is-revealed");
+        archive.classList.add("is-ready");
+        return;
+      }
+
+      if (heading) {
+        heading.classList.add("is-opening");
+        heading.style.animationDelay = "0ms";
+        markRevealedOnAnimationEnd(heading);
+      }
+
+      Array.prototype.forEach.call(cards, function (card, index) {
+        // SP: カードはすべて個別発火
+        if (isSp) {
+          card.classList.add("js-scroll-reveal");
+          return;
+        }
+
+        if (isElementInViewport(card, 0.1)) {
+          card.classList.add("is-opening");
+          card.style.animationDelay =
+            openingCardBaseDelay + openingCardIndex * 70 + "ms";
+          openingCardIndex += 1;
+          markRevealedOnAnimationEnd(card);
+          return;
+        }
+
+        card.classList.add("js-scroll-reveal");
+      });
+
+      Array.prototype.forEach.call(widgets, function (widget, index) {
+        // PICK UP: 見出し + カード個別発火
+        if (widget.classList.contains("blog-archive__widget--pickup")) {
+          var pickupHeading = widget.querySelector(".blog-archive__widget-title");
+          var pickupCards = widget.querySelectorAll(".blog-pickup");
+
+          if (pickupHeading) {
+            if (isElementInViewport(pickupHeading, 0.1)) {
+              pickupHeading.classList.add("is-opening");
+              pickupHeading.style.animationDelay = 80 + index * 80 + "ms";
+              markRevealedOnAnimationEnd(pickupHeading);
+            } else {
+              pickupHeading.classList.add("js-scroll-reveal");
+            }
+          }
+
+          Array.prototype.forEach.call(pickupCards, function (pickup) {
+            if (isElementInViewport(pickup, 0.1)) {
+              pickup.classList.add("is-opening");
+              pickup.style.animationDelay =
+                openingCardBaseDelay + openingCardIndex * 70 + "ms";
+              openingCardIndex += 1;
+              markRevealedOnAnimationEnd(pickup);
+              return;
+            }
+
+            pickup.classList.add("js-scroll-reveal");
+          });
+          return;
+        }
+
+        if (isElementInViewport(widget, 0.1)) {
+          widget.classList.add("is-opening");
+          widget.style.animationDelay = 80 + index * 80 + "ms";
+          markRevealedOnAnimationEnd(widget);
+          return;
+        }
+
+        widget.classList.add("js-scroll-reveal");
+      });
+
+      if (moreWrap) {
+        moreWrap.classList.add("js-scroll-reveal");
+      }
+
+      observeScrollRevealElements(
+        archive.querySelectorAll(".js-scroll-reveal")
+      );
+
+      archive.classList.add("is-ready");
+    }
+
+    if (prefersReducedMotion()) {
+      classifyAndStart();
+      return;
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      classifyAndStart();
+      return;
+    }
+
+    if (isElementInViewport(archive, 0.15)) {
+      window.setTimeout(classifyAndStart, 180);
+      return;
+    }
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          observer.disconnect();
+          classifyAndStart();
+        });
+      },
+      { root: null, rootMargin: "0px 0px -10% 0px", threshold: 0 }
+    );
+
+    observer.observe(archive);
+  }
+
+  function primeBlogArchiveRevealIfVisible() {
+    var archive = document.querySelector(".blog-archive-page .blog-archive");
+    if (!archive) return;
+    archive.classList.add("is-ready");
+    Array.prototype.forEach.call(
+      archive.querySelectorAll(
+        ".is-opening, .js-scroll-reveal, .blog-archive__heading, .blog-card, .blog-archive__widget, .blog-archive__widget-title, .blog-pickup, .blog-archive__more-wrap"
+      ),
+      function (el) {
+        el.classList.add("is-opening", "is-inview", "is-revealed");
+        el.style.animationDelay = "";
+      }
+    );
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initHeaderDrawer();
     initWorksSlider();
@@ -1302,6 +1499,8 @@
     initWorksArchiveStickyFilters();
     initWorksSingleOpeningReveal();
     initRecruitIntroOpeningReveal();
+    initBlogFeaturedOpeningReveal();
+    initBlogArchiveReveal();
     initJobCardAccordion();
   });
 
@@ -1314,5 +1513,7 @@
     primeWorksArchiveOpeningIfVisible();
     primeWorksSingleOpeningIfVisible();
     primeRecruitIntroOpeningIfVisible();
+    primeBlogFeaturedOpeningIfVisible();
+    primeBlogArchiveRevealIfVisible();
   });
 })();
