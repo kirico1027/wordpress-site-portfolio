@@ -393,9 +393,10 @@
 
     if (
       el.classList.contains("works__slider-wrap") ||
-      el.classList.contains("works-single__pickup-grid")
+      el.classList.contains("works-single__pickup-grid") ||
+      el.classList.contains("blog-single__pickup-grid")
     ) {
-      var cards = el.querySelectorAll(".works-card");
+      var cards = el.querySelectorAll(".works-card, .blog-card");
       var last = cards.length ? cards[cards.length - 1] : el;
 
       function onEnd(event) {
@@ -444,6 +445,17 @@
       }
 
       el.addEventListener("animationend", onEffectsHeadEnd);
+      return;
+    }
+
+    if (el.classList.contains("blog-single__heading")) {
+      function onBlogHeadingEnd(event) {
+        if (event.animationName !== "blog-single-line-grow") return;
+        el.classList.add("is-revealed");
+        el.removeEventListener("animationend", onBlogHeadingEnd);
+      }
+
+      el.addEventListener("animationend", onBlogHeadingEnd);
       return;
     }
 
@@ -1147,6 +1159,62 @@
     }
   }
 
+  function initBlogSingleOpeningReveal() {
+    var page = document.querySelector(".blog-single-page");
+    if (!page) return;
+
+    function start() {
+      if (page.classList.contains("is-ready")) return;
+      page.classList.add("is-ready");
+    }
+
+    if (prefersReducedMotion()) {
+      start();
+      return;
+    }
+
+    window.setTimeout(start, 0);
+  }
+
+  function primeBlogSingleOpeningIfVisible() {
+    var page = document.querySelector(".blog-single-page");
+    if (page) page.classList.add("is-ready");
+  }
+
+  function prepareBlogSingleScrollReveal() {
+    var page = document.querySelector(".blog-single-page");
+    if (!page || page.getAttribute("data-scroll-reveal-prepared")) return;
+
+    page.setAttribute("data-scroll-reveal-prepared", "1");
+
+    var selectors = [
+      ".blog-single__body .blog-single__heading",
+      ".blog-single__body .blog-single__subheading",
+      ".blog-single__body .blog-single__figure",
+      ".blog-single__share",
+      ".blog-single__back",
+    ];
+
+    selectors.forEach(function (selector) {
+      page.querySelectorAll(selector).forEach(function (el) {
+        el.classList.add("js-scroll-reveal");
+      });
+    });
+
+    var pickupGrid = page.querySelector(".blog-single__pickup-grid");
+    if (pickupGrid) {
+      var isSp = window.matchMedia("(max-width: 768px)").matches;
+
+      if (isSp) {
+        page.querySelectorAll(".blog-single__pickup-grid .blog-card").forEach(function (el) {
+          el.classList.add("js-scroll-reveal");
+        });
+      } else {
+        pickupGrid.classList.add("js-scroll-reveal");
+      }
+    }
+  }
+
   function initRecruitIntroOpeningReveal() {
     var intro = document.querySelector(".recruit-intro");
     if (!intro) return;
@@ -1490,6 +1558,7 @@
     initSectionHeadingScrollReveal();
     prepareWorksArchiveCards();
     prepareWorksSingleScrollReveal();
+    prepareBlogSingleScrollReveal();
     initScrollReveal();
     initAboutCollageReveal();
     initCompanyCollageReveal();
@@ -1498,6 +1567,7 @@
     initWorksArchiveOpeningReveal();
     initWorksArchiveStickyFilters();
     initWorksSingleOpeningReveal();
+    initBlogSingleOpeningReveal();
     initRecruitIntroOpeningReveal();
     initBlogFeaturedOpeningReveal();
     initBlogArchiveReveal();
@@ -1512,6 +1582,7 @@
     primeServiceOpeningIfVisible();
     primeWorksArchiveOpeningIfVisible();
     primeWorksSingleOpeningIfVisible();
+    primeBlogSingleOpeningIfVisible();
     primeRecruitIntroOpeningIfVisible();
     primeBlogFeaturedOpeningIfVisible();
     primeBlogArchiveRevealIfVisible();

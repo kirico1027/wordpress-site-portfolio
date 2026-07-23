@@ -10,6 +10,194 @@
 }
 
 // ---------------------------------------------------------------------------
+// Opening（パンくず → meta → タイトル → ヒーロー）— Works詳細と同型
+// ---------------------------------------------------------------------------
+
+@keyframes blog-single-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blog-single-grow {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes blog-single-line-grow {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js .blog-single-page:not(.is-ready) {
+    .blog-single__breadcrumb,
+    .blog-single__meta,
+    .blog-single__title {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+
+    .blog-single__breadcrumb-line {
+      transform: scaleX(0);
+    }
+
+    .blog-single__hero {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+  }
+
+  html.js .blog-single-page.is-ready {
+    .blog-single__breadcrumb {
+      animation: blog-single-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .blog-single__breadcrumb-line {
+      transform-origin: left center;
+      animation: blog-single-line-grow 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: 200ms;
+    }
+
+    .blog-single__meta {
+      animation: blog-single-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: 520ms;
+    }
+
+    .blog-single__title {
+      animation: blog-single-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: 560ms;
+    }
+
+    .blog-single__hero {
+      transform-origin: center center;
+      animation: blog-single-grow 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-delay: 680ms;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Body scroll-reveal（見出し・画像・share・back + Pick up）
+// ---------------------------------------------------------------------------
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js.scroll-reveal-active .blog-single-page {
+    .blog-single__heading.js-scroll-reveal {
+      &:not(.is-inview) {
+        opacity: 0;
+        transform: translateY(1rem);
+
+        &::after {
+          transform: scaleX(0);
+        }
+      }
+
+      &.is-inview:not(.is-revealed) {
+        animation: blog-single-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+        &::after {
+          animation: blog-single-line-grow 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+          animation-delay: 150ms;
+        }
+      }
+
+      &.is-revealed {
+        opacity: 1;
+        transform: none;
+        animation: none;
+
+        &::after {
+          transform: scaleX(1);
+          animation: none;
+        }
+      }
+    }
+
+    .blog-single__subheading.js-scroll-reveal,
+    .blog-single__figure.js-scroll-reveal,
+    .blog-single__share.js-scroll-reveal,
+    .blog-single__back.js-scroll-reveal {
+      &:not(.is-inview) {
+        opacity: 0;
+        transform: translateY(1rem);
+      }
+
+      &.is-inview:not(.is-revealed) {
+        animation: blog-single-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+
+      &.is-revealed {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
+    }
+
+    @include mq {
+      .blog-single__pickup-grid .blog-card.js-scroll-reveal {
+        &:not(.is-inview) {
+          opacity: 0;
+          transform: translateY(1rem);
+        }
+
+        &.is-inview:not(.is-revealed) {
+          animation: blog-single-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        &.is-revealed {
+          opacity: 1;
+          transform: none;
+          animation: none;
+        }
+      }
+    }
+
+    @include mq-hero-pc {
+      .blog-single__pickup-grid.js-scroll-reveal:not(.is-inview) .blog-card {
+        opacity: 0;
+        transform: translateY(1rem);
+      }
+
+      .blog-single__pickup-grid.js-scroll-reveal.is-inview:not(.is-revealed) .blog-card {
+        animation: blog-single-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+
+      @for $i from 1 through 8 {
+        .blog-single__pickup-grid.js-scroll-reveal.is-inview:not(.is-revealed)
+          .blog-card:nth-child(#{$i}) {
+          animation-delay: #{($i - 1) * 70}ms;
+        }
+      }
+
+      .blog-single__pickup-grid.js-scroll-reveal.is-revealed .blog-card {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Breadcrumb
 // ---------------------------------------------------------------------------
 
@@ -177,14 +365,25 @@
 }
 
 .blog-single__heading {
+  position: relative;
   margin: rem(32) 0 0;
   padding: rem(12) rem(4) rem(13);
-  border-bottom: 1px solid var(--color-border);
   font-size: rem(24);
   font-weight: 700;
   line-height: calc(36 / 24);
   letter-spacing: rem(2.4);
   color: var(--color-text);
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--color-border);
+    transform-origin: left center;
+  }
 }
 
 .blog-single__subheading {
