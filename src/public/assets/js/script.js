@@ -249,25 +249,87 @@
 
     var viewport = featured.querySelector(".blog-featured__viewport");
     var track = featured.querySelector(".blog-featured__track");
-    var slides = featured.querySelectorAll(".blog-featured__slide");
+    var originalSlides = Array.prototype.slice.call(
+      track.querySelectorAll(".blog-featured__slide")
+    );
     var prevBtn = featured.querySelector(".blog-featured__nav-btn--prev");
     var nextBtn = featured.querySelector(".blog-featured__nav-btn--next");
-    if (!viewport || !track || slides.length === 0) return;
+    if (!viewport || !track || originalSlides.length === 0) return;
 
-    // Figma 初期表示: 中央が「社員インタビュー」、左右に「お役立ち情報」が覗く
-    var index = slides.length > 1 ? 1 : 0;
+    var count = originalSlides.length;
+    var index = count > 1 ? 1 : 0;
+    var slides = originalSlides;
+    var looping = count > 1;
 
-    function update() {
+    if (looping) {
+      var fragBefore = document.createDocumentFragment();
+      var fragAfter = document.createDocumentFragment();
+
+      originalSlides.forEach(function (slide) {
+        var before = slide.cloneNode(true);
+        var after = slide.cloneNode(true);
+        before.setAttribute("aria-hidden", "true");
+        before.setAttribute("tabindex", "-1");
+        after.setAttribute("aria-hidden", "true");
+        after.setAttribute("tabindex", "-1");
+        fragBefore.appendChild(before);
+        fragAfter.appendChild(after);
+      });
+
+      track.insertBefore(fragBefore, track.firstChild);
+      track.appendChild(fragAfter);
+      slides = track.querySelectorAll(".blog-featured__slide");
+      // 中央セット内の2枚目（Figma: 社員インタビューが中央）
+      index = count + 1;
+    }
+
+    function setTransform(animate) {
       var slide = slides[index];
+      if (!slide) return;
+
+      if (!animate) {
+        track.style.transition = "none";
+      } else {
+        track.style.transition = "";
+      }
+
       var viewportWidth = viewport.offsetWidth;
       var slideWidth = slide.offsetWidth;
       var offset = slide.offsetLeft - (viewportWidth - slideWidth) / 2;
       track.style.transform = "translateX(" + -offset + "px)";
+
+      if (!animate) {
+        // スタイル再計算後に transition を戻す（ジャンプを見せない）
+        void track.offsetWidth;
+        track.style.transition = "";
+      }
+    }
+
+    function normalizeIndex() {
+      if (!looping) return;
+      if (index >= count * 2) {
+        index -= count;
+        setTransform(false);
+      } else if (index < count) {
+        index += count;
+        setTransform(false);
+      }
     }
 
     function goTo(nextIndex) {
-      index = (nextIndex + slides.length) % slides.length;
-      update();
+      index = nextIndex;
+      if (!looping) {
+        index = Math.max(0, Math.min(index, count - 1));
+      }
+      setTransform(true);
+    }
+
+    if (looping) {
+      track.addEventListener("transitionend", function (event) {
+        if (event.target !== track) return;
+        if (event.propertyName && event.propertyName !== "transform") return;
+        normalizeIndex();
+      });
     }
 
     if (prevBtn) {
@@ -282,8 +344,10 @@
       });
     }
 
-    window.addEventListener("resize", update);
-    update();
+    window.addEventListener("resize", function () {
+      setTransform(false);
+    });
+    setTransform(false);
   }
 
   function prefersReducedMotion() {
