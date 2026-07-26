@@ -10,6 +10,68 @@
 }
 
 // ---------------------------------------------------------------------------
+// Opening（画面内フィールド・同意・送信）+ scroll-reveal（画面外）
+// ---------------------------------------------------------------------------
+
+@keyframes entry-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js .entry-page:not(.is-ready) {
+    .entry-form__field.is-opening,
+    .entry-form__actions.is-opening {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+  }
+
+  html.js .entry-page.is-ready {
+    .entry-form__field.is-opening:not(.is-revealed),
+    .entry-form__actions.is-opening:not(.is-revealed) {
+      animation: entry-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .entry-form__field.is-opening.is-revealed,
+    .entry-form__actions.is-opening.is-revealed {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js.scroll-reveal-active .entry-page {
+    .entry-form__field.js-scroll-reveal,
+    .entry-form__actions.js-scroll-reveal {
+      &:not(.is-inview) {
+        opacity: 0;
+        transform: translateY(1rem);
+      }
+
+      &.is-inview:not(.is-revealed) {
+        animation: entry-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+
+      &.is-revealed {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Form section（外枠 1184 / padding 32 / フォーム 560 / pt 80 / pb 120）
 // ---------------------------------------------------------------------------
 

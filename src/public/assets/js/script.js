@@ -9,7 +9,6 @@
 
     var toggle = header.querySelector(".top-header__menu-toggle");
     var backdrop = header.querySelector(".top-header__backdrop");
-    var drawerClose = header.querySelector(".top-header__drawer-close");
     var navLinks = header.querySelectorAll(".top-header__nav-link");
 
     function setOpen(open) {
@@ -33,10 +32,6 @@
 
     if (backdrop) {
       backdrop.addEventListener("click", closeMenu);
-    }
-
-    if (drawerClose) {
-      drawerClose.addEventListener("click", closeMenu);
     }
 
     navLinks.forEach(function (link) {
@@ -459,7 +454,36 @@
       return;
     }
 
+    if (el.classList.contains("company-profile__row")) {
+      markCompanyRowRevealed(el);
+      return;
+    }
+
+    if (el.classList.contains("section-label")) {
+      var labelText = el.querySelector(".section-label__text");
+      var labelTarget = labelText || el;
+
+      function onLabelEnd(event) {
+        if (event.target !== labelTarget) return;
+        el.classList.add("is-revealed");
+        labelTarget.removeEventListener("animationend", onLabelEnd);
+      }
+
+      labelTarget.addEventListener("animationend", onLabelEnd);
+      return;
+    }
+
     markRevealedOnAnimationEnd(el);
+  }
+
+  function markCompanyRowRevealed(row) {
+    function onEnd(event) {
+      if (event.animationName !== "company-fade-in") return;
+      row.classList.add("is-revealed");
+      row.removeEventListener("animationend", onEnd);
+    }
+
+    row.addEventListener("animationend", onEnd);
   }
 
   function activateHeadingReveal(heading) {
@@ -1002,6 +1026,80 @@
     }
   }
 
+  // News archive: 入場はフィルター＋画面内アイテム、以降は scroll-reveal
+  function prepareNewsArchiveItems() {
+    var archive = document.querySelector(".news-archive-page .news-archive");
+    if (!archive || archive.getAttribute("data-reveal-prepared")) return;
+
+    var list = archive.querySelector(".news-archive__list");
+    if (!list) return;
+
+    archive.setAttribute("data-reveal-prepared", "1");
+
+    var items = list.querySelectorAll(".news-item");
+    var openingIndex = 0;
+    var openingItemBaseDelay = 300;
+
+    Array.prototype.forEach.call(items, function (item) {
+      // SP/PC とも画面内は入場スタガー、画面外は scroll-reveal
+      if (isElementInViewport(item, 0.1)) {
+        // トップ共通 partial 由来の js-scroll-reveal を入場用に外す
+        item.classList.remove("js-scroll-reveal");
+        item.classList.add("is-opening");
+        item.style.animationDelay =
+          openingItemBaseDelay + openingIndex * 70 + "ms";
+        openingIndex += 1;
+      }
+      // 画面外は partial の js-scroll-reveal のまま
+    });
+  }
+
+  function initNewsArchiveOpeningReveal() {
+    var archive = document.querySelector(".news-archive-page .news-archive");
+    if (!archive) return;
+
+    function start() {
+      if (archive.classList.contains("is-ready")) return;
+      archive.classList.add("is-ready");
+
+      if (prefersReducedMotion()) {
+        Array.prototype.forEach.call(
+          archive.querySelectorAll(".news-item.is-opening"),
+          function (item) {
+            item.classList.add("is-revealed");
+          }
+        );
+        return;
+      }
+
+      Array.prototype.forEach.call(
+        archive.querySelectorAll(".news-item.is-opening"),
+        function (item) {
+          markRevealedOnAnimationEnd(item);
+        }
+      );
+    }
+
+    if (prefersReducedMotion()) {
+      start();
+      return;
+    }
+
+    window.setTimeout(start, 550);
+  }
+
+  function primeNewsArchiveOpeningIfVisible() {
+    var archive = document.querySelector(".news-archive-page .news-archive");
+    if (!archive) return;
+    archive.classList.add("is-ready");
+    Array.prototype.forEach.call(
+      archive.querySelectorAll(".news-item.is-opening"),
+      function (item) {
+        item.classList.add("is-revealed");
+      }
+    );
+  }
+
   // Works archive: 入場はフィルター＋画面内カード、以降は scroll-reveal
   function prepareWorksArchiveCards() {
     var archive = document.querySelector(".works-archive-page .works-archive");
@@ -1213,6 +1311,298 @@
         pickupGrid.classList.add("js-scroll-reveal");
       }
     }
+  }
+
+  function initNewsSingleOpeningReveal() {
+    var page = document.querySelector(".news-single-page");
+    if (!page) return;
+
+    function start() {
+      if (page.classList.contains("is-ready")) return;
+      page.classList.add("is-ready");
+    }
+
+    if (prefersReducedMotion()) {
+      start();
+      return;
+    }
+
+    window.setTimeout(start, 0);
+  }
+
+  function primeNewsSingleOpeningIfVisible() {
+    var page = document.querySelector(".news-single-page");
+    if (page) page.classList.add("is-ready");
+  }
+
+  function prepareNewsSingleScrollReveal() {
+    var page = document.querySelector(".news-single-page");
+    if (!page || page.getAttribute("data-scroll-reveal-prepared")) return;
+
+    page.setAttribute("data-scroll-reveal-prepared", "1");
+
+    // 画面内の段落は即表示（動きなし）、画面外のみ scroll-reveal
+    page.querySelectorAll(".news-single__paragraph").forEach(function (el) {
+      if (isElementInViewport(el, 0.1)) {
+        el.classList.add("is-inview", "is-revealed");
+        return;
+      }
+      el.classList.add("js-scroll-reveal");
+    });
+
+    // 戻るボタンは常に scroll-reveal（画面内なら即再生、画面外ならスクロールで）
+    var back = page.querySelector(".news-single__back");
+    if (back) back.classList.add("js-scroll-reveal");
+  }
+
+  function initContactOpeningReveal() {
+    var page = document.querySelector(".contact-page");
+    if (!page) return;
+
+    function start() {
+      if (page.classList.contains("is-ready")) return;
+      page.classList.add("is-ready");
+    }
+
+    if (prefersReducedMotion()) {
+      start();
+      return;
+    }
+
+    window.setTimeout(start, 0);
+  }
+
+  function primeContactOpeningIfVisible() {
+    var page = document.querySelector(".contact-page");
+    if (page) page.classList.add("is-ready");
+  }
+
+  function prepareContactScrollReveal() {
+    var page = document.querySelector(".contact-page");
+    if (!page || page.getAttribute("data-scroll-reveal-prepared")) return;
+
+    page.setAttribute("data-scroll-reveal-prepared", "1");
+
+    // お問い合わせ内容・同意・送信は入場後の scroll-reveal
+    var messageField = page.querySelector("#contact-message");
+    if (messageField) {
+      var messageWrap = messageField.closest(".contact-form__field");
+      if (messageWrap) messageWrap.classList.add("js-scroll-reveal");
+    }
+
+    var agree = page.querySelector(".contact-form__field--agree");
+    if (agree) agree.classList.add("js-scroll-reveal");
+
+    var actions = page.querySelector(".contact-form__actions");
+    if (actions) actions.classList.add("js-scroll-reveal");
+  }
+
+  function initDownloadOpeningReveal() {
+    var page = document.querySelector(".download-page");
+    if (!page) return;
+
+    function start() {
+      if (page.classList.contains("is-ready")) return;
+      page.classList.add("is-ready");
+    }
+
+    if (prefersReducedMotion()) {
+      start();
+      return;
+    }
+
+    window.setTimeout(start, 0);
+  }
+
+  function primeDownloadOpeningIfVisible() {
+    var page = document.querySelector(".download-page");
+    if (page) page.classList.add("is-ready");
+  }
+
+  function prepareDownloadScrollReveal() {
+    var page = document.querySelector(".download-page");
+    if (!page || page.getAttribute("data-scroll-reveal-prepared")) return;
+
+    page.setAttribute("data-scroll-reveal-prepared", "1");
+
+    Array.prototype.forEach.call(
+      page.querySelectorAll(".download-form__field"),
+      function (field) {
+        if (isElementInViewport(field, 0.1)) {
+          field.classList.add("is-opening");
+          return;
+        }
+        field.classList.add("js-scroll-reveal");
+      }
+    );
+
+    var actions = page.querySelector(".download-form__actions");
+    if (actions) {
+      if (isElementInViewport(actions, 0.1)) {
+        actions.classList.add("is-opening");
+      } else {
+        actions.classList.add("js-scroll-reveal");
+      }
+    }
+  }
+
+  function initEntryOpeningReveal() {
+    var page = document.querySelector(".entry-page");
+    if (!page) return;
+
+    function start() {
+      if (page.classList.contains("is-ready")) return;
+      page.classList.add("is-ready");
+
+      if (prefersReducedMotion()) {
+        Array.prototype.forEach.call(
+          page.querySelectorAll(".is-opening"),
+          function (el) {
+            el.classList.add("is-revealed");
+          }
+        );
+        return;
+      }
+
+      Array.prototype.forEach.call(
+        page.querySelectorAll(".is-opening"),
+        function (el) {
+          markRevealedOnAnimationEnd(el);
+        }
+      );
+    }
+
+    if (prefersReducedMotion()) {
+      start();
+      return;
+    }
+
+    // page-hero のあとに短い間隔で開始
+    window.setTimeout(start, 200);
+  }
+
+  function primeEntryOpeningIfVisible() {
+    var page = document.querySelector(".entry-page");
+    if (!page) return;
+    page.classList.add("is-ready");
+    Array.prototype.forEach.call(
+      page.querySelectorAll(".is-opening"),
+      function (el) {
+        el.classList.add("is-revealed");
+      }
+    );
+  }
+
+  function prepareEntryScrollReveal() {
+    var page = document.querySelector(".entry-page");
+    if (!page || page.getAttribute("data-scroll-reveal-prepared")) return;
+
+    page.setAttribute("data-scroll-reveal-prepared", "1");
+
+    var openingIndex = 0;
+    var openingBaseDelay = 200;
+
+    Array.prototype.forEach.call(
+      page.querySelectorAll(".entry-form__field"),
+      function (field) {
+        if (isElementInViewport(field, 0.1)) {
+          field.classList.add("is-opening");
+          field.style.animationDelay =
+            openingBaseDelay + openingIndex * 60 + "ms";
+          openingIndex += 1;
+          return;
+        }
+        field.classList.add("js-scroll-reveal");
+      }
+    );
+
+    var actions = page.querySelector(".entry-form__actions");
+    if (actions) {
+      if (isElementInViewport(actions, 0.1)) {
+        actions.classList.add("is-opening");
+        actions.style.animationDelay =
+          openingBaseDelay + openingIndex * 60 + "ms";
+      } else {
+        actions.classList.add("js-scroll-reveal");
+      }
+    }
+  }
+
+  function initCompanyOpeningReveal() {
+    var page = document.querySelector(".company-page");
+    if (!page) return;
+
+    function start() {
+      if (page.classList.contains("is-ready")) return;
+      page.classList.add("is-ready");
+
+      if (prefersReducedMotion()) {
+        Array.prototype.forEach.call(
+          page.querySelectorAll(".company-profile__row.is-opening"),
+          function (row) {
+            row.classList.add("is-revealed");
+          }
+        );
+        return;
+      }
+
+      Array.prototype.forEach.call(
+        page.querySelectorAll(".company-profile__row.is-opening"),
+        function (row) {
+          markCompanyRowRevealed(row);
+        }
+      );
+    }
+
+    if (prefersReducedMotion()) {
+      start();
+      return;
+    }
+
+    window.setTimeout(start, 0);
+  }
+
+  function primeCompanyOpeningIfVisible() {
+    var page = document.querySelector(".company-page");
+    if (!page) return;
+    page.classList.add("is-ready");
+    Array.prototype.forEach.call(
+      page.querySelectorAll(".company-profile__row.is-opening"),
+      function (row) {
+        row.classList.add("is-revealed");
+      }
+    );
+  }
+
+  function prepareCompanyScrollReveal() {
+    var page = document.querySelector(".company-page");
+    if (!page || page.getAttribute("data-scroll-reveal-prepared")) return;
+
+    page.setAttribute("data-scroll-reveal-prepared", "1");
+
+    // 表の行: 画面内は入場、画面外は scroll-reveal
+    Array.prototype.forEach.call(
+      page.querySelectorAll(".company-profile__row"),
+      function (row) {
+        if (isElementInViewport(row, 0.1)) {
+          row.classList.add("is-opening");
+          return;
+        }
+        row.classList.add("js-scroll-reveal");
+      }
+    );
+
+    var access = page.querySelector(".company-access");
+    if (!access) return;
+
+    var label = access.querySelector(".section-label");
+    if (label) label.classList.add("js-scroll-reveal");
+
+    var address = access.querySelector(".company-access__address");
+    if (address) address.classList.add("js-scroll-reveal");
+
+    var map = access.querySelector(".company-access__map");
+    if (map) map.classList.add("js-scroll-reveal");
   }
 
   function initRecruitIntroOpeningReveal() {
@@ -1557,17 +1947,29 @@
     initBlogFeaturedSlider();
     initSectionHeadingScrollReveal();
     prepareWorksArchiveCards();
+    prepareNewsArchiveItems();
     prepareWorksSingleScrollReveal();
     prepareBlogSingleScrollReveal();
+    prepareNewsSingleScrollReveal();
+    prepareContactScrollReveal();
+    prepareDownloadScrollReveal();
+    prepareEntryScrollReveal();
+    prepareCompanyScrollReveal();
     initScrollReveal();
     initAboutCollageReveal();
     initCompanyCollageReveal();
     initAboutPurposeReveal();
     initServiceOpeningReveal();
     initWorksArchiveOpeningReveal();
+    initNewsArchiveOpeningReveal();
     initWorksArchiveStickyFilters();
     initWorksSingleOpeningReveal();
     initBlogSingleOpeningReveal();
+    initNewsSingleOpeningReveal();
+    initContactOpeningReveal();
+    initDownloadOpeningReveal();
+    initEntryOpeningReveal();
+    initCompanyOpeningReveal();
     initRecruitIntroOpeningReveal();
     initBlogFeaturedOpeningReveal();
     initBlogArchiveReveal();
@@ -1581,8 +1983,14 @@
     primeAboutPurposeIfVisible();
     primeServiceOpeningIfVisible();
     primeWorksArchiveOpeningIfVisible();
+    primeNewsArchiveOpeningIfVisible();
     primeWorksSingleOpeningIfVisible();
     primeBlogSingleOpeningIfVisible();
+    primeNewsSingleOpeningIfVisible();
+    primeContactOpeningIfVisible();
+    primeDownloadOpeningIfVisible();
+    primeEntryOpeningIfVisible();
+    primeCompanyOpeningIfVisible();
     primeRecruitIntroOpeningIfVisible();
     primeBlogFeaturedOpeningIfVisible();
     primeBlogArchiveRevealIfVisible();

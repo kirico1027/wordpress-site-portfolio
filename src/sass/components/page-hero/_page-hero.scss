@@ -61,7 +61,8 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  html.js .page-hero__inner {
+  html.js .page-hero__title,
+  html.js .page-hero__lead {
     animation: page-hero-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 }

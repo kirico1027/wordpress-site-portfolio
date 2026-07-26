@@ -9,6 +9,65 @@
   padding-top: 0;
 }
 
+// ---------------------------------------------------------------------------
+// Opening（フィルター＋画面内アイテム）+ scroll-reveal（画面外アイテム）
+// ---------------------------------------------------------------------------
+
+@keyframes news-archive-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js .news-archive:not(.is-ready) {
+    .news-archive__filters,
+    .news-item.is-opening {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+  }
+
+  html.js .news-archive.is-ready {
+    .news-archive__filters {
+      animation: news-archive-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .news-item.is-opening:not(.is-revealed) {
+      animation: news-archive-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .news-item.is-opening.is-revealed {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+  }
+
+  html.js.scroll-reveal-active .news-archive {
+    .news-item.js-scroll-reveal:not(.is-inview) {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+
+    .news-item.js-scroll-reveal.is-inview:not(.is-revealed) {
+      animation: news-archive-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .news-item.js-scroll-reveal.is-revealed {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+  }
+}
+
 .news-archive__inner {
   display: flex;
   align-items: flex-start;

@@ -139,6 +139,11 @@
   }
 }
 
+// PC ナビではロゴがホーム導線のため非表示。ドロワー先頭のみ表示
+.top-header__nav-link--home {
+  display: none;
+}
+
 .top-header__nav-link--contact {
   align-items: center;
   width: auto;
@@ -175,6 +180,8 @@
   padding: 0;
   border: none;
   background: transparent;
+  appearance: none;
+  -webkit-appearance: none;
   cursor: pointer;
   flex-shrink: 0;
 }
@@ -209,15 +216,12 @@
 
 .top-header--menu-open .top-header__menu-toggle-bar:nth-child(2) {
   opacity: 0;
+  visibility: hidden;
 }
 
 .top-header--menu-open .top-header__menu-toggle-bar:nth-child(3) {
   top: rem(19);
   transform: rotate(-45deg);
-}
-
-.top-header__drawer-close {
-  display: none;
 }
 
 .top-header__backdrop {
@@ -257,9 +261,17 @@
 
   .top-header__menu-toggle {
     display: block;
+    position: relative;
     z-index: 1002;
     width: rem(36);
     height: rem(36);
+    overflow: hidden;
+  }
+
+  // ドロワー表示中はヘッダー帯の背景を消し、トグル×だけ残す
+  .top-header--menu-open .top-header__inner {
+    background: transparent;
+    box-shadow: none;
   }
 
   .top-header__menu-toggle-bar {
@@ -298,7 +310,7 @@
     align-items: stretch;
     justify-content: flex-start;
     gap: 0;
-    padding: rem(80) rem(32) rem(48);
+    padding: rem(72) rem(32) rem(48);
     background: var(--color-white);
     box-shadow: rem(-4) 0 rem(24) rgba(0, 0, 0, 0.1);
     transform: translateX(100%);
@@ -311,27 +323,15 @@
     transform: translateX(0);
   }
 
-  .top-header__drawer-close {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-self: flex-end;
-    width: rem(40);
-    height: rem(40);
-    margin: 0 0 rem(24);
-    padding: 0;
-    border: none;
-    background: transparent;
-    font-size: rem(28);
-    line-height: 1;
-    color: var(--color-text);
-    cursor: pointer;
-  }
-
   .top-header__nav-link {
     min-width: 0;
     width: 100%;
     border-top: 1px solid var(--color-border);
+  }
+
+  .top-header__nav-link--home {
+    display: inline-flex;
+    border-top: none;
   }
 
   .top-header__nav-link-inner {
@@ -342,13 +342,38 @@
     justify-content: flex-start;
   }
 
-  .top-header__nav-link-en,
-  .top-header__nav-link-ja {
-    justify-content: flex-start;
+  // ドロワー: 日本語先行 + 英字補助（PC のホバー差し替えは使わない）
+  .top-header__nav-link:not(.top-header__nav-link--contact) .top-header__nav-link-swap {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: rem(12);
+    row-gap: rem(4);
+    width: 100%;
+    height: auto;
+    overflow: visible;
   }
 
-  .top-header__nav-link-ja {
+  .top-header__nav-link:not(.top-header__nav-link--contact) .top-header__nav-link-en,
+  .top-header__nav-link:not(.top-header__nav-link--contact) .top-header__nav-link-ja {
+    position: static;
+    justify-content: flex-start;
+    width: auto;
+    height: auto;
+    transform: none;
+    transition: none;
+  }
+
+  .top-header__nav-link:not(.top-header__nav-link--contact) .top-header__nav-link-ja {
+    order: 1;
     font-size: rem(16);
+    font-weight: 600;
+  }
+
+  .top-header__nav-link:not(.top-header__nav-link--contact) .top-header__nav-link-en {
+    order: 2;
+    font-size: rem(14);
+    font-weight: 400;
   }
 
   .top-header__nav-link--contact {

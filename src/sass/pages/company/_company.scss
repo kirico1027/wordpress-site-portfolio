@@ -10,6 +10,189 @@
 }
 
 // ---------------------------------------------------------------------------
+// Opening（ヒーロー → 会社概要ラベル → 表の行）
+// ---------------------------------------------------------------------------
+
+@keyframes company-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes company-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js .company-page:not(.is-ready) {
+    .company-profile .section-label__dot,
+    .company-profile .section-label__text {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+
+    .company-profile__row.is-opening {
+      .company-profile__term,
+      .company-profile__desc {
+        opacity: 0;
+        transform: translateY(1rem);
+      }
+
+      &::after {
+        opacity: 0;
+      }
+    }
+  }
+
+  html.js .company-page.is-ready {
+    .company-profile .section-label__dot {
+      animation: company-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: 160ms;
+    }
+
+    .company-profile .section-label__text {
+      animation: company-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: 220ms;
+    }
+
+    // 画面内の行: テキスト fade-up / 横線 fade-in
+    .company-profile__row.is-opening:not(.is-revealed) {
+      .company-profile__term,
+      .company-profile__desc {
+        animation: company-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+        animation-delay: 280ms;
+      }
+
+      &::after {
+        animation: company-fade-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+        animation-delay: 280ms;
+      }
+    }
+
+    .company-profile__row.is-opening.is-revealed {
+      .company-profile__term,
+      .company-profile__desc {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
+
+      &::after {
+        opacity: 1;
+        animation: none;
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// scroll-reveal（画面外の表行 + アクセス）
+// ---------------------------------------------------------------------------
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js.scroll-reveal-active .company-page {
+    .company-profile__row.js-scroll-reveal {
+      &:not(.is-inview) {
+        .company-profile__term,
+        .company-profile__desc {
+          opacity: 0;
+          transform: translateY(1rem);
+        }
+
+        &::after {
+          opacity: 0;
+        }
+      }
+
+      &.is-inview:not(.is-revealed) {
+        .company-profile__term,
+        .company-profile__desc {
+          animation: company-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        &::after {
+          animation: company-fade-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+      }
+
+      &.is-revealed {
+        .company-profile__term,
+        .company-profile__desc {
+          opacity: 1;
+          transform: none;
+          animation: none;
+        }
+
+        &::after {
+          opacity: 1;
+          animation: none;
+        }
+      }
+    }
+
+    .company-access .section-label.js-scroll-reveal {
+      &:not(.is-inview) {
+        .section-label__dot,
+        .section-label__text {
+          opacity: 0;
+          transform: translateY(1rem);
+        }
+      }
+
+      &.is-inview:not(.is-revealed) {
+        .section-label__dot {
+          animation: company-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .section-label__text {
+          animation: company-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+          animation-delay: 80ms;
+        }
+      }
+
+      &.is-revealed {
+        .section-label__dot,
+        .section-label__text {
+          opacity: 1;
+          transform: none;
+          animation: none;
+        }
+      }
+    }
+
+    .company-access__address.js-scroll-reveal,
+    .company-access__map.js-scroll-reveal {
+      &:not(.is-inview) {
+        opacity: 0;
+        transform: translateY(1rem);
+      }
+
+      &.is-inview:not(.is-revealed) {
+        animation: company-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+
+      &.is-revealed {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
 // 会社概要（Figma 1:2970: 1184 / px32 py80 / 内容960中央）
 // ---------------------------------------------------------------------------
 
@@ -54,6 +237,7 @@
 }
 
 .company-profile__row {
+  position: relative;
   display: flex;
   align-items: center;
   width: 100%;
@@ -62,7 +246,16 @@
   padding-right: rem(24);
   padding-bottom: rem(33);
   padding-left: rem(48);
-  border-bottom: 1px solid var(--color-border);
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--color-border);
+  }
 }
 
 .company-profile__term {

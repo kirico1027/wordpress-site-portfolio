@@ -2,7 +2,7 @@
 @use "../../foundation/mixins" as *;
 
 // ---------------------------------------------------------------------------
-// Terms page — Figma 1:6108 / main 1:6160 / content 1:6180
+// Terms page — Figma 1:6108 / breadcrumb 1:6161 / content 1:6180
 // ---------------------------------------------------------------------------
 
 .terms-page {
@@ -10,7 +10,7 @@
 }
 
 // ---------------------------------------------------------------------------
-// Breadcrumb
+// Breadcrumb — 1184 / px32 / pt200（カンプ）
 // ---------------------------------------------------------------------------
 
 .terms__breadcrumb-area {
@@ -79,51 +79,75 @@
 }
 
 // ---------------------------------------------------------------------------
-// Content
+// Content — Figma 1:6180
+// Outer: items-center / pt80 / pb160 / px32
+// Inner column: 720
 // ---------------------------------------------------------------------------
+
+.terms__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding-inline: rem(32);
+  @include fluid-pc-range(padding-top, 64, 80, $max-vw: 1905);
+  @include fluid-pc-range(padding-bottom, 100, 160, $max-vw: 1905);
+}
 
 .terms__inner {
   box-sizing: border-box;
   width: 100%;
   max-width: rem(720);
-  margin-inline: auto;
-  @include fluid-pc-range(padding-top, 64, 80, $max-vw: 1905);
-  @include fluid-pc-range(padding-bottom, 100, 160, $max-vw: 1905);
 }
 
 .terms__title {
   margin: 0;
+  font-family: var(--font-base);
   font-size: rem(28);
   font-weight: 700;
   line-height: calc(39.2 / 28);
   letter-spacing: rem(1.4);
   color: var(--color-text);
+  overflow-wrap: break-word;
 }
 
+// H1直下 — Figma pt32 + List pt24 を合算
 .terms__body {
-  margin-top: rem(32);
+  margin-top: rem(56);
 }
 
+// Numbered List 1:6185: pl20 — マーカーなし（x=20 のインデントのみ）
 .terms__list {
-  margin: rem(24) 0 0;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: rem(720);
+  margin: 0;
+  padding: 0;
   padding-left: rem(20);
-  list-style: decimal;
 }
 
 .terms__item {
+  margin: 0;
+  width: 100%;
+  max-width: rem(700);
+  font-family: var(--font-base);
   font-size: rem(15);
   font-weight: 500;
   line-height: calc(27 / 15);
   letter-spacing: rem(0.75);
   color: var(--color-text);
+  overflow-wrap: break-word;
 }
 
+// List Item 2〜: pt24
 .terms__item + .terms__item {
   margin-top: rem(24);
 }
 
+// 条項内は行間のみ（Figma mb-0）
 .terms__item-title {
   margin: 0;
+  font-family: inherit;
   font-size: inherit;
   font-weight: 900;
   line-height: inherit;
@@ -133,39 +157,31 @@
 
 .terms__item-text {
   margin: 0;
+  font-family: inherit;
   font-size: inherit;
-  font-weight: inherit;
+  font-weight: 500;
   line-height: inherit;
   letter-spacing: inherit;
   color: inherit;
 }
 
-.terms__item-text + .terms__item-text,
-.terms__item-title + .terms__item-text {
-  margin-top: 0;
-}
-
-.terms__item-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.terms__item-list-entry {
-  margin: 0;
-}
-
+// Closing 1:6226: リスト外・幅720・pt24
 .terms__closing {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: rem(720);
   margin: rem(24) 0 0;
+  font-family: var(--font-base);
   font-size: rem(15);
   font-weight: 500;
   line-height: calc(27 / 15);
   letter-spacing: rem(0.75);
   color: var(--color-text);
+  overflow-wrap: break-word;
 }
 
 // ---------------------------------------------------------------------------
-// Responsive
+// SP（≤768）
 // ---------------------------------------------------------------------------
 
 @include mq {
@@ -188,9 +204,10 @@
     gap: rem(10);
   }
 
-  .terms__inner {
+  .terms__content {
     @include fluid-sp-range(padding-top, 48, 64);
     @include fluid-sp-range(padding-bottom, 64, 100);
+    @include fluid-sp-range(padding-inline, 20, 32);
   }
 
   .terms__title {
@@ -200,7 +217,7 @@
   }
 
   .terms__body {
-    margin-top: rem(24);
+    margin-top: rem(44);
   }
 
   .terms__item,
@@ -211,7 +228,6 @@
   }
 
   .terms__list {
-    margin-top: rem(20);
     padding-left: rem(16);
   }
 

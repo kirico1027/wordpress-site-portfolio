@@ -10,6 +10,75 @@
 }
 
 // ---------------------------------------------------------------------------
+// Opening（カバー → 見出し → リスト → 画面内フォーム）
+// ---------------------------------------------------------------------------
+
+@keyframes download-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js .download-page:not(.is-ready) {
+    .download-intro__title,
+    .download-intro__text,
+    .download-form__field.is-opening,
+    .download-form__actions.is-opening {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+  }
+
+  html.js .download-page.is-ready {
+    // 見出し・文言のみ fade-up（check は初期から表示・アニメなし）
+    .download-intro__title,
+    .download-intro__text {
+      animation: download-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: 200ms;
+    }
+
+    .download-form__field.is-opening,
+    .download-form__actions.is-opening {
+      animation: download-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: 360ms;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// scroll-reveal（画面外フォーム欄・同意・送信）
+// ---------------------------------------------------------------------------
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js.scroll-reveal-active .download-page {
+    .download-form__field.js-scroll-reveal,
+    .download-form__actions.js-scroll-reveal {
+      &:not(.is-inview) {
+        opacity: 0;
+        transform: translateY(1rem);
+      }
+
+      &.is-inview:not(.is-revealed) {
+        animation: download-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+
+      &.is-revealed {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Content（intro + form）— 外枠 1184 / padding 32 / pt 80 / pb 120 / gap 64
 // ---------------------------------------------------------------------------
 
@@ -98,6 +167,9 @@
   font-size: rem(20);
   line-height: 1;
   color: var(--color-accent-orange);
+  opacity: 1;
+  transform: none;
+  animation: none;
 }
 
 .download-intro__text {

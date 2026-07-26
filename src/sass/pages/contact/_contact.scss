@@ -10,6 +10,94 @@
 }
 
 // ---------------------------------------------------------------------------
+// Opening（ヒーロー → ラジオ → 名前〜会社）
+// ---------------------------------------------------------------------------
+
+@keyframes contact-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js .contact-page:not(.is-ready) {
+    .contact-form__field--radios,
+    .contact-form__form > .contact-form__field:nth-child(2),
+    .contact-form__form > .contact-form__field:nth-child(3),
+    .contact-form__form > .contact-form__field:nth-child(4),
+    .contact-form__form > .contact-form__field:nth-child(5),
+    .contact-form__form > .contact-form__field:nth-child(6) {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+  }
+
+  html.js .contact-page.is-ready {
+    .contact-form__field--radios {
+      animation: contact-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: 200ms;
+    }
+
+    .contact-form__form > .contact-form__field:nth-child(2) {
+      animation: contact-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: 280ms;
+    }
+
+    .contact-form__form > .contact-form__field:nth-child(3) {
+      animation: contact-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: 340ms;
+    }
+
+    .contact-form__form > .contact-form__field:nth-child(4) {
+      animation: contact-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: 400ms;
+    }
+
+    .contact-form__form > .contact-form__field:nth-child(5) {
+      animation: contact-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: 460ms;
+    }
+
+    .contact-form__form > .contact-form__field:nth-child(6) {
+      animation: contact-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: 520ms;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Body scroll-reveal（内容・同意・送信）
+// ---------------------------------------------------------------------------
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js.scroll-reveal-active .contact-page {
+    .contact-form__field.js-scroll-reveal,
+    .contact-form__actions.js-scroll-reveal {
+      &:not(.is-inview) {
+        opacity: 0;
+        transform: translateY(1rem);
+      }
+
+      &.is-inview:not(.is-revealed) {
+        animation: contact-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+
+      &.is-revealed {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Form section（Figma 1:2693 / 1:2695 — 外枠 1184 / padding 32 / フォーム 560）
 // ---------------------------------------------------------------------------
 
