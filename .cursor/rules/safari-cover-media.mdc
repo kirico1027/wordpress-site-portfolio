@@ -1,0 +1,43 @@
+---
+description: Safari で aspect-ratio + cover 画像が崩れるときの汎用修正（grid 化）
+globs: src/sass/**/*.scss
+alwaysApply: false
+---
+
+# Safari Cover Media（汎用）
+
+Chrome 正常・Safari のみ、`aspect-ratio` 枠内の cover 画像が intrinsic サイズではみ出す場合に使う。
+
+## 原因
+
+親に `aspect-ratio`、子に `position: absolute` + `height: 100%` + `max-width: none` だと、Safari で高さが伝わらず崩れることがある。
+
+## 第一選択（cover 系）
+
+```scss
+.{media} {
+  display: grid;
+  aspect-ratio: /* カンプ比 */;
+
+  .{media}__img {
+    position: relative; // absolute にしない
+    grid-area: 1 / 1;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+  }
+}
+```
+
+## 適用範囲
+
+- **対象**: inset 0 の cover（カード・ヒーロー・一覧サムネ等）
+- **対象外**: Figma オフセット指定など absolute 配置が必須の特殊レイアウト
+
+## 禁止
+
+- cover 用途で `absolute` + `height: 100%` + `max-width: none` を新規採用する
+- サイト全体の画像コンポーネントを無差別に書き換える（cover 系モディファイアに限定）
+
+横幅インセット（`min()` / `calc` / `var` の Safari 無効化）は別問題。案件の inset ルールを参照。

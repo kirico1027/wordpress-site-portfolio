@@ -1,0 +1,33 @@
+---
+description: 横スクロール／ドラッグ可能なスライダーの汎用パターン（Pointer・低減モーション）
+globs: src/public/assets/js/**/*.js,src/sass/**/*.scss,src/templates/**/*.html
+alwaysApply: false
+---
+
+# Drag Scroll Slider（汎用）
+
+カード列・ギャラリーなど **横 overflow スクロール** は、共通ヘルパー1本で初期化する。
+
+## JS
+
+- `pointerdown` / `pointermove` / `pointerup`（`setPointerCapture`）
+- ドラッグ中はルートに `is-dragging`（CSS で `scroll-snap` やリンク誤クリック対策）
+- 自動スクロール／無限ループがある場合は **`prefers-reduced-motion: reduce` で停止**（手動スクロールは残してよい）
+
+```js
+function initDragScrollSlider(slider) {
+  // pointer で scrollLeft を更新
+  // is-dragging の付け外し
+}
+```
+
+## CSS
+
+- スクロール容器: `overflow-x: auto`（必要なら `scroll-snap-type`）
+- `is-dragging` 中は `scroll-snap-type: none`、子リンクは `pointer-events: none` 等を検討
+- バー非表示は案件次第（`-webkit-overflow-scrolling: touch` はレガシー配慮）
+
+## 禁止
+
+- ページごとにほぼ同じドラッグ実装を複製する
+- 低減モーション無視の自動マーキーを常時回す

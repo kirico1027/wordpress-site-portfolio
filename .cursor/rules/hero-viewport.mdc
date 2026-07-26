@@ -1,0 +1,36 @@
+---
+description: トップFVをビューポート高さいっぱいにする汎用パターン（100dvh・固定ヘッダー余白・下層ヒーローと分離）
+globs: src/templates/index.html,src/sass/pages/top/**/*.scss,src/index.html
+alwaysApply: false
+---
+
+# Hero Viewport Height（汎用）
+
+**対象**: トップのフルビューポート FV のみ。下層のページヒーロー（`page-hero.mdc`）とは **別系統**。
+
+## 高さ
+
+- `min-height: 100vh` に続けて `min-height: 100dvh`（固定 `height: 100vh` だけにしない）
+- 中身が多いときはセクションが伸びられること（`min-height`）
+- 高さに裸の `vw` を使わない
+
+## レイアウト
+
+- FV を `display: flex` + `align-items: center` などで縦中央寄せを検討
+- **上**: 固定ヘッダー分 + `env(safe-area-inset-top)`
+- **下**: スクロール誘導などと干渉しない padding + `env(safe-area-inset-bottom)`
+
+## FOUC（JS アニメがある場合）
+
+- `<head>` で `html.js` を付与（`scroll-reveal.mdc` と同型）
+- `prefers-reduced-motion: no-preference` かつ `html.js` のときだけ初期非表示
+- 背景画像は必要なら `rel="preload" as="image"`
+
+## 禁止
+
+- 下層ヒーローにトップ FV クラスを流用する
+- モバイルで `100vh` のみ（アドレスバーでジャンプしやすい）
+
+## サイト固有
+
+パララックス・GSAP・具体 px は案件トークン／ページ SCSS に閉じる。本案件のクラス・数値は `hero-viewport-height.mdc`。

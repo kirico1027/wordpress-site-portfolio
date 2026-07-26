@@ -1,0 +1,53 @@
+---
+description: アーカイブ一覧の Opening Reveal（画面内入場スタガー + 画面外は scroll-reveal）（汎用）
+globs: src/templates/**/*archive*.html,src/sass/pages/**/*archive*.scss,src/public/assets/js/**/*.js,src/partials/cards/**/*.html
+alwaysApply: false
+---
+
+# Archive Opening Reveal（汎用）
+
+一覧アーカイブは **初回入場** と **スクロール後入場** を分ける。マークアップ規約は `archive-filter-cards.mdc`、状態クラスは `scroll-reveal.mdc`。
+
+## 振り分け
+
+| 対象 | クラス | 挙動 |
+|------|--------|------|
+| 初期画面内のカード／行 | `is-opening` | フィルター等とセットの入場スタガー |
+| 画面外 | `js-scroll-reveal` | 通常の scroll-reveal |
+
+```js
+if (isElementInViewport(item)) {
+  item.classList.remove("js-scroll-reveal"); // partial 由来なら外す
+  item.classList.add("is-opening");
+  item.style.animationDelay = baseDelay + index * step + "ms";
+}
+// 画面外は js-scroll-reveal のまま（または後から付与）
+```
+
+## シーケンス
+
+1. **prepare** — 画面内判定 → `is-opening` / `js-scroll-reveal` 振り分け（一度だけ、`data-reveal-prepared` 等）
+2. **start** — コンテナに `is-ready` → opening の CSS アニメ開始 → `animationend` で `is-revealed`
+3. **prime（pageshow のみ）** — `is-ready` + opening を即 `is-revealed`（戻る時の再アニメ防止）
+
+## CSS の型
+
+```scss
+@media (prefers-reduced-motion: no-preference) {
+  html.js .{archive}:not(.is-ready) {
+    .{filters}, .{item}.is-opening { opacity: 0; /* … */ }
+  }
+  html.js .{archive}.is-ready {
+    .{filters} { animation: /* fade-up */ both; }
+    .{item}.is-opening:not(.is-revealed) { animation: /* … */ both; }
+    .{item}.is-opening.is-revealed { opacity: 1; animation: none; }
+  }
+  // 画面外は scroll-reveal.mdc と同じ is-inview / is-revealed
+}
+```
+
+## 禁止
+
+- 全カードを opening だけ／scroll-reveal だけに統一する（長い一覧で破綻）
+- opening 対象に `js-scroll-reveal` を残したまま二重発火させる
+- 初回 boot で opening を `prime` 相当でスキップする

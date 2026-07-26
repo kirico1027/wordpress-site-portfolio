@@ -1,0 +1,39 @@
+---
+description: ヘッダードロワー開閉の汎用パターン（トグル主役・状態1クラス・バー変形・閉じ方共通化）
+globs: src/**/*.html,src/public/assets/js/**/*.js,src/sass/**/*.scss
+alwaysApply: false
+---
+
+# Header Drawer（汎用）
+
+モバイルメニューは **トグルボタンが開閉アニメの主役**。別要素のバツを主役にしない。
+
+## 必須
+
+| 項目 | 方針 |
+|------|------|
+| 主ボタン | ハンバーガー（`aria-expanded` / `aria-controls`） |
+| 状態 | ヘッダー（またはルート）の **修飾クラス1つ** で開閉を表現 |
+| アイコン | 3本線→バツは **バー要素自体** の `top` / `rotate` / `opacity`（別バツ要素で代替しない） |
+| 閉じ方 | `toggle click` / `backdrop click` / `Escape` / `nav link click` を同一 JS で共通化 |
+| 前面表示 | 開時もトグルがバツとして見えるよう `z-index` と配置基準を確保 |
+| JS | サイト共通の1ファイルに集約。ページ個別インライン script 禁止 |
+
+```js
+root.classList.toggle("{block}--menu-open", open);
+toggle.setAttribute("aria-expanded", open ? "true" : "false");
+```
+
+## 補助クローズボタン
+
+ドロワー内に閉じるボタンを置く場合も **アニメの主役はトグル側**。補助はフォーカス・タッチ用に留める。
+
+## スタイル
+
+- ドロワー／オーバーレイ／バー変形の単一ソースを決め、生成 CSS を手編集しない
+- 開閉は原則 CSS（状態クラス）。JS はクラスと ARIA のみ
+
+## 禁止
+
+- 開用・閉用で別アイコン要素を差し替えて「変形」と見せかける
+- 閉じトリガーをページごとにバラバラ実装する

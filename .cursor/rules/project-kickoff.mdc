@@ -38,6 +38,20 @@ alwaysApply: true
 | アコーディオン | `details-accordion.mdc` |
 | `?v=` | `cache-buster.mdc` |
 
+## インタラクション・アニメ（汎用）
+
+| 種別 | ルール |
+|------|--------|
+| Scroll / Load reveal | `scroll-reveal.mdc` |
+| アーカイブ Opening | `archive-opening-reveal.mdc` |
+| ヘッダードロワー | `header-drawer.mdc` |
+| トップ FV 高さ | `hero-viewport.mdc` |
+| モバイルリロードちらつき | `mobile-reload-flicker.mdc` |
+| Safari cover 画像 | `safari-cover-media.mdc` |
+| 横ドラッグスライダー | `drag-scroll-slider.mdc` |
+
+案件のクラス名・数値は、上記に対応する `*-menu` / `hero-viewport-height` / `safari-layout-inset` / `subpage-scroll-reveal` 等に閉じる。
+
 ## 後続工程
 
 ```

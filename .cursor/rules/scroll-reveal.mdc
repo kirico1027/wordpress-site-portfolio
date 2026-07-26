@@ -1,0 +1,62 @@
+---
+description: Scroll / Load reveal の汎用アーキテクチャ（状態クラス・FOUC・リロード・bfcache・低減モーション）
+globs: src/templates/**/*.html,src/sass/**/*.scss,src/public/assets/js/**/*.js,src/partials/**/*.html
+alwaysApply: false
+---
+
+# Scroll Reveal（汎用）
+
+入場アニメは **CSS 再生 + JS は状態付与のみ**。`scroll` イベントの直接監視は使わない。
+
+## 2種類
+
+| 種類 | クラス例 | 用途 | 発火 |
+|------|----------|------|------|
+| Load | `js-load-reveal` | ページ上部（h1 / リード） | ロード直後 |
+| Scroll | `js-scroll-reveal` | それ以降 | IntersectionObserver |
+
+## 状態クラス（必須の二段）
+
+| クラス | 意味 |
+|--------|------|
+| `is-inview` | アニメ開始（CSS `animation` が走る） |
+| `is-revealed` | 完了（最終見た目を固定、再再生しない） |
+
+`animationend` で `is-revealed` を付与する。
+
+## FOUC 防止
+
+1. `<head>` で `document.documentElement.classList.add("js")`
+2. 隠すのは **`html.js` かつ `prefers-reduced-motion: no-preference`** のときだけ
+3. JS 準備後に `scroll-reveal-active`（等）を付与してから本格監視
+
+```scss
+@media (prefers-reduced-motion: no-preference) {
+  html.js.scroll-reveal-active .{target}.js-scroll-reveal {
+    &:not(.is-inview) { opacity: 0; transform: translateY(/* … */); }
+    &.is-inview:not(.is-revealed) { animation: /* … */ both; }
+    &.is-revealed { opacity: 1; transform: none; animation: none; }
+  }
+}
+```
+
+## リロード時（画面内も再生）
+
+Observer は「入ってきた」要素向き。**初期から画面内の要素**は `is-inview` のみ付与して CSS を再生する（`AnimateVisible` 型）。
+
+### 禁止
+
+- 初回 boot で画面内要素に `is-inview` **+** `is-revealed` を同時付与（アニメがスキップされる）
+- 下層を `initScrollReveal`（画面外待ち）だけにする
+
+## bfcache（戻る）
+
+`pageshow` でのみ `prime*IfVisible`（即 `is-inview` + `is-revealed`）。初回表示では呼ばない。
+
+## 低減モーション
+
+`prefers-reduced-motion: reduce` → 即 `is-inview` + `is-revealed`。CSS アニメブロックは `no-preference` 内に閉じる。
+
+## 共通 partial の注意
+
+CTA 等を partial で配る場合、アニメ変更は **partial / 共通 JS / 共通 SCSS** の3点だけ。ページ直書き禁止。

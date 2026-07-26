@@ -40,6 +40,10 @@ News / Works など **一覧アーカイブ** は次の型に揃える。
 - フィルター UI が News / Works で同型なら、後から `partials/` に `filter-tabs` 等へ寄せてよい
 - **先にテンプレ直書きを増やさない**。差は BEM ブロック名とカード partial の差で吸収
 
+## 入場アニメ
+
+画面内スタガー + 画面外 scroll-reveal は **`archive-opening-reveal.mdc`**（状態クラスは `scroll-reveal.mdc`）。
+
 ## 禁止
 
 - アーカイブごとにフィルターの ARIA / active 表現を変える
