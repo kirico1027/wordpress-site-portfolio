@@ -1,0 +1,56 @@
+<?php
+/**
+ * Front page — About section.
+ *
+ * @package BizLife
+ */
+?>
+<section class="section about">
+  <div class="container about__inner">
+    <div class="about__visual">
+      <div class="about__visual-scaler">
+        <div class="about__visual-collage">
+        <figure class="about__figure about__figure--main js-scroll-reveal js-about-collage-reveal">
+          <img src="<?php echo esc_url(get_theme_file_uri('assets/img/top/about-01.png')); ?>" alt="" width="350" height="233" />
+        </figure>
+        <div class="about__figure-row">
+          <span class="about__shape js-scroll-reveal js-about-collage-reveal" aria-hidden="true"></span>
+          <figure class="about__figure about__figure--sub js-scroll-reveal js-about-collage-reveal">
+            <img src="<?php echo esc_url(get_theme_file_uri('assets/img/top/about-02.png')); ?>" alt="" width="240" height="160" />
+          </figure>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="about__content">
+      <?php
+      get_template_part(
+        'template-parts/sections/section-heading',
+        null,
+        array(
+          'en'    => 'About us',
+          'title' => '私たちについて',
+        )
+      );
+      get_template_part(
+        'template-parts/sections/section-body',
+        null,
+        array(
+          'blockClass' => 'about__text js-scroll-reveal',
+          'modifier'   => 'section-body--about',
+          'text'       => 'Biz Lifeは社員の幸せと企業の成功を追求し、革新的なメンタルヘルスサポートを提供しています。私たちは社員ファーストの理念に基づき、社員が健康で充実した人生を送り、企業が持続可能な成功を収めるためのパートナーとして、常に前進しています。',
+        )
+      );
+      get_template_part(
+        'template-parts/sections/btn-more',
+        null,
+        array(
+          'href'     => home_url('/about/'),
+          'label'    => '私たちについて',
+          'modifier' => 'js-scroll-reveal',
+        )
+      );
+      ?>
+    </div>
+  </div>
+</section>
