@@ -1,0 +1,108 @@
+<?php
+/**
+ * Page template: Terms (slug: terms).
+ *
+ * Phase 2: static HTML markup.
+ *
+ * @package BizLife
+ */
+
+get_header();
+?>
+<main class="terms-page terms">
+  <div class="terms__breadcrumb-area">
+    <div class="container terms__breadcrumb-inner">
+      <nav class="terms__breadcrumb" aria-label="パンくずリスト">
+        <a class="terms__breadcrumb-parent" href="<?php echo esc_url(home_url('/')); ?>">
+          <span class="terms__breadcrumb-en">Home</span>
+          <span class="terms__breadcrumb-ja">ホーム</span>
+        </a>
+        <span class="terms__breadcrumb-sep" aria-hidden="true">
+          <span class="material-icons">chevron_right</span>
+        </span>
+        <span class="terms__breadcrumb-current" aria-current="page">利用規約</span>
+      </nav>
+    </div>
+  </div>
+
+  <article class="terms__content" aria-labelledby="terms-heading">
+    <div class="terms__inner">
+      <h1 id="terms-heading" class="terms__title">利用規約</h1>
+
+      <div class="terms__body">
+        <div class="terms__list">
+          <section class="terms__item">
+            <p class="terms__item-title">利用規約の適用範囲</p>
+            <p class="terms__item-text">
+              1.1 当社のウェブサイトやサービスをご利用いただく際には、本利用規約が適用されます。
+            </p>
+            <p class="terms__item-text">
+              1.2 本利用規約に同意いただいた場合、当社のサービスを利用することができます。同意しない場合、当社のサービスの利用をお控えください。
+            </p>
+          </section>
+          <section class="terms__item">
+            <p class="terms__item-title">アカウントの作成</p>
+            <p class="terms__item-text">
+              2.1 当社の一部のサービスを利用するには、アカウントの作成が必要です。アカウント情報は正確かつ最新のものである必要があります。
+            </p>
+            <p class="terms__item-text">
+              2.2 アカウントの管理は利用者の責任とします。アカウント情報の不正利用や漏洩が発生した場合、利用者は直ちに当社に通報する責任があります。
+            </p>
+          </section>
+          <section class="terms__item">
+            <p class="terms__item-title">禁止事項</p>
+            <p class="terms__item-text">3.1 利用者は、以下の行為を禁止します。</p>
+            <p class="terms__item-text">
+              法律に違反する行為他の利用者のプライバシーや権利を侵害する行為当社のサービスやシステムに損害を与える行為
+            </p>
+            <p class="terms__item-text">
+              3.2 上記に該当する行為が発覚した場合、当社は適切な措置を講じる権利を有します。
+            </p>
+          </section>
+          <section class="terms__item">
+            <p class="terms__item-title">サービスの提供</p>
+            <p class="terms__item-text">
+              4.1 当社は、事前の通知なしにサービスの内容や仕様を変更する権利を有します。
+            </p>
+            <p class="terms__item-text">
+              4.2 サービス提供には最善を尽くしますが、予期せぬ事態が発生した場合には、当社は一切の責任を負いません。
+            </p>
+          </section>
+          <section class="terms__item">
+            <p class="terms__item-title">知的財産権</p>
+            <p class="terms__item-text">
+              5.1 当社のウェブサイトやサービスに関する知的財産権は、当社または関連する権利者に帰属します。
+            </p>
+            <p class="terms__item-text">
+              5.2 利用者は、当社のウェブサイトやサービスを個人的な目的でのみ利用することができます。無断で複製、配布、変更、逆コンパイル、逆アセンブル、リバースエンジニアリングすることは禁止されています。
+            </p>
+          </section>
+          <section class="terms__item">
+            <p class="terms__item-title">免責事項</p>
+            <p class="terms__item-text">
+              6.1 当社は、サービスの提供に際し合理的な注意を払いますが、利用者による情報の誤用や損失について一切の責任を負いません。
+            </p>
+            <p class="terms__item-text">
+              6.2 当社は、ウェブサイトへのアクセスや利用の中断、停止、終了に関して一切の責任を負いません。
+            </p>
+          </section>
+          <section class="terms__item">
+            <p class="terms__item-title">利用規約の変更</p>
+            <p class="terms__item-text">
+              7.1 当社は、必要に応じて本利用規約を変更する権利を有します。変更があった場合、利用者に通知いたします。
+            </p>
+            <p class="terms__item-text">
+              7.2 利用者は、変更後の利用規約に同意した場合、その変更内容が適用されます。
+            </p>
+          </section>
+        </div>
+
+        <p class="terms__closing">
+          以上が当社の利用規約です。ご理解とご同意の上、サービスをご利用いただきますようお願いいたします。
+        </p>
+      </div>
+    </div>
+  </article>
+</main>
+<?php
+get_footer();
