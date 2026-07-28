@@ -10,10 +10,6 @@
 get_header();
 
 $works_card_fallback = get_theme_file_uri('assets/img/works/works_01.png');
-$queried_term = get_queried_object();
-$term_title = ($queried_term && !is_wp_error($queried_term) && !empty($queried_term->name))
-  ? $queried_term->name
-  : single_term_title('', false);
 ?>
 <main class="works-archive-page">
   <?php
@@ -23,7 +19,7 @@ $term_title = ($queried_term && !is_wp_error($queried_term) && !empty($queried_t
     array(
       'heroModifier'  => 'page-hero--light',
       'heroHeadingId' => 'works-hero-heading',
-      'heroTitleEn'   => $term_title,
+      'heroTitleEn'   => 'Works',
       'heroTitleJa'   => '実績紹介',
       'heroImgSrc'    => '',
     )
