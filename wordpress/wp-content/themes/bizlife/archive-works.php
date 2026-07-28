@@ -2,19 +2,20 @@
 /**
  * Works archive template (CPT: works).
  *
- * Phase 3 Step14: static HTML markup from works-archive.html.
- * Dynamic loop and single-works.php come in later steps.
+ * Main query renders works cards; filters, more button, and CTA remain static.
  *
  * @package BizLife
  */
 
 get_header();
 
-$works_card_href = '#';
-$img_works_01 = get_theme_file_uri('assets/img/works/works_01.png');
-$img_works_02 = get_theme_file_uri('assets/img/works/works_02.png');
-$img_works_03 = get_theme_file_uri('assets/img/works/works_03.png');
-$img_works_04 = get_theme_file_uri('assets/img/works/works_04.png');
+$works_card_thumbnails = array(
+  get_theme_file_uri('assets/img/works/works_01.png'),
+  get_theme_file_uri('assets/img/works/works_02.png'),
+  get_theme_file_uri('assets/img/works/works_03.png'),
+  get_theme_file_uri('assets/img/works/works_04.png'),
+);
+$works_card_thumbnail_count = count($works_card_thumbnails);
 ?>
 <main class="works-archive-page">
   <?php
@@ -52,50 +53,33 @@ $img_works_04 = get_theme_file_uri('assets/img/works/works_04.png');
 
       <div class="works-archive__grid">
         <?php
-        get_template_part(
-          'template-parts/cards/works-card',
-          null,
-          array(
-            'href'      => $works_card_href,
-            'thumbnail' => $img_works_01,
-            'tags'      => array('つながるワークフロー', 'あなたのメンタルコーチ'),
-            'title'     => '意地でも従業員満足度を高めたかった。とことん向き合うことで見えたこれからの福利厚生',
-            'company'   => '株式会社giraffe',
-          )
-        );
-        get_template_part(
-          'template-parts/cards/works-card',
-          null,
-          array(
-            'href'      => $works_card_href,
-            'thumbnail' => $img_works_02,
-            'tags'      => array('つながるワークフロー', 'みんなの福利厚生クラウド'),
-            'title'     => '従業員満足度が前年比200％Up！「従業員」の本質を語れるBiz Lifeのサービス',
-            'company'   => '株式会社Rabbit',
-          )
-        );
-        get_template_part(
-          'template-parts/cards/works-card',
-          null,
-          array(
-            'href'      => $works_card_href,
-            'thumbnail' => $img_works_03,
-            'tags'      => array('つながるワークフロー'),
-            'title'     => 'これはただの福利厚生ではないと確信。これからより求められる働き方だと感じた',
-            'company'   => '株式会社turtle',
-          )
-        );
-        get_template_part(
-          'template-parts/cards/works-card',
-          null,
-          array(
-            'href'      => $works_card_href,
-            'thumbnail' => $img_works_04,
-            'tags'      => array('あなたのメンタルコーチ'),
-            'title'     => '内部崩壊しかけていた弊社を救うきっかけになった「福利厚生」の話',
-            'company'   => '株式会社monkey',
-          )
-        );
+        $works_card_index = 0;
+
+        if (have_posts()) :
+          while (have_posts()) :
+            the_post();
+            $card_thumbnail = $works_card_thumbnails[$works_card_index % $works_card_thumbnail_count];
+            ?>
+        <article class="works-card">
+          <a class="works-card__link" href="<?php the_permalink(); ?>">
+            <figure class="works-card__figure">
+              <img src="<?php echo esc_url($card_thumbnail); ?>" alt="" width="432" height="259" />
+              <span class="works-card__dim" aria-hidden="true"></span>
+              <span class="works-card__more" aria-hidden="true">Read more</span>
+            </figure>
+            <div class="works-card__body">
+              <ul class="works-card__tags">
+                <li class="works-card__tag"># つながるワークフロー</li>
+              </ul>
+              <h3 class="works-card__title"><?php the_title(); ?></h3>
+              <p class="works-card__company">株式会社BizLife</p>
+            </div>
+          </a>
+        </article>
+            <?php
+            ++$works_card_index;
+          endwhile;
+        endif;
         ?>
       </div>
 
