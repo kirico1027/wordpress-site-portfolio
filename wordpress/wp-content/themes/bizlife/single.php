@@ -1,0 +1,233 @@
+<?php
+/**
+ * Single blog post template.
+ *
+ * Phase 2: static HTML markup from blog-single.html.
+ * Dynamic post fields are wired in Phase 3.
+ *
+ * @package BizLife
+ */
+
+get_header();
+
+$blog_archive_href = home_url('/blog/');
+$blog_single_href = home_url('/sample-post/');
+$img_blog_single_hero = get_theme_file_uri('assets/img/blog/blog-single_hero.png');
+$img_blog_single_body_01 = get_theme_file_uri('assets/img/blog/blog-single_body_01.png');
+$img_blog_single_body_02 = get_theme_file_uri('assets/img/blog/blog-single_body_02.png');
+$img_blog_single_pickup_01 = get_theme_file_uri('assets/img/blog/blog-single_pickup_01.png');
+$img_blog_single_pickup_02 = get_theme_file_uri('assets/img/blog/blog-single_pickup_02.png');
+$img_blog_single_pickup_03 = get_theme_file_uri('assets/img/blog/blog-single_pickup_03.png');
+?>
+<main class="blog-single-page blog-single">
+  <div class="blog-single__breadcrumb-area">
+    <div class="container blog-single__breadcrumb-inner">
+      <nav class="blog-single__breadcrumb" aria-label="パンくずリスト">
+        <a class="blog-single__breadcrumb-parent" href="<?php echo esc_url($blog_archive_href); ?>">
+          <span class="blog-single__breadcrumb-en">Blog</span>
+          <span class="blog-single__breadcrumb-ja">ブログ</span>
+        </a>
+        <span class="blog-single__breadcrumb-sep" aria-hidden="true">
+          <span class="material-icons">chevron_right</span>
+        </span>
+        <span class="blog-single__breadcrumb-current" aria-current="page">福利厚生の進化：従業員の幸福を...</span>
+      </nav>
+      <span class="blog-single__breadcrumb-line" aria-hidden="true"></span>
+    </div>
+  </div>
+
+  <article class="blog-single__article" aria-labelledby="blog-single-heading">
+    <div class="container blog-single__inner">
+      <div class="blog-single__content">
+        <div class="blog-single__meta">
+          <ul class="blog-single__tags">
+            <li class="blog-single__tag">社員インタビュー</li>
+          </ul>
+          <time class="blog-single__date" datetime="2026-08-26T15:32">2026/8/26 15:32</time>
+        </div>
+
+        <h1 id="blog-single-heading" class="blog-single__title">
+          福利厚生の進化：従業員の幸福を追求するビジネスの新たな道
+        </h1>
+
+        <figure class="blog-single__hero">
+          <img
+            src="<?php echo esc_url($img_blog_single_hero); ?>"
+            alt=""
+            width="720"
+            height="432"
+          />
+        </figure>
+
+        <div class="blog-single__body">
+          <h2 class="blog-single__heading">令和で求められる福利厚生とは？</h2>
+          <h3 class="blog-single__subheading">
+            令和時代における福利厚生は、従来の概念を超えて、より幅広いニーズに対応する必要があります。
+          </h3>
+          <p class="blog-single__paragraph">
+            従業員が健康で充実した生活を送り、仕事とプライベートのバランスを保つことが求められています。そのため、給与や保険だけでなく、柔軟な働き方やメンタルヘルスのサポート、キャリア開発プログラムなど、個々の従業員のニーズに合わせた福利厚生が重要視されています。
+          </p>
+          <p class="blog-single__paragraph">
+            また、デジタル技術の進化に伴い、リモートワークやオンライン研修など、新たな働き方や学び方をサポートする施策も注目されています。BizLifeでは、こうした新しい時代に求められる福利厚生を提供し、従業員の幸福と企業の成長を支援しています。
+          </p>
+
+          <figure class="blog-single__figure">
+            <img
+              src="<?php echo esc_url($img_blog_single_body_01); ?>"
+              alt=""
+              width="720"
+              height="481"
+            />
+          </figure>
+
+          <h2 class="blog-single__heading">これまでの福利厚生では補ていなかった部分</h2>
+          <h3 class="blog-single__subheading">
+            従来の福利厚生は、主に給与や健康保険、退職制度などの基本的なニーズに焦点を当ててきました。
+          </h3>
+          <p class="blog-single__paragraph">
+            しかし、近年の社会状況の変化や労働者のニーズの多様化により、これらの伝統的な福利厚生だけでは満足できない場面が増えています。例えば、メンタルヘルスの問題やワークライフバランスの課題は、従来の制度では十分にカバーできない場合があります。
+          </p>
+          <h3 class="blog-single__subheading">従業員にとって重要な要素</h3>
+          <p class="blog-single__paragraph">
+            また、柔軟な働き方やキャリア開発の機会も、従業員にとって重要な要素となっています。このような点から、新しい福利厚生の形態が求められています。
+          </p>
+          <p class="blog-single__paragraph">
+            BizLifeでは、従業員のメンタルヘルスを支援するプログラムや、柔軟な働き方を実現するための制度、キャリア開発支援など、これまでの福利厚生では補いきれなかった部分に焦点を当ててサービスを展開しています。
+          </p>
+
+          <h2 class="blog-single__heading">社員が求める会社像</h2>
+          <h3 class="blog-single__subheading">
+            現代の従業員は、給与や福利厚生だけでなく、会社の文化や価値観にも注目しています。
+          </h3>
+          <p class="blog-single__paragraph">
+            彼らは、働く環境が自身のニーズや価値観に合致しているかどうかを重視し、それが自己実現や働きがいにつながると考えています。
+          </p>
+          <p class="blog-single__paragraph">
+            したがって、従業員が求める会社像とは、働きやすい環境やチームワーク、自己成長の機会を提供する企業であり、従業員の声を尊重し、多様性や包括性を尊重する組織です。
+          </p>
+          <p class="blog-single__paragraph">また、企業の社会的責任や環境への取り組みにも注目が集まっています。</p>
+          <p class="blog-single__paragraph">
+            BizLifeでは、従業員が自己実現や成長を達成できる環境を提供し、社会貢献活動や環境保護にも積極的に取り組むことで、社員が求める理想の会社像を実現しています。
+          </p>
+
+          <figure class="blog-single__figure blog-single__figure--tall">
+            <img
+              src="<?php echo esc_url($img_blog_single_body_02); ?>"
+              alt=""
+              width="720"
+              height="540"
+            />
+          </figure>
+
+          <h2 class="blog-single__heading">BizLifeで実現できること</h2>
+          <h3 class="blog-single__subheading">
+            BizLifeでは、従業員の幸福と健康を最優先に考え、革新的な福利厚生サービスを提供しています。
+          </h3>
+          <p class="blog-single__paragraph">
+            その中でも特に注目すべき点は、従業員のメンタルヘルスを支援するプログラムです。近年、メンタルヘルスの重要性が高まっており、ストレスや精神的な負担が増加しています。
+          </p>
+          <p class="blog-single__paragraph">
+            BizLifeでは、定期的なデジタルデトックスやストレス管理プログラムを通じて、従業員が心身の健康を維持し、ストレスを軽減できるよう支援しています。
+          </p>
+          <p class="blog-single__paragraph">
+            また、柔軟な働き方やキャリア開発の機会も充実しており、従業員が自己実現を追求し、成長できる環境を提供しています。
+          </p>
+          <p class="blog-single__paragraph">
+            さらに、企業の社会的責任として、地域社会や環境への貢献活動にも積極的に取り組んでいます。従業員が安心して働き、生活の質を向上させるための多彩なサポートがBizLifeにはあります。
+          </p>
+        </div>
+
+        <div class="blog-single__share">
+          <p class="blog-single__share-label">\ Let's shere ! /</p>
+          <ul class="blog-single__share-list" aria-hidden="true">
+            <li><span class="blog-single__share-link"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></span></li>
+            <li><span class="blog-single__share-link"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="blog-single__back">
+        <?php
+        get_template_part(
+          'template-parts/sections/btn-more',
+          null,
+          array(
+            'modifier' => '',
+            'href'     => $blog_archive_href,
+            'label'    => '一覧ページに戻る',
+          )
+        );
+        ?>
+      </div>
+    </div>
+  </article>
+
+  <section class="blog-single__pickup" aria-labelledby="blog-pickup-heading">
+    <div class="container blog-single__pickup-inner">
+      <?php
+      get_template_part(
+        'template-parts/sections/section-heading',
+        null,
+        array(
+          'en'    => 'Pick up',
+          'title' => '今話題の記事',
+        )
+      );
+      ?>
+
+      <div class="blog-single__pickup-grid">
+        <article class="blog-card">
+          <a class="blog-card__link" href="<?php echo esc_url($blog_single_href); ?>">
+            <figure class="blog-card__figure">
+              <img src="<?php echo esc_url($img_blog_single_pickup_01); ?>" alt="" width="328" height="197" />
+              <span class="blog-card__dim" aria-hidden="true"></span>
+              <span class="blog-card__more" aria-hidden="true">Read more</span>
+            </figure>
+            <div class="blog-card__body">
+              <ul class="blog-card__tags">
+                <li class="blog-card__tag">お役立ち情報</li>
+              </ul>
+              <h3 class="blog-card__title">ビジネスの成功と従業員の幸福を両立させる福利厚生の秘訣</h3>
+              <time class="blog-card__date" datetime="2024-04-25">2024/4/25</time>
+            </div>
+          </a>
+        </article>
+        <article class="blog-card">
+          <a class="blog-card__link" href="<?php echo esc_url($blog_single_href); ?>">
+            <figure class="blog-card__figure">
+              <img src="<?php echo esc_url($img_blog_single_pickup_02); ?>" alt="" width="328" height="197" />
+              <span class="blog-card__dim" aria-hidden="true"></span>
+              <span class="blog-card__more" aria-hidden="true">Read more</span>
+            </figure>
+            <div class="blog-card__body">
+              <ul class="blog-card__tags">
+                <li class="blog-card__tag">導入事例</li>
+              </ul>
+              <h3 class="blog-card__title">従業員の幸福と企業の繁栄を両立する福利厚生戦略</h3>
+              <time class="blog-card__date" datetime="2024-04-09">2024/4/9</time>
+            </div>
+          </a>
+        </article>
+        <article class="blog-card">
+          <a class="blog-card__link" href="<?php echo esc_url($blog_single_href); ?>">
+            <figure class="blog-card__figure">
+              <img src="<?php echo esc_url($img_blog_single_pickup_03); ?>" alt="" width="328" height="197" />
+              <span class="blog-card__dim" aria-hidden="true"></span>
+              <span class="blog-card__more" aria-hidden="true">Read more</span>
+            </figure>
+            <div class="blog-card__body">
+              <ul class="blog-card__tags">
+                <li class="blog-card__tag">お役立ち情報</li>
+                <li class="blog-card__tag">新着記事</li>
+              </ul>
+              <h3 class="blog-card__title">幸せな働き方を支援する福利厚生プログラムの魅力</h3>
+              <time class="blog-card__date" datetime="2024-04-14">2024/4/14</time>
+            </div>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+<?php
+get_footer();
