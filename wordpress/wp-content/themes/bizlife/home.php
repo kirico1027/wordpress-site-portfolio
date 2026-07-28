@@ -2,7 +2,7 @@
 /**
  * Blog posts archive (Posts page: /blog/).
  *
- * Phase 2: static HTML markup from blog-archive.html.
+ * Main query renders archive cards; featured slider and sidebar remain static.
  *
  * @package BizLife
  */
@@ -10,6 +10,15 @@
 get_header();
 
 $blog_single_href = '#';
+$blog_archive_card_limit = 6;
+$blog_archive_card_thumbnails = array(
+  get_theme_file_uri('assets/img/works/works_01.png'),
+  get_theme_file_uri('assets/img/works/works_02.png'),
+  get_theme_file_uri('assets/img/works/works_03.png'),
+  get_theme_file_uri('assets/img/works/works_04.png'),
+  get_theme_file_uri('assets/img/works/works_01.png'),
+  get_theme_file_uri('assets/img/works/works_02.png'),
+);
 $img_blog_featured_01 = get_theme_file_uri('assets/img/blog/blog-featured_01.png');
 $img_blog_featured_02 = get_theme_file_uri('assets/img/blog/blog-featured_02.png');
 $img_blog_single_body_02 = get_theme_file_uri('assets/img/blog/blog-single_body_02.png');
@@ -111,103 +120,39 @@ $img_works_04 = get_theme_file_uri('assets/img/works/works_04.png');
       <div class="blog-archive__main">
         <h2 class="blog-archive__heading">すべて</h2>
         <div class="blog-archive__grid">
+          <?php
+          $blog_archive_card_index = 0;
+
+          if (have_posts()) :
+            while (have_posts() && $blog_archive_card_index < $blog_archive_card_limit) :
+              the_post();
+              $card_thumbnail = $blog_archive_card_thumbnails[$blog_archive_card_index];
+              ?>
           <article class="blog-card">
-            <a class="blog-card__link" href="<?php echo esc_url($blog_single_href); ?>">
+            <a class="blog-card__link" href="<?php echo esc_url(get_permalink()); ?>">
               <figure class="blog-card__figure">
-                <img src="<?php echo esc_url($img_works_01); ?>" alt="" width="328" height="197" />
+                <img src="<?php echo esc_url($card_thumbnail); ?>" alt="" width="328" height="197" />
                 <span class="blog-card__dim" aria-hidden="true"></span>
                 <span class="blog-card__more" aria-hidden="true">Read more</span>
               </figure>
               <div class="blog-card__body">
                 <ul class="blog-card__tags">
-                  <li class="blog-card__tag">社員インタビュー</li>
+                  <?php foreach (get_the_category() as $category) : ?>
+                    <li class="blog-card__tag"><?php echo esc_html($category->name); ?></li>
+                  <?php endforeach; ?>
                 </ul>
-                <h3 class="blog-card__title">福利厚生の進化：従業員の幸福を追求するビジネスの新たな道</h3>
-                <time class="blog-card__date" datetime="2026-08-26">2026/8/26</time>
+                <h3 class="blog-card__title"><?php the_title(); ?></h3>
+                <time class="blog-card__date" datetime="<?php echo esc_attr(get_the_date('Y-m-d')); ?>">
+                  <?php echo esc_html(get_the_date('Y/n/j')); ?>
+                </time>
               </div>
             </a>
           </article>
-          <article class="blog-card">
-            <a class="blog-card__link" href="<?php echo esc_url($blog_single_href); ?>">
-              <figure class="blog-card__figure">
-                <img src="<?php echo esc_url($img_works_02); ?>" alt="" width="328" height="197" />
-                <span class="blog-card__dim" aria-hidden="true"></span>
-                <span class="blog-card__more" aria-hidden="true">Read more</span>
-              </figure>
-              <div class="blog-card__body">
-                <ul class="blog-card__tags">
-                  <li class="blog-card__tag">お役立ち情報</li>
-                </ul>
-                <h3 class="blog-card__title">ビジネスの成功と従業員の幸福を両立させる福利厚生の秘訣</h3>
-                <time class="blog-card__date" datetime="2026-08-25">2026/8/25</time>
-              </div>
-            </a>
-          </article>
-          <article class="blog-card">
-            <a class="blog-card__link" href="<?php echo esc_url($blog_single_href); ?>">
-              <figure class="blog-card__figure">
-                <img src="<?php echo esc_url($img_works_03); ?>" alt="" width="328" height="197" />
-                <span class="blog-card__dim" aria-hidden="true"></span>
-                <span class="blog-card__more" aria-hidden="true">Read more</span>
-              </figure>
-              <div class="blog-card__body">
-                <ul class="blog-card__tags">
-                  <li class="blog-card__tag">社員インタビュー</li>
-                </ul>
-                <h3 class="blog-card__title">福利厚生の進化：従業員の幸福を追求するビジネスの新たな道</h3>
-                <time class="blog-card__date" datetime="2026-08-24">2026/8/24</time>
-              </div>
-            </a>
-          </article>
-          <article class="blog-card">
-            <a class="blog-card__link" href="<?php echo esc_url($blog_single_href); ?>">
-              <figure class="blog-card__figure">
-                <img src="<?php echo esc_url($img_works_04); ?>" alt="" width="328" height="197" />
-                <span class="blog-card__dim" aria-hidden="true"></span>
-                <span class="blog-card__more" aria-hidden="true">Read more</span>
-              </figure>
-              <div class="blog-card__body">
-                <ul class="blog-card__tags">
-                  <li class="blog-card__tag">サービス・事業</li>
-                </ul>
-                <h3 class="blog-card__title">働く人の幸福を最優先に考える企業文化の構築</h3>
-                <time class="blog-card__date" datetime="2026-08-21">2026/8/21</time>
-              </div>
-            </a>
-          </article>
-          <article class="blog-card">
-            <a class="blog-card__link" href="<?php echo esc_url($blog_single_href); ?>">
-              <figure class="blog-card__figure">
-                <img src="<?php echo esc_url($img_works_01); ?>" alt="" width="328" height="197" />
-                <span class="blog-card__dim" aria-hidden="true"></span>
-                <span class="blog-card__more" aria-hidden="true">Read more</span>
-              </figure>
-              <div class="blog-card__body">
-                <ul class="blog-card__tags">
-                  <li class="blog-card__tag">お役立ち情報</li>
-                  <li class="blog-card__tag">新着記事</li>
-                </ul>
-                <h3 class="blog-card__title">幸せな働き方を支援する福利厚生プログラムの魅力</h3>
-                <time class="blog-card__date" datetime="2026-08-14">2026/8/14</time>
-              </div>
-            </a>
-          </article>
-          <article class="blog-card">
-            <a class="blog-card__link" href="<?php echo esc_url($blog_single_href); ?>">
-              <figure class="blog-card__figure">
-                <img src="<?php echo esc_url($img_works_02); ?>" alt="" width="328" height="197" />
-                <span class="blog-card__dim" aria-hidden="true"></span>
-                <span class="blog-card__more" aria-hidden="true">Read more</span>
-              </figure>
-              <div class="blog-card__body">
-                <ul class="blog-card__tags">
-                  <li class="blog-card__tag">導入事例</li>
-                </ul>
-                <h3 class="blog-card__title">従業員の幸福と企業の繁栄を両立する福利厚生戦略</h3>
-                <time class="blog-card__date" datetime="2026-08-09">2026/8/9</time>
-              </div>
-            </a>
-          </article>
+              <?php
+              ++$blog_archive_card_index;
+            endwhile;
+          endif;
+          ?>
         </div>
         <div class="blog-archive__more-wrap">
           <button class="blog-archive__more" type="button">
