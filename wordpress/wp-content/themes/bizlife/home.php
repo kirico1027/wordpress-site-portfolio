@@ -9,7 +9,7 @@
 
 get_header();
 
-$blog_single_href = home_url('/sample-post/');
+$blog_single_href = '#';
 $img_blog_featured_01 = get_theme_file_uri('assets/img/blog/blog-featured_01.png');
 $img_blog_featured_02 = get_theme_file_uri('assets/img/blog/blog-featured_02.png');
 $img_blog_single_body_02 = get_theme_file_uri('assets/img/blog/blog-single_body_02.png');
