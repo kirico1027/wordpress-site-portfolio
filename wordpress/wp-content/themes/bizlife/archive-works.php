@@ -57,14 +57,20 @@ $works_card_fallback = get_theme_file_uri('assets/img/works/works_01.png');
             <div class="works-card__body">
               <ul class="works-card__tags">
                 <?php
-                $works_category_label = 'つながるワークフロー';
                 $works_categories = get_the_terms(get_the_ID(), 'works_category');
 
                 if ($works_categories && !is_wp_error($works_categories)) {
-                  $works_category_label = $works_categories[0]->name;
+                  foreach ($works_categories as $works_category) {
+                    ?>
+                <li class="works-card__tag"># <?php echo esc_html($works_category->name); ?></li>
+                    <?php
+                  }
+                } else {
+                  ?>
+                <li class="works-card__tag"># つながるワークフロー</li>
+                  <?php
                 }
                 ?>
-                <li class="works-card__tag"># <?php echo esc_html($works_category_label); ?></li>
               </ul>
               <h3 class="works-card__title"><?php the_title(); ?></h3>
               <?php
