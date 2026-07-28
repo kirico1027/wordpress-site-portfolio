@@ -12,10 +12,10 @@ get_header();
 $works_archive_href = home_url('/works/');
 $works_card_href = '#';
 $img_works_single_hero_fallback = get_theme_file_uri('assets/img/works-single/works-single_01.png');
-$img_works_single_02 = get_theme_file_uri('assets/img/works-single/works-single_02.png');
 $img_works_single_05 = get_theme_file_uri('assets/img/works-single/works-single_05.png');
 $img_works_single_06 = get_theme_file_uri('assets/img/works-single/works-single_06.png');
 $img_works_single_07 = get_theme_file_uri('assets/img/works-single/works-single_07.png');
+$company_description_fallback = 'モンキーは、クリエイティブなデザインとブランディングソリューションを提供する会社です。当社のデザインチームは、顧客企業のビジュアルアイデンティティを強化し、魅力的なブランドイメージを構築するための戦略的なアプローチを提供しています。';
 ?>
 <main class="works-single-page works-single">
   <div class="works-single__breadcrumb-area">
@@ -66,20 +66,21 @@ $img_works_single_07 = get_theme_file_uri('assets/img/works-single/works-single_
             </figure>
 
             <div class="works-single__client">
+              <?php
+              $company_name = function_exists('get_field') ? get_field('company_name') : '';
+              if (!$company_name) {
+                $company_name = '株式会社サンプル';
+              }
+
+              $company_description = function_exists('get_field') ? get_field('company_description') : '';
+              if (!$company_description) {
+                $company_description = $company_description_fallback;
+              }
+              ?>
               <div class="works-single__client-head">
-                <figure class="works-single__client-logo">
-                  <img
-                    src="<?php echo esc_url($img_works_single_02); ?>"
-                    alt="株式会社monkey"
-                    width="120"
-                    height="60"
-                  />
-                </figure>
-                <p class="works-single__client-name">株式会社monkey</p>
+                <p class="works-single__client-name"><?php echo esc_html($company_name); ?></p>
               </div>
-              <p class="works-single__client-desc">
-                モンキーは、クリエイティブなデザインとブランディングソリューションを提供する会社です。当社のデザインチームは、顧客企業のビジュアルアイデンティティを強化し、魅力的なブランドイメージを構築するための戦略的なアプローチを提供しています。
-              </p>
+              <p class="works-single__client-desc"><?php echo nl2br(esc_html(wp_strip_all_tags($company_description))); ?></p>
             </div>
 
             <div class="works-single__body">

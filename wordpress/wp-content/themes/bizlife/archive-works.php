@@ -67,7 +67,13 @@ $works_card_fallback = get_theme_file_uri('assets/img/works/works_01.png');
                 <li class="works-card__tag"># <?php echo esc_html($works_category_label); ?></li>
               </ul>
               <h3 class="works-card__title"><?php the_title(); ?></h3>
-              <p class="works-card__company">株式会社BizLife</p>
+              <?php
+              $company_name = function_exists('get_field') ? get_field('company_name') : '';
+              if (!$company_name) {
+                $company_name = '株式会社サンプル';
+              }
+              ?>
+              <p class="works-card__company"><?php echo esc_html($company_name); ?></p>
             </div>
           </a>
         </article>
