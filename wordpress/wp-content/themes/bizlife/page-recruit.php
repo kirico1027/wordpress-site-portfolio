@@ -1,0 +1,643 @@
+<?php
+/**
+ * Page template: Recruit (slug: recruit).
+ *
+ * Phase 2: static HTML markup. ACF/CPT integration later.
+ *
+ * @package BizLife
+ */
+
+get_header();
+?>
+<main class="recruit-page">
+  <?php
+  get_template_part(
+    'template-parts/page-hero',
+    null,
+    array(
+      'heroModifier'  => 'page-hero--light',
+      'heroHeadingId' => 'recruit-hero-heading',
+      'heroTitleEn'   => 'Recruit',
+      'heroTitleJa'   => '採用情報',
+      'heroImgSrc'    => '',
+    )
+  );
+  ?>
+
+<section class="recruit-intro" aria-labelledby="recruit-intro-heading">
+        <div class="container recruit-intro__inner">
+          <div class="recruit-intro__head">
+            <h2 id="recruit-intro-heading" class="recruit-intro__title">
+              新しいアイデアと挑戦を求める<br />仲間を募集しています。
+            </h2>
+            <div class="recruit-intro__body">
+              <p class="recruit-intro__text">BizLifeでは、常に新しい挑戦を受け入れ、成長を目指す仲間を求めています。</p>
+              <p class="recruit-intro__text">あなたのアイデアや才能を活かし、一緒に企業の未来を築きませんか？</p>
+              <p class="recruit-intro__text">フレキシブルな働き方や充実した福利厚生、そしてチームワークを大切に</p>
+              <p class="recruit-intro__text">する環境で、あなたのキャリアを育てます。</p>
+              <p class="recruit-intro__text">挑戦を楽しみながら、成長を実感できる環境で活躍しませんか？</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="recruit-intro__gallery" aria-label="オフィスの様子">
+          <div class="recruit-intro__gallery-slider" tabindex="0">
+            <ul class="recruit-intro__gallery-list">
+              <li class="recruit-intro__gallery-item">
+                <figure class="recruit-intro__gallery-figure">
+                  <img src="<?php echo esc_url(get_theme_file_uri('assets/img/about/gallery_01.png')); ?>" alt="" width="738" height="443" loading="lazy" />
+                </figure>
+              </li>
+              <li class="recruit-intro__gallery-item">
+                <figure class="recruit-intro__gallery-figure">
+                  <img src="<?php echo esc_url(get_theme_file_uri('assets/img/about/gallery_02.png')); ?>" alt="" width="738" height="443" loading="lazy" />
+                </figure>
+              </li>
+              <li class="recruit-intro__gallery-item">
+                <figure class="recruit-intro__gallery-figure">
+                  <img src="<?php echo esc_url(get_theme_file_uri('assets/img/about/gallery_03.png')); ?>" alt="" width="738" height="443" loading="lazy" />
+                </figure>
+              </li>
+              <li class="recruit-intro__gallery-item">
+                <figure class="recruit-intro__gallery-figure">
+                  <img src="<?php echo esc_url(get_theme_file_uri('assets/img/about/gallery_04.png')); ?>" alt="" width="738" height="443" loading="lazy" />
+                </figure>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section class="recruit-culture" aria-labelledby="recruit-culture-heading">
+        <div class="container recruit-culture__inner">
+          <div class="section-heading js-section-heading-reveal">
+            <p class="section-heading__en">
+              <span class="section-heading__dot" aria-hidden="true"></span>
+              <span class="section-heading__en-text">Culture</span>
+            </p>
+            <h2 id="recruit-culture-heading" class="section-heading__title">企業文化</h2>
+          </div>
+          <ul class="recruit-culture__list">
+            <li class="recruit-culture__item">
+              <article class="culture-card">
+                <div class="culture-card__head js-scroll-reveal">
+                  <div class="culture-card__num-wrap">
+                    <p class="culture-card__num" aria-hidden="true">01</p>
+                  </div>
+                  <h3 class="culture-card__title">自分をもっと大切に</h3>
+                </div>
+                <p class="culture-card__text js-scroll-reveal">BizLifeは従業員の幸福と健康を最優先に考えています。従業員が心身ともに健康で充実した生活を送ることができるよう、柔軟な勤務制度や健康管理支援を提供し、働きやすい環境を整えています。</p>
+              </article>
+            </li>
+            <li class="recruit-culture__item">
+              <article class="culture-card">
+                <div class="culture-card__head js-scroll-reveal">
+                  <div class="culture-card__num-wrap">
+                    <p class="culture-card__num" aria-hidden="true">02</p>
+                  </div>
+                  <h3 class="culture-card__title">挑戦至上主義</h3>
+                </div>
+                <p class="culture-card__text js-scroll-reveal">常に新しいアイデアやアプローチを模索し、イノベーションを推進しています。社員は積極的な発想や挑戦を奨励され、失敗を恐れずに新しいことに取り組むことができます。まずはやってみる。</p>
+              </article>
+            </li>
+            <li class="recruit-culture__item">
+              <article class="culture-card">
+                <div class="culture-card__head js-scroll-reveal">
+                  <div class="culture-card__num-wrap">
+                    <p class="culture-card__num" aria-hidden="true">03</p>
+                  </div>
+                  <h3 class="culture-card__title">常にアップデート</h3>
+                </div>
+                <p class="culture-card__text js-scroll-reveal">BizLifeでは、協力と共創を大切にしています。社員同士や顧客との協力関係を築き共に成長することを目指しています。自身だけの価値観に捉われず、他者の視点を取り入れることでアップデートしていきます。</p>
+              </article>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="recruit-welfare" aria-labelledby="recruit-welfare-heading">
+        <div class="container recruit-welfare__inner">
+          <div class="section-heading js-section-heading-reveal">
+            <p class="section-heading__en">
+              <span class="section-heading__dot" aria-hidden="true"></span>
+              <span class="section-heading__en-text">Welfare</span>
+            </p>
+            <h2 id="recruit-welfare-heading" class="section-heading__title">福利厚生</h2>
+          </div>
+          <ul class="recruit-welfare__list">
+            <li class="recruit-welfare__item">
+              <article class="welfare-card">
+                <div class="welfare-card__lead js-scroll-reveal">
+                  <div class="welfare-card__head">
+                    <p class="welfare-card__label">Flex time-remot work</p>
+                    <h3 class="welfare-card__title">フルフレックス＆RW</h3>
+                  </div>
+                  <span class="material-icons welfare-card__icon" aria-hidden="true">access_time</span>
+                </div>
+                <p class="welfare-card__text js-scroll-reveal">フルフレックス制度によって、早朝勤務や11時出勤などここに合わせた働き方が可能です。</p>
+              </article>
+            </li>
+            <li class="recruit-welfare__item">
+              <article class="welfare-card">
+                <div class="welfare-card__lead js-scroll-reveal">
+                  <div class="welfare-card__head">
+                    <p class="welfare-card__label">Activity aid</p>
+                    <h3 class="welfare-card__title">アクティビティ補助</h3>
+                  </div>
+                  <span class="material-icons welfare-card__icon" aria-hidden="true">directions_walk</span>
+                </div>
+                <p class="welfare-card__text js-scroll-reveal">社員の意欲的な活動を支援します。書籍購入やセミナー参加など補助項目は設けていません。</p>
+              </article>
+            </li>
+            <li class="recruit-welfare__item">
+              <article class="welfare-card">
+                <div class="welfare-card__lead js-scroll-reveal">
+                  <div class="welfare-card__head">
+                    <p class="welfare-card__label">Pet office</p>
+                    <h3 class="welfare-card__title">ペットオフィス</h3>
+                  </div>
+                  <span class="material-icons welfare-card__icon" aria-hidden="true">pets</span>
+                </div>
+                <p class="welfare-card__text js-scroll-reveal">ペットを連れてくることができる環境。ストレスを軽減し、リラックスした雰囲気を醸成します。</p>
+              </article>
+            </li>
+            <li class="recruit-welfare__item">
+              <article class="welfare-card">
+                <div class="welfare-card__lead js-scroll-reveal">
+                  <div class="welfare-card__head">
+                    <p class="welfare-card__label">Inner wellness day</p>
+                    <h3 class="welfare-card__title">インナーウェルネスデー</h3>
+                  </div>
+                  <span class="material-icons welfare-card__icon" aria-hidden="true">spa</span>
+                </div>
+                <p class="welfare-card__text js-scroll-reveal">社員が自由にデジタルデトックスを目的とした勤務日を定められます。クリエイティブな1日に。</p>
+              </article>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="recruit-member" aria-labelledby="recruit-member-heading">
+        <div class="container recruit-member__inner">
+          <div class="section-heading js-section-heading-reveal">
+            <p class="section-heading__en">
+              <span class="section-heading__dot" aria-hidden="true"></span>
+              <span class="section-heading__en-text">Member</span>
+            </p>
+            <h2 id="recruit-member-heading" class="section-heading__title">メンバー紹介</h2>
+          </div>
+          <ul class="recruit-member__list">
+            <li class="recruit-member__item">
+              <article class="member-card">
+                <figure class="member-card__figure js-scroll-reveal">
+                  <img src="<?php echo esc_url(get_theme_file_uri('assets/img/recruit/member_male.png')); ?>" alt="" width="200" height="200" loading="lazy" />
+                </figure>
+                <div class="member-card__body js-scroll-reveal">
+                  <p class="member-card__role">代表取締役社長</p>
+                  <p class="member-card__name">一ノ瀬一茶</p>
+                </div>
+              </article>
+            </li>
+            <li class="recruit-member__item">
+              <article class="member-card">
+                <figure class="member-card__figure js-scroll-reveal">
+                  <img src="<?php echo esc_url(get_theme_file_uri('assets/img/recruit/member_male.png')); ?>" alt="" width="200" height="200" loading="lazy" />
+                </figure>
+                <div class="member-card__body js-scroll-reveal">
+                  <p class="member-card__role">代表取締役副社長</p>
+                  <p class="member-card__name">鈴木藍</p>
+                </div>
+              </article>
+            </li>
+            <li class="recruit-member__item">
+              <article class="member-card">
+                <figure class="member-card__figure js-scroll-reveal">
+                  <img src="<?php echo esc_url(get_theme_file_uri('assets/img/recruit/member_female.png')); ?>" alt="" width="200" height="200" loading="lazy" />
+                </figure>
+                <div class="member-card__body js-scroll-reveal">
+                  <p class="member-card__role">取締役専務執行役員</p>
+                  <p class="member-card__name">佐々木賢咲</p>
+                </div>
+              </article>
+            </li>
+            <li class="recruit-member__item">
+              <article class="member-card">
+                <figure class="member-card__figure js-scroll-reveal">
+                  <img src="<?php echo esc_url(get_theme_file_uri('assets/img/recruit/member_male.png')); ?>" alt="" width="200" height="200" loading="lazy" />
+                </figure>
+                <div class="member-card__body js-scroll-reveal">
+                  <p class="member-card__role">開発統括責任者</p>
+                  <p class="member-card__name">成田條</p>
+                </div>
+              </article>
+            </li>
+            <li class="recruit-member__item">
+              <article class="member-card">
+                <figure class="member-card__figure js-scroll-reveal">
+                  <img src="<?php echo esc_url(get_theme_file_uri('assets/img/recruit/member_female.png')); ?>" alt="" width="200" height="200" loading="lazy" />
+                </figure>
+                <div class="member-card__body js-scroll-reveal">
+                  <p class="member-card__role">マーケティング統括責任者</p>
+                  <p class="member-card__name">森田綾香</p>
+                </div>
+              </article>
+            </li>
+            <li class="recruit-member__item">
+              <article class="member-card">
+                <figure class="member-card__figure js-scroll-reveal">
+                  <img src="<?php echo esc_url(get_theme_file_uri('assets/img/recruit/member_male.png')); ?>" alt="" width="200" height="200" loading="lazy" />
+                </figure>
+                <div class="member-card__body js-scroll-reveal">
+                  <p class="member-card__role">営業部統括長</p>
+                  <p class="member-card__name">近藤武道</p>
+                </div>
+              </article>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="recruit-jobs" aria-labelledby="recruit-jobs-heading">
+        <div class="container recruit-jobs__inner">
+          <div class="section-heading js-section-heading-reveal">
+            <p class="section-heading__en">
+              <span class="section-heading__dot" aria-hidden="true"></span>
+              <span class="section-heading__en-text">Jobtype</span>
+            </p>
+            <h2 id="recruit-jobs-heading" class="section-heading__title">募集職種</h2>
+          </div>
+          <div class="recruit-jobs__grid">
+            <details class="job-card js-scroll-reveal">
+              <summary class="job-card__summary">
+                <div class="job-card__head">
+                  <p class="job-card__category">PRODUCT MANAGER</p>
+                  <h3 class="job-card__title">プロダクトマネージャー（正社員）</h3>
+                </div>
+                <p class="job-card__type">中途採用</p>
+                <p class="job-card__excerpt">健康と幸福を最優先に考えるプロダクトマネージャーを募集しています。製品戦略の策定から実行、ユーザーフィードバックの収集、競合製品の分析まで、製品開発の各段階でリーダーシップを発揮し、顧客満足度を向上させる役割を担っていただきます。</p>
+                <span class="material-icons job-card__icon" aria-hidden="true">keyboard_arrow_down</span>
+              </summary>
+              <div class="job-card__collapse">
+                <div class="job-card__panel">
+                <section class="job-card__block">
+                  <h4 class="job-card__block-title">応募条件</h4>
+                  <ul class="job-card__list">
+                    <li>プロジェクトマネジメントの経験3年以上</li>
+                    <li>チームマネジメントの経験</li>
+                    <li>プロダクト開発に関する深い知識と理解</li>
+                  </ul>
+                  <ul class="job-card__tags">
+                    <li><span class="job-card__tag">時短勤務OK</span></li>
+                    <li><span class="job-card__tag">第二新卒歓迎</span></li>
+                  </ul>
+                </section>
+                <section class="job-card__block">
+                  <h4 class="job-card__block-title">職種内容</h4>
+                  <p class="job-card__text">製品戦略の策定から実行、ユーザーフィードバックの収集、競合製品の分析まで、製品開発の各段階でリーダーシップを発揮し、顧客満足度を向上させる役割を担っていただきます。BizLifeの健康と幸福を最優先に考えるプロダクトマネージャーとして、チームと共にプロダクトを成長させていきます。</p>
+                </section>
+                <section class="job-card__block">
+                  <h4 class="job-card__block-title">求める人物像</h4>
+                  <p class="job-card__hashtags">#責任感　#柔軟性　#リーダーシップ</p>
+                </section>
+                <section class="job-card__block">
+                  <h4 class="job-card__block-title">勤務地/勤務時間</h4>
+                  <div class="job-card__meta">
+                    <p class="job-card__meta-label">&lt; 勤務地 &gt;</p>
+                    <p class="job-card__meta-text">本社もしくは自宅（リモートの場合）</p>
+                  </div>
+                  <div class="job-card__meta">
+                    <p class="job-card__meta-label">&lt; 勤務時間 &gt;</p>
+                    <ul class="job-card__list job-card__list--plain">
+                      <li>フレックスタイム制（7:00-23:00）</li>
+                      <li>休憩時間：60分</li>
+                      <li>時間外労働有無：有（月10時間程度）</li>
+                      <li>※個々人に合わせ柔軟に働けます</li>
+                    </ul>
+                  </div>
+                </section>
+                <section class="job-card__block">
+                  <h4 class="job-card__block-title">給与/賞与</h4>
+                  <div class="job-card__meta">
+                    <p class="job-card__meta-label">&lt; 想定年収 &gt;</p>
+                    <p class="job-card__meta-text">500万円〜700万円</p>
+                  </div>
+                  <div class="job-card__meta">
+                    <p class="job-card__meta-label">&lt; 賞与 &gt;</p>
+                    <p class="job-card__meta-text">年2回（7月/12月）</p>
+                  </div>
+                  <div class="job-card__meta">
+                    <p class="job-card__meta-label">&lt; 昇給 &gt;</p>
+                    <p class="job-card__meta-text">年1回（4月）</p>
+                  </div>
+                </section>
+                <div class="job-card__actions">
+                  <a class="job-card__cta" href="<?php echo esc_url(home_url('/recruit/entry/')); ?>">まずは話を聞いてみる</a>
+                </div>
+                </div>
+              </div>
+            </details>
+            <details class="job-card js-scroll-reveal">
+              <summary class="job-card__summary">
+                <div class="job-card__head">
+                  <p class="job-card__category">WEB MARKTER</p>
+                  <h3 class="job-card__title">WEBマーケター（正社員）</h3>
+                </div>
+                <p class="job-card__type">中途採用</p>
+                <p class="job-card__excerpt">健康と幸福を最優先に考えるプロダクトマネージャーを募集しています。製品戦略の策定から実行、ユーザーフィードバックの収集、競合製品の分析まで、製品開発の各段階でリーダーシップを発揮し、顧客満足度を向上させる役割を担っていただきます。</p>
+                <span class="material-icons job-card__icon" aria-hidden="true">keyboard_arrow_down</span>
+              </summary>
+              <div class="job-card__collapse">
+                <div class="job-card__panel">
+                <section class="job-card__block">
+                  <h4 class="job-card__block-title">応募条件</h4>
+                  <ul class="job-card__list">
+                    <li>Webマーケティングの実務経験3年以上</li>
+                    <li>SEO / SEM / SNS運用のいずれかの実務経験</li>
+                    <li>データ分析に基づく施策立案の経験</li>
+                  </ul>
+                  <ul class="job-card__tags">
+                    <li><span class="job-card__tag">時短勤務OK</span></li>
+                    <li><span class="job-card__tag">第二新卒歓迎</span></li>
+                  </ul>
+                </section>
+                <section class="job-card__block">
+                  <h4 class="job-card__block-title">職種内容</h4>
+                  <p class="job-card__text">デジタル施策の企画・実行から効果測定までを一貫して担当し、BizLifeのサービス認知とリード獲得を推進します。ユーザーの健康と幸福につながるメッセージ設計を大切にしながら、チームと連携してマーケティング施策を成長させていきます。</p>
+                </section>
+                <section class="job-card__block">
+                  <h4 class="job-card__block-title">求める人物像</h4>
+                  <p class="job-card__hashtags">#責任感　#柔軟性　#リーダーシップ</p>
+                </section>
+                <section class="job-card__block">
+                  <h4 class="job-card__block-title">勤務地/勤務時間</h4>
+                  <div class="job-card__meta">
+                    <p class="job-card__meta-label">&lt; 勤務地 &gt;</p>
+                    <p class="job-card__meta-text">本社もしくは自宅（リモートの場合）</p>
+                  </div>
+                  <div class="job-card__meta">
+                    <p class="job-card__meta-label">&lt; 勤務時間 &gt;</p>
+                    <ul class="job-card__list job-card__list--plain">
+                      <li>フレックスタイム制（7:00-23:00）</li>
+                      <li>休憩時間：60分</li>
+                      <li>時間外労働有無：有（月10時間程度）</li>
+                      <li>※個々人に合わせ柔軟に働けます</li>
+                    </ul>
+                  </div>
+                </section>
+                <section class="job-card__block">
+                  <h4 class="job-card__block-title">給与/賞与</h4>
+                  <div class="job-card__meta">
+                    <p class="job-card__meta-label">&lt; 想定年収 &gt;</p>
+                    <p class="job-card__meta-text">500万円〜700万円</p>
+                  </div>
+                  <div class="job-card__meta">
+                    <p class="job-card__meta-label">&lt; 賞与 &gt;</p>
+                    <p class="job-card__meta-text">年2回（7月/12月）</p>
+                  </div>
+                  <div class="job-card__meta">
+                    <p class="job-card__meta-label">&lt; 昇給 &gt;</p>
+                    <p class="job-card__meta-text">年1回（4月）</p>
+                  </div>
+                </section>
+                <div class="job-card__actions">
+                  <a class="job-card__cta" href="<?php echo esc_url(home_url('/recruit/entry/')); ?>">まずは話を聞いてみる</a>
+                </div>
+                </div>
+              </div>
+            </details>
+            <details class="job-card js-scroll-reveal">
+              <summary class="job-card__summary">
+                <div class="job-card__head">
+                  <p class="job-card__category">INSIDE SELES</p>
+                  <h3 class="job-card__title">インサイドセールス（正社員）</h3>
+                </div>
+                <p class="job-card__type">中途採用</p>
+                <p class="job-card__excerpt">健康と幸福を最優先に考えるセールスを募集しています。製品戦略の策定から実行、ユーザーフィードバックの収集、競合製品の分析まで、製品開発の各段階でリーダーシップを発揮し、顧客満足度を向上させる役割を担っていただきます。</p>
+                <span class="material-icons job-card__icon" aria-hidden="true">keyboard_arrow_down</span>
+              </summary>
+              <div class="job-card__collapse">
+                <div class="job-card__panel">
+                <section class="job-card__block">
+                  <h4 class="job-card__block-title">応募条件</h4>
+                  <ul class="job-card__list">
+                    <li>インサイドセールスまたは営業の実務経験</li>
+                    <li>顧客ヒアリングと課題整理の経験</li>
+                    <li>CRM / SFA ツールの利用経験</li>
+                  </ul>
+                  <ul class="job-card__tags">
+                    <li><span class="job-card__tag">時短勤務OK</span></li>
+                    <li><span class="job-card__tag">第二新卒歓迎</span></li>
+                  </ul>
+                </section>
+                <section class="job-card__block">
+                  <h4 class="job-card__block-title">職種内容</h4>
+                  <p class="job-card__text">見込み顧客へのアプローチから商談設定、フィールドセールスへの引き継ぎまでを担当します。BizLifeの福利厚生サービスが企業の健康経営につながるよう、丁寧なコミュニケーションで信頼関係を築いていきます。</p>
+                </section>
+                <section class="job-card__block">
+                  <h4 class="job-card__block-title">求める人物像</h4>
+                  <p class="job-card__hashtags">#責任感　#柔軟性　#リーダーシップ</p>
+                </section>
+                <section class="job-card__block">
+                  <h4 class="job-card__block-title">勤務地/勤務時間</h4>
+                  <div class="job-card__meta">
+                    <p class="job-card__meta-label">&lt; 勤務地 &gt;</p>
+                    <p class="job-card__meta-text">本社もしくは自宅（リモートの場合）</p>
+                  </div>
+                  <div class="job-card__meta">
+                    <p class="job-card__meta-label">&lt; 勤務時間 &gt;</p>
+                    <ul class="job-card__list job-card__list--plain">
+                      <li>フレックスタイム制（7:00-23:00）</li>
+                      <li>休憩時間：60分</li>
+                      <li>時間外労働有無：有（月10時間程度）</li>
+                      <li>※個々人に合わせ柔軟に働けます</li>
+                    </ul>
+                  </div>
+                </section>
+                <section class="job-card__block">
+                  <h4 class="job-card__block-title">給与/賞与</h4>
+                  <div class="job-card__meta">
+                    <p class="job-card__meta-label">&lt; 想定年収 &gt;</p>
+                    <p class="job-card__meta-text">500万円〜700万円</p>
+                  </div>
+                  <div class="job-card__meta">
+                    <p class="job-card__meta-label">&lt; 賞与 &gt;</p>
+                    <p class="job-card__meta-text">年2回（7月/12月）</p>
+                  </div>
+                  <div class="job-card__meta">
+                    <p class="job-card__meta-label">&lt; 昇給 &gt;</p>
+                    <p class="job-card__meta-text">年1回（4月）</p>
+                  </div>
+                </section>
+                <div class="job-card__actions">
+                  <a class="job-card__cta" href="<?php echo esc_url(home_url('/recruit/entry/')); ?>">まずは話を聞いてみる</a>
+                </div>
+                </div>
+              </div>
+            </details>
+            <details class="job-card js-scroll-reveal">
+              <summary class="job-card__summary">
+                <div class="job-card__head">
+                  <p class="job-card__category">BACK OFFICE</p>
+                  <h3 class="job-card__title">バックオフィス（正社員）</h3>
+                </div>
+                <p class="job-card__type">中途採用</p>
+                <p class="job-card__excerpt">健康と幸福を最優先に考えるバックオフィスメンバーを募集しています。製品戦略の策定から実行、ユーザーフィードバックの収集、競合製品の分析まで、製品開発の各段階でリーダーシップを発揮し、顧客満足度を向上させる役割を担っていただきます。</p>
+                <span class="material-icons job-card__icon" aria-hidden="true">keyboard_arrow_down</span>
+              </summary>
+              <div class="job-card__collapse">
+                <div class="job-card__panel">
+                <section class="job-card__block">
+                  <h4 class="job-card__block-title">応募条件</h4>
+                  <ul class="job-card__list">
+                    <li>総務・人事・経理いずれかの実務経験</li>
+                    <li>社内外調整やドキュメント整備の経験</li>
+                    <li>Excel / Google Workspace の実務スキル</li>
+                  </ul>
+                  <ul class="job-card__tags">
+                    <li><span class="job-card__tag">時短勤務OK</span></li>
+                    <li><span class="job-card__tag">第二新卒歓迎</span></li>
+                  </ul>
+                </section>
+                <section class="job-card__block">
+                  <h4 class="job-card__block-title">職種内容</h4>
+                  <p class="job-card__text">採用・労務・総務・経理まわりの業務を通じて、社員が安心して働ける環境づくりを支えます。BizLifeのカルチャーを体現するバックオフィスとして、現場と連携しながら仕組みの改善と運用を担っていただきます。</p>
+                </section>
+                <section class="job-card__block">
+                  <h4 class="job-card__block-title">求める人物像</h4>
+                  <p class="job-card__hashtags">#責任感　#柔軟性　#リーダーシップ</p>
+                </section>
+                <section class="job-card__block">
+                  <h4 class="job-card__block-title">勤務地/勤務時間</h4>
+                  <div class="job-card__meta">
+                    <p class="job-card__meta-label">&lt; 勤務地 &gt;</p>
+                    <p class="job-card__meta-text">本社もしくは自宅（リモートの場合）</p>
+                  </div>
+                  <div class="job-card__meta">
+                    <p class="job-card__meta-label">&lt; 勤務時間 &gt;</p>
+                    <ul class="job-card__list job-card__list--plain">
+                      <li>フレックスタイム制（7:00-23:00）</li>
+                      <li>休憩時間：60分</li>
+                      <li>時間外労働有無：有（月10時間程度）</li>
+                      <li>※個々人に合わせ柔軟に働けます</li>
+                    </ul>
+                  </div>
+                </section>
+                <section class="job-card__block">
+                  <h4 class="job-card__block-title">給与/賞与</h4>
+                  <div class="job-card__meta">
+                    <p class="job-card__meta-label">&lt; 想定年収 &gt;</p>
+                    <p class="job-card__meta-text">500万円〜700万円</p>
+                  </div>
+                  <div class="job-card__meta">
+                    <p class="job-card__meta-label">&lt; 賞与 &gt;</p>
+                    <p class="job-card__meta-text">年2回（7月/12月）</p>
+                  </div>
+                  <div class="job-card__meta">
+                    <p class="job-card__meta-label">&lt; 昇給 &gt;</p>
+                    <p class="job-card__meta-text">年1回（4月）</p>
+                  </div>
+                </section>
+                <div class="job-card__actions">
+                  <a class="job-card__cta" href="<?php echo esc_url(home_url('/recruit/entry/')); ?>">まずは話を聞いてみる</a>
+                </div>
+                </div>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="recruit-flow" aria-labelledby="recruit-flow-heading">
+        <div class="container recruit-flow__inner">
+          <div class="section-heading js-section-heading-reveal">
+            <p class="section-heading__en">
+              <span class="section-heading__dot" aria-hidden="true"></span>
+              <span class="section-heading__en-text">Flow</span>
+            </p>
+            <h2 id="recruit-flow-heading" class="section-heading__title">選考フロー</h2>
+          </div>
+          <div class="recruit-flow__box">
+            <ol class="recruit-flow__steps">
+              <li class="recruit-flow__step js-scroll-reveal">
+                <div class="recruit-flow__step-head">
+                  <p class="recruit-flow__step-label">STEP 1</p>
+                  <span class="recruit-flow__step-divider" aria-hidden="true"></span>
+                  <p class="recruit-flow__step-title">カジュアル面談</p>
+                </div>
+                <p class="recruit-flow__step-text">候補者とのカジュアルな対話を通じて、お互いの価値観や志向を共有し、楽しく会話を重ねます。<br />BizLifeは、個々の人物像やユニークな才能を重視し、候補者とのコミュニケーションを大切にします。</p>
+              </li>
+              <li class="recruit-flow__bundle js-scroll-reveal">
+                <div class="recruit-flow__arrow" aria-hidden="true">
+                  <span class="material-icons">arrow_drop_down</span>
+                </div>
+                <div class="recruit-flow__step">
+                  <div class="recruit-flow__step-head">
+                    <p class="recruit-flow__step-label">STEP 2</p>
+                    <span class="recruit-flow__step-divider" aria-hidden="true"></span>
+                    <p class="recruit-flow__step-title">書類選考</p>
+                  </div>
+                  <p class="recruit-flow__step-text">応募書類や履歴書を通じて、候補者の経歴や過去の業績を慎重に確認します。<br />BizLifeでは、候補者の多様性と個性を尊重し、適切なポジションへのマッチングを重視します。</p>
+                </div>
+              </li>
+              <li class="recruit-flow__bundle js-scroll-reveal">
+                <div class="recruit-flow__arrow" aria-hidden="true">
+                  <span class="material-icons">arrow_drop_down</span>
+                </div>
+                <div class="recruit-flow__step">
+                  <div class="recruit-flow__step-head">
+                    <p class="recruit-flow__step-label">STEP 3</p>
+                    <span class="recruit-flow__step-divider" aria-hidden="true"></span>
+                    <p class="recruit-flow__step-title">一次面接</p>
+                  </div>
+                  <p class="recruit-flow__step-text">オンライン上での面接を通じて、候補者の熱意やポテンシャルを探求します。<br />BizLifeは、新しい視点やアイデアを大切にし、創造性と柔軟性を持つ候補者を歓迎します。</p>
+                </div>
+              </li>
+              <li class="recruit-flow__bundle js-scroll-reveal">
+                <div class="recruit-flow__arrow" aria-hidden="true">
+                  <span class="material-icons">arrow_drop_down</span>
+                </div>
+                <div class="recruit-flow__step">
+                  <div class="recruit-flow__step-head">
+                    <p class="recruit-flow__step-label">STEP 4</p>
+                    <span class="recruit-flow__step-divider" aria-hidden="true"></span>
+                    <p class="recruit-flow__step-title">最終面接</p>
+                  </div>
+                  <p class="recruit-flow__step-text">最終面接では、候補者と経営陣との意義深い対話を重視します。<br />BizLifeは、チームワークと共感性を重視し候補者が企業文化とミッションに共感し、フィットすることを確認します。</p>
+                </div>
+              </li>
+              <li class="recruit-flow__bundle js-scroll-reveal">
+                <div class="recruit-flow__arrow" aria-hidden="true">
+                  <span class="material-icons">arrow_drop_down</span>
+                </div>
+                <div class="recruit-flow__step">
+                  <div class="recruit-flow__step-head">
+                    <p class="recruit-flow__step-label">STEP 5</p>
+                    <span class="recruit-flow__step-divider" aria-hidden="true"></span>
+                    <p class="recruit-flow__step-title">オファー面談</p>
+                  </div>
+                  <p class="recruit-flow__step-text">最終選考を通過した候補者とのオファー面談では、BizLifeのビジョンとミッションに基づいた働きやすい環境や成長の機会について話し合います。候補者との協力関係を築きながら、共に成長していくことを期待します。</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+<section class="recruit-entry" aria-labelledby="recruit-entry-heading">
+  <div class="recruit-entry__wrap">
+    <div class="container recruit-entry__inner">
+      <h2 id="recruit-entry-heading" class="recruit-entry__title js-scroll-reveal">ENTRY</h2>
+      <p class="recruit-entry__lead js-scroll-reveal">
+        数ある会社から弊社求人にご興味·関心をいただきありがとうございます。<br />
+        成長できるような環境を精一杯ご用意いたします。<br />
+        まずはお気軽にエントリーボタンから、話を聞きに来てください。
+      </p>
+      <a class="btn-more btn-more--entry js-scroll-reveal" href="<?php echo esc_url(home_url('/recruit/entry/')); ?>">
+        <span class="btn-more__label">ENTRY</span>
+        <span class="btn-more__icon" aria-hidden="true"><span class="material-icons">keyboard_arrow_right</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+    </main>
+<?php
+get_footer();
