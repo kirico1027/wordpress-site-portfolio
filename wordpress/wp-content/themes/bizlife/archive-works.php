@@ -2,20 +2,15 @@
 /**
  * Works archive template (CPT: works).
  *
- * Main query renders works cards; filters, more button, and CTA remain static.
+ * Main query renders works cards with featured images.
+ * Filters, more button, and CTA remain static.
  *
  * @package BizLife
  */
 
 get_header();
 
-$works_card_thumbnails = array(
-  get_theme_file_uri('assets/img/works/works_01.png'),
-  get_theme_file_uri('assets/img/works/works_02.png'),
-  get_theme_file_uri('assets/img/works/works_03.png'),
-  get_theme_file_uri('assets/img/works/works_04.png'),
-);
-$works_card_thumbnail_count = count($works_card_thumbnails);
+$works_card_fallback = get_theme_file_uri('assets/img/works/works_01.png');
 ?>
 <main class="works-archive-page">
   <?php
@@ -52,18 +47,25 @@ $works_card_thumbnail_count = count($works_card_thumbnails);
       </div>
 
       <div class="works-archive__grid">
-        <?php
-        $works_card_index = 0;
-
-        if (have_posts()) :
-          while (have_posts()) :
-            the_post();
-            $card_thumbnail = $works_card_thumbnails[$works_card_index % $works_card_thumbnail_count];
-            ?>
+        <?php if (have_posts()) : ?>
+          <?php while (have_posts()) : ?>
+            <?php the_post(); ?>
         <article class="works-card">
           <a class="works-card__link" href="<?php the_permalink(); ?>">
             <figure class="works-card__figure">
-              <img src="<?php echo esc_url($card_thumbnail); ?>" alt="" width="432" height="259" />
+              <?php if (has_post_thumbnail()) : ?>
+                <?php
+                echo get_the_post_thumbnail(
+                  null,
+                  'large',
+                  array(
+                    'alt' => '',
+                  )
+                );
+                ?>
+              <?php else : ?>
+              <img src="<?php echo esc_url($works_card_fallback); ?>" alt="" width="432" height="259" />
+              <?php endif; ?>
               <span class="works-card__dim" aria-hidden="true"></span>
               <span class="works-card__more" aria-hidden="true">Read more</span>
             </figure>
@@ -76,11 +78,8 @@ $works_card_thumbnail_count = count($works_card_thumbnails);
             </div>
           </a>
         </article>
-            <?php
-            ++$works_card_index;
-          endwhile;
-        endif;
-        ?>
+          <?php endwhile; ?>
+        <?php endif; ?>
       </div>
 
       <div class="works-archive__more-wrap">

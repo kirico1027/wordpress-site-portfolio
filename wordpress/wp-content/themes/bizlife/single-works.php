@@ -11,7 +11,7 @@ get_header();
 
 $works_archive_href = home_url('/works/');
 $works_card_href = '#';
-$img_works_single_01 = get_theme_file_uri('assets/img/works-single/works-single_01.png');
+$img_works_single_hero_fallback = get_theme_file_uri('assets/img/works-single/works-single_01.png');
 $img_works_single_02 = get_theme_file_uri('assets/img/works-single/works-single_02.png');
 $img_works_single_05 = get_theme_file_uri('assets/img/works-single/works-single_05.png');
 $img_works_single_06 = get_theme_file_uri('assets/img/works-single/works-single_06.png');
@@ -45,12 +45,24 @@ $img_works_single_07 = get_theme_file_uri('assets/img/works-single/works-single_
             </h1>
 
             <figure class="works-single__hero">
+              <?php if (has_post_thumbnail()) : ?>
+                <?php
+                echo get_the_post_thumbnail(
+                  null,
+                  'large',
+                  array(
+                    'alt' => '',
+                  )
+                );
+                ?>
+              <?php else : ?>
               <img
-                src="<?php echo esc_url($img_works_single_01); ?>"
+                src="<?php echo esc_url($img_works_single_hero_fallback); ?>"
                 alt=""
                 width="720"
                 height="432"
               />
+              <?php endif; ?>
             </figure>
 
             <div class="works-single__client">
