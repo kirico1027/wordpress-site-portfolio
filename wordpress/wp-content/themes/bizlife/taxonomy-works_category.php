@@ -1,0 +1,108 @@
+<?php
+/**
+ * Works category taxonomy archive (taxonomy: works_category).
+ *
+ * Main query renders matching works cards. Filters and CTA remain static.
+ *
+ * @package BizLife
+ */
+
+get_header();
+
+$works_card_fallback = get_theme_file_uri('assets/img/works/works_01.png');
+$queried_term = get_queried_object();
+$term_title = ($queried_term && !is_wp_error($queried_term) && !empty($queried_term->name))
+  ? $queried_term->name
+  : single_term_title('', false);
+?>
+<main class="works-archive-page">
+  <?php
+  get_template_part(
+    'template-parts/page-hero',
+    null,
+    array(
+      'heroModifier'  => 'page-hero--light',
+      'heroHeadingId' => 'works-hero-heading',
+      'heroTitleEn'   => $term_title,
+      'heroTitleJa'   => '実績紹介',
+      'heroImgSrc'    => '',
+    )
+  );
+  ?>
+
+  <section class="works-archive" aria-label="実績一覧">
+    <div class="container works-archive__inner">
+      <div class="works-archive__filters-sticky">
+        <nav class="works-archive__filters" aria-label="カテゴリフィルター">
+          <a class="works-archive__filter works-archive__filter--active" href="<?php echo esc_url(home_url('/works/')); ?>" aria-current="page">すべて</a>
+          <ul class="works-archive__filter-list">
+            <li class="works-archive__filter-item">
+              <a class="works-archive__filter" href="#">あなたのメンタルコーチ</a>
+            </li>
+            <li class="works-archive__filter-item">
+              <a class="works-archive__filter" href="#">つながるワークフロー</a>
+            </li>
+            <li class="works-archive__filter-item">
+              <a class="works-archive__filter" href="#">みんなの福利厚生クラウド</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="works-archive__grid">
+        <?php if (have_posts()) : ?>
+          <?php while (have_posts()) : ?>
+            <?php the_post(); ?>
+        <article class="works-card">
+          <a class="works-card__link" href="<?php the_permalink(); ?>">
+            <figure class="works-card__figure">
+              <?php if (has_post_thumbnail()) : ?>
+                <?php
+                echo get_the_post_thumbnail(
+                  null,
+                  'large',
+                  array(
+                    'alt' => '',
+                  )
+                );
+                ?>
+              <?php else : ?>
+              <img src="<?php echo esc_url($works_card_fallback); ?>" alt="" width="432" height="259" />
+              <?php endif; ?>
+              <span class="works-card__dim" aria-hidden="true"></span>
+              <span class="works-card__more" aria-hidden="true">Read more</span>
+            </figure>
+            <div class="works-card__body">
+              <ul class="works-card__tags">
+                <?php
+                $works_category_label = 'つながるワークフロー';
+                $works_categories = get_the_terms(get_the_ID(), 'works_category');
+
+                if ($works_categories && !is_wp_error($works_categories)) {
+                  $works_category_label = $works_categories[0]->name;
+                }
+                ?>
+                <li class="works-card__tag"># <?php echo esc_html($works_category_label); ?></li>
+              </ul>
+              <h3 class="works-card__title"><?php the_title(); ?></h3>
+              <p class="works-card__company">株式会社BizLife</p>
+            </div>
+          </a>
+        </article>
+          <?php endwhile; ?>
+        <?php endif; ?>
+      </div>
+
+      <div class="works-archive__more-wrap">
+        <button class="works-archive__more" type="button">
+          <span class="works-archive__more-label">もっと見る</span>
+          <span class="works-archive__more-icon" aria-hidden="true"><span class="material-icons">keyboard_arrow_down</span></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <?php get_template_part('template-parts/sections/cta-contact'); ?>
+</main>
+<?php
+get_footer();
