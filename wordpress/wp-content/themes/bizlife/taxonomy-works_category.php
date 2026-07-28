@@ -32,22 +32,7 @@ $term_title = ($queried_term && !is_wp_error($queried_term) && !empty($queried_t
 
   <section class="works-archive" aria-label="実績一覧">
     <div class="container works-archive__inner">
-      <div class="works-archive__filters-sticky">
-        <nav class="works-archive__filters" aria-label="カテゴリフィルター">
-          <a class="works-archive__filter works-archive__filter--active" href="<?php echo esc_url(home_url('/works/')); ?>" aria-current="page">すべて</a>
-          <ul class="works-archive__filter-list">
-            <li class="works-archive__filter-item">
-              <a class="works-archive__filter" href="#">あなたのメンタルコーチ</a>
-            </li>
-            <li class="works-archive__filter-item">
-              <a class="works-archive__filter" href="#">つながるワークフロー</a>
-            </li>
-            <li class="works-archive__filter-item">
-              <a class="works-archive__filter" href="#">みんなの福利厚生クラウド</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      <?php get_template_part('template-parts/works-filter'); ?>
 
       <div class="works-archive__grid">
         <?php if (have_posts()) : ?>
