@@ -121,7 +121,7 @@ $related_works_query = null;
         'template-parts/sections/section-heading',
         null,
         array(
-          'en'    => 'RELATED WORKS',
+          'en'    => 'Related works',
           'title' => '関連実績',
         )
       );
