@@ -81,6 +81,11 @@
 // ---------------------------------------------------------------------------
 
 .news-archive__filters {
+  position: sticky;
+  // 固定ヘッダー（padding 16 + inner ~77）直下に余白を残す。Works フィルター sticky と同値。
+  top: rem(120);
+  z-index: 50;
+  align-self: flex-start;
   display: flex;
   flex-direction: column;
   flex: 0 0 rem(240);
@@ -193,6 +198,9 @@
   }
 
   .news-archive__filters {
+    position: static;
+    top: auto;
+    z-index: auto;
     flex: none;
     flex-direction: row;
     flex-wrap: wrap;

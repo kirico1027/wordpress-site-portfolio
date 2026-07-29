@@ -8604,6 +8604,10 @@ body {
 }
 
 .news-archive__filters {
+  position: sticky;
+  top: 7.5rem;
+  z-index: 50;
+  align-self: flex-start;
   display: flex;
   flex-direction: column;
   flex: 0 0 15rem;
@@ -8704,6 +8708,9 @@ body {
     padding-bottom: clamp(2.5rem, 2.5rem + (100vw - 375px) * 20 / 393, 3.75rem);
   }
   .news-archive__filters {
+    position: static;
+    top: auto;
+    z-index: auto;
     flex: none;
     flex-direction: row;
     flex-wrap: wrap;
