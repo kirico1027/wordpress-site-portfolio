@@ -2,14 +2,15 @@
 /**
  * Works category taxonomy archive (taxonomy: works_category).
  *
- * Main query renders matching works cards. Filters and CTA remain static.
+ * Main query shows the first batch for the current term; further posts load via Ajax.
  *
  * @package BizLife
  */
 
 get_header();
 
-$works_card_fallback = get_theme_file_uri('assets/img/works/works_01.png');
+$works_has_more      = bizlife_works_archive_has_more();
+$works_category_slug = bizlife_works_archive_category_slug();
 ?>
 <main class="works-archive-page">
   <?php
@@ -33,64 +34,30 @@ $works_card_fallback = get_theme_file_uri('assets/img/works/works_01.png');
       <div class="works-archive__grid">
         <?php if (have_posts()) : ?>
           <?php while (have_posts()) : ?>
-            <?php the_post(); ?>
-        <article class="works-card">
-          <a class="works-card__link" href="<?php the_permalink(); ?>">
-            <figure class="works-card__figure">
-              <?php if (has_post_thumbnail()) : ?>
-                <?php
-                echo get_the_post_thumbnail(
-                  null,
-                  'large',
-                  array(
-                    'alt' => '',
-                  )
-                );
-                ?>
-              <?php else : ?>
-              <img src="<?php echo esc_url($works_card_fallback); ?>" alt="" width="432" height="259" />
-              <?php endif; ?>
-              <span class="works-card__dim" aria-hidden="true"></span>
-              <span class="works-card__more" aria-hidden="true">Read more</span>
-            </figure>
-            <div class="works-card__body">
-              <ul class="works-card__tags">
-                <?php
-                $works_categories = get_the_terms(get_the_ID(), 'works_category');
-
-                if ($works_categories && !is_wp_error($works_categories)) {
-                  foreach ($works_categories as $works_category) {
-                    ?>
-                <li class="works-card__tag"># <?php echo esc_html($works_category->name); ?></li>
-                    <?php
-                  }
-                } else {
-                  ?>
-                <li class="works-card__tag"># つながるワークフロー</li>
-                  <?php
-                }
-                ?>
-              </ul>
-              <h3 class="works-card__title"><?php the_title(); ?></h3>
-              <?php
-              $company_name = function_exists('get_field') ? get_field('company_name') : '';
-              if (!$company_name) {
-                $company_name = '株式会社サンプル';
-              }
-              ?>
-              <p class="works-card__company"><?php echo esc_html($company_name); ?></p>
-            </div>
-          </a>
-        </article>
+            <?php
+            the_post();
+            get_template_part(
+              'template-parts/cards/works-card',
+              null,
+              bizlife_get_works_card_args(get_post())
+            );
+            ?>
           <?php endwhile; ?>
         <?php endif; ?>
       </div>
 
-      <div class="works-archive__more-wrap">
-        <button class="works-archive__more" type="button">
+      <div
+        class="works-archive__more-wrap<?php echo $works_has_more ? '' : ' is-hidden'; ?>"
+        data-works-load-more
+        data-next-page="2"
+        data-category="<?php echo esc_attr($works_category_slug); ?>"
+        <?php echo $works_has_more ? '' : ' hidden'; ?>
+      >
+        <button class="works-archive__more" type="button" aria-busy="false">
           <span class="works-archive__more-label">もっと見る</span>
           <span class="works-archive__more-icon" aria-hidden="true"><span class="material-icons">keyboard_arrow_down</span></span>
         </button>
+        <p class="works-archive__more-error" hidden role="alert"></p>
       </div>
     </div>
   </section>

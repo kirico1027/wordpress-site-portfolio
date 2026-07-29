@@ -41,9 +41,13 @@ if (!is_array($args['tags'])) {
     </figure>
     <div class="works-card__body">
       <ul class="works-card__tags">
-        <?php foreach ($args['tags'] as $tag) : ?>
+        <?php if (!empty($args['tags'])) : ?>
+          <?php foreach ($args['tags'] as $tag) : ?>
         <li class="works-card__tag"># <?php echo esc_html($tag); ?></li>
-        <?php endforeach; ?>
+          <?php endforeach; ?>
+        <?php else : ?>
+        <li class="works-card__tag"># つながるワークフロー</li>
+        <?php endif; ?>
       </ul>
       <h3 class="works-card__title"><?php echo esc_html($args['title']); ?></h3>
       <p class="works-card__company"><?php echo esc_html($args['company']); ?></p>

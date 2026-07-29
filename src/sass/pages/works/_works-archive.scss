@@ -199,6 +199,12 @@
   width: 100%;
   max-width: rem(1040);
   margin-inline: auto;
+
+  // display:flex が [hidden] を上書きしないよう明示
+  &[hidden],
+  &.is-hidden {
+    display: none !important;
+  }
 }
 
 .works-archive__more {
@@ -215,11 +221,29 @@
   letter-spacing: rem(1.6);
   color: var(--color-text);
   cursor: pointer;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, opacity 0.2s ease;
 
   &:hover {
     color: var(--color-primary);
   }
+
+  &[aria-busy="true"],
+  &:disabled {
+    opacity: 0.55;
+    cursor: wait;
+    pointer-events: none;
+  }
+}
+
+.works-archive__more-error {
+  margin: rem(16) 0 0;
+  width: 100%;
+  text-align: center;
+  font-size: rem(14);
+  font-weight: 500;
+  line-height: calc(22 / 14);
+  letter-spacing: rem(1.4);
+  color: var(--color-text-muted);
 }
 
 .works-archive__more-icon {

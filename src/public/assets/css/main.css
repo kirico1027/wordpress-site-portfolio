@@ -5272,6 +5272,9 @@ body {
   max-width: 65rem;
   margin-inline: auto;
 }
+.works-archive__more-wrap[hidden], .works-archive__more-wrap.is-hidden {
+  display: none !important;
+}
 
 .works-archive__more {
   display: inline-flex;
@@ -5287,10 +5290,26 @@ body {
   letter-spacing: 0.1rem;
   color: var(--color-text);
   cursor: pointer;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, opacity 0.2s ease;
 }
 .works-archive__more:hover {
   color: var(--color-primary);
+}
+.works-archive__more[aria-busy=true], .works-archive__more:disabled {
+  opacity: 0.55;
+  cursor: wait;
+  pointer-events: none;
+}
+
+.works-archive__more-error {
+  margin: 1rem 0 0;
+  width: 100%;
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.5714285714;
+  letter-spacing: 0.0875rem;
+  color: var(--color-text-muted);
 }
 
 .works-archive__more-icon {

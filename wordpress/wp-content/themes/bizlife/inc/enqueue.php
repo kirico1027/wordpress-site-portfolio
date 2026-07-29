@@ -73,6 +73,22 @@ function bizlife_enqueue_assets() {
     bizlife_asset_version('assets/js/script.js'),
     true
   );
+
+  if (is_post_type_archive('works') || is_tax('works_category')) {
+    wp_localize_script(
+      'bizlife-script',
+      'bizlifeWorksLoadMore',
+      array(
+        'ajaxUrl' => admin_url('admin-ajax.php'),
+        'action'  => 'bizlife_load_more_works',
+        'nonce'   => wp_create_nonce('bizlife_works_load_more'),
+        'i18n'    => array(
+          'loading' => __('読み込み中…', 'bizlife'),
+          'error'   => __('読み込みに失敗しました。もう一度お試しください。', 'bizlife'),
+        ),
+      )
+    );
+  }
 }
 add_action('wp_enqueue_scripts', 'bizlife_enqueue_assets');
 
