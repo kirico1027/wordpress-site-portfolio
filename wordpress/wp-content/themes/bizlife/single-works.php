@@ -41,7 +41,9 @@ $related_works_query = null;
       <article class="works-single__article" aria-labelledby="works-single-heading">
         <div class="container works-single__inner">
           <div class="works-single__content">
-            <time class="works-single__date" datetime="2026-08-08T15:45">2026/8/8 15:45</time>
+            <time class="works-single__date" datetime="<?php echo esc_attr(get_the_date('c')); ?>">
+              <?php echo esc_html(get_the_date('Y/n/j H:i')); ?>
+            </time>
             <h1 id="works-single-heading" class="works-single__title">
               <?php the_title(); ?>
             </h1>
@@ -49,13 +51,8 @@ $related_works_query = null;
             <figure class="works-single__hero">
               <?php if (has_post_thumbnail()) : ?>
                 <?php
-                echo get_the_post_thumbnail(
-                  null,
-                  'large',
-                  array(
-                    'alt' => '',
-                  )
-                );
+                // Prefer the media library alt; do not force a sample/empty override.
+                echo get_the_post_thumbnail(null, 'large');
                 ?>
               <?php else : ?>
               <img
