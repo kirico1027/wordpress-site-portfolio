@@ -2,107 +2,54 @@
 /**
  * Blog posts archive (Posts page: /blog/).
  *
- * Main query renders archive cards; featured slider and sidebar remain static.
+ * Featured slider: latest 5 posts.
+ * Main grid: main query (latest posts, BIZLIFE_BLOG_PER_PAGE).
+ * Sidebar remains static for now.
  *
  * @package BizLife
  */
 
 get_header();
 
-$blog_single_href = '#';
-$blog_archive_card_limit = 6;
-$blog_archive_card_thumbnails = array(
-  get_theme_file_uri('assets/img/works/works_01.png'),
-  get_theme_file_uri('assets/img/works/works_02.png'),
-  get_theme_file_uri('assets/img/works/works_03.png'),
-  get_theme_file_uri('assets/img/works/works_04.png'),
-  get_theme_file_uri('assets/img/works/works_01.png'),
-  get_theme_file_uri('assets/img/works/works_02.png'),
-);
-$img_blog_featured_01 = get_theme_file_uri('assets/img/blog/blog-featured_01.png');
-$img_blog_featured_02 = get_theme_file_uri('assets/img/blog/blog-featured_02.png');
-$img_blog_single_body_02 = get_theme_file_uri('assets/img/blog/blog-single_body_02.png');
-$img_blog_single_pickup_02 = get_theme_file_uri('assets/img/blog/blog-single_pickup_02.png');
-$img_blog_single_pickup_03 = get_theme_file_uri('assets/img/blog/blog-single_pickup_03.png');
+$featured_query = bizlife_get_blog_featured_query();
 $img_works_01 = get_theme_file_uri('assets/img/works/works_01.png');
 $img_works_02 = get_theme_file_uri('assets/img/works/works_02.png');
 $img_works_03 = get_theme_file_uri('assets/img/works/works_03.png');
-$img_works_04 = get_theme_file_uri('assets/img/works/works_04.png');
+$blog_single_href = '#';
 ?>
 <main class="blog-archive-page">
   <section class="blog-featured" aria-label="注目の記事">
     <div class="blog-featured__viewport">
       <div class="blog-featured__track">
-        <a class="blog-featured__slide" href="<?php echo esc_url($blog_single_href); ?>">
+        <?php if ($featured_query->have_posts()) : ?>
+          <?php while ($featured_query->have_posts()) : ?>
+            <?php
+            $featured_query->the_post();
+            $featured_categories = bizlife_get_blog_category_names(get_post());
+            $featured_thumbnail = get_the_post_thumbnail_url(null, 'large');
+            if (!$featured_thumbnail) {
+              $featured_thumbnail = bizlife_blog_fallback_thumbnail_url();
+            }
+            ?>
+        <a class="blog-featured__slide" href="<?php echo esc_url(get_permalink()); ?>">
           <div class="blog-featured__card">
             <div class="blog-featured__content">
               <ul class="blog-featured__tags">
-                <li class="blog-featured__tag">お役立ち情報</li>
+                <li class="blog-featured__tag"><?php echo esc_html($featured_categories[0]); ?></li>
               </ul>
-              <p class="blog-featured__title">ビジネスの成功と従業員の幸福を両立させる福利厚生の秘訣</p>
-              <time class="blog-featured__date" datetime="2026-08-25">2026/8/25</time>
+              <p class="blog-featured__title"><?php echo esc_html(get_the_title()); ?></p>
+              <time class="blog-featured__date" datetime="<?php echo esc_attr(get_the_date('Y-m-d')); ?>">
+                <?php echo esc_html(get_the_date('Y/n/j')); ?>
+              </time>
             </div>
             <figure class="blog-featured__figure">
-              <img src="<?php echo esc_url($img_blog_featured_02); ?>" alt="" width="550" height="330" />
+              <img src="<?php echo esc_url($featured_thumbnail); ?>" alt="" width="550" height="330" />
             </figure>
           </div>
         </a>
-        <a class="blog-featured__slide" href="<?php echo esc_url($blog_single_href); ?>">
-          <div class="blog-featured__card">
-            <div class="blog-featured__content">
-              <ul class="blog-featured__tags">
-                <li class="blog-featured__tag">社員インタビュー</li>
-              </ul>
-              <p class="blog-featured__title">福利厚生の進化：従業員の幸福を追求するビジネスの新たな道</p>
-              <time class="blog-featured__date" datetime="2026-08-26">2026/8/26</time>
-            </div>
-            <figure class="blog-featured__figure">
-              <img src="<?php echo esc_url($img_blog_featured_01); ?>" alt="" width="550" height="330" />
-            </figure>
-          </div>
-        </a>
-        <a class="blog-featured__slide" href="<?php echo esc_url($blog_single_href); ?>">
-          <div class="blog-featured__card">
-            <div class="blog-featured__content">
-              <ul class="blog-featured__tags">
-                <li class="blog-featured__tag">サービス・事業</li>
-              </ul>
-              <p class="blog-featured__title">働く人の幸福を最優先に考える企業文化の構築</p>
-              <time class="blog-featured__date" datetime="2026-08-21">2026/8/21</time>
-            </div>
-            <figure class="blog-featured__figure">
-              <img src="<?php echo esc_url($img_blog_single_body_02); ?>" alt="" width="550" height="330" />
-            </figure>
-          </div>
-        </a>
-        <a class="blog-featured__slide" href="<?php echo esc_url($blog_single_href); ?>">
-          <div class="blog-featured__card">
-            <div class="blog-featured__content">
-              <ul class="blog-featured__tags">
-                <li class="blog-featured__tag">導入事例</li>
-              </ul>
-              <p class="blog-featured__title">従業員の幸福と企業の繁栄を両立する福利厚生戦略</p>
-              <time class="blog-featured__date" datetime="2026-08-09">2026/8/9</time>
-            </div>
-            <figure class="blog-featured__figure">
-              <img src="<?php echo esc_url($img_blog_single_pickup_02); ?>" alt="" width="550" height="330" />
-            </figure>
-          </div>
-        </a>
-        <a class="blog-featured__slide" href="<?php echo esc_url($blog_single_href); ?>">
-          <div class="blog-featured__card">
-            <div class="blog-featured__content">
-              <ul class="blog-featured__tags">
-                <li class="blog-featured__tag">新着記事</li>
-              </ul>
-              <p class="blog-featured__title">幸せな働き方を支援する福利厚生プログラムの魅力</p>
-              <time class="blog-featured__date" datetime="2026-08-14">2026/8/14</time>
-            </div>
-            <figure class="blog-featured__figure">
-              <img src="<?php echo esc_url($img_blog_single_pickup_03); ?>" alt="" width="550" height="330" />
-            </figure>
-          </div>
-        </a>
+          <?php endwhile; ?>
+          <?php wp_reset_postdata(); ?>
+        <?php endif; ?>
       </div>
     </div>
     <div class="blog-featured__nav">
@@ -120,39 +67,18 @@ $img_works_04 = get_theme_file_uri('assets/img/works/works_04.png');
       <div class="blog-archive__main">
         <h2 class="blog-archive__heading">すべて</h2>
         <div class="blog-archive__grid">
-          <?php
-          $blog_archive_card_index = 0;
-
-          if (have_posts()) :
-            while (have_posts() && $blog_archive_card_index < $blog_archive_card_limit) :
-              the_post();
-              $card_thumbnail = $blog_archive_card_thumbnails[$blog_archive_card_index];
-              ?>
-          <article class="blog-card">
-            <a class="blog-card__link" href="<?php echo esc_url(get_permalink()); ?>">
-              <figure class="blog-card__figure">
-                <img src="<?php echo esc_url($card_thumbnail); ?>" alt="" width="328" height="197" />
-                <span class="blog-card__dim" aria-hidden="true"></span>
-                <span class="blog-card__more" aria-hidden="true">Read more</span>
-              </figure>
-              <div class="blog-card__body">
-                <ul class="blog-card__tags">
-                  <?php foreach (get_the_category() as $category) : ?>
-                    <li class="blog-card__tag"><?php echo esc_html($category->name); ?></li>
-                  <?php endforeach; ?>
-                </ul>
-                <h3 class="blog-card__title"><?php the_title(); ?></h3>
-                <time class="blog-card__date" datetime="<?php echo esc_attr(get_the_date('Y-m-d')); ?>">
-                  <?php echo esc_html(get_the_date('Y/n/j')); ?>
-                </time>
-              </div>
-            </a>
-          </article>
+          <?php if (have_posts()) : ?>
+            <?php while (have_posts()) : ?>
               <?php
-              ++$blog_archive_card_index;
-            endwhile;
-          endif;
-          ?>
+              the_post();
+              get_template_part(
+                'template-parts/cards/blog-card',
+                null,
+                bizlife_get_blog_card_args(get_post())
+              );
+              ?>
+            <?php endwhile; ?>
+          <?php endif; ?>
         </div>
         <div class="blog-archive__more-wrap">
           <button class="blog-archive__more" type="button">

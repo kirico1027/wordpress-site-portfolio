@@ -2,8 +2,8 @@
 /**
  * Single blog post template.
  *
- * Renders post title, date, categories, and content dynamically.
- * Pickup, share, breadcrumb current, and hero image remain static (Phase 2).
+ * Dynamic: breadcrumb title, categories, date, title, hero, content, Pick up.
+ * Share UI remains decorative (no share URLs in design).
  *
  * @package BizLife
  */
@@ -11,13 +11,16 @@
 get_header();
 
 $blog_archive_href = home_url('/blog/');
-$blog_single_href = '#';
-$img_blog_single_hero = get_theme_file_uri('assets/img/blog/blog-single_hero.png');
-$img_blog_single_pickup_01 = get_theme_file_uri('assets/img/blog/blog-single_pickup_01.png');
-$img_blog_single_pickup_02 = get_theme_file_uri('assets/img/blog/blog-single_pickup_02.png');
-$img_blog_single_pickup_03 = get_theme_file_uri('assets/img/blog/blog-single_pickup_03.png');
+$pickup_query = null;
 ?>
 <main class="blog-single-page blog-single">
+  <?php if (have_posts()) : ?>
+    <?php while (have_posts()) : ?>
+      <?php
+      the_post();
+      $pickup_query = bizlife_get_blog_pickup_query(get_post());
+      $category_names = bizlife_get_blog_category_names(get_post());
+      ?>
   <div class="blog-single__breadcrumb-area">
     <div class="container blog-single__breadcrumb-inner">
       <nav class="blog-single__breadcrumb" aria-label="パンくずリスト">
@@ -28,22 +31,19 @@ $img_blog_single_pickup_03 = get_theme_file_uri('assets/img/blog/blog-single_pic
         <span class="blog-single__breadcrumb-sep" aria-hidden="true">
           <span class="material-icons">chevron_right</span>
         </span>
-        <span class="blog-single__breadcrumb-current" aria-current="page">福利厚生の進化：従業員の幸福を...</span>
+        <span class="blog-single__breadcrumb-current" aria-current="page"><?php echo esc_html(get_the_title()); ?></span>
       </nav>
       <span class="blog-single__breadcrumb-line" aria-hidden="true"></span>
     </div>
   </div>
 
-  <?php if (have_posts()) : ?>
-    <?php while (have_posts()) : ?>
-      <?php the_post(); ?>
       <article class="blog-single__article" aria-labelledby="blog-single-heading">
         <div class="container blog-single__inner">
           <div class="blog-single__content">
             <div class="blog-single__meta">
               <ul class="blog-single__tags">
-                <?php foreach (get_the_category() as $category) : ?>
-                  <li class="blog-single__tag"><?php echo esc_html($category->name); ?></li>
+                <?php foreach ($category_names as $category_name) : ?>
+                  <li class="blog-single__tag"><?php echo esc_html($category_name); ?></li>
                 <?php endforeach; ?>
               </ul>
               <time class="blog-single__date" datetime="<?php echo esc_attr(get_the_date('c')); ?>">
@@ -56,12 +56,16 @@ $img_blog_single_pickup_03 = get_theme_file_uri('assets/img/blog/blog-single_pic
             </h1>
 
             <figure class="blog-single__hero">
+              <?php if (has_post_thumbnail()) : ?>
+                <?php echo get_the_post_thumbnail(null, 'large'); ?>
+              <?php else : ?>
               <img
-                src="<?php echo esc_url($img_blog_single_hero); ?>"
+                src="<?php echo esc_url(bizlife_blog_single_hero_fallback_url()); ?>"
                 alt=""
                 width="720"
                 height="432"
               />
+              <?php endif; ?>
             </figure>
 
             <div class="blog-single__body">
@@ -95,7 +99,8 @@ $img_blog_single_pickup_03 = get_theme_file_uri('assets/img/blog/blog-single_pic
     <?php endwhile; ?>
   <?php endif; ?>
 
-  <section class="blog-single__pickup" aria-labelledby="blog-pickup-heading">
+  <?php if ($pickup_query instanceof WP_Query) : ?>
+  <section class="blog-single__pickup" aria-label="今話題の記事">
     <div class="container blog-single__pickup-inner">
       <?php
       get_template_part(
@@ -109,58 +114,21 @@ $img_blog_single_pickup_03 = get_theme_file_uri('assets/img/blog/blog-single_pic
       ?>
 
       <div class="blog-single__pickup-grid">
-        <article class="blog-card">
-          <a class="blog-card__link" href="<?php echo esc_url($blog_single_href); ?>">
-            <figure class="blog-card__figure">
-              <img src="<?php echo esc_url($img_blog_single_pickup_01); ?>" alt="" width="328" height="197" />
-              <span class="blog-card__dim" aria-hidden="true"></span>
-              <span class="blog-card__more" aria-hidden="true">Read more</span>
-            </figure>
-            <div class="blog-card__body">
-              <ul class="blog-card__tags">
-                <li class="blog-card__tag">お役立ち情報</li>
-              </ul>
-              <h3 class="blog-card__title">ビジネスの成功と従業員の幸福を両立させる福利厚生の秘訣</h3>
-              <time class="blog-card__date" datetime="2024-04-25">2024/4/25</time>
-            </div>
-          </a>
-        </article>
-        <article class="blog-card">
-          <a class="blog-card__link" href="<?php echo esc_url($blog_single_href); ?>">
-            <figure class="blog-card__figure">
-              <img src="<?php echo esc_url($img_blog_single_pickup_02); ?>" alt="" width="328" height="197" />
-              <span class="blog-card__dim" aria-hidden="true"></span>
-              <span class="blog-card__more" aria-hidden="true">Read more</span>
-            </figure>
-            <div class="blog-card__body">
-              <ul class="blog-card__tags">
-                <li class="blog-card__tag">導入事例</li>
-              </ul>
-              <h3 class="blog-card__title">従業員の幸福と企業の繁栄を両立する福利厚生戦略</h3>
-              <time class="blog-card__date" datetime="2024-04-09">2024/4/9</time>
-            </div>
-          </a>
-        </article>
-        <article class="blog-card">
-          <a class="blog-card__link" href="<?php echo esc_url($blog_single_href); ?>">
-            <figure class="blog-card__figure">
-              <img src="<?php echo esc_url($img_blog_single_pickup_03); ?>" alt="" width="328" height="197" />
-              <span class="blog-card__dim" aria-hidden="true"></span>
-              <span class="blog-card__more" aria-hidden="true">Read more</span>
-            </figure>
-            <div class="blog-card__body">
-              <ul class="blog-card__tags">
-                <li class="blog-card__tag">お役立ち情報</li>
-                <li class="blog-card__tag">新着記事</li>
-              </ul>
-              <h3 class="blog-card__title">幸せな働き方を支援する福利厚生プログラムの魅力</h3>
-              <time class="blog-card__date" datetime="2024-04-14">2024/4/14</time>
-            </div>
-          </a>
-        </article>
+        <?php while ($pickup_query->have_posts()) : ?>
+          <?php
+          $pickup_query->the_post();
+          get_template_part(
+            'template-parts/cards/blog-card',
+            null,
+            bizlife_get_blog_card_args(get_post())
+          );
+          ?>
+        <?php endwhile; ?>
+        <?php wp_reset_postdata(); ?>
       </div>
     </div>
   </section>
+  <?php endif; ?>
 </main>
 <?php
 get_footer();
