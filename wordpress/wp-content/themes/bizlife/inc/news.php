@@ -110,3 +110,46 @@ function bizlife_get_news_item_args($post = null) {
     'title'    => get_the_title($post),
   );
 }
+
+/**
+ * Add news-single__paragraph class so existing CSS / reveal JS keep working with the_content().
+ *
+ * @param string $content Post content HTML.
+ * @return string
+ */
+function bizlife_news_content_paragraph_class($content) {
+  if (!is_singular('news') || !in_the_loop() || !is_main_query()) {
+    return $content;
+  }
+
+  if (false === strpos($content, '<p')) {
+    return $content;
+  }
+
+  return preg_replace_callback(
+    '/<p(\s[^>]*)?>/i',
+    function ($matches) {
+      $attrs = isset($matches[1]) ? $matches[1] : '';
+
+      if (false !== strpos($attrs, 'news-single__paragraph')) {
+        return $matches[0];
+      }
+
+      if (preg_match('/\sclass=(["\'])(.*?)\1/i', $attrs, $class_match)) {
+        $quote   = $class_match[1];
+        $classes = trim($class_match[2] . ' news-single__paragraph');
+        $attrs   = preg_replace(
+          '/\sclass=(["\']).*?\1/i',
+          ' class=' . $quote . $classes . $quote,
+          $attrs,
+          1
+        );
+        return '<p' . $attrs . '>';
+      }
+
+      return '<p class="news-single__paragraph"' . $attrs . '>';
+    },
+    $content
+  );
+}
+add_filter('the_content', 'bizlife_news_content_paragraph_class', 12);
