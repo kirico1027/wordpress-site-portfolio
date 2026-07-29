@@ -114,3 +114,74 @@ function bizlife_works_archive_category_slug() {
 
   return sanitize_title($term->slug);
 }
+
+/**
+ * Term IDs of works_category assigned to a Works post.
+ *
+ * @param int|WP_Post|null $post Post object, ID, or null for global post.
+ * @return int[]
+ */
+function bizlife_get_works_category_ids($post = null) {
+  $post = get_post($post);
+
+  if (!$post || 'works' !== $post->post_type) {
+    return array();
+  }
+
+  $terms = get_the_terms($post, 'works_category');
+
+  if (!$terms || is_wp_error($terms)) {
+    return array();
+  }
+
+  return array_map('intval', wp_list_pluck($terms, 'term_id'));
+}
+
+/**
+ * Query related Works sharing any works_category with the given post.
+ *
+ * Returns null when the post has no categories or no related posts exist.
+ *
+ * @param int|WP_Post|null $post Post object, ID, or null for global post.
+ * @return WP_Query|null
+ */
+function bizlife_get_related_works_query($post = null) {
+  $post = get_post($post);
+
+  if (!$post || 'works' !== $post->post_type) {
+    return null;
+  }
+
+  $term_ids = bizlife_get_works_category_ids($post);
+
+  if (!$term_ids) {
+    return null;
+  }
+
+  $query = new WP_Query(
+    array(
+      'post_type'           => 'works',
+      'post_status'         => 'publish',
+      'posts_per_page'      => 3,
+      'post__not_in'        => array((int) $post->ID),
+      'tax_query'           => array(
+        array(
+          'taxonomy' => 'works_category',
+          'field'    => 'term_id',
+          'terms'    => $term_ids,
+          'operator' => 'IN',
+        ),
+      ),
+      'orderby'             => 'date',
+      'order'               => 'DESC',
+      'no_found_rows'       => true,
+      'ignore_sticky_posts' => true,
+    )
+  );
+
+  if (!$query->have_posts()) {
+    return null;
+  }
+
+  return $query;
+}

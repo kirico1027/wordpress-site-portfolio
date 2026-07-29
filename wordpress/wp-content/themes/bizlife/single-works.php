@@ -2,7 +2,7 @@
 /**
  * Single Works template (CPT: works).
  *
- * Renders title and content dynamically. Hero, client block, pickup remain static.
+ * Related works (same works_category) render below the article when available.
  *
  * @package BizLife
  */
@@ -10,12 +10,10 @@
 get_header();
 
 $works_archive_href = home_url('/works/');
-$works_card_href = '#';
 $img_works_single_hero_fallback = get_theme_file_uri('assets/img/works-single/works-single_01.png');
-$img_works_single_05 = get_theme_file_uri('assets/img/works-single/works-single_05.png');
-$img_works_single_06 = get_theme_file_uri('assets/img/works-single/works-single_06.png');
-$img_works_single_07 = get_theme_file_uri('assets/img/works-single/works-single_07.png');
 $company_description_fallback = 'モンキーは、クリエイティブなデザインとブランディングソリューションを提供する会社です。当社のデザインチームは、顧客企業のビジュアルアイデンティティを強化し、魅力的なブランドイメージを構築するための戦略的なアプローチを提供しています。';
+
+$related_works_query = null;
 ?>
 <main class="works-single-page works-single">
   <div class="works-single__breadcrumb-area">
@@ -35,7 +33,10 @@ $company_description_fallback = 'モンキーは、クリエイティブなデ�
 
   <?php if (have_posts()) : ?>
     <?php while (have_posts()) : ?>
-      <?php the_post(); ?>
+      <?php
+      the_post();
+      $related_works_query = bizlife_get_related_works_query(get_post());
+      ?>
       <article class="works-single__article" aria-labelledby="works-single-heading">
         <div class="container works-single__inner">
           <div class="works-single__content">
@@ -114,58 +115,36 @@ $company_description_fallback = 'モンキーは、クリエイティブなデ�
     <?php endwhile; ?>
   <?php endif; ?>
 
-  <section class="works-single__pickup" aria-labelledby="works-pickup-heading">
+  <?php if ($related_works_query instanceof WP_Query) : ?>
+  <section class="works-single__pickup" aria-label="関連実績">
     <div class="container works-single__pickup-inner">
       <?php
       get_template_part(
         'template-parts/sections/section-heading',
         null,
         array(
-          'en'    => 'Pick up',
-          'title' => 'おすすめ記事',
+          'en'    => 'RELATED WORKS',
+          'title' => '関連実績',
         )
       );
       ?>
 
       <div class="works-single__pickup-grid">
-        <?php
-        get_template_part(
-          'template-parts/cards/works-card',
-          null,
-          array(
-            'href'      => $works_card_href,
-            'thumbnail' => $img_works_single_05,
-            'tags'      => array('つながるワークフロー', 'あなたのメンタルコーチ'),
-            'title'     => '意地でも従業員満足度を高めたかった。とことん向き合うことで見えたこれからの福利厚生',
-            'company'   => '株式会社giraffe',
-          )
-        );
-        get_template_part(
-          'template-parts/cards/works-card',
-          null,
-          array(
-            'href'      => $works_card_href,
-            'thumbnail' => $img_works_single_06,
-            'tags'      => array('つながるワークフロー'),
-            'title'     => 'これはただの福利厚生ではないと確信。これからより求められる働き方だと感じた',
-            'company'   => '株式会社turtle',
-          )
-        );
-        get_template_part(
-          'template-parts/cards/works-card',
-          null,
-          array(
-            'href'      => $works_card_href,
-            'thumbnail' => $img_works_single_07,
-            'tags'      => array('つながるワークフロー', 'みんなの福利厚生クラウド'),
-            'title'     => '従業員満足度が前年比200％Up！「従業員」の本質を語れるBiz Lifeのサービス',
-            'company'   => '株式会社Rabbit',
-          )
-        );
-        ?>
+        <?php while ($related_works_query->have_posts()) : ?>
+          <?php
+          $related_works_query->the_post();
+          get_template_part(
+            'template-parts/cards/works-card',
+            null,
+            bizlife_get_works_card_args(get_post())
+          );
+          ?>
+        <?php endwhile; ?>
+        <?php wp_reset_postdata(); ?>
       </div>
     </div>
   </section>
+  <?php endif; ?>
 </main>
 <?php
 get_footer();
