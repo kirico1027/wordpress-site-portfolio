@@ -7,8 +7,8 @@
  * @param array $args {
  *   @type string $href     Detail link.
  *   @type string $datetime datetime attribute (Y-m-d).
- *   @type string $date     Display date.
- *   @type string $tag      Category label.
+ *   @type string $date     Display date (Y.n.j).
+ *   @type string $tag      Category label (optional).
  *   @type string $title    News title.
  * }
  */
@@ -28,7 +28,9 @@ $args = wp_parse_args(
   <a class="news-item__link" href="<?php echo esc_url($args['href']); ?>">
     <div class="news-item__meta">
       <time class="news-item__date" datetime="<?php echo esc_attr($args['datetime']); ?>"><?php echo esc_html($args['date']); ?></time>
-      <span class="news-item__tag"><?php echo esc_html($args['tag']); ?></span>
+      <?php if ('' !== $args['tag']) : ?>
+        <span class="news-item__tag"><?php echo esc_html($args['tag']); ?></span>
+      <?php endif; ?>
     </div>
     <p class="news-item__title"><?php echo esc_html($args['title']); ?></p>
   </a>

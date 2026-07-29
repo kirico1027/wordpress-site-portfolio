@@ -19,3 +19,4 @@ require_once get_template_directory() . '/inc/works.php';
 require_once get_template_directory() . '/inc/ajax-works.php';
 require_once get_template_directory() . '/inc/blog.php';
 require_once get_template_directory() . '/inc/ajax-blog.php';
+require_once get_template_directory() . '/inc/news.php';
