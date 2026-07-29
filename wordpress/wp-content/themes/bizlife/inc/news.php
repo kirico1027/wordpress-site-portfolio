@@ -10,9 +10,11 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Posts per page for News archives (matches static template list count).
+ * Posts per page for News archives.
+ *
+ * Static design has no pagination / load-more, so archives show all published posts.
  */
-define('BIZLIFE_NEWS_PER_PAGE', 5);
+define('BIZLIFE_NEWS_PER_PAGE', -1);
 
 /**
  * Preferred news_category term order (static archive filters).
@@ -31,7 +33,7 @@ function bizlife_news_category_term_order() {
 }
 
 /**
- * Limit main query on News archive and news_category taxonomies.
+ * Show all posts on News archive and news_category taxonomies.
  *
  * @param WP_Query $query Main query.
  */
