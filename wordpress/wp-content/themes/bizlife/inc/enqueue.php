@@ -83,8 +83,22 @@ function bizlife_enqueue_assets() {
         'action'  => 'bizlife_load_more_works',
         'nonce'   => wp_create_nonce('bizlife_works_load_more'),
         'i18n'    => array(
-          'loading' => __('読み込み中…', 'bizlife'),
-          'error'   => __('読み込みに失敗しました。もう一度お試しください。', 'bizlife'),
+          'error' => __('読み込みに失敗しました。もう一度お試しください。', 'bizlife'),
+        ),
+      )
+    );
+  }
+
+  if (is_home()) {
+    wp_localize_script(
+      'bizlife-script',
+      'bizlifeBlogLoadMore',
+      array(
+        'ajaxUrl' => admin_url('admin-ajax.php'),
+        'action'  => 'bizlife_load_more_blog',
+        'nonce'   => wp_create_nonce('bizlife_blog_load_more'),
+        'i18n'    => array(
+          'error' => __('読み込みに失敗しました。もう一度お試しください。', 'bizlife'),
         ),
       )
     );

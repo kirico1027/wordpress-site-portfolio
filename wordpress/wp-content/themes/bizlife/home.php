@@ -2,9 +2,7 @@
 /**
  * Blog posts archive (Posts page: /blog/).
  *
- * Featured slider: latest 5 posts.
- * Main grid: main query (latest posts, BIZLIFE_BLOG_PER_PAGE).
- * Sidebar remains static for now.
+ * Featured slider, main grid (Ajax load more), and dynamic sidebar.
  *
  * @package BizLife
  */
@@ -12,10 +10,7 @@
 get_header();
 
 $featured_query = bizlife_get_blog_featured_query();
-$img_works_01 = get_theme_file_uri('assets/img/works/works_01.png');
-$img_works_02 = get_theme_file_uri('assets/img/works/works_02.png');
-$img_works_03 = get_theme_file_uri('assets/img/works/works_03.png');
-$blog_single_href = '#';
+$blog_has_more  = bizlife_blog_archive_has_more();
 ?>
 <main class="blog-archive-page">
   <section class="blog-featured" aria-label="注目の記事">
@@ -80,88 +75,21 @@ $blog_single_href = '#';
             <?php endwhile; ?>
           <?php endif; ?>
         </div>
-        <div class="blog-archive__more-wrap">
-          <button class="blog-archive__more" type="button">
+        <div
+          class="blog-archive__more-wrap<?php echo $blog_has_more ? '' : ' is-hidden'; ?>"
+          data-blog-load-more
+          data-next-page="2"
+          <?php echo $blog_has_more ? '' : ' hidden'; ?>
+        >
+          <button class="blog-archive__more" type="button" aria-busy="false">
             <span class="blog-archive__more-label">もっと見る</span>
             <span class="blog-archive__more-icon" aria-hidden="true"><span class="material-icons">keyboard_arrow_down</span></span>
           </button>
+          <p class="blog-archive__more-error" hidden role="alert"></p>
         </div>
       </div>
 
-      <aside class="blog-archive__sidebar" aria-label="ブログサイドバー">
-        <div class="blog-archive__widget blog-archive__widget--category">
-          <p class="blog-archive__widget-title">
-            <span class="blog-archive__widget-title-en">CATEGORY</span>
-            <span class="blog-archive__widget-title-ja">カテゴリ</span>
-          </p>
-          <ul class="blog-archive__categories">
-            <li><a class="blog-archive__category" href="#">新着記事</a></li>
-            <li><a class="blog-archive__category" href="#">お役立ち情報</a></li>
-            <li><a class="blog-archive__category" href="#">働き方</a></li>
-            <li><a class="blog-archive__category" href="#">サービス・事業</a></li>
-            <li><a class="blog-archive__category" href="#">導入事例</a></li>
-            <li><a class="blog-archive__category" href="#">おすすめ</a></li>
-            <li><a class="blog-archive__category" href="#">社員インタビュー</a></li>
-            <li><a class="blog-archive__category" href="#">その他</a></li>
-          </ul>
-        </div>
-
-        <div class="blog-archive__widget blog-archive__widget--keyword">
-          <p class="blog-archive__widget-title">
-            <span class="blog-archive__widget-title-en">KEYWORD</span>
-            <span class="blog-archive__widget-title-ja">キーワード検索</span>
-          </p>
-          <form class="blog-archive__search" role="search" action="#" method="get">
-            <label class="u-visually-hidden" for="blog-search">キーワード検索</label>
-            <input id="blog-search" class="blog-archive__search-input" type="search" name="s" placeholder="Search" />
-            <button class="blog-archive__search-btn" type="submit" aria-label="検索する">
-              <span class="material-icons" aria-hidden="true">search</span>
-            </button>
-          </form>
-        </div>
-
-        <div class="blog-archive__widget blog-archive__widget--pickup">
-          <p class="blog-archive__widget-title">
-            <span class="blog-archive__widget-title-en">PICK UP</span>
-            <span class="blog-archive__widget-title-ja">今話題の記事</span>
-          </p>
-          <div class="blog-archive__pickup">
-            <a class="blog-pickup" href="<?php echo esc_url($blog_single_href); ?>">
-              <figure class="blog-pickup__figure">
-                <img src="<?php echo esc_url($img_works_01); ?>" alt="" width="272" height="163" />
-                <span class="blog-pickup__dim" aria-hidden="true"></span>
-                <span class="blog-pickup__more" aria-hidden="true">Read more</span>
-              </figure>
-              <div class="blog-pickup__body">
-                <p class="blog-pickup__title">福利厚生の進化：従業員の幸福を追求するビジネスの新たな道</p>
-                <p class="blog-pickup__category"><span class="blog-pickup__dot" aria-hidden="true"></span>社員インタビュー</p>
-              </div>
-            </a>
-            <a class="blog-pickup" href="<?php echo esc_url($blog_single_href); ?>">
-              <figure class="blog-pickup__figure">
-                <img src="<?php echo esc_url($img_works_02); ?>" alt="" width="272" height="163" />
-                <span class="blog-pickup__dim" aria-hidden="true"></span>
-                <span class="blog-pickup__more" aria-hidden="true">Read more</span>
-              </figure>
-              <div class="blog-pickup__body">
-                <p class="blog-pickup__title">ビジネスの成功と従業員の幸福を両立させる福利厚生の秘訣</p>
-                <p class="blog-pickup__category"><span class="blog-pickup__dot" aria-hidden="true"></span>お役立ち情報</p>
-              </div>
-            </a>
-            <a class="blog-pickup" href="<?php echo esc_url($blog_single_href); ?>">
-              <figure class="blog-pickup__figure">
-                <img src="<?php echo esc_url($img_works_03); ?>" alt="" width="272" height="163" />
-                <span class="blog-pickup__dim" aria-hidden="true"></span>
-                <span class="blog-pickup__more" aria-hidden="true">Read more</span>
-              </figure>
-              <div class="blog-pickup__body">
-                <p class="blog-pickup__title">福利厚生の進化：従業員の幸福を追求するビジネスの新たな道</p>
-                <p class="blog-pickup__category"><span class="blog-pickup__dot" aria-hidden="true"></span>社員インタビュー</p>
-              </div>
-            </a>
-          </div>
-        </div>
-      </aside>
+      <?php get_template_part('template-parts/blog-sidebar'); ?>
     </div>
   </section>
 

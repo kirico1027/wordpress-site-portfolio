@@ -1101,6 +1101,76 @@
   }
 
   // Works archive: 入場はフィルター＋画面内カード、以降は scroll-reveal
+  // カード準備は初期表示 / Ajax 追加の両方から呼ぶ（同じ分類ルール）
+  var WORKS_ARCHIVE_OPENING_BASE_DELAY = 300;
+  var WORKS_ARCHIVE_OPENING_STAGGER = 70;
+
+  function runWorksArchiveOpeningAnimations(cards) {
+    if (!cards || !cards.length) return;
+
+    if (prefersReducedMotion()) {
+      Array.prototype.forEach.call(cards, function (card) {
+        card.classList.add("is-revealed");
+      });
+      return;
+    }
+
+    Array.prototype.forEach.call(cards, function (card) {
+      void card.offsetWidth;
+      markRevealedOnAnimationEnd(card);
+    });
+  }
+
+  /**
+   * 初回・Ajax 共通: 画面内は is-opening、画面外は js-scroll-reveal。
+   * Ajax 時に全件 is-opening しない（画面外でアニメ終了するのを防ぐ）。
+   *
+   * @param {Element[]|NodeList} cards
+   * @param {{ mode?: "initial"|"ajax" }} options
+   * @returns {Element[]} opening 対象
+   */
+  function prepareWorksArchiveCardElements(cards, options) {
+    options = options || {};
+    var mode = options.mode === "ajax" ? "ajax" : "initial";
+    var isSp = window.matchMedia("(max-width: 768px)").matches;
+    var openingIndex = 0;
+    var openingCards = [];
+    var list = Array.prototype.slice.call(cards);
+
+    Array.prototype.forEach.call(list, function (card, index) {
+      if (!card || card.getAttribute("data-reveal-bound") === "1") return;
+      card.setAttribute("data-reveal-bound", "1");
+
+      if (prefersReducedMotion()) {
+        card.classList.add("is-opening", "is-revealed");
+        return;
+      }
+
+      var useOpening;
+      if (isSp) {
+        // 初回 SP: 先頭のみ opening。Ajax SP: すべて scroll-reveal（初回の画面外カードと同じ）
+        useOpening = mode === "initial" && index === 0;
+      } else {
+        useOpening = isElementInViewport(card, 0.1);
+      }
+
+      if (useOpening) {
+        card.classList.add("is-opening");
+        card.style.animationDelay =
+          WORKS_ARCHIVE_OPENING_BASE_DELAY +
+          openingIndex * WORKS_ARCHIVE_OPENING_STAGGER +
+          "ms";
+        openingIndex += 1;
+        openingCards.push(card);
+        return;
+      }
+
+      card.classList.add("js-scroll-reveal");
+    });
+
+    return openingCards;
+  }
+
   function prepareWorksArchiveCards() {
     var archive = document.querySelector(".works-archive-page .works-archive");
     if (!archive || archive.getAttribute("data-reveal-prepared")) return;
@@ -1110,29 +1180,358 @@
     if (!grid) return;
 
     archive.setAttribute("data-reveal-prepared", "1");
+    prepareWorksArchiveCardElements(grid.querySelectorAll(".works-card"), {
+      mode: "initial",
+    });
 
-    var cards = grid.querySelectorAll(".works-card");
+    if (
+      moreWrap &&
+      !moreWrap.hasAttribute("hidden") &&
+      !moreWrap.classList.contains("is-hidden")
+    ) {
+      moreWrap.classList.add("js-scroll-reveal");
+    }
+  }
+
+  function hideWorksLoadMoreWrap(wrap, button) {
+    if (!wrap) return;
+    wrap.setAttribute("hidden", "");
+    wrap.classList.add("is-hidden");
+    wrap.classList.remove("js-scroll-reveal", "is-inview", "is-revealed");
+    wrap.setAttribute("aria-hidden", "true");
+    if (button) {
+      button.disabled = true;
+      button.setAttribute("aria-busy", "false");
+    }
+  }
+
+  function registerWorksArchiveScrollReveal(cards) {
+    observeScrollRevealElements(cards);
+  }
+
+  var BLOG_ARCHIVE_OPENING_BASE_DELAY = 120;
+  var BLOG_ARCHIVE_OPENING_STAGGER = 70;
+
+  function hideBlogLoadMoreWrap(wrap, button) {
+    if (!wrap) return;
+    wrap.setAttribute("hidden", "");
+    wrap.classList.add("is-hidden");
+    wrap.classList.remove("js-scroll-reveal", "is-inview", "is-revealed");
+    wrap.setAttribute("aria-hidden", "true");
+    if (button) {
+      button.disabled = true;
+      button.setAttribute("aria-busy", "false");
+    }
+  }
+
+  /**
+   * Blog カード分類（初回 initBlogArchiveReveal と同じルール）。
+   * Ajax 追加後も同じ関数を使う。
+   *
+   * @param {Element[]|NodeList} cards
+   * @returns {Element[]} opening 対象
+   */
+  function prepareBlogArchiveCardElements(cards) {
     var isSp = window.matchMedia("(max-width: 768px)").matches;
     var openingIndex = 0;
-    var openingCardBaseDelay = 300;
+    var openingCards = [];
+    var list = Array.prototype.slice.call(cards);
 
-    Array.prototype.forEach.call(cards, function (card, index) {
-      var isOpening = isSp ? index === 0 : isElementInViewport(card, 0.1);
+    Array.prototype.forEach.call(list, function (card) {
+      if (!card || card.nodeType !== 1) return;
+      if (card.getAttribute("data-reveal-bound") === "1") return;
+      card.setAttribute("data-reveal-bound", "1");
 
-      if (isOpening) {
+      if (prefersReducedMotion()) {
+        card.classList.add("is-opening", "is-revealed");
+        return;
+      }
+
+      // SP: 初回と同じく個別 scroll-reveal
+      if (isSp) {
+        card.classList.add("js-scroll-reveal");
+        return;
+      }
+
+      if (isElementInViewport(card, 0.1)) {
         card.classList.add("is-opening");
         card.style.animationDelay =
-          openingCardBaseDelay + openingIndex * 70 + "ms";
+          BLOG_ARCHIVE_OPENING_BASE_DELAY +
+          openingIndex * BLOG_ARCHIVE_OPENING_STAGGER +
+          "ms";
         openingIndex += 1;
+        openingCards.push(card);
         return;
       }
 
       card.classList.add("js-scroll-reveal");
     });
 
-    if (moreWrap) {
-      moreWrap.classList.add("js-scroll-reveal");
+    return openingCards;
+  }
+
+  function runBlogArchiveOpeningAnimations(cards) {
+    if (!cards || !cards.length) return;
+
+    if (prefersReducedMotion()) {
+      Array.prototype.forEach.call(cards, function (card) {
+        card.classList.add("is-revealed");
+      });
+      return;
     }
+
+    Array.prototype.forEach.call(cards, function (card) {
+      void card.offsetWidth;
+      markRevealedOnAnimationEnd(card);
+    });
+  }
+
+  function registerBlogArchiveScrollReveal(cards) {
+    observeScrollRevealElements(cards);
+  }
+
+  function initBlogLoadMore() {
+    var wrap = document.querySelector(
+      ".blog-archive__more-wrap[data-blog-load-more]"
+    );
+    var config = window.bizlifeBlogLoadMore;
+    if (!wrap || !config || !config.ajaxUrl) return;
+    if (wrap.hasAttribute("hidden") || wrap.classList.contains("is-hidden")) {
+      return;
+    }
+
+    var button = wrap.querySelector(".blog-archive__more");
+    var errorEl = wrap.querySelector(".blog-archive__more-error");
+    var grid = document.querySelector(".blog-archive-page .blog-archive__grid");
+    var archive = document.querySelector(".blog-archive-page .blog-archive");
+    if (!button || !grid) return;
+
+    var loading = false;
+
+    function setLoading(isLoading) {
+      loading = isLoading;
+      button.disabled = isLoading;
+      button.setAttribute("aria-busy", isLoading ? "true" : "false");
+    }
+
+    function showError() {
+      if (!errorEl) return;
+      errorEl.textContent =
+        config.i18n && config.i18n.error
+          ? config.i18n.error
+          : "読み込みに失敗しました。もう一度お試しください。";
+      errorEl.hidden = false;
+    }
+
+    function clearError() {
+      if (!errorEl) return;
+      errorEl.hidden = true;
+      errorEl.textContent = "";
+    }
+
+    function isTruthyHasMore(value) {
+      return value === true || value === 1 || value === "1";
+    }
+
+    function appendCards(html) {
+      if (!html) return [];
+
+      var temp = document.createElement("div");
+      temp.innerHTML = html;
+      var nodes = Array.prototype.slice.call(temp.children);
+      var appended = [];
+
+      Array.prototype.forEach.call(nodes, function (child) {
+        grid.appendChild(child);
+        appended.push(child);
+      });
+
+      // DOM 追加後に初回と同じ分類（画面内 opening / 画面外 scroll-reveal）
+      var openingCards = prepareBlogArchiveCardElements(appended);
+
+      if (archive && !archive.classList.contains("is-ready")) {
+        archive.classList.add("is-ready");
+      }
+      runBlogArchiveOpeningAnimations(openingCards);
+      registerBlogArchiveScrollReveal(appended);
+
+      return appended;
+    }
+
+    button.addEventListener("click", function () {
+      if (
+        loading ||
+        wrap.hasAttribute("hidden") ||
+        wrap.classList.contains("is-hidden")
+      ) {
+        return;
+      }
+
+      var nextPage = parseInt(wrap.getAttribute("data-next-page") || "2", 10);
+      if (!nextPage || nextPage < 2) return;
+
+      clearError();
+      setLoading(true);
+
+      var body = new FormData();
+      body.append("action", config.action || "bizlife_load_more_blog");
+      body.append("nonce", config.nonce || "");
+      body.append("page", String(nextPage));
+
+      fetch(config.ajaxUrl, {
+        method: "POST",
+        credentials: "same-origin",
+        body: body,
+      })
+        .then(function (response) {
+          return response.json().then(function (json) {
+            return { ok: response.ok, json: json };
+          });
+        })
+        .then(function (result) {
+          if (!result.json || !result.json.success) {
+            throw new Error("load-more-failed");
+          }
+
+          var payload = result.json.data || {};
+          appendCards(payload.html || "");
+
+          if (isTruthyHasMore(payload.has_more)) {
+            wrap.setAttribute("data-next-page", String(nextPage + 1));
+            setLoading(false);
+          } else {
+            hideBlogLoadMoreWrap(wrap, button);
+            loading = false;
+          }
+        })
+        .catch(function () {
+          showError();
+          setLoading(false);
+        });
+    });
+  }
+
+  function initWorksLoadMore() {
+    var wrap = document.querySelector(
+      ".works-archive__more-wrap[data-works-load-more]"
+    );
+    var config = window.bizlifeWorksLoadMore;
+    if (!wrap || !config || !config.ajaxUrl) return;
+    if (wrap.hasAttribute("hidden") || wrap.classList.contains("is-hidden")) {
+      return;
+    }
+
+    var button = wrap.querySelector(".works-archive__more");
+    var errorEl = wrap.querySelector(".works-archive__more-error");
+    var grid = document.querySelector(".works-archive__grid");
+    var archive = document.querySelector(".works-archive-page .works-archive");
+    if (!button || !grid) return;
+
+    var loading = false;
+
+    function setLoading(isLoading) {
+      loading = isLoading;
+      button.disabled = isLoading;
+      button.setAttribute("aria-busy", isLoading ? "true" : "false");
+    }
+
+    function showError() {
+      if (!errorEl) return;
+      errorEl.textContent =
+        config.i18n && config.i18n.error
+          ? config.i18n.error
+          : "読み込みに失敗しました。もう一度お試しください。";
+      errorEl.hidden = false;
+    }
+
+    function clearError() {
+      if (!errorEl) return;
+      errorEl.hidden = true;
+      errorEl.textContent = "";
+    }
+
+    function isTruthyHasMore(value) {
+      return value === true || value === 1 || value === "1";
+    }
+
+    function appendCards(html) {
+      if (!html) return [];
+
+      var temp = document.createElement("div");
+      temp.innerHTML = html;
+      var nodes = Array.prototype.slice.call(temp.children);
+      var appended = [];
+
+      Array.prototype.forEach.call(nodes, function (child) {
+        grid.appendChild(child);
+        appended.push(child);
+      });
+
+      var openingCards = prepareWorksArchiveCardElements(appended, {
+        mode: "ajax",
+      });
+
+      if (archive && !archive.classList.contains("is-ready")) {
+        archive.classList.add("is-ready");
+      }
+      runWorksArchiveOpeningAnimations(openingCards);
+      registerWorksArchiveScrollReveal(appended);
+
+      return appended;
+    }
+
+    button.addEventListener("click", function () {
+      if (
+        loading ||
+        wrap.hasAttribute("hidden") ||
+        wrap.classList.contains("is-hidden")
+      ) {
+        return;
+      }
+
+      var nextPage = parseInt(wrap.getAttribute("data-next-page") || "2", 10);
+      if (!nextPage || nextPage < 2) return;
+
+      clearError();
+      setLoading(true);
+
+      var body = new FormData();
+      body.append("action", config.action || "bizlife_load_more_works");
+      body.append("nonce", config.nonce || "");
+      body.append("page", String(nextPage));
+      body.append("category", wrap.getAttribute("data-category") || "");
+
+      fetch(config.ajaxUrl, {
+        method: "POST",
+        credentials: "same-origin",
+        body: body,
+      })
+        .then(function (response) {
+          return response.json().then(function (json) {
+            return { ok: response.ok, json: json };
+          });
+        })
+        .then(function (result) {
+          if (!result.json || !result.json.success) {
+            throw new Error("load-more-failed");
+          }
+
+          var payload = result.json.data || {};
+          appendCards(payload.html || "");
+
+          if (isTruthyHasMore(payload.has_more)) {
+            wrap.setAttribute("data-next-page", String(nextPage + 1));
+            setLoading(false);
+          } else {
+            hideWorksLoadMoreWrap(wrap, button);
+            loading = false;
+          }
+        })
+        .catch(function () {
+          showError();
+          setLoading(false);
+        });
+    });
   }
 
   function initWorksArchiveOpeningReveal() {
@@ -1824,24 +2223,9 @@
         markRevealedOnAnimationEnd(heading);
       }
 
-      Array.prototype.forEach.call(cards, function (card, index) {
-        // SP: カードはすべて個別発火
-        if (isSp) {
-          card.classList.add("js-scroll-reveal");
-          return;
-        }
-
-        if (isElementInViewport(card, 0.1)) {
-          card.classList.add("is-opening");
-          card.style.animationDelay =
-            openingCardBaseDelay + openingCardIndex * 70 + "ms";
-          openingCardIndex += 1;
-          markRevealedOnAnimationEnd(card);
-          return;
-        }
-
-        card.classList.add("js-scroll-reveal");
-      });
+      var openingCards = prepareBlogArchiveCardElements(cards);
+      runBlogArchiveOpeningAnimations(openingCards);
+      openingCardIndex = openingCards.length;
 
       Array.prototype.forEach.call(widgets, function (widget, index) {
         // PICK UP: 見出し + カード個別発火
@@ -1947,6 +2331,8 @@
     initBlogFeaturedSlider();
     initSectionHeadingScrollReveal();
     prepareWorksArchiveCards();
+    initWorksLoadMore();
+    initBlogLoadMore();
     prepareNewsArchiveItems();
     prepareWorksSingleScrollReveal();
     prepareBlogSingleScrollReveal();
