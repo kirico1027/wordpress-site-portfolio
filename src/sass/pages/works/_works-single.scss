@@ -166,19 +166,24 @@
 .works-single__breadcrumb-inner {
   display: flex;
   align-items: center;
+  min-width: 0;
+  width: 100%;
 }
 
 .works-single__breadcrumb {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   gap: rem(12);
   margin: 0;
   padding: 0;
+  min-width: 0;
+  width: 100%;
 }
 
 .works-single__breadcrumb-parent {
   display: inline-flex;
+  flex-shrink: 0;
   align-items: center;
   gap: rem(16);
   text-decoration: none;
@@ -207,6 +212,7 @@
 
 .works-single__breadcrumb-sep {
   display: inline-flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
   color: var(--color-text);
@@ -217,6 +223,10 @@
 }
 
 .works-single__breadcrumb-current {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   font-size: rem(14);
   font-weight: 700;
   line-height: calc(14 / 14);

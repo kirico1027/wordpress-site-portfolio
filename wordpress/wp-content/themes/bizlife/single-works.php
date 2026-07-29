@@ -16,6 +16,13 @@ $company_description_fallback = 'モンキーは、クリエイティブなデ�
 $related_works_query = null;
 ?>
 <main class="works-single-page works-single">
+  <?php if (have_posts()) : ?>
+    <?php while (have_posts()) : ?>
+      <?php
+      the_post();
+      // Related query does not alter the global post until its loop runs below.
+      $related_works_query = bizlife_get_related_works_query(get_post());
+      ?>
   <div class="works-single__breadcrumb-area">
     <div class="container works-single__breadcrumb-inner">
       <nav class="works-single__breadcrumb" aria-label="パンくずリスト">
@@ -26,17 +33,11 @@ $related_works_query = null;
         <span class="works-single__breadcrumb-sep" aria-hidden="true">
           <span class="material-icons">chevron_right</span>
         </span>
-        <span class="works-single__breadcrumb-current" aria-current="page">内部崩壊しかけていた弊社を救う...</span>
+        <span class="works-single__breadcrumb-current" aria-current="page"><?php echo esc_html(get_the_title()); ?></span>
       </nav>
     </div>
   </div>
 
-  <?php if (have_posts()) : ?>
-    <?php while (have_posts()) : ?>
-      <?php
-      the_post();
-      $related_works_query = bizlife_get_related_works_query(get_post());
-      ?>
       <article class="works-single__article" aria-labelledby="works-single-heading">
         <div class="container works-single__inner">
           <div class="works-single__content">
