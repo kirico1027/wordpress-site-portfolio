@@ -2,10 +2,21 @@
 /**
  * Front page — Hero section.
  *
- * Phase 2: static markup. Phase 3+: news ticker from news CPT.
+ * hero-news shows the latest published News post (1). Hidden when none.
  *
  * @package BizLife
  */
+
+$hero_news_query = bizlife_get_news_query(1);
+$hero_news_post  = null;
+
+if ($hero_news_query->have_posts()) {
+  $hero_news_query->the_post();
+  $hero_news_post = get_post();
+  wp_reset_postdata();
+} else {
+  wp_reset_postdata();
+}
 ?>
 <section class="hero">
   <div class="hero__inner container">
@@ -43,12 +54,14 @@
       </div>
     </div>
   </div>
+  <?php if ($hero_news_post) : ?>
   <div class="hero-news">
     <div class="hero-news__inner container">
-      <a class="hero-news__link" href="<?php echo esc_url(home_url('/news/')); ?>">
-        <time class="hero-news__date" datetime="2026-08-01">2026.8.1</time>
-        <p class="hero-news__text">革新的な福利厚生サービスが登場！次世代の完全従業員ファーストの新サービス</p>
+      <a class="hero-news__link" href="<?php echo esc_url(get_permalink($hero_news_post)); ?>">
+        <time class="hero-news__date" datetime="<?php echo esc_attr(get_the_date('Y-m-d', $hero_news_post)); ?>"><?php echo esc_html(get_the_date('Y.n.j', $hero_news_post)); ?></time>
+        <p class="hero-news__text"><?php echo esc_html(get_the_title($hero_news_post)); ?></p>
       </a>
     </div>
   </div>
+  <?php endif; ?>
 </section>

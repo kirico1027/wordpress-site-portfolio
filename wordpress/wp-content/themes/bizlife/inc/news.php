@@ -86,10 +86,11 @@ function bizlife_get_news_primary_term($post = null) {
 /**
  * Build args for template-parts/cards/news-item.php from a News post.
  *
- * @param int|WP_Post|null $post Post object, ID, or null for global post.
+ * @param int|WP_Post|null $post         Post object, ID, or null for global post.
+ * @param string           $date_format  Display date format (archive: Y.n.j / front: Y/n/j).
  * @return array<string, string>
  */
-function bizlife_get_news_item_args($post = null) {
+function bizlife_get_news_item_args($post = null, $date_format = 'Y.n.j') {
   $post = get_post($post);
 
   if (!$post || 'news' !== $post->post_type) {
@@ -107,9 +108,39 @@ function bizlife_get_news_item_args($post = null) {
   return array(
     'href'     => get_permalink($post),
     'datetime' => get_the_date('Y-m-d', $post),
-    'date'     => get_the_date('Y.n.j', $post),
+    'date'     => get_the_date($date_format, $post),
     'tag'      => $term ? $term->name : '',
     'title'    => get_the_title($post),
+  );
+}
+
+/**
+ * News archive URL (with home_url fallback).
+ *
+ * @return string
+ */
+function bizlife_get_news_archive_url() {
+  $url = get_post_type_archive_link('news');
+  return $url ? $url : home_url('/news/');
+}
+
+/**
+ * Query published News posts for front-page sections.
+ *
+ * @param int $posts_per_page Number of posts (5 for top News, 1 for hero-news).
+ * @return WP_Query
+ */
+function bizlife_get_news_query($posts_per_page) {
+  return new WP_Query(
+    array(
+      'post_type'           => 'news',
+      'post_status'         => 'publish',
+      'posts_per_page'      => (int) $posts_per_page,
+      'orderby'             => 'date',
+      'order'               => 'DESC',
+      'no_found_rows'       => true,
+      'ignore_sticky_posts' => true,
+    )
   );
 }
 

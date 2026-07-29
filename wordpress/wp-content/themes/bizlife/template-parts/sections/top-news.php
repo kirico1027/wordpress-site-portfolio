@@ -2,12 +2,13 @@
 /**
  * Front page — News section.
  *
- * Phase 2: static sample items. Phase 3: WP_Query news CPT.
+ * Latest 5 published news posts (static: top-news.html).
  *
  * @package BizLife
  */
 
-$news_href = home_url('/news/');
+$news_archive_href = bizlife_get_news_archive_url();
+$news_query        = bizlife_get_news_query(5);
 ?>
 <section class="section news">
   <div class="container news__inner">
@@ -34,71 +35,30 @@ $news_href = home_url('/news/');
       </div>
     </div>
     <div class="news__main">
-      <ul class="news__list">
-        <?php
-        get_template_part(
-          'template-parts/cards/news-item',
-          null,
-          array(
-            'href'     => $news_href,
-            'datetime' => '2026-08-08',
-            'date'     => '2026/8/8',
-            'tag'      => '採用',
-            'title'    => '2027年卒 インターンシップ募集開始のお知らせ',
-          )
-        );
-        get_template_part(
-          'template-parts/cards/news-item',
-          null,
-          array(
-            'href'     => $news_href,
-            'datetime' => '2026-08-08',
-            'date'     => '2026/8/8',
-            'tag'      => 'お知らせ',
-            'title'    => '夏季休業のお知らせ',
-          )
-        );
-        get_template_part(
-          'template-parts/cards/news-item',
-          null,
-          array(
-            'href'     => $news_href,
-            'datetime' => '2026-08-01',
-            'date'     => '2026/8/1',
-            'tag'      => 'メディア掲載',
-            'title'    => 'イベント出展のお知らせ【2024夏】',
-          )
-        );
-        get_template_part(
-          'template-parts/cards/news-item',
-          null,
-          array(
-            'href'     => $news_href,
-            'datetime' => '2026-08-01',
-            'date'     => '2026/8/1',
-            'tag'      => 'お知らせ',
-            'title'    => '【ご報告】導入社数1000社を突破しました！',
-          )
-        );
-        get_template_part(
-          'template-parts/cards/news-item',
-          null,
-          array(
-            'href'     => $news_href,
-            'datetime' => '2026-08-01',
-            'date'     => '2026/8/1',
-            'tag'      => 'お知らせ',
-            'title'    => '革新的な福利厚生サービスが登場！次世代の完全従業員ファーストの新サービス',
-          )
-        );
-        ?>
-      </ul>
+      <?php if ($news_query->have_posts()) : ?>
+        <ul class="news__list">
+          <?php while ($news_query->have_posts()) : ?>
+            <?php
+            $news_query->the_post();
+            get_template_part(
+              'template-parts/cards/news-item',
+              null,
+              bizlife_get_news_item_args(get_post(), 'Y/n/j')
+            );
+            ?>
+          <?php endwhile; ?>
+          <?php wp_reset_postdata(); ?>
+        </ul>
+      <?php else : ?>
+        <?php wp_reset_postdata(); ?>
+        <p class="news__empty"><?php esc_html_e('現在、お知らせはありません。', 'bizlife'); ?></p>
+      <?php endif; ?>
       <?php
       get_template_part(
         'template-parts/sections/btn-more',
         null,
         array(
-          'href'     => $news_href,
+          'href'     => $news_archive_href,
           'label'    => '一覧をみる',
           'modifier' => 'btn-more--center js-scroll-reveal',
         )

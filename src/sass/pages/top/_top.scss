@@ -2110,6 +2110,15 @@ $about-visual-base-h: rem(393.328);
   list-style: none;
 }
 
+.news__empty {
+  margin: 0;
+  font-size: rem(15);
+  font-weight: 500;
+  line-height: 1.7;
+  letter-spacing: rem(0.75);
+  color: var(--color-text);
+}
+
 // ---------------------------------------------------------------------------
 // News scroll-reveal（記事を上から順 → 装飾ブロック → ボタン）
 // ---------------------------------------------------------------------------

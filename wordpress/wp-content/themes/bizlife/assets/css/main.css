@@ -2853,6 +2853,15 @@ body {
   list-style: none;
 }
 
+.news__empty {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.7;
+  letter-spacing: 0.046875rem;
+  color: var(--color-text);
+}
+
 @media (prefers-reduced-motion: no-preference) {
   html.js.scroll-reveal-active .news .js-scroll-reveal:not(.is-inview) {
     opacity: 0;
