@@ -173,7 +173,66 @@
   }
 
   function initWorksSlider() {
-    initDragScrollSlider(document.querySelector(".works__slider"));
+    var slider = document.querySelector(".works__slider");
+    if (!slider || !slider.children.length) return;
+
+    // About / Recruit ギャラリーと同じく、トラック化してカードを複製しシームレスに流す
+    var track = document.createElement("div");
+    track.className = "works__slider-track";
+    while (slider.firstChild) {
+      track.appendChild(slider.firstChild);
+    }
+    slider.appendChild(track);
+
+    var originals = Array.prototype.slice.call(track.children);
+    originals.forEach(function (item) {
+      var clone = item.cloneNode(true);
+      clone.setAttribute("aria-hidden", "true");
+      Array.prototype.forEach.call(
+        clone.querySelectorAll("a, button, [tabindex]"),
+        function (el) {
+          el.setAttribute("tabindex", "-1");
+        }
+      );
+      track.appendChild(clone);
+    });
+
+    if (prefersReducedMotion()) {
+      slider.classList.add("works__slider--static");
+      initDragScrollSlider(slider);
+      return;
+    }
+
+    slider.classList.add("works__slider--marquee");
+
+    var offset = 0;
+    var speed = 0.5;
+    var halfWidth = 0;
+
+    function measure() {
+      halfWidth = track.scrollWidth / 2;
+    }
+
+    measure();
+    window.addEventListener("resize", measure);
+
+    track.querySelectorAll("img").forEach(function (img) {
+      if (img.complete) return;
+      img.addEventListener("load", measure);
+    });
+
+    function tick() {
+      if (halfWidth > 0) {
+        offset += speed;
+        if (offset >= halfWidth) offset -= halfWidth;
+        track.style.transform = "translate3d(" + -offset + "px, 0, 0)";
+      } else {
+        measure();
+      }
+      window.requestAnimationFrame(tick);
+    }
+
+    window.requestAnimationFrame(tick);
   }
 
   function initAboutGallerySlider() {
