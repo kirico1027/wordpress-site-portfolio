@@ -17,7 +17,7 @@ define('BIZLIFE_WORKS_PER_PAGE', 4);
 /**
  * Front-page Works slider card count.
  */
-define('BIZLIFE_WORKS_FRONT_COUNT', 4);
+define('BIZLIFE_WORKS_FRONT_COUNT', 5);
 
 /**
  * Limit main query on Works archive and works_category taxonomies.
