@@ -1971,6 +1971,90 @@
     });
   }
 
+  function initEntryFormSample() {
+    var form = document.querySelector(".entry-form__form");
+    if (!form || form.getAttribute("data-entry-form-init") === "1") return;
+    form.setAttribute("data-entry-form-init", "1");
+
+    var email = form.querySelector("#entry-email");
+    var emailConfirm = form.querySelector("#entry-email-confirm");
+    var emailError = form.querySelector("#entry-email-confirm-error");
+    var status = form.querySelector(".entry-form__status");
+    var mismatchMessage = "メールアドレスが一致していません。";
+    var sampleMessage =
+      "エントリー内容を受け付けました。\nこちらはポートフォリオ用フォームのため、実際の送信は行われていません。";
+
+    function clearEmailMismatch() {
+      if (emailConfirm) {
+        emailConfirm.setCustomValidity("");
+      }
+      if (emailError) {
+        emailError.hidden = true;
+        emailError.textContent = "";
+      }
+    }
+
+    function showEmailMismatch() {
+      if (emailConfirm) {
+        emailConfirm.setCustomValidity(mismatchMessage);
+      }
+      if (emailError) {
+        emailError.hidden = false;
+        emailError.textContent = mismatchMessage;
+      }
+    }
+
+    function hideStatus() {
+      if (!status) return;
+      status.hidden = true;
+      status.textContent = "";
+    }
+
+    function showSampleStatus() {
+      if (!status) return;
+      status.hidden = false;
+      status.textContent = sampleMessage;
+    }
+
+    if (email) {
+      email.addEventListener("input", function () {
+        clearEmailMismatch();
+        hideStatus();
+      });
+    }
+
+    if (emailConfirm) {
+      emailConfirm.addEventListener("input", function () {
+        clearEmailMismatch();
+        hideStatus();
+      });
+    }
+
+    form.addEventListener("submit", function (event) {
+      clearEmailMismatch();
+
+      if (email && emailConfirm && email.value !== emailConfirm.value) {
+        event.preventDefault();
+        showEmailMismatch();
+        if (typeof emailConfirm.reportValidity === "function") {
+          emailConfirm.reportValidity();
+        }
+        emailConfirm.focus();
+        return;
+      }
+
+      if (!form.checkValidity()) {
+        return;
+      }
+
+      event.preventDefault();
+      showSampleStatus();
+      if (status && typeof status.scrollIntoView === "function") {
+        status.scrollIntoView({ block: "nearest", behavior: "smooth" });
+      }
+    });
+  }
+
   function primeContactOpeningIfVisible() {
     var page = document.querySelector(".contact-page");
     if (page) page.classList.add("is-ready");
@@ -2554,6 +2638,7 @@
     initNewsSingleOpeningReveal();
     initContactOpeningReveal();
     initContactFormSample();
+    initEntryFormSample();
     initDownloadOpeningReveal();
     initEntryOpeningReveal();
     initCompanyOpeningReveal();

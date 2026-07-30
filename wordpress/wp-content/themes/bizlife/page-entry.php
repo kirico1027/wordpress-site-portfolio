@@ -27,7 +27,7 @@ get_header();
   <section class="entry-form" aria-labelledby="entry-form-heading">
     <h2 id="entry-form-heading" class="u-visually-hidden">採用エントリーフォーム</h2>
     <div class="container entry-form__inner">
-      <form class="entry-form__form" action="#" method="post" enctype="multipart/form-data" novalidate>
+      <form class="entry-form__form" action="" method="post" enctype="multipart/form-data">
         <div class="entry-form__field">
           <label class="entry-form__label" for="entry-name">
             お名前<span class="entry-form__required" aria-hidden="true">*</span>
@@ -89,7 +89,9 @@ get_header();
             placeholder="メールアドレス（確認用）"
             autocomplete="email"
             required
+            aria-describedby="entry-email-confirm-error"
           />
+          <p id="entry-email-confirm-error" class="entry-form__error" hidden></p>
         </div>
 
         <div class="entry-form__field">
@@ -185,6 +187,8 @@ get_header();
             <span class="entry-form__agree-text">プライバシーポリシーに同意する</span>
           </label>
         </div>
+
+        <p class="entry-form__status" role="status" aria-live="polite" hidden></p>
 
         <div class="entry-form__actions">
           <button class="entry-form__submit" type="submit">エントリー</button>
