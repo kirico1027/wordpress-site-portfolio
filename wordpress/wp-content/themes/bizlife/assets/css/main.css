@@ -2188,6 +2188,23 @@ body {
   }
 }
 
+.works__empty {
+  margin: 0;
+  margin-top: 3rem;
+}
+@media (min-width: 769px) {
+  .works__empty {
+    margin-top: clamp(2.25rem, 2.25rem + (100vw - 769px) * 12 / 415, 3rem);
+  }
+}
+.works__empty {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.7;
+  letter-spacing: 0.046875rem;
+  color: var(--color-text);
+}
+
 .works__slider {
   display: flex;
   overflow-x: auto;

@@ -1441,6 +1441,16 @@ $about-visual-base-h: rem(393.328);
   @include fluid-pc-range(margin-top, 36, 48, $sp-px: 48);
 }
 
+.works__empty {
+  margin: 0;
+  @include fluid-pc-range(margin-top, 36, 48, $sp-px: 48);
+  font-size: rem(15);
+  font-weight: 500;
+  line-height: 1.7;
+  letter-spacing: rem(0.75);
+  color: var(--color-text);
+}
+
 .works__slider {
   display: flex;
   overflow-x: auto;

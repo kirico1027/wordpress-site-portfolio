@@ -15,6 +15,11 @@ if (!defined('ABSPATH')) {
 define('BIZLIFE_WORKS_PER_PAGE', 4);
 
 /**
+ * Front-page Works slider card count.
+ */
+define('BIZLIFE_WORKS_FRONT_COUNT', 4);
+
+/**
  * Limit main query on Works archive and works_category taxonomies.
  *
  * @param WP_Query $query Main query.
@@ -82,6 +87,36 @@ function bizlife_get_works_card_args($post = null) {
     'tags'      => $tags,
     'title'     => get_the_title($post),
     'company'   => $company_name,
+  );
+}
+
+/**
+ * Works archive URL (with home_url fallback).
+ *
+ * @return string
+ */
+function bizlife_get_works_archive_url() {
+  $url = get_post_type_archive_link('works');
+  return $url ? $url : home_url('/works/');
+}
+
+/**
+ * Query published Works posts for the front-page slider.
+ *
+ * @param int $posts_per_page Number of posts (default: BIZLIFE_WORKS_FRONT_COUNT).
+ * @return WP_Query
+ */
+function bizlife_get_works_query($posts_per_page = BIZLIFE_WORKS_FRONT_COUNT) {
+  return new WP_Query(
+    array(
+      'post_type'           => 'works',
+      'post_status'         => 'publish',
+      'posts_per_page'      => (int) $posts_per_page,
+      'orderby'             => 'date',
+      'order'               => 'DESC',
+      'no_found_rows'       => true,
+      'ignore_sticky_posts' => true,
+    )
   );
 }
 
