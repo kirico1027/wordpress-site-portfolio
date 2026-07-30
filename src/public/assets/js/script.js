@@ -1886,6 +1886,91 @@
     window.setTimeout(start, 0);
   }
 
+  function initContactFormSample() {
+    var form = document.querySelector(".contact-form__form");
+    if (!form || form.getAttribute("data-contact-form-init") === "1") return;
+    form.setAttribute("data-contact-form-init", "1");
+
+    var email = form.querySelector("#contact-email");
+    var emailConfirm = form.querySelector("#contact-email-confirm");
+    var emailError = form.querySelector("#contact-email-confirm-error");
+    var status = form.querySelector(".contact-form__status");
+    var mismatchMessage = "メールアドレスが一致していません。";
+    var sampleMessage =
+      "このフォームはポートフォリオ用のサンプルです。\n実際には送信されません。";
+
+    function clearEmailMismatch() {
+      if (emailConfirm) {
+        emailConfirm.setCustomValidity("");
+      }
+      if (emailError) {
+        emailError.hidden = true;
+        emailError.textContent = "";
+      }
+    }
+
+    function showEmailMismatch() {
+      if (emailConfirm) {
+        emailConfirm.setCustomValidity(mismatchMessage);
+      }
+      if (emailError) {
+        emailError.hidden = false;
+        emailError.textContent = mismatchMessage;
+      }
+    }
+
+    function hideStatus() {
+      if (!status) return;
+      status.hidden = true;
+      status.textContent = "";
+    }
+
+    function showSampleStatus() {
+      if (!status) return;
+      status.hidden = false;
+      status.textContent = sampleMessage;
+    }
+
+    if (email) {
+      email.addEventListener("input", function () {
+        clearEmailMismatch();
+        hideStatus();
+      });
+    }
+
+    if (emailConfirm) {
+      emailConfirm.addEventListener("input", function () {
+        clearEmailMismatch();
+        hideStatus();
+      });
+    }
+
+    form.addEventListener("submit", function (event) {
+      clearEmailMismatch();
+
+      if (email && emailConfirm && email.value !== emailConfirm.value) {
+        event.preventDefault();
+        showEmailMismatch();
+        if (typeof emailConfirm.reportValidity === "function") {
+          emailConfirm.reportValidity();
+        }
+        emailConfirm.focus();
+        return;
+      }
+
+      // HTML5 必須・email 形式はブラウザ標準に任せ、通過時のみサンプル表示
+      if (!form.checkValidity()) {
+        return;
+      }
+
+      event.preventDefault();
+      showSampleStatus();
+      if (status && typeof status.scrollIntoView === "function") {
+        status.scrollIntoView({ block: "nearest", behavior: "smooth" });
+      }
+    });
+  }
+
   function primeContactOpeningIfVisible() {
     var page = document.querySelector(".contact-page");
     if (page) page.classList.add("is-ready");
@@ -2468,6 +2553,7 @@
     initBlogSingleOpeningReveal();
     initNewsSingleOpeningReveal();
     initContactOpeningReveal();
+    initContactFormSample();
     initDownloadOpeningReveal();
     initEntryOpeningReveal();
     initCompanyOpeningReveal();

@@ -7567,6 +7567,29 @@ body {
   color: var(--color-text);
 }
 
+.contact-form__error {
+  margin: 0.5rem 0 0;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: #c62828;
+}
+
+.contact-form__status {
+  margin: 1.5rem 0 0;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--color-primary);
+  border-radius: 0.25rem;
+  background: rgba(0, 133, 202, 0.08);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+  color: var(--color-text);
+  white-space: pre-line;
+}
+
 .contact-form__actions {
   display: flex;
   justify-content: center;

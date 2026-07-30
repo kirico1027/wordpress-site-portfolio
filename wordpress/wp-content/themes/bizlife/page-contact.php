@@ -27,7 +27,7 @@ get_header();
   <section class="contact-form" aria-labelledby="contact-form-heading">
     <h2 id="contact-form-heading" class="u-visually-hidden">お問い合わせフォーム</h2>
     <div class="container contact-form__inner">
-      <form class="contact-form__form" action="#" method="post" novalidate>
+      <form class="contact-form__form" action="" method="post">
         <div
           class="contact-form__field contact-form__field--radios"
           role="group"
@@ -115,7 +115,9 @@ get_header();
             placeholder="メールアドレス（確認用）"
             autocomplete="email"
             required
+            aria-describedby="contact-email-confirm-error"
           />
+          <p id="contact-email-confirm-error" class="contact-form__error" hidden></p>
         </div>
 
         <div class="contact-form__field">
@@ -154,6 +156,8 @@ get_header();
             <span class="contact-form__agree-text">プライバシーポリシーに同意する</span>
           </label>
         </div>
+
+        <p class="contact-form__status" role="status" aria-live="polite" hidden></p>
 
         <div class="contact-form__actions">
           <button class="contact-form__submit" type="submit">送信する</button>
