@@ -2210,11 +2210,25 @@ body {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  cursor: grab;
   padding-left: clamp(1rem, 4vw, 2rem);
   padding-right: clamp(1rem, 4vw, 2rem);
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   scrollbar-width: none;
+}
+.works__slider a,
+.works__slider img {
+  -webkit-user-drag: none;
+}
+.works__slider.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  user-select: none;
+}
+.works__slider.is-dragging .works-card__link {
+  pointer-events: none;
 }
 
 .works__slider::-webkit-scrollbar {

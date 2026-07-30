@@ -49,11 +49,15 @@
     if (!slider) return null;
 
     var opts = options || {};
+    // クリック時の微小移動をドラッグと誤判定しない（実移動 px）
+    var DRAG_THRESHOLD = 8;
+    var isPointerDown = false;
     var isDragging = false;
     var startX = 0;
     var scrollLeft = 0;
     var hasMoved = false;
     var activePointerId = null;
+    var savedSnapType = "";
     var state = { dragging: false };
 
     function getPageX(event) {
@@ -61,19 +65,19 @@
       return 0;
     }
 
-    function onPointerDown(event) {
-      if (event.pointerType === "touch") return;
-
+    function beginDrag(event) {
       isDragging = true;
       state.dragging = true;
-      hasMoved = false;
-      activePointerId = event.pointerId;
+      hasMoved = true;
       startX = getPageX(event);
       scrollLeft = slider.scrollLeft;
+      savedSnapType = slider.style.scrollSnapType;
+      slider.style.scrollSnapType = "none";
       slider.classList.add("is-dragging");
       if (typeof opts.onDragStart === "function") opts.onDragStart();
 
-      if (slider.setPointerCapture) {
+      // クリックを奪わないよう、ドラッグ確定後にだけ capture する
+      if (slider.setPointerCapture && event.pointerId != null) {
         try {
           slider.setPointerCapture(event.pointerId);
         } catch (error) {
@@ -82,28 +86,29 @@
       }
     }
 
-    function onPointerMove(event) {
-      if (!isDragging) return;
-      if (activePointerId !== null && event.pointerId !== activePointerId) return;
+    function endDrag(event) {
+      if (!isPointerDown) return;
+      if (
+        event &&
+        activePointerId !== null &&
+        event.pointerId !== activePointerId
+      ) {
+        return;
+      }
 
-      event.preventDefault();
-      var x = getPageX(event);
-      var walk = (x - startX) * 1.2;
-      if (Math.abs(walk) > 3) hasMoved = true;
-      slider.scrollLeft = scrollLeft - walk;
-    }
-
-    function onPointerUp(event) {
-      if (!isDragging) return;
-      if (activePointerId !== null && event.pointerId !== activePointerId) return;
-
-      isDragging = false;
-      state.dragging = false;
+      isPointerDown = false;
       activePointerId = null;
-      slider.classList.remove("is-dragging");
-      if (typeof opts.onDragEnd === "function") opts.onDragEnd();
 
-      if (slider.releasePointerCapture && event.pointerId != null) {
+      if (isDragging) {
+        isDragging = false;
+        state.dragging = false;
+        slider.classList.remove("is-dragging");
+        slider.style.scrollSnapType = savedSnapType;
+        savedSnapType = "";
+        if (typeof opts.onDragEnd === "function") opts.onDragEnd();
+      }
+
+      if (event && slider.releasePointerCapture && event.pointerId != null) {
         try {
           slider.releasePointerCapture(event.pointerId);
         } catch (error) {
@@ -112,12 +117,47 @@
       }
     }
 
+    function onPointerDown(event) {
+      // タッチはネイティブ横スクロールに任せる
+      if (event.pointerType === "touch") return;
+
+      isPointerDown = true;
+      isDragging = false;
+      state.dragging = false;
+      hasMoved = false;
+      activePointerId = event.pointerId;
+      startX = getPageX(event);
+      scrollLeft = slider.scrollLeft;
+    }
+
+    function onPointerMove(event) {
+      if (!isPointerDown) return;
+      if (activePointerId !== null && event.pointerId !== activePointerId) return;
+
+      var x = getPageX(event);
+      var dx = x - startX;
+
+      if (!hasMoved) {
+        if (Math.abs(dx) < DRAG_THRESHOLD) return;
+        beginDrag(event);
+        dx = 0;
+      }
+
+      event.preventDefault();
+      slider.scrollLeft = scrollLeft - dx * 1.2;
+    }
+
+    function onPointerUp(event) {
+      endDrag(event);
+    }
+
     slider.addEventListener("pointerdown", onPointerDown);
     slider.addEventListener("pointermove", onPointerMove);
     slider.addEventListener("pointerup", onPointerUp);
     slider.addEventListener("pointercancel", onPointerUp);
     slider.addEventListener("lostpointercapture", onPointerUp);
 
+    // ドラッグ後の誤クリックのみ抑止（閾値未満の通常クリックは通す）
     slider.addEventListener(
       "click",
       function (event) {

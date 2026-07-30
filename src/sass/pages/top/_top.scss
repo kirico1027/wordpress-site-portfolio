@@ -1456,10 +1456,28 @@ $about-visual-base-h: rem(393.328);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  cursor: grab;
   @include fluid-padding-inline(rem(16), 4vw, rem(32));
   padding-top: rem(8);
   padding-bottom: rem(8);
   scrollbar-width: none;
+
+  // リンク／画像のネイティブドラッグが横スクロールを奪わないようにする
+  a,
+  img {
+    -webkit-user-drag: none;
+  }
+
+  &.is-dragging {
+    cursor: grabbing;
+    scroll-snap-type: none;
+    user-select: none;
+
+    .works-card__link {
+      pointer-events: none;
+    }
+  }
 }
 
 .works__slider::-webkit-scrollbar {
