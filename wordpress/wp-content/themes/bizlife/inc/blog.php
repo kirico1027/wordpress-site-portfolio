@@ -45,12 +45,9 @@ function bizlife_blog_archive_posts_per_page($query) {
     $query->set('posts_per_page', BIZLIFE_BLOG_PER_PAGE);
   }
 
-  // Blog sidebar search sends post_type=post; keep results to standard posts.
+  // search.php renders Blog cards only — always limit front-end search to posts.
   if ($query->is_search()) {
-    $post_type = isset($_GET['post_type']) ? sanitize_key(wp_unslash($_GET['post_type'])) : '';
-    if ('post' === $post_type) {
-      $query->set('post_type', 'post');
-    }
+    $query->set('post_type', 'post');
   }
 }
 add_action('pre_get_posts', 'bizlife_blog_archive_posts_per_page');
