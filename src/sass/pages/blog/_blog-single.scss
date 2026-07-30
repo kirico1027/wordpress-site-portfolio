@@ -372,6 +372,19 @@
 
 .blog-single__body {
   margin-top: rem(32);
+  overflow-wrap: break-word;
+
+  // the_content() 由来の未クラス画像・テーブルのはみ出し防止
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+  }
 }
 
 .blog-single__heading {

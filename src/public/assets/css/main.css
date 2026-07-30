@@ -10211,6 +10211,16 @@ body {
 
 .blog-single__body {
   margin-top: 2rem;
+  overflow-wrap: break-word;
+}
+.blog-single__body img {
+  max-width: 100%;
+  height: auto;
+}
+.blog-single__body table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
 }
 
 .blog-single__heading {

@@ -275,3 +275,73 @@ function bizlife_get_blog_pickup_query($exclude_post = null) {
 
   return $query;
 }
+
+/**
+ * Append a BEM class to matching HTML tags in post content.
+ *
+ * @param string $content HTML.
+ * @param string $tag     Tag name (e.g. p, h2).
+ * @param string $class   Class to ensure.
+ * @return string
+ */
+function bizlife_blog_content_ensure_tag_class($content, $tag, $class) {
+  if (false === strpos($content, '<' . $tag)) {
+    return $content;
+  }
+
+  $pattern = '/<' . preg_quote($tag, '/') . '(\s[^>]*)?>/i';
+
+  return preg_replace_callback(
+    $pattern,
+    function ($matches) use ($tag, $class) {
+      $attrs = isset($matches[1]) ? $matches[1] : '';
+
+      if (false !== strpos($attrs, $class)) {
+        return $matches[0];
+      }
+
+      if (preg_match('/\sclass=(["\'])(.*?)\1/i', $attrs, $class_match)) {
+        $quote   = $class_match[1];
+        $classes = trim($class_match[2] . ' ' . $class);
+        $attrs   = preg_replace(
+          '/\sclass=(["\']).*?\1/i',
+          ' class=' . $quote . $classes . $quote,
+          $attrs,
+          1
+        );
+        return '<' . $tag . $attrs . '>';
+      }
+
+      return '<' . $tag . ' class="' . $class . '"' . $attrs . '>';
+    },
+    $content
+  );
+}
+
+/**
+ * Map the_content() markup to Blog single BEM classes (static template parity).
+ *
+ * Mirrors news single paragraph class injection for CSS / scroll-reveal selectors.
+ *
+ * @param string $content Post content HTML.
+ * @return string
+ */
+function bizlife_blog_content_element_classes($content) {
+  if (!is_singular('post') || !in_the_loop() || !is_main_query()) {
+    return $content;
+  }
+
+  $map = array(
+    'p'      => 'blog-single__paragraph',
+    'h2'     => 'blog-single__heading',
+    'h3'     => 'blog-single__subheading',
+    'figure' => 'blog-single__figure',
+  );
+
+  foreach ($map as $tag => $class) {
+    $content = bizlife_blog_content_ensure_tag_class($content, $tag, $class);
+  }
+
+  return $content;
+}
+add_filter('the_content', 'bizlife_blog_content_element_classes', 12);
