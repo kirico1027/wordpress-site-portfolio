@@ -63,7 +63,7 @@ $document_cover_src = get_theme_file_uri('assets/img/download/document-cover.png
 
       <div class="download-form">
         <h2 id="download-form-heading" class="u-visually-hidden">資料ダウンロードフォーム</h2>
-        <form class="download-form__form" action="#" method="post" novalidate aria-labelledby="download-form-heading">
+        <form class="download-form__form" action="" method="post" aria-labelledby="download-form-heading">
           <div class="download-form__field">
             <label class="download-form__label" for="download-name">
               お名前<span class="download-form__required" aria-hidden="true">*</span>
@@ -125,7 +125,9 @@ $document_cover_src = get_theme_file_uri('assets/img/download/document-cover.png
               placeholder="メールアドレス（確認用）"
               autocomplete="email"
               required
+              aria-describedby="download-email-confirm-error"
             />
+            <p id="download-email-confirm-error" class="download-form__error" hidden></p>
           </div>
 
           <div class="download-form__field">
@@ -162,6 +164,8 @@ $document_cover_src = get_theme_file_uri('assets/img/download/document-cover.png
               <span class="download-form__agree-text">プライバシーポリシーに同意する</span>
             </label>
           </div>
+
+          <p class="download-form__status" role="status" aria-live="polite" hidden></p>
 
           <div class="download-form__actions">
             <button class="download-form__submit" type="submit">送信する</button>

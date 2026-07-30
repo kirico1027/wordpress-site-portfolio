@@ -37,7 +37,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/brands.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="./public/assets/css/main.css?v=298" />
+<link rel="stylesheet" href="./public/assets/css/main.css?v=299" />
 
   </head>
   <body>
@@ -162,7 +162,7 @@
 
           <div class="download-form">
             <h2 id="download-form-heading" class="u-visually-hidden">資料ダウンロードフォーム</h2>
-            <form class="download-form__form" action="#" method="post" novalidate aria-labelledby="download-form-heading">
+            <form class="download-form__form" action="" method="post" aria-labelledby="download-form-heading">
               <div class="download-form__field">
                 <label class="download-form__label" for="download-name">
                   お名前<span class="download-form__required" aria-hidden="true">*</span>
@@ -224,7 +224,9 @@
                   placeholder="メールアドレス（確認用）"
                   autocomplete="email"
                   required
+                  aria-describedby="download-email-confirm-error"
                 />
+                <p id="download-email-confirm-error" class="download-form__error" hidden></p>
               </div>
 
               <div class="download-form__field">
@@ -261,6 +263,8 @@
                   <span class="download-form__agree-text">プライバシーポリシーに同意する</span>
                 </label>
               </div>
+
+              <p class="download-form__status" role="status" aria-live="polite" hidden></p>
 
               <div class="download-form__actions">
                 <button class="download-form__submit" type="submit">送信する</button>
@@ -312,6 +316,6 @@
   </div>
 </footer>
 
-    <script src="./public/assets/js/script.js?v=117"></script>
+    <script src="./public/assets/js/script.js?v=118"></script>
   </body>
 </html>
