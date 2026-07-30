@@ -2391,20 +2391,7 @@ body {
     flex: 0 1 48%;
     width: 48%;
     margin-top: 0;
-    container-type: inline-size;
-    min-height: 0;
-    max-width: 100%;
     align-self: flex-start;
-  }
-  .company__visual-scaler {
-    width: 100%;
-    box-sizing: border-box;
-    height: calc(26.01175rem * 100cqw / 33.75rem);
-    overflow: hidden;
-  }
-  .company__collage {
-    transform: scale(calc(100cqw / 33.75rem));
-    transform-origin: top left;
   }
   .company .section-heading__title {
     letter-spacing: 0.15em;
@@ -2506,7 +2493,7 @@ body {
   }
 }
 .company__visual {
-  overflow: visible;
+  overflow-x: clip;
 }
 
 @media (min-width: 769px) and (max-width: 1183px) {
@@ -2516,7 +2503,9 @@ body {
   }
 }
 .company__visual-scaler {
-  width: 33.75rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .company__collage {
@@ -2525,6 +2514,25 @@ body {
   height: 26.01175rem;
 }
 
+@media (min-width: 769px) {
+  .company__visual {
+    container-type: inline-size;
+    min-height: 0;
+    max-width: 100%;
+  }
+  .company__visual-scaler {
+    width: 100%;
+    box-sizing: border-box;
+    height: calc(26.01175rem * 100cqw / 33.75rem);
+    overflow: hidden;
+  }
+  .company__collage {
+    width: 33.75rem;
+    height: 26.01175rem;
+    transform: scale(calc(100cqw / 33.75rem));
+    transform-origin: top left;
+  }
+}
 .company__collage-row--top {
   position: absolute;
   left: 0;

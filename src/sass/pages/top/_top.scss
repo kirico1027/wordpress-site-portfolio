@@ -1634,22 +1634,7 @@ $about-visual-base-h: rem(393.328);
     flex: 0 1 48%;
     width: 48%;
     margin-top: 0;
-    container-type: inline-size;
-    min-height: 0;
-    max-width: 100%;
     align-self: flex-start;
-  }
-
-  .company__visual-scaler {
-    width: 100%;
-    box-sizing: border-box;
-    height: calc(#{rem(416.188)} * (100cqw / #{rem(540)}));
-    overflow: hidden;
-  }
-
-  .company__collage {
-    transform: scale(calc(100cqw / #{rem(540)}));
-    transform-origin: top left;
   }
 
   .company .section-heading__title {
@@ -1673,6 +1658,32 @@ $about-visual-base-h: rem(393.328);
 // ---------------------------------------------------------------------------
 // Company
 // ---------------------------------------------------------------------------
+
+$company-visual-base-w: rem(540);
+$company-visual-base-h: rem(416.188);
+
+// About と同様: 親カラム幅に合わせてコラージュを縮小し、layout 幅も親内に収める
+@mixin company-visual-scale {
+  .company__visual {
+    container-type: inline-size;
+    min-height: 0;
+    max-width: 100%;
+  }
+
+  .company__visual-scaler {
+    width: 100%;
+    box-sizing: border-box;
+    height: calc(#{$company-visual-base-h} * (100cqw / #{$company-visual-base-w}));
+    overflow: hidden;
+  }
+
+  .company__collage {
+    width: $company-visual-base-w;
+    height: $company-visual-base-h;
+    transform: scale(calc(100cqw / #{$company-visual-base-w}));
+    transform-origin: top left;
+  }
+}
 
 @include mq-hero-pc {
   .company.section {
@@ -1737,7 +1748,7 @@ $about-visual-base-h: rem(393.328);
   max-width: 100%;
   min-width: 0;
   @include fluid-pc-range(margin-top, 96, 120);
-  overflow: visible;
+  overflow-x: clip;
 }
 
 // 769〜1183px では上マージンをなくして2カラム上端を揃える
@@ -1749,13 +1760,21 @@ $about-visual-base-h: rem(393.328);
 }
 
 .company__visual-scaler {
-  width: rem(540);
+  // layout 幅は親カラムに追従（固定 540px だと狭い PC で body を押し広げる）
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .company__collage {
   position: relative;
-  width: rem(540);
-  height: rem(416.188);
+  width: $company-visual-base-w;
+  height: $company-visual-base-h;
+}
+
+// ベース定義より後に置き、狭い／広い PC とも cascade で確実に効かせる
+@include mq-hero-pc {
+  @include company-visual-scale;
 }
 
 .company__collage-row--top {
