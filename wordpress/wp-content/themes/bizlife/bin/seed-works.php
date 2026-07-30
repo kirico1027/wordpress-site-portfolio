@@ -89,7 +89,8 @@ function bizlife_seed_works_definitions() {
       'slug'               => 'seed-harbor-brand',
       'title'              => 'ブランドサイトと採用コンテンツの統合プロジェクト — 多拠点企業の情報設計見直し',
       'date'               => '2025-03-08 14:00:00',
-      'image'              => 'works_04.png',
+      // Distinct from works_04 (same scene as works-single_01). Source: works-single_03 office photo.
+      'image'              => 'works_05.png',
       'categories'         => array('mental-coach', 'connected-workflow', 'welfare-cloud'),
       'company_name'       => 'Harbor & Co. Holdings ホールディングス株式会社',
       'company_description'=> "国内外に拠点を持つホールディングス。グループ各社の採用とコーポレート発信を横断的に支援するプロジェクトを推進しています。",

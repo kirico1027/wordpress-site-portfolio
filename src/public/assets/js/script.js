@@ -175,6 +175,22 @@
   function initWorksSlider() {
     var slider = document.querySelector(".works__slider");
     if (!slider || !slider.children.length) return;
+    if (slider.getAttribute("data-works-slider-init") === "1") return;
+    slider.setAttribute("data-works-slider-init", "1");
+
+    // 既存 track / clone があれば解体してから再構築（二重初期化・ホットリロード対策）
+    var existingTrack = slider.querySelector(":scope > .works__slider-track");
+    if (existingTrack) {
+      while (existingTrack.firstChild) {
+        var child = existingTrack.firstChild;
+        if (child.getAttribute && child.getAttribute("aria-hidden") === "true") {
+          existingTrack.removeChild(child);
+          continue;
+        }
+        slider.insertBefore(child, existingTrack);
+      }
+      slider.removeChild(existingTrack);
+    }
 
     // About / Recruit ギャラリーと同じく、トラック化してカードを複製しシームレスに流す
     var track = document.createElement("div");
