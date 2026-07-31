@@ -1,5 +1,5 @@
 /**
- * Works admin list: featured image column.
+ * Works admin list: featured image + company columns.
  */
 
 .wp-list-table.posts .column-bizlife_thumbnail {
@@ -27,4 +27,21 @@
   display: inline-block;
   color: #646970;
   line-height: 48px;
+}
+
+.wp-list-table.posts .column-bizlife_company {
+  width: 18%;
+  vertical-align: middle;
+}
+
+.wp-list-table.posts td.column-bizlife_company .bizlife-admin-company {
+  display: inline-block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  line-height: 1.4;
+}
+
+.wp-list-table.posts td.column-bizlife_company .bizlife-admin-company-empty {
+  color: #646970;
 }

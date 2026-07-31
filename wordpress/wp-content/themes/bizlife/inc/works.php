@@ -222,7 +222,9 @@ function bizlife_get_related_works_query($post = null) {
 }
 
 /**
- * Insert featured-image column after the checkbox on Works list.
+ * Insert featured-image and company-name columns on Works list.
+ *
+ * Order: checkbox → image → title → company → categories → date.
  *
  * @param array<string, string> $columns List table columns.
  * @return array<string, string>
@@ -236,6 +238,10 @@ function bizlife_works_admin_columns($columns) {
     if ('cb' === $key) {
       $new_columns['bizlife_thumbnail'] = __('画像', 'bizlife');
     }
+
+    if ('title' === $key) {
+      $new_columns['bizlife_company'] = __('会社名', 'bizlife');
+    }
   }
 
   if (!isset($new_columns['bizlife_thumbnail'])) {
@@ -247,36 +253,77 @@ function bizlife_works_admin_columns($columns) {
     );
   }
 
+  if (!isset($new_columns['bizlife_company'])) {
+    $new_columns['bizlife_company'] = __('会社名', 'bizlife');
+  }
+
   return $new_columns;
 }
 add_filter('manage_works_posts_columns', 'bizlife_works_admin_columns');
 
 /**
- * Render Works featured-image column cell.
+ * Resolve Works company_name for admin list (no front-end fallback).
+ *
+ * @param int $post_id Post ID.
+ * @return string Trimmed company name, or empty string when unset.
+ */
+function bizlife_works_admin_get_company_name($post_id) {
+  $post_id = (int) $post_id;
+  $company = '';
+
+  if (function_exists('get_field')) {
+    $value = get_field('company_name', $post_id);
+    if (is_string($value) || is_numeric($value)) {
+      $company = (string) $value;
+    }
+  }
+
+  if ('' === trim($company)) {
+    $meta = get_post_meta($post_id, 'company_name', true);
+    if (is_string($meta) || is_numeric($meta)) {
+      $company = (string) $meta;
+    }
+  }
+
+  return trim($company);
+}
+
+/**
+ * Render Works admin list custom columns (thumbnail / company).
  *
  * @param string $column  Column key.
  * @param int    $post_id Post ID.
  */
 function bizlife_works_admin_custom_column($column, $post_id) {
-  if ('bizlife_thumbnail' !== $column) {
-    return;
-  }
-
   $post_id = (int) $post_id;
 
-  if (has_post_thumbnail($post_id)) {
-    echo get_the_post_thumbnail(
-      $post_id,
-      array(80, 48),
-      array(
-        'class' => 'bizlife-admin-thumb',
-        'alt'   => '',
-      )
-    );
+  if ('bizlife_thumbnail' === $column) {
+    if (has_post_thumbnail($post_id)) {
+      echo get_the_post_thumbnail(
+        $post_id,
+        array(80, 48),
+        array(
+          'class' => 'bizlife-admin-thumb',
+          'alt'   => '',
+        )
+      );
+      return;
+    }
+
+    echo '<span class="bizlife-admin-thumb-empty">' . esc_html__('—', 'bizlife') . '</span>';
     return;
   }
 
-  echo '<span class="bizlife-admin-thumb-empty">' . esc_html__('—', 'bizlife') . '</span>';
+  if ('bizlife_company' === $column) {
+    $company = bizlife_works_admin_get_company_name($post_id);
+
+    if ('' === $company) {
+      echo '<span class="bizlife-admin-company-empty">' . esc_html__('—', 'bizlife') . '</span>';
+      return;
+    }
+
+    echo '<span class="bizlife-admin-company">' . esc_html($company) . '</span>';
+  }
 }
 add_action('manage_works_posts_custom_column', 'bizlife_works_admin_custom_column', 10, 2);
 
