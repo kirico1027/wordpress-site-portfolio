@@ -131,7 +131,7 @@ HTML;
     // Newest → older within each batch; dates staggered for archive order checks.
     // Dates are on/before 2026-07-29 so posts stay published (not future).
     array(
-      'slug'     => 'seed-blog-workstyle-hybrid-guide',
+      'slug'     => 'blog-workstyle-hybrid-guide',
       'title'    => 'ハイブリッド勤務を続けるためのチーム設計ガイド',
       'date'     => '2026-07-29 10:00:00',
       'image'    => 'blog/blog-featured_01.png',
@@ -140,7 +140,7 @@ HTML;
       'content'  => $body_work,
     ),
     array(
-      'slug'     => 'seed-blog-tips-welfare-balance',
+      'slug'     => 'blog-tips-welfare-balance',
       'title'    => 'ビジネスの成功と従業員の幸福を両立させる福利厚生の秘訣',
       'date'     => '2026-07-28 11:30:00',
       'image'    => 'blog/blog-featured_02.png',
@@ -149,7 +149,7 @@ HTML;
       'content'  => $body_tips,
     ),
     array(
-      'slug'     => 'seed-blog-case-onboarding',
+      'slug'     => 'blog-case-onboarding',
       'title'    => '導入3か月で問い合わせが半減したオンボーディング改善事例',
       'date'     => '2026-07-27 09:15:00',
       'image'    => 'blog/blog-single_body_01.png',
@@ -158,7 +158,7 @@ HTML;
       'content'  => $body_case,
     ),
     array(
-      'slug'     => 'seed-blog-workstyle-async',
+      'slug'     => 'blog-workstyle-async',
       'title'    => '非同期コミュニケーションが機能する組織の共通点',
       'date'     => '2026-07-25 14:00:00',
       'image'    => 'blog/blog-single_body_02.png',
@@ -167,7 +167,7 @@ HTML;
       'content'  => $body_work,
     ),
     array(
-      'slug'     => 'seed-blog-tips-mental-health',
+      'slug'     => 'blog-tips-mental-health',
       'title'    => 'メンタルヘルス施策を形骸化させない運用チェックリスト',
       'date'     => '2026-07-23 16:45:00',
       'image'    => 'blog/blog-single_pickup_01.png',
@@ -176,7 +176,7 @@ HTML;
       'content'  => $body_tips,
     ),
     array(
-      'slug'     => 'seed-blog-case-engagement',
+      'slug'     => 'blog-case-engagement',
       'title'    => '従業員エンゲージメント向上につながった福利厚生戦略',
       'date'     => '2026-07-21 10:20:00',
       'image'    => 'blog/blog-single_pickup_02.png',
@@ -185,7 +185,7 @@ HTML;
       'content'  => $body_case,
     ),
     array(
-      'slug'     => 'seed-blog-tips-career-growth',
+      'slug'     => 'blog-tips-career-growth',
       'title'    => '学びを止めない職場をつくるスキルアップ支援の考え方',
       'date'     => '2026-07-18 13:10:00',
       'image'    => 'blog/blog-single_pickup_03.png',
@@ -194,7 +194,7 @@ HTML;
       'content'  => $body_tips,
     ),
     array(
-      'slug'     => 'seed-blog-workstyle-onboarding-remote',
+      'slug'     => 'blog-workstyle-onboarding-remote',
       'title'    => 'リモート前提のオンボーディングで最初の90日を整える',
       'date'     => '2026-07-15 09:00:00',
       'image'    => 'blog/blog-single_hero.png',
@@ -203,7 +203,7 @@ HTML;
       'content'  => $body_work,
     ),
     array(
-      'slug'     => 'seed-blog-case-workflow',
+      'slug'     => 'blog-case-workflow',
       'title'    => 'ワークフロー刷新で承認待ち時間を短縮した導入事例',
       'date'     => '2026-07-12 11:00:00',
       'image'    => 'works/works_01.png',
@@ -212,7 +212,7 @@ HTML;
       'content'  => $body_case,
     ),
     array(
-      'slug'     => 'seed-blog-tips-family-care',
+      'slug'     => 'blog-tips-family-care',
       'title'    => '育児・介護と仕事を両立するための制度設計の基本',
       'date'     => '2026-07-09 15:30:00',
       'image'    => 'works/works_02.png',
@@ -221,7 +221,7 @@ HTML;
       'content'  => $body_tips,
     ),
     array(
-      'slug'     => 'seed-blog-workstyle-meeting',
+      'slug'     => 'blog-workstyle-meeting',
       'title'    => '会議を減らし、成果を増やすミーティング再設計',
       'date'     => '2026-07-06 10:45:00',
       'image'    => 'works/works_03.png',
@@ -230,7 +230,7 @@ HTML;
       'content'  => $body_work,
     ),
     array(
-      'slug'     => 'seed-blog-case-retention',
+      'slug'     => 'blog-case-retention',
       'title'    => '離職率改善につながった働き方改革の実践レポート',
       'date'     => '2026-07-02 09:30:00',
       'image'    => 'works/works_04.png',
