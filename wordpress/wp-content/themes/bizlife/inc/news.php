@@ -188,9 +188,9 @@ function bizlife_news_content_paragraph_class($content) {
 add_filter('the_content', 'bizlife_news_content_paragraph_class', 12);
 
 /**
- * Insert featured-image column and drop author on News list.
+ * Drop unused author column on News list.
  *
- * Order: checkbox → image → title → news_category → date.
+ * Order: checkbox → title → news_category → date.
  *
  * @param array<string, string> $columns List table columns.
  * @return array<string, string>
@@ -198,80 +198,7 @@ add_filter('the_content', 'bizlife_news_content_paragraph_class', 12);
 function bizlife_news_admin_columns($columns) {
   unset($columns['author']);
 
-  $new_columns = array();
-
-  foreach ($columns as $key => $label) {
-    $new_columns[$key] = $label;
-
-    if ('cb' === $key) {
-      $new_columns['bizlife_thumbnail'] = __('画像', 'bizlife');
-    }
-  }
-
-  if (!isset($new_columns['bizlife_thumbnail'])) {
-    $new_columns = array_merge(
-      array(
-        'bizlife_thumbnail' => __('画像', 'bizlife'),
-      ),
-      $new_columns
-    );
-  }
-
-  return $new_columns;
+  return $columns;
 }
 add_filter('manage_news_posts_columns', 'bizlife_news_admin_columns');
-
-/**
- * Render News featured-image column cell.
- *
- * @param string $column  Column key.
- * @param int    $post_id Post ID.
- */
-function bizlife_news_admin_custom_column($column, $post_id) {
-  if ('bizlife_thumbnail' !== $column) {
-    return;
-  }
-
-  $post_id = (int) $post_id;
-
-  if (has_post_thumbnail($post_id)) {
-    echo get_the_post_thumbnail(
-      $post_id,
-      array(80, 48),
-      array(
-        'class' => 'bizlife-admin-thumb',
-        'alt'   => '',
-      )
-    );
-    return;
-  }
-
-  echo '<span class="bizlife-admin-thumb-empty">' . esc_html__('—', 'bizlife') . '</span>';
-}
-add_action('manage_news_posts_custom_column', 'bizlife_news_admin_custom_column', 10, 2);
-
-/**
- * Enqueue admin list CSS for News screen (shared thumbnail styles with Works).
- *
- * @param string $hook_suffix Current admin page hook.
- */
-function bizlife_news_admin_assets($hook_suffix) {
-  if ('edit.php' !== $hook_suffix) {
-    return;
-  }
-
-  $screen = function_exists('get_current_screen') ? get_current_screen() : null;
-
-  if (!$screen || 'news' !== $screen->post_type) {
-    return;
-  }
-
-  wp_enqueue_style(
-    'bizlife-admin-news',
-    get_theme_file_uri('assets/css/admin-works.css'),
-    array(),
-    bizlife_asset_version('assets/css/admin-works.css')
-  );
-}
-add_action('admin_enqueue_scripts', 'bizlife_news_admin_assets');
 
