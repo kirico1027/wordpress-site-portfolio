@@ -1,5 +1,8 @@
 /**
- * Works admin list: featured image + company columns.
+ * Admin CPT list helpers (Works / News).
+ *
+ * Shared: .column-bizlife_thumbnail
+ * Works only: .column-bizlife_company
  */
 
 .wp-list-table.posts .column-bizlife_thumbnail {
