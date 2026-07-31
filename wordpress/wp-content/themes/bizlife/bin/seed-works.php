@@ -56,7 +56,7 @@ require_once ABSPATH . 'wp-admin/includes/image.php';
 function bizlife_seed_works_definitions() {
   return array(
     array(
-      'slug'               => 'seed-aurora-corp',
+      'slug'               => 'aurora-corp',
       'title'              => 'コーポレートサイトリニューアル',
       'date'               => '2025-01-15 10:00:00',
       'image'              => 'works_01.png',
@@ -66,7 +66,7 @@ function bizlife_seed_works_definitions() {
       'content'            => "<p>コーポレートサイトの情報設計からデザイン、実装までを一貫して担当。サービス価値が伝わるトップページ構成と、導入事例導線を整備しました。</p>\n<p>採用候補者向けの導線も整理し、問い合わせまでの離脱を抑える構成にしています。</p>",
     ),
     array(
-      'slug'               => 'seed-northwind-recruit',
+      'slug'               => 'northwind-recruit',
       'title'              => 'エンジニア採用サイトの立ち上げ',
       'date'               => '2025-02-03 11:30:00',
       'image'              => 'works_02.png',
@@ -76,7 +76,7 @@ function bizlife_seed_works_definitions() {
       'content'            => "<p>採用ブランドのトーン設計、インタビュー記事テンプレート、応募フォームまでの導線を構築。求人票だけでなく「働き方」が一目で分かる構成にしました。</p>",
     ),
     array(
-      'slug'               => 'seed-petal-service',
+      'slug'               => 'petal-service',
       'title'              => 'SaaSサービスサイト制作',
       'date'               => '2025-02-20 09:15:00',
       'image'              => 'works_03.png',
@@ -86,7 +86,7 @@ function bizlife_seed_works_definitions() {
       'content'            => "<p>料金表・機能比較・導入フローを再設計し、検討中ユーザーが自走で理解できるサービスサイトへ刷新しました。</p>",
     ),
     array(
-      'slug'               => 'seed-harbor-brand',
+      'slug'               => 'harbor-brand',
       'title'              => 'ブランドサイトと採用コンテンツの統合プロジェクト — 多拠点企業の情報設計見直し',
       'date'               => '2025-03-08 14:00:00',
       // Distinct from works_04 (same scene as works-single_01). Source: works-single_03 office photo.
@@ -97,7 +97,7 @@ function bizlife_seed_works_definitions() {
       'content'            => "<p>グループ共通のデザインシステムを定義しつつ、各社ブランドの差分を許容するテンプレート設計を実施。長文の企業紹介にも耐えるタイポグラフィ設計を検証しています。</p>\n<p>採用・IR・サービス紹介の導線を整理し、回遊しやすい情報設計へ更新しました。</p>",
     ),
     array(
-      'slug'               => 'seed-lumen-lp',
+      'slug'               => 'lumen-lp',
       'title'              => 'キャンペーンLP',
       'date'               => '2025-03-22 16:45:00',
       'image'              => 'works_01.png',
@@ -107,7 +107,7 @@ function bizlife_seed_works_definitions() {
       'content'            => "<p>季節キャンペーン用の縦長LPを制作。CTAの配置とスマホでの読了導線を重点的に調整しました。</p>",
     ),
     array(
-      'slug'               => 'seed-orchid-wellness',
+      'slug'               => 'orchid-wellness',
       'title'              => '福利厚生クラウドの導入事例サイト',
       'date'               => '2025-04-05 10:20:00',
       'image'              => 'works_02.png',
@@ -117,7 +117,7 @@ function bizlife_seed_works_definitions() {
       'content'            => "<p>導入企業インタビューを中心にした事例サイトを構築。カテゴリ横断のタグ表示と、読み物としての詳細ページレイアウトを確認できる構成にしています。</p>",
     ),
     array(
-      'slug'               => 'seed-kite-portal',
+      'slug'               => 'kite-portal',
       'title'              => '社内ポータルUI改善',
       'date'               => '2025-04-18 13:10:00',
       'image'              => 'works_03.png',
@@ -127,7 +127,7 @@ function bizlife_seed_works_definitions() {
       'content'            => "<p>ダッシュボードの優先度整理と、モバイル閲覧時の操作性改善を実施。業務フローに沿ったナビ再編が主な成果です。</p>",
     ),
     array(
-      'slug'               => 'seed-summit-career',
+      'slug'               => 'summit-career',
       'title'              => '新卒向けキャリアサイト全面刷新とコンテンツ運用設計の伴走支援',
       'date'               => '2025-05-01 09:00:00',
       'image'              => 'works_04.png',

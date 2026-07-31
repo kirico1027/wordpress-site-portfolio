@@ -62,17 +62,19 @@ add_action('init', 'bizlife_register_works_cpt');
  */
 function bizlife_register_works_category_taxonomy() {
   $labels = array(
-    'name'              => __('Works Categories', 'bizlife'),
-    'singular_name'     => __('Works Category', 'bizlife'),
-    'search_items'      => __('Search Works Categories', 'bizlife'),
-    'all_items'         => __('All Works Categories', 'bizlife'),
-    'parent_item'       => __('Parent Works Category', 'bizlife'),
-    'parent_item_colon' => __('Parent Works Category:', 'bizlife'),
-    'edit_item'         => __('Edit Works Category', 'bizlife'),
-    'update_item'       => __('Update Works Category', 'bizlife'),
-    'add_new_item'      => __('Add New Works Category', 'bizlife'),
-    'new_item_name'     => __('New Works Category Name', 'bizlife'),
-    'menu_name'         => __('Works Categories', 'bizlife'),
+    'name'              => __('Worksカテゴリー', 'bizlife'),
+    'singular_name'     => __('Worksカテゴリー', 'bizlife'),
+    'search_items'      => __('Worksカテゴリーを検索', 'bizlife'),
+    'all_items'         => __('Worksカテゴリー一覧', 'bizlife'),
+    'parent_item'       => __('親Worksカテゴリー', 'bizlife'),
+    'parent_item_colon' => __('親Worksカテゴリー:', 'bizlife'),
+    'edit_item'         => __('Worksカテゴリーを編集', 'bizlife'),
+    'update_item'       => __('Worksカテゴリーを更新', 'bizlife'),
+    'add_new_item'      => __('新規Worksカテゴリーを追加', 'bizlife'),
+    'new_item_name'     => __('新しいWorksカテゴリー名', 'bizlife'),
+    'menu_name'         => __('Worksカテゴリー', 'bizlife'),
+    'not_found'         => __('Worksカテゴリーが見つかりませんでした。', 'bizlife'),
+    'back_to_items'     => __('← Worksカテゴリーへ戻る', 'bizlife'),
   );
 
   $args = array(
