@@ -1,0 +1,30 @@
+/**
+ * Works admin list: featured image column.
+ */
+
+.wp-list-table.posts .column-bizlife_thumbnail {
+  width: 92px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.wp-list-table.posts td.column-bizlife_thumbnail {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  line-height: 1;
+}
+
+.wp-list-table.posts td.column-bizlife_thumbnail .bizlife-admin-thumb {
+  display: block;
+  width: 80px;
+  height: 48px;
+  margin: 0 auto;
+  object-fit: cover;
+  vertical-align: middle;
+}
+
+.wp-list-table.posts td.column-bizlife_thumbnail .bizlife-admin-thumb-empty {
+  display: inline-block;
+  color: #646970;
+  line-height: 48px;
+}

@@ -220,3 +220,87 @@ function bizlife_get_related_works_query($post = null) {
 
   return $query;
 }
+
+/**
+ * Insert featured-image column after the checkbox on Works list.
+ *
+ * @param array<string, string> $columns List table columns.
+ * @return array<string, string>
+ */
+function bizlife_works_admin_columns($columns) {
+  $new_columns = array();
+
+  foreach ($columns as $key => $label) {
+    $new_columns[$key] = $label;
+
+    if ('cb' === $key) {
+      $new_columns['bizlife_thumbnail'] = __('画像', 'bizlife');
+    }
+  }
+
+  if (!isset($new_columns['bizlife_thumbnail'])) {
+    $new_columns = array_merge(
+      array(
+        'bizlife_thumbnail' => __('画像', 'bizlife'),
+      ),
+      $new_columns
+    );
+  }
+
+  return $new_columns;
+}
+add_filter('manage_works_posts_columns', 'bizlife_works_admin_columns');
+
+/**
+ * Render Works featured-image column cell.
+ *
+ * @param string $column  Column key.
+ * @param int    $post_id Post ID.
+ */
+function bizlife_works_admin_custom_column($column, $post_id) {
+  if ('bizlife_thumbnail' !== $column) {
+    return;
+  }
+
+  $post_id = (int) $post_id;
+
+  if (has_post_thumbnail($post_id)) {
+    echo get_the_post_thumbnail(
+      $post_id,
+      array(80, 48),
+      array(
+        'class' => 'bizlife-admin-thumb',
+        'alt'   => '',
+      )
+    );
+    return;
+  }
+
+  echo '<span class="bizlife-admin-thumb-empty">' . esc_html__('—', 'bizlife') . '</span>';
+}
+add_action('manage_works_posts_custom_column', 'bizlife_works_admin_custom_column', 10, 2);
+
+/**
+ * Enqueue admin CSS for Works list screen only.
+ *
+ * @param string $hook_suffix Current admin page hook.
+ */
+function bizlife_works_admin_assets($hook_suffix) {
+  if ('edit.php' !== $hook_suffix) {
+    return;
+  }
+
+  $screen = function_exists('get_current_screen') ? get_current_screen() : null;
+
+  if (!$screen || 'works' !== $screen->post_type) {
+    return;
+  }
+
+  wp_enqueue_style(
+    'bizlife-admin-works',
+    get_theme_file_uri('assets/css/admin-works.css'),
+    array(),
+    bizlife_asset_version('assets/css/admin-works.css')
+  );
+}
+add_action('admin_enqueue_scripts', 'bizlife_works_admin_assets');
