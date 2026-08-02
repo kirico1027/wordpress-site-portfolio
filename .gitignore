@@ -1,5 +1,6 @@
 # editor / local reference
 .vscode/
+*.code-workspace
 works-detail.pdf
 
 # dependencies
